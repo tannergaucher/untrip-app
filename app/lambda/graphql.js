@@ -1,7 +1,7 @@
 const { ApolloServer, gql } = require("apollo-server-lambda")
 const { prisma } = require("./generated/prisma-client")
 const { verify, sign } = require("jsonwebtoken")
-const { hash, compare } = require("bcrypt")
+const { hashSync, genSaltSync, compareSync } = require("bcryptjs")
 
 class AuthError extends Error {
   constructor() {
@@ -101,9 +101,11 @@ const resolvers = {
       return prisma.list({ id: listId })
     },
   },
+
   Mutation: {
     signup: async (parent, { email, password }, context) => {
-      const hashedPassword = await hash(password, 10)
+      const salt = getSaltSync(10)
+      const hashedPassword = hashSynx(password, salt)
 
       const user = await prisma.createUser({
         email,
@@ -124,7 +126,7 @@ const resolvers = {
         throw new Error(`No user found for this email`)
       }
 
-      const passwordValid = await compare(password, user.password)
+      const passwordValid = await compareSync(password, user.password)
 
       if (!passwordValid) {
         throw new Error(`Invalid password`)
