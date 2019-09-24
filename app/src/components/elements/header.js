@@ -14,6 +14,9 @@ export default function Header({ location }) {
       p={[2]}
       opacity=".92"
       style={{
+        position: `sticky`,
+        top: `0`,
+        zIndex: `1`,
         borderBottom: `1px solid var(--light-2)`,
       }}
     >

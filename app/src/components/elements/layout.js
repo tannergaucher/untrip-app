@@ -15,17 +15,11 @@ export default function Layout({ children, location }) {
       style={{
         margin: "0 auto",
         maxWidth: `var(--max-width)`,
+        // for ios position sticky
+        display: `block`,
       }}
     >
-      <Box
-        style={{
-          position: `sticky`,
-          top: `0`,
-          zIndex: `1`,
-        }}
-      >
-        <Header location={location} />
-      </Box>
+      <Header location={location} />
       <Box as="main" style={{ minHeight: `100vh` }}>
         {children}
       </Box>
