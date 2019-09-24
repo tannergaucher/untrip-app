@@ -6,8 +6,6 @@ import { HeroCard } from "../components/styles"
 import { SEO } from "../components/elements"
 
 export default function CategoryTag({ data }) {
-  console.log(data)
-
   return (
     <>
       <SEO title={`${data.tag.tag} Posts`} />
