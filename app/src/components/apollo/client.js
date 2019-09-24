@@ -7,7 +7,7 @@ import fetch from "isomorphic-fetch"
 const isBrowser = () => typeof window !== "undefined"
 
 const httpLink = createHttpLink({
-  uri: process.env.GATSBY_SITE_URL + "/.netlify/functions/graphql",
+  uri: "/.netlify/functions/graphql",
   credentials: "include",
 })
 
