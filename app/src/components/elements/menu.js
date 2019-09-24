@@ -16,7 +16,7 @@ export default function Menu() {
 
   return (
     <>
-      <button onClick={() => setShow(!show)}>
+      <button onClick={() => setShow(!show)} style={{ border: `none` }}>
         <MenuIcon color="var(--dark-1)" />
       </button>
       {show && (
@@ -28,7 +28,7 @@ export default function Menu() {
         >
           <Flex flex={1} flexDirection="column" p={[2]} bg="var(--light-1)">
             <Flex justifyContent="flex-end">
-              <button onClick={() => setShow(false)}>
+              <button onClick={() => setShow(false)} style={{ border: `none` }}>
                 <Close color="var(--dark-1)" />
               </button>
             </Flex>

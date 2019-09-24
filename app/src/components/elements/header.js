@@ -27,6 +27,7 @@ export default function Header({ location }) {
         }}
         style={{
           visibility: location.pathname === "/" ? "hidden" : "visible",
+          border: `none`,
         }}
       >
         <Previous color="var(--dark-1)" />
