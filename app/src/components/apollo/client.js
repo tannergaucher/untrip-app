@@ -7,8 +7,8 @@ import fetch from "isomorphic-fetch"
 const isBrowser = () => typeof window !== "undefined"
 
 const httpLink = createHttpLink({
-  uri: "/.netlify/functions/graphql",
-  credentials: "include",
+  uri: process.env.GATSBY_SITE_URL + "/.netlify/functions/graphql",
+  credentials: "same-origin",
 })
 
 const authLink = setContext((_, { headers }) => {
