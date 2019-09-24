@@ -14,6 +14,9 @@ export default function Header({ location }) {
       p={[2]}
       opacity=".92"
       style={{
+        position: `sticky`,
+        top: `0`,
+        zIndex: `1`,
         borderBottom: `1px solid var(--light-2)`,
       }}
     >
@@ -22,13 +25,12 @@ export default function Header({ location }) {
           e.preventDefault()
           window.history.back()
         }}
+        style={{
+          visibility: location.pathname === "/" ? "hidden" : "visible",
+          border: `none`,
+        }}
       >
-        <Previous
-          color="var(--dark-1)"
-          style={{
-            visibility: location.pathname === "/" ? "hidden" : "visible",
-          }}
-        />
+        <Previous color="var(--dark-1)" />
       </button>
       <Link
         to="/"
