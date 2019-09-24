@@ -22,13 +22,11 @@ export default function Header({ location }) {
           e.preventDefault()
           window.history.back()
         }}
+        style={{
+          visibility: location.pathname === "/" ? "hidden" : "visible",
+        }}
       >
-        <Previous
-          color="var(--dark-1)"
-          style={{
-            visibility: location.pathname === "/" ? "hidden" : "visible",
-          }}
-        />
+        <Previous color="var(--dark-1)" />
       </button>
       <Link
         to="/"
