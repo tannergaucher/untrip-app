@@ -8,7 +8,7 @@ const isBrowser = () => typeof window !== "undefined"
 
 const httpLink = createHttpLink({
   uri: process.env.GATSBY_SITE_URL + "/.netlify/functions/graphql",
-  credentials: "same-origin",
+  credentials: "include",
 })
 
 const authLink = setContext((_, { headers }) => {

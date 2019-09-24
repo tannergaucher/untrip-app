@@ -2,7 +2,7 @@ import React from "react"
 import { useApolloClient } from "@apollo/react-hooks"
 import { Button } from "../styles"
 
-export default function logout() {
+export default function Logout() {
   const client = useApolloClient()
 
   return (

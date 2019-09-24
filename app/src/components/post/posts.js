@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import { PostCard } from "../post"
 import { useAllSanityPost } from "../hooks"
 
-export default function posts() {
+export default function Posts() {
   const { edges } = useAllSanityPost()
 
   return (
