@@ -1,0 +1,24 @@
+type User {
+  id: ID! @id
+  email: String! @unique
+  password: String!
+  lists: [List!]
+}
+
+type List {
+  id: ID! @id 
+  title: String!
+  places: [Place!]
+  user: User!
+}
+
+type Place {
+  id: ID! @id
+  placeSanityId: String
+  placeName: String
+  placeImageUrl: String
+  placeSlug: String
+  lat: Float
+  lng: Float
+  list: List
+}
