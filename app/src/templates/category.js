@@ -1,6 +1,6 @@
 import React from "react"
 import { Box } from "grommet"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import { HeroCard } from "../components/styles"
 import { SEO } from "../components/elements"

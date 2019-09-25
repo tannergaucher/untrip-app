@@ -19,61 +19,52 @@ export default function Menu() {
       <Button
         plain={true}
         onClick={() => setShow(!show)}
-        icon={<MenuIcon color="var(--dark-1)" />}
+        margin="small"
+        icon={<MenuIcon color="dark-1" />}
       />
 
       {show && (
-        <Layer
-          full={true}
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
-          onClickCapture={() => setShow(false)}
-        >
-          <Box>
-            <Button
-              plain={true}
-              onClick={() => setShow(false)}
-              style={{ border: `none` }}
-              icon={<Close color="var(--dark-1)" />}
-            />
-            <MenuNav />
-          </Box>
-        </Layer>
+        <>
+          <Layer
+            onEsc={() => setShow(false)}
+            onClickOutside={() => setShow(false)}
+            onClickCapture={() => setShow(false)}
+            position="right"
+            full="vertical"
+            responsive={false}
+            modal={true}
+          >
+            <Box>
+              <Button
+                plain={true}
+                onClick={() => setShow(false)}
+                style={{ border: `none` }}
+                icon={<Close color="var(--dark-1)" />}
+              />
+              <MenuNav />
+            </Box>
+          </Layer>
+        </>
       )}
     </>
   )
 }
 
 const MenuNav = () => (
-  <Box>
-    <MenuNavItem
-      text="Home"
-      to="/"
-      icon={<Home color="var(--dark-1)" size="40px" />}
-    />
-    <MenuNavItem
-      text="Guide"
-      to="guide"
-      icon={<Navigate color="var(--dark-1)" size="40px" />}
-    />
-    <MenuNavItem
-      text="Untrips"
-      to="untrips"
-      icon={<List color="var(--dark-1)" size="40px" />}
-    />
-    <MenuNavItem
-      text="Account"
-      to="account"
-      icon={<User color="var(--dark-1)" size="40px" />}
-    />
+  <Box pad="medium">
+    <MenuItem text="Home" to="/" />
+    <MenuItem text="Guide" to="guide" />
+    <MenuItem text="Untrips" to="untrips" />
+    <MenuItem text="Account" to="account" />
   </Box>
 )
 
-const MenuNavItem = ({ text, to, icon }) => (
-  <Link to={to} color="inherit" style={{ textDecoration: `none` }}>
-    <Box>
-      {icon}
-      <Heading>{text}</Heading>
-    </Box>
+const MenuItem = ({ text, to }) => (
+  <Link
+    to={to}
+    color="inherit"
+    style={{ textDecoration: `none`, color: `inherit` }}
+  >
+    <Heading level="2">{text}</Heading>
   </Link>
 )

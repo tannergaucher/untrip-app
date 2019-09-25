@@ -1,6 +1,15 @@
 import React, { useState } from "react"
-import { Box, Button, Anchor } from "grommet"
-import { Facebook, Instagram, Twitter, Domain, Phone, Map } from "grommet-icons"
+import { Box, Button, Anchor, Text } from "grommet"
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Domain,
+  Phone,
+  Map,
+  CaretNext,
+  CaretDown,
+} from "grommet-icons"
 
 export default function PlaceDetails({ place }) {
   const [show, setShow] = useState(false)
@@ -9,20 +18,23 @@ export default function PlaceDetails({ place }) {
     <Box>
       <Button
         onClick={() => setShow(!show)}
-        label="Details"
+        label={<Text color="dark-2">Details</Text>}
         plain={true}
-        fill
+        gap="xsmall"
+        icon={show ? <CaretDown size="small" /> : <CaretNext size="small" />}
       />
+
       {show && (
-        <Box>
+        // TODO EXTRACT TO COMPONENT
+        <Box margin={{ vertical: "small" }}>
           {place.place.location && (
-            <Box>
+            <Box margin={{ vertical: "small" }}>
               <Anchor label="On Google Maps" icon={<Map size="18px" />} />
             </Box>
           )}
 
           {place.place.facebookLink && (
-            <Box>
+            <Box margin={{ vertical: "small" }}>
               <Anchor
                 href={place.place.facebookLink}
                 label="Facebook"
@@ -32,7 +44,7 @@ export default function PlaceDetails({ place }) {
           )}
 
           {place.place.instagramLink && (
-            <Box>
+            <Box margin={{ vertical: "small" }}>
               <Anchor
                 href={place.place.instagramLink}
                 label="Instagram"
@@ -42,7 +54,7 @@ export default function PlaceDetails({ place }) {
           )}
 
           {place.place.twitterLink && (
-            <Box>
+            <Box margin={{ vertical: "small" }}>
               <Anchor
                 href={place.place.twitterLink}
                 label="Twitter"
@@ -52,7 +64,7 @@ export default function PlaceDetails({ place }) {
           )}
 
           {place.place.websiteLink && (
-            <Box>
+            <Box margin={{ vertical: "small" }}>
               <Anchor
                 href={place.place.websiteLink}
                 label="Website"
@@ -62,7 +74,7 @@ export default function PlaceDetails({ place }) {
           )}
 
           {place.place.phoneNumber && (
-            <Box>
+            <Box margin={{ vertical: "small" }}>
               <Anchor
                 icon={<Phone size="18px" />}
                 label={place.place.phoneNumber}

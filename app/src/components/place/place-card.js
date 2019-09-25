@@ -1,5 +1,6 @@
 import React from "react"
 import Img from "gatsby-image"
+import { Link } from "gatsby"
 import { Heading, Text, Box } from "grommet"
 
 import BlockContent from "@sanity/block-content-to-react"
@@ -9,20 +10,33 @@ import { AddToListModal } from "../list"
 
 export default function PlaceCard({ postPlace }) {
   return (
-    <Box elevation="small" round="medium">
-      <Box justify="between">
-        <Heading>{postPlace.place.name}</Heading>
-        <Text>{postPlace.place.placeType.type}</Text>
-        {postPlace.place.tags.map(tag => (
-          <Text key={tag.id}>{tag.tag}</Text>
-        ))}
+    <Box elevation="large" round="medium" margin={{ vertical: `large` }}>
+      <Box direction="row" justify="between" align="center" pad="medium">
+        <Box>
+          <Heading level="6" margin="none" color="dark-2">
+            {postPlace.place.placeType.type}
+          </Heading>
+
+          <Heading level="2" margin="none">
+            {postPlace.place.name}
+          </Heading>
+        </Box>
         <AddToListModal place={postPlace} />
       </Box>
       <Img fluid={postPlace.place.image.asset.fluid} />
-      <Text>{postPlace.place.imageCaption}</Text>
-      {/* TODO: position absolute photo credit over image */}
-      <BlockContent blocks={postPlace._rawText} />
-      <PlaceDetails place={postPlace} />
+
+      <Box pad="medium" direction="row">
+        {postPlace.place.tags.map(tag => (
+          <Link key={tag.id} to={`/tags/${tag.slug.current}`}>
+            <Text margin={{ right: "small" }}>#{tag.tag}</Text>
+          </Link>
+        ))}
+      </Box>
+
+      <Box pad="small">
+        <BlockContent blocks={postPlace._rawText} />
+        <PlaceDetails place={postPlace} />
+      </Box>
     </Box>
   )
 }

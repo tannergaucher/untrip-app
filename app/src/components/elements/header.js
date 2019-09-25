@@ -7,10 +7,18 @@ import { Menu } from "../elements"
 
 export default function Header({ location }) {
   return (
-    <Box as="header" direction="row" justify="between">
+    <Box
+      as="header"
+      direction="row"
+      justify="between"
+      align="center"
+      background="light-1"
+      style={{ position: `sticky`, top: `0`, zIndex: `2`, opacity: `.95` }}
+    >
       <Button
         plain={true}
-        icon={<Previous color="var(--dark-1)" />}
+        icon={<Previous color="dark-1" />}
+        margin="small"
         style={{
           visibility: location.pathname === "/" ? "hidden" : "visible",
         }}
@@ -23,9 +31,12 @@ export default function Header({ location }) {
         to="/"
         style={{
           textDecoration: `none`,
+          color: `inherit`,
         }}
       >
-        <Heading>Untrip</Heading>
+        <Heading level="3" margin="medium">
+          Untrip
+        </Heading>
       </Link>
       <Menu />
     </Box>
