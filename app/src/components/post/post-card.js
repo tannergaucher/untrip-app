@@ -1,18 +1,29 @@
 import React from "react"
 import Img from "gatsby-image"
-import { Heading, Card } from "rebass"
+import { Box, Heading } from "grommet"
 
 export default function PostCard({ post }) {
   return (
-    <Card mb={[4]} p={[2]}>
-      <Img fluid={post.mainImage.asset.fluid} />
-
-      <Heading fontSize={[2]} mt={[2]} fontWeight="400">
-        {post.category.category}
-      </Heading>
-      <Heading fontSize={[4]} lineHeight="1.1" fontWeight="900" mt={[2]}>
-        {post.title}
-      </Heading>
-    </Card>
+    <Box
+      margin={{ horizontal: "small", vertical: "large" }}
+      round="small"
+      elevation="medium"
+    >
+      <Img
+        fluid={post.mainImage.asset.fluid}
+        style={{ borderRadius: "6px 6px 0px 0px" }}
+      />
+      <Box pad="small">
+        <Heading level="6" margin="none" color="dark-3">
+          {post.category.category}
+        </Heading>
+        <Heading
+          level="2"
+          margin={{ top: "xsmall", horizontal: "none", vertical: "none" }}
+        >
+          {post.title}
+        </Heading>
+      </Box>
+    </Box>
   )
 }

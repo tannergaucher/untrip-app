@@ -1,6 +1,5 @@
 import React from "react"
-import { Box, Text } from "rebass"
-import { CheckBox } from "grommet"
+import { CheckBox, Box, Text } from "grommet"
 
 import { useMutation } from "@apollo/react-hooks"
 import { TOGGLE_PLACE_MUTATION } from "../apollo/graphql"
@@ -42,7 +41,7 @@ export default function TogglePlaceCheckBox({ place, list }) {
   })
 
   return (
-    <Box my={[1]}>
+    <Box>
       <CheckBox
         key={list.id}
         disabled={loading}
