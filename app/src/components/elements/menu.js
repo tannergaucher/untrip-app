@@ -22,7 +22,6 @@ export default function Menu() {
         margin="small"
         icon={<MenuIcon color="dark-3" />}
       />
-
       {show && (
         <>
           <Layer
