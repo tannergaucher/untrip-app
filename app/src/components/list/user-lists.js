@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 import { useQuery } from "@apollo/react-hooks"
-import { Heading, Text, Box } from "rebass"
+import { Heading, Button } from "grommet"
 
 import { CreateList, TogglePlaceCheckBox } from "../list"
-import { Button } from "../styles"
 import { Loading } from "../elements"
 import { CURRENT_USER_QUERY } from "../apollo/graphql"
 
@@ -16,17 +15,13 @@ export default function UserLists({ place }) {
 
   return (
     <>
-      <Heading mb={[2]}>Add {place.name}...</Heading>
+      <Heading>Add {place.name}...</Heading>
       {data &&
         data.me &&
         data.me.lists.map(list => (
           <TogglePlaceCheckBox key={list.id} list={list} place={place} />
         ))}
-      {!show && (
-        <Button width={[1]} mt={[3]} onClick={() => setShow(!show)}>
-          New List
-        </Button>
-      )}
+      {!show && <Button onClick={() => setShow(!show)} label="New List" />}
       {show && <CreateList place={place} setShow={setShow} />}
     </>
   )

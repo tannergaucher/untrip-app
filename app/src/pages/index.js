@@ -1,5 +1,5 @@
 import React from "react"
-import { Box } from "rebass"
+import { Box } from "grommet"
 
 import { SEO } from "../components/elements"
 import { Posts } from "../components/post"

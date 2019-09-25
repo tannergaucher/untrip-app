@@ -1,5 +1,5 @@
 import React from "react"
-import { Box } from "rebass"
+import { Box } from "grommet"
 import { Link } from "gatsby"
 
 import { HeroCard } from "../components/styles"
@@ -9,7 +9,7 @@ export default function CategoryTag({ data }) {
   return (
     <>
       <SEO title={`${data.tag.tag} Posts`} />
-      <Box my={[2]} px={[2]}>
+      <Box>
         {data.posts.edges.map(edge => (
           <Link
             to={`/posts/${edge.node.category.slug.current}/${edge.node.slug.current}`}

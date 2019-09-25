@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { useMutation } from "@apollo/react-hooks"
-import { Form, FormField } from "grommet"
+import { Form, FormField, Button } from "grommet"
 
-import { Button } from "../styles"
 import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 export default function CreateList({ place, setShow }) {
@@ -58,9 +57,7 @@ export default function CreateList({ place, setShow }) {
         value={listTitle}
         onChange={e => setListTitle(e.target.value)}
       />
-      <Button type="submit" fill primary mt={[3]}>
-        Create List
-      </Button>
+      <Button type="submit" label="Create List" />
     </Form>
   )
 }

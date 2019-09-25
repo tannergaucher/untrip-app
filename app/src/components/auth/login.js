@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-
-import { Button, TextInput } from "../styles"
+import { Button, TextInput, Form, Text } from "grommet"
 
 import { LOGIN_MUTATION } from "../apollo/graphql"
 import { useMutation, useApolloClient } from "@apollo/react-hooks"
@@ -15,8 +14,8 @@ export default function Login() {
 
   return (
     <fieldset disabled={loading} style={{ border: `none` }}>
-      {error && `Error: ${error.message}`}
-      <form
+      {error && <Text>{error.message}</Text>}
+      <Form
         onSubmit={async e => {
           e.preventDefault()
           const { data } = await login()
@@ -29,31 +28,23 @@ export default function Login() {
           })
         }}
       >
-        <label htmlFor="email">
-          <TextInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            mt={[2]}
-            disabled={loading}
-          />
-        </label>
-        <label htmlFor="password">
-          <TextInput
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            mt={[2]}
-            disabled={loading}
-          />
-        </label>
-        <Button type="submit" mt={[2]} disabled={loading} width={[1]}>
-          Log in
-        </Button>
-      </form>
+        <TextInput
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          disabled={loading}
+        />
+        <TextInput
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          disabled={loading}
+        />
+        <Button type="submit" label="Log In" />
+      </Form>
     </fieldset>
   )
 }

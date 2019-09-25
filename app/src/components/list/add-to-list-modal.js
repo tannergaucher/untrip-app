@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { AddCircle } from "grommet-icons"
-import { Button, Heading, Flex } from "rebass"
+
 import { useQuery } from "@apollo/react-hooks"
-import { Layer } from "grommet"
+import { Layer, Button, Heading, Box } from "grommet"
 
 import { IS_LOGGED_IN } from "../apollo/graphql"
 import { AuthTabs } from "../auth"
@@ -18,25 +18,24 @@ export default function AddToListModal({ place }) {
   return (
     <>
       <Button
-        bg="var(--light-1)"
-        color="var(--dark-1)"
+        plain={true}
         onClick={() => setShow(!show)}
-      >
-        <AddCircle color="var(--dark-1)" />
-      </Button>
+        icon={<AddCircle color="var(--dark-1)" />}
+      />
+
       {show && (
         <Layer
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
           responsive={false}
         >
-          <Flex flexDirection="column" p={[2, 4]}>
+          <Box>
             {data && data.isLoggedIn ? (
               <UserLists place={place.place} />
             ) : (
               <PleaseSignIn />
             )}
-          </Flex>
+          </Box>
         </Layer>
       )}
     </>

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import { Layer } from "grommet"
-import { Heading, Flex } from "rebass"
+import { Layer, Heading, Box, Button } from "grommet"
+
 import {
   Menu as MenuIcon,
   Close,
@@ -16,9 +16,12 @@ export default function Menu() {
 
   return (
     <>
-      <button onClick={() => setShow(!show)} style={{ border: `none` }}>
-        <MenuIcon color="var(--dark-1)" />
-      </button>
+      <Button
+        plain={true}
+        onClick={() => setShow(!show)}
+        icon={<MenuIcon color="var(--dark-1)" />}
+      />
+
       {show && (
         <Layer
           full={true}
@@ -26,14 +29,15 @@ export default function Menu() {
           onClickOutside={() => setShow(false)}
           onClickCapture={() => setShow(false)}
         >
-          <Flex flex={1} flexDirection="column" p={[2]} bg="var(--light-1)">
-            <Flex justifyContent="flex-end">
-              <button onClick={() => setShow(false)} style={{ border: `none` }}>
-                <Close color="var(--dark-1)" />
-              </button>
-            </Flex>
+          <Box>
+            <Button
+              plain={true}
+              onClick={() => setShow(false)}
+              style={{ border: `none` }}
+              icon={<Close color="var(--dark-1)" />}
+            />
             <MenuNav />
-          </Flex>
+          </Box>
         </Layer>
       )}
     </>
@@ -41,12 +45,7 @@ export default function Menu() {
 }
 
 const MenuNav = () => (
-  <Flex
-    flex={1}
-    flexDirection="column"
-    justifyContent="center"
-    alignItems="center"
-  >
+  <Box>
     <MenuNavItem
       text="Home"
       to="/"
@@ -67,23 +66,14 @@ const MenuNav = () => (
       to="account"
       icon={<User color="var(--dark-1)" size="40px" />}
     />
-  </Flex>
+  </Box>
 )
 
 const MenuNavItem = ({ text, to, icon }) => (
   <Link to={to} color="inherit" style={{ textDecoration: `none` }}>
-    <Flex flexDirection="column" alignItems="center">
+    <Box>
       {icon}
-      <Heading
-        mb={[5]}
-        mt={2}
-        ml={[2]}
-        fontSize={[5]}
-        color="var(--dark-1)"
-        fontWeight="900"
-      >
-        {text}
-      </Heading>
-    </Flex>
+      <Heading>{text}</Heading>
+    </Box>
   </Link>
 )
