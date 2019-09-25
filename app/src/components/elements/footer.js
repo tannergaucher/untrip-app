@@ -15,7 +15,7 @@ export default function Footer() {
 function NavLink({ to, text }) {
   return (
     <Link to={to} style={{ color: "interit", textDecoration: "none" }}>
-      <Heading level="5" margin={{ vertical: "medium" }} color="dark-1">
+      <Heading level="5" margin={{ vertical: "medium" }} color="dark-3">
         {text}
       </Heading>
     </Link>

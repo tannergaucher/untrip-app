@@ -5,8 +5,10 @@ import { Box, Heading } from "grommet"
 
 export default function HeroCard({ text, fluid }) {
   return (
-    <Box style={{ position: `relative` }}>
+    <Box style={{ position: `relative` }} round="medium" margin="medium">
       <Heading
+        margin="none"
+        color="light-1"
         style={{
           zIndex: `1`,
           position: `absolute`,

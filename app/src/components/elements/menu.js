@@ -20,7 +20,7 @@ export default function Menu() {
         plain={true}
         onClick={() => setShow(!show)}
         margin="small"
-        icon={<MenuIcon color="dark-1" />}
+        icon={<MenuIcon color="dark-3" />}
       />
 
       {show && (
@@ -39,7 +39,7 @@ export default function Menu() {
                 plain={true}
                 onClick={() => setShow(false)}
                 style={{ border: `none` }}
-                icon={<Close color="var(--dark-1)" />}
+                icon={<Close color="var(--dark-3)" />}
               />
               <MenuNav />
             </Box>

@@ -18,23 +18,23 @@ export default function PostTemplate({ data }) {
         image={data.sanityPost.mainImage.asset.fluid.src}
         url={`https://untrip.app/posts/${data.sanityPost.category.slug.current}/${data.sanityPost.slug.current}`}
       />
+      <Img fluid={sanityPost.mainImage.asset.fluid} />
+
       <Box margin="medium">
         <Link
           to={`/guide/categories/${sanityPost.category.slug.current}`}
           style={{ color: `inherit`, textDecoration: `none` }}
         >
-          <Heading level="6" margin="small" textAlign="center" color="dark-3">
+          <Heading level="6" margin="small" color="dark-3" textAlign="center">
             {sanityPost.category.category}
           </Heading>
         </Link>
-        <Heading level="1" margin="small" textAlign="center">
+        <Heading level="1" margin="medium" textAlign="center">
           {sanityPost.title}
         </Heading>
-        <Share post={data.sanityPost} />
       </Box>
 
-      <Img fluid={sanityPost.mainImage.asset.fluid} />
-
+      <Share post={data.sanityPost} />
       <Box as="article">
         <Box pad="small">
           <BlockContent blocks={sanityPost._rawBody} ser />

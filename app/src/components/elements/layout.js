@@ -11,11 +11,11 @@ export default function Layout({ children, location }) {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
   return (
-    <>
+    <Box background="light-1">
       <Header location={location} />
       <Box as="main">{children}</Box>
       <Footer />
-    </>
+    </Box>
   )
 }
 

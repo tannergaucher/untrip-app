@@ -7,7 +7,7 @@ export default function Share() {
     <Box
       direction="row"
       justify="center"
-      margin={{ horizontal: "large", top: "large", bottom: "medium" }}
+      margin={{ horizontal: "medium", top: "medium", bottom: "medium" }}
     >
       <Button
         plain={true}
