@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useMutation, useApolloClient } from "@apollo/react-hooks"
-import { TextInput, Button, Text, Form } from "grommet"
+import { TextInput, Button, Text, Form, Box } from "grommet"
 
 import { SIGN_UP_MUTATION } from "../apollo/graphql"
 
@@ -28,14 +28,16 @@ export default function Signup() {
           })
         }}
       >
-        <TextInput
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          disabled={loading}
-        />
+        <Box margin={{ vertical: "medium" }}>
+          <TextInput
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            disabled={loading}
+          />
+        </Box>
 
         <TextInput
           type="password"
@@ -45,7 +47,12 @@ export default function Signup() {
           disabled={loading}
         />
 
-        <Button type="submit" label="Sign Up" />
+        <Button
+          type="submit"
+          label="Sign Up"
+          margin={{ top: "medium" }}
+          fill={true}
+        />
       </Form>
     </fieldset>
   )

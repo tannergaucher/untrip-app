@@ -12,13 +12,13 @@ export default function Header({ location }) {
       direction="row"
       justify="between"
       align="center"
-      background="light-2"
+      background="dark-1"
       elevation="small"
       style={{ position: `sticky`, top: `0`, zIndex: `2`, opacity: `.95` }}
     >
       <Button
         plain={true}
-        icon={<Previous color="dark-3" />}
+        icon={<Previous color="light-3" />}
         margin="small"
         style={{
           visibility: location.pathname === "/" ? "hidden" : "visible",
@@ -35,7 +35,7 @@ export default function Header({ location }) {
           color: `inherit`,
         }}
       >
-        <Heading level="3" margin="medium" color="dark-3">
+        <Heading level="3" margin="medium" color="light-3">
           Untrip
         </Heading>
       </Link>

@@ -41,7 +41,7 @@ export default function TogglePlaceCheckBox({ place, list }) {
   })
 
   return (
-    <Box>
+    <Box margin="small">
       <CheckBox
         key={list.id}
         disabled={loading}

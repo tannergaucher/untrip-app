@@ -28,8 +28,10 @@ export default function AddToListModal({ place }) {
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
           responsive={false}
+          full="horizontal"
+          margin="small"
         >
-          <Box>
+          <Box pad="medium">
             {data && data.isLoggedIn ? (
               <UserLists place={place.place} />
             ) : (
@@ -45,7 +47,9 @@ export default function AddToListModal({ place }) {
 function PleaseSignIn() {
   return (
     <>
-      <Heading>You must be logged in to do that.</Heading>
+      <Heading level="4" textAlign="center">
+        You must be logged in to do that
+      </Heading>
       <AuthTabs />
     </>
   )

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useMutation } from "@apollo/react-hooks"
-import { Form, FormField, Button } from "grommet"
+import { Form, FormField, Button, Box } from "grommet"
 
 import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
@@ -56,8 +56,15 @@ export default function CreateList({ place, setShow }) {
         name="List Name"
         value={listTitle}
         onChange={e => setListTitle(e.target.value)}
+        required={true}
       />
-      <Button type="submit" label="Create List" />
+
+      <Button
+        type="submit"
+        label="Create List"
+        margin={{ top: "small" }}
+        fill={true}
+      />
     </Form>
   )
 }

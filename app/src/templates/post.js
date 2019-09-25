@@ -1,9 +1,9 @@
 import React from "react"
 import Img from "gatsby-image"
 import BlockContent from "@sanity/block-content-to-react"
-import { graphql, Link } from "gatsby"
-
-import { Heading, Box } from "grommet"
+import { graphql } from "gatsby"
+import { navigate } from "@reach/router"
+import { Heading, Box, Anchor } from "grommet"
 
 import { PostPlaces, Share, Author } from "../components/post"
 import { SEO } from "../components/elements"
@@ -21,14 +21,16 @@ export default function PostTemplate({ data }) {
       <Img fluid={sanityPost.mainImage.asset.fluid} />
 
       <Box margin="medium">
-        <Link
-          to={`/guide/categories/${sanityPost.category.slug.current}`}
-          style={{ color: `inherit`, textDecoration: `none` }}
+        <Anchor
+          textAlign="center"
+          onClick={() => {
+            navigate(`/guide/categories/${sanityPost.category.slug.current}`)
+          }}
         >
-          <Heading level="6" margin="small" color="dark-3" textAlign="center">
+          <Heading textAlign="center" level="4">
             {sanityPost.category.category}
           </Heading>
-        </Link>
+        </Anchor>
         <Heading level="1" margin="medium" textAlign="center">
           {sanityPost.title}
         </Heading>

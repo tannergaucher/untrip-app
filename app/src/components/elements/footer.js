@@ -1,10 +1,10 @@
 import React from "react"
-import { Box, Heading } from "grommet"
-import { Link } from "gatsby"
+import { Box, Heading, Anchor } from "grommet"
+import { navigate } from "gatsby"
 
 export default function Footer() {
   return (
-    <Box as="footer" background="light-2" pad="large">
+    <Box as="footer" background="dark-1" pad="large">
       <NavLink text="About Untrip" to="/about" />
       <NavLink text="Contact" to="/contact" />
       <NavLink text="Download the App" to="/download" />
@@ -14,10 +14,14 @@ export default function Footer() {
 
 function NavLink({ to, text }) {
   return (
-    <Link to={to} style={{ color: "interit", textDecoration: "none" }}>
-      <Heading level="5" margin={{ vertical: "medium" }} color="dark-3">
+    <Anchor
+      onClick={() => {
+        navigate(to)
+      }}
+    >
+      <Heading level="5" margin={{ vertical: "medium" }}>
         {text}
       </Heading>
-    </Link>
+    </Anchor>
   )
 }
