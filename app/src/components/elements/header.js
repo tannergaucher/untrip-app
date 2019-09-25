@@ -14,10 +14,8 @@ export default function Header({ location }) {
       p={[2]}
       opacity=".92"
       style={{
-        position: `fixed`,
+        position: `sticky`,
         top: `0`,
-        left: `0`,
-        right: `0`,
         zIndex: `1`,
         borderBottom: `1px solid var(--light-2)`,
       }}

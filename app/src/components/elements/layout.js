@@ -17,8 +17,6 @@ export default function Layout({ children, location }) {
         style={{
           margin: "0 auto",
           maxWidth: `var(--max-width)`,
-          // for ios position sticky
-          display: `block`,
         }}
       >
         <Header location={location} />

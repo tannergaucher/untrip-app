@@ -16,7 +16,10 @@ export default function Menu() {
 
   return (
     <>
-      <button onClick={() => setShow(!show)} style={{ border: `none` }}>
+      <button
+        onClick={() => setShow(!show)}
+        style={{ border: `none`, background: `var(--light-1)` }}
+      >
         <MenuIcon color="var(--dark-1)" />
       </button>
       {show && (
