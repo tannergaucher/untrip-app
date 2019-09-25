@@ -13,7 +13,7 @@ export default function Menu() {
         plain={true}
         onClick={() => setShow(!show)}
         margin="small"
-        icon={<MenuIcon color="light-3" />}
+        icon={<MenuIcon color="dark-3" />}
       />
       {show && (
         <>
