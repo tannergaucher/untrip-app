@@ -39,7 +39,9 @@ export default function PostTemplate({ data }) {
         <Box pad="small">
           <BlockContent blocks={sanityPost._rawBody} ser />
           <PostPlaces postPlaces={sanityPost.postPlaces} />
-          <Author author={sanityPost.author} />
+          <Box margin={{ vertical: "large" }}>
+            <Author author={sanityPost.author} />
+          </Box>
         </Box>
       </Box>
     </>
