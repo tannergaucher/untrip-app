@@ -1,6 +1,6 @@
 import React from "react"
-import { Box } from "rebass"
-import { Link } from "gatsby"
+import { Box } from "grommet"
+import { Link, graphql } from "gatsby"
 
 import { HeroCard } from "../components/styles"
 import { SEO } from "../components/elements"
@@ -12,7 +12,7 @@ export default function CategoryTemplate({ pageContext, data }) {
   return (
     <>
       <SEO title={`Tags`} />
-      <Box my={[2]} px={[2]}>
+      <Box>
         {edges.map(edge => (
           <Link
             key={edge.node.id}

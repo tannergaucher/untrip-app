@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Box } from "rebass"
+import { Box, Grommet } from "grommet"
 import { useQuery } from "@apollo/react-hooks"
-import { Grommet } from "grommet"
+
 
 import { Header, Footer } from "../elements"
 import { CURRENT_USER_QUERY } from "../apollo/graphql"
@@ -13,14 +13,9 @@ export default function Layout({ children, location }) {
 
   return (
     <Grommet>
-      <Box
-        style={{
-          margin: "0 auto",
-          maxWidth: `var(--max-width)`,
-        }}
-      >
+      <Box>
         <Header location={location} />
-        <Box as="main" style={{ minHeight: `100vh` }}>
+        <Box as="main">
           {children}
         </Box>
         <Footer />

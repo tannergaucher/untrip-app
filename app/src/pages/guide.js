@@ -1,5 +1,5 @@
 import React from "react"
-import { Box } from "rebass"
+import { Box } from "grommet"
 
 import { Categories } from "../components/category"
 import { SEO } from "../components/elements"
@@ -8,7 +8,7 @@ export default function Guide() {
   return (
     <>
       <SEO title={`Guide`} />
-      <Box my={[2]} px={[2]}>
+      <Box>
         <Categories />
       </Box>
     </>

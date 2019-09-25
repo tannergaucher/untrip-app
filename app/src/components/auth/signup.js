@@ -1,8 +1,6 @@
 import React, { useState } from "react"
-import { Text } from "rebass"
 import { useMutation, useApolloClient } from "@apollo/react-hooks"
-
-import { TextInput, Button } from "../styles"
+import { TextInput, Button, Text, Form } from "grommet"
 
 import { SIGN_UP_MUTATION } from "../apollo/graphql"
 
@@ -16,9 +14,8 @@ export default function Signup() {
 
   return (
     <fieldset disabled={loading} style={{ border: `none` }}>
-      {error && <Text color="var(--warning)">Error: {error.message}</Text>}
-
-      <form
+      {error && <Text>Error: {error.message}</Text>}
+      <Form
         onSubmit={async e => {
           e.preventDefault()
           const { data } = await signup()
@@ -31,31 +28,25 @@ export default function Signup() {
           })
         }}
       >
-        <label htmlFor="email">
-          <TextInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            mt={[2]}
-            disabled={loading}
-          />
-        </label>
-        <label htmlFor="password">
-          <TextInput
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            mt={[2]}
-            disabled={loading}
-          />
-        </label>
-        <Button type="submit" mt={[2]} disabled={loading} width={[1]}>
-          Sign up
-        </Button>
-      </form>
+        <TextInput
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          disabled={loading}
+        />
+
+        <TextInput
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          disabled={loading}
+        />
+
+        <Button type="submit" label="Sign Up" />
+      </Form>
     </fieldset>
   )
 }

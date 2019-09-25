@@ -1,48 +1,45 @@
 import React from "react"
 import { Previous } from "grommet-icons"
-import { Flex, Heading } from "rebass"
+import { Box, Heading, Button } from "grommet"
+import { Link } from "gatsby"
 
-import { Link } from "../styles"
 import { Menu } from "../elements"
 
 export default function Header({ location }) {
   return (
-    <Flex
+    <Box
       as="header"
-      justifyContent="space-between"
-      bg="var(--light-1)"
-      p={[2]}
-      opacity=".92"
-      style={{
-        position: `sticky`,
-        top: `0`,
-        zIndex: `1`,
-        borderBottom: `1px solid var(--light-2)`,
-      }}
+      direction="row"
+      justify="between"
+      align="center"
+      background="light-2"
+      elevation="small"
+      style={{ position: `sticky`, top: `0`, zIndex: `2`, opacity: `.95` }}
     >
-      <button
+      <Button
+        plain={true}
+        icon={<Previous color="dark-3" />}
+        margin="small"
+        style={{
+          visibility: location.pathname === "/" ? "hidden" : "visible",
+        }}
         onClick={e => {
           e.preventDefault()
           window.history.back()
         }}
-        style={{
-          visibility: location.pathname === "/" ? "hidden" : "visible",
-          border: `none`,
-        }}
-      >
-        <Previous color="var(--dark-1)" />
-      </button>
+      />
       <Link
         to="/"
         style={{
           textDecoration: `none`,
+          color: `inherit`,
         }}
       >
-        <Heading fontSize={[3]} color="var(--dark-1)" letterSpacing="-.5px">
+        <Heading level="3" margin="medium" color="dark-3">
           Untrip
         </Heading>
       </Link>
       <Menu />
-    </Flex>
+    </Box>
   )
 }

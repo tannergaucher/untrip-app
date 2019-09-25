@@ -1,19 +1,11 @@
 import React from "react"
-import { Tabs, Tab } from "grommet"
-import { Flex, Heading } from "rebass"
+import { Box, Tabs, Tab, Heading } from "grommet"
 
 import { Login, Signup } from "../auth"
 
-export default function AuthTabs({ message, fullHeight }) {
+export default function AuthTabs({ message }) {
   return (
-    <Flex
-      width={[1]}
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      style={{ height: fullHeight ? `calc(100vh - 50px)` : "" }}
-      p={[3]}
-    >
+    <Box>
       {message && (
         <Heading mb={[4]} textAlign="center">
           {message}
@@ -27,6 +19,6 @@ export default function AuthTabs({ message, fullHeight }) {
           <Signup />
         </Tab>
       </Tabs>
-    </Flex>
+    </Box>
   )
 }

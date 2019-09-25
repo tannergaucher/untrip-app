@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import { Box, Heading, Flex } from "rebass"
+import { Box, Heading } from "grommet"
 import { useQuery } from "@apollo/react-hooks"
 
 import { AuthTabs } from "../components/auth"
@@ -25,9 +25,9 @@ export default function ListsPage() {
 
 function Message({ message }) {
   return (
-    <Flex style={{ height: `calc(100vh - 50px)` }} justifyContent="center">
-      <Heading mt={[4]}>{message}</Heading>
-    </Flex>
+    <Box>
+      <Heading>{message}</Heading>
+    </Box>
   )
 }
 
@@ -37,7 +37,7 @@ function UserLists() {
   return (
     <>
       <SEO title={`My Untrips | Untrip`} />
-      <Box my={[2]} px={[2]}>
+      <Box>
         {loading && <Loading message="Loading lists..." />}
         {error && `Error: ${error.message}`}
         {/* handle case of user not having any lists  */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import { Layer } from "grommet"
-import { Heading, Flex } from "rebass"
+import { Layer, Heading, Box, Button } from "grommet"
+
 import {
   Menu as MenuIcon,
   Close,
@@ -16,77 +16,54 @@ export default function Menu() {
 
   return (
     <>
-      <button
+      <Button
+        plain={true}
         onClick={() => setShow(!show)}
-        style={{ border: `none`, background: `var(--light-1)` }}
-      >
-        <MenuIcon color="var(--dark-1)" />
-      </button>
+        margin="small"
+        icon={<MenuIcon color="dark-3" />}
+      />
       {show && (
-        <Layer
-          full={true}
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
-          onClickCapture={() => setShow(false)}
-        >
-          <Flex flex={1} flexDirection="column" p={[2]} bg="var(--light-1)">
-            <Flex justifyContent="flex-end">
-              <button onClick={() => setShow(false)} style={{ border: `none` }}>
-                <Close color="var(--dark-1)" />
-              </button>
-            </Flex>
-            <MenuNav />
-          </Flex>
-        </Layer>
+        <>
+          <Layer
+            onEsc={() => setShow(false)}
+            onClickOutside={() => setShow(false)}
+            onClickCapture={() => setShow(false)}
+            position="right"
+            full="vertical"
+            responsive={false}
+            modal={true}
+          >
+            <Box>
+              <Button
+                plain={true}
+                onClick={() => setShow(false)}
+                style={{ border: `none` }}
+                icon={<Close color="var(--dark-3)" />}
+              />
+              <MenuNav />
+            </Box>
+          </Layer>
+        </>
       )}
     </>
   )
 }
 
 const MenuNav = () => (
-  <Flex
-    flex={1}
-    flexDirection="column"
-    justifyContent="center"
-    alignItems="center"
-  >
-    <MenuNavItem
-      text="Home"
-      to="/"
-      icon={<Home color="var(--dark-1)" size="40px" />}
-    />
-    <MenuNavItem
-      text="Guide"
-      to="guide"
-      icon={<Navigate color="var(--dark-1)" size="40px" />}
-    />
-    <MenuNavItem
-      text="Untrips"
-      to="untrips"
-      icon={<List color="var(--dark-1)" size="40px" />}
-    />
-    <MenuNavItem
-      text="Account"
-      to="account"
-      icon={<User color="var(--dark-1)" size="40px" />}
-    />
-  </Flex>
+  <Box pad="medium">
+    <MenuItem text="Home" to="/" />
+    <MenuItem text="Guide" to="guide" />
+    <MenuItem text="Untrips" to="untrips" />
+    <MenuItem text="Account" to="account" />
+  </Box>
 )
 
-const MenuNavItem = ({ text, to, icon }) => (
-  <Link to={to} color="inherit" style={{ textDecoration: `none` }}>
-    <Flex flexDirection="column" alignItems="center">
-      {icon}
-      <Heading
-        mb={[5]}
-        mt={2}
-        ml={[2]}
-        fontSize={[5]}
-        color="var(--dark-1)"
-        fontWeight="900"
-      >
-        {text}
-      </Heading>
-    </Flex>
+const MenuItem = ({ text, to }) => (
+  <Link
+    to={to}
+    color="inherit"
+    style={{ textDecoration: `none`, color: `inherit` }}
+  >
+    <Heading level="2">{text}</Heading>
   </Link>
 )

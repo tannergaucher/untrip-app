@@ -1,13 +1,14 @@
 import React from "react"
 import Img from "gatsby-image"
-import { Card, Heading } from "rebass"
+
+import { Box, Heading } from "grommet"
 
 export default function HeroCard({ text, fluid }) {
   return (
-    <Card mb={[2]} style={{ position: `relative` }}>
+    <Box style={{ position: `relative` }} round="medium" margin="medium">
       <Heading
-        color="var(--light-1)"
-        fontSize={[4]}
+        margin="none"
+        color="light-1"
         style={{
           zIndex: `1`,
           position: `absolute`,
@@ -24,9 +25,8 @@ export default function HeroCard({ text, fluid }) {
         style={{
           filter: `brightness(.7)`,
           height: "250px",
-          // borderRadius: `10px`,
         }}
       />
-    </Card>
+    </Box>
   )
 }
