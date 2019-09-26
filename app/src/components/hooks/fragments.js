@@ -42,7 +42,7 @@ export const SANITY_AUTHOR_FRAGMENT = graphql`
     }
     image {
       asset {
-        fixed(width: 50) {
+        fixed(width: 50, height: 50) {
           ...GatsbySanityImageFixed
         }
       }

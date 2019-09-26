@@ -8,7 +8,6 @@ export default function Logout() {
   return (
     <Button
       label="Log Out"
-      primary={true}
       fill={true}
       onClick={() => {
         localStorage.removeItem("token")

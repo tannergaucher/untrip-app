@@ -5,14 +5,11 @@ import { Box, Heading } from "grommet"
 
 export default function HeroCard({ text, fluid }) {
   return (
-    <Box
-      style={{ position: `relative` }}
-      round="medium"
-      margin={{ vertical: "medium" }}
-    >
+    <Box margin={{ bottom: "large" }} style={{ position: `relative` }}>
       <Heading
         margin="none"
         color="light-1"
+        level="3"
         style={{
           zIndex: `1`,
           position: `absolute`,

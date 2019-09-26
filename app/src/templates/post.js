@@ -18,18 +18,23 @@ export default function PostTemplate({ data }) {
         url={`https://untrip.app/posts/${sanityPost.category.slug.current}/${sanityPost.slug.current}`}
       />
       <Img fluid={sanityPost.mainImage.asset.fluid} />
-      <Box margin="medium">
+      <Box margin={{ top: "small" }}>
         <Anchor
           textAlign="center"
           onClick={() => {
             navigate(`/guide/categories/${sanityPost.category.slug.current}`)
           }}
         >
-          <Heading textAlign="center" level="4">
+          <Heading textAlign="center" level="4" color="black">
             {sanityPost.category.category}
           </Heading>
         </Anchor>
-        <Heading level="1" margin="medium" textAlign="center">
+        <Heading
+          level="1"
+          margin={{ top: "small" }}
+          textAlign="center"
+          color="black"
+        >
           {sanityPost.title}
         </Heading>
       </Box>
@@ -38,7 +43,7 @@ export default function PostTemplate({ data }) {
         <Box pad="small">
           <BlockContent blocks={sanityPost._rawBody} />
           <PostPlaces postPlaces={sanityPost.postPlaces} />
-          <Box margin={{ vertical: "large" }}>
+          <Box margin={{ vertical: "large", horizontal: "medium" }}>
             <Author author={sanityPost.author} />
           </Box>
         </Box>

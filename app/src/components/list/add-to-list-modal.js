@@ -20,7 +20,7 @@ export default function AddToListModal({ place }) {
       <Button
         plain={true}
         onClick={() => setShow(!show)}
-        icon={<AddCircle />}
+        icon={<AddCircle color="black" />}
       />
 
       {show && (

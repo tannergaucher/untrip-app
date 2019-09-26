@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { navigate } from "gatsby"
 import { Layer, Heading, Box, Button, Anchor } from "grommet"
-
-import { Menu as MenuIcon, Close } from "grommet-icons"
+import { Menu as MenuIcon } from "grommet-icons"
 
 export default function Menu() {
   const [show, setShow] = useState(false)
@@ -13,7 +12,7 @@ export default function Menu() {
         plain={true}
         onClick={() => setShow(!show)}
         margin="small"
-        icon={<MenuIcon color="dark-3" />}
+        icon={<MenuIcon color="black" />}
       />
       {show && (
         <>
@@ -26,13 +25,7 @@ export default function Menu() {
             responsive={false}
             modal={true}
           >
-            <Box>
-              <Button
-                plain={true}
-                onClick={() => setShow(false)}
-                style={{ border: `none` }}
-                icon={<Close color="var(--dark-3)" />}
-              />
+            <Box fill="vertical">
               <MenuNav />
             </Box>
           </Layer>
@@ -43,7 +36,7 @@ export default function Menu() {
 }
 
 const MenuNav = () => (
-  <Box pad="medium">
+  <Box pad="large" fill="vertical" justify="center" align="end">
     <MenuItem text="Home" to="/" />
     <MenuItem text="Guide" to="guide" />
     <MenuItem text="Untrips" to="untrips" />
