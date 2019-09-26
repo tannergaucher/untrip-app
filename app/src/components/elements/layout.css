@@ -7,9 +7,10 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 21px;
 }
 
 p {
   line-height: 1.4;
+  font-size: 20px;
+  color: black;
 }
