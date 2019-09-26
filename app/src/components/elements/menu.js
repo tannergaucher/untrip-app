@@ -1,15 +1,8 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
-import { Layer, Heading, Box, Button } from "grommet"
+import { navigate } from "gatsby"
+import { Layer, Heading, Box, Button, Anchor } from "grommet"
 
-import {
-  Menu as MenuIcon,
-  Close,
-  Home,
-  Navigate,
-  User,
-  List,
-} from "grommet-icons"
+import { Menu as MenuIcon, Close } from "grommet-icons"
 
 export default function Menu() {
   const [show, setShow] = useState(false)
@@ -59,11 +52,11 @@ const MenuNav = () => (
 )
 
 const MenuItem = ({ text, to }) => (
-  <Link
-    to={to}
-    color="inherit"
-    style={{ textDecoration: `none`, color: `inherit` }}
+  <Anchor
+    onClick={() => {
+      navigate(`/${to}`)
+    }}
   >
     <Heading level="2">{text}</Heading>
-  </Link>
+  </Anchor>
 )

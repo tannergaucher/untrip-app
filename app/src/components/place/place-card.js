@@ -1,7 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
-import { Link } from "gatsby"
-import { Heading, Text, Box } from "grommet"
+import { navigate } from "gatsby"
+import { Heading, Text, Box, Anchor } from "grommet"
 
 import BlockContent from "@sanity/block-content-to-react"
 
@@ -26,16 +26,16 @@ export default function PlaceCard({ postPlace }) {
 
       <Box pad="medium" direction="row" wrap={true}>
         {postPlace.place.tags.map(tag => (
-          <Link
+          <Anchor
             key={tag.id}
-            to={`/tags/${tag.slug.current}`}
-            style={{ color: `inherit` }}
+            onClick={() => {
+              navigate(`/tags/${tag.slug.current}`)
+            }}
           >
             <Text margin={{ right: "small" }}>#{tag.tag}</Text>
-          </Link>
+          </Anchor>
         ))}
       </Box>
-
       <Box pad="small">
         <BlockContent blocks={postPlace._rawText} />
         <PlaceDetails place={postPlace} />

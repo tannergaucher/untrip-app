@@ -15,13 +15,19 @@ export default function UserLists({ place }) {
 
   return (
     <>
-      <Heading>Add {place.name}...</Heading>
+      <Heading level="4">Add {place.name} to list</Heading>
       {data &&
         data.me &&
         data.me.lists.map(list => (
           <TogglePlaceCheckBox key={list.id} list={list} place={place} />
         ))}
-      {!show && <Button onClick={() => setShow(!show)} label="New List" />}
+      {!show && (
+        <Button
+          onClick={() => setShow(!show)}
+          label="New List"
+          margin={{ top: "medium" }}
+        />
+      )}
       {show && <CreateList place={place} setShow={setShow} />}
     </>
   )
