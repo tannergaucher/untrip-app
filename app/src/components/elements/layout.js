@@ -19,6 +19,11 @@ const myTheme = {
   layer: {
     background: "light-2",
   },
+  accordion: {
+    border: {
+      color: "none",
+    },
+  },
 }
 
 export default function Layout({ children, location }) {
