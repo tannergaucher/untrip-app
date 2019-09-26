@@ -9,11 +9,17 @@ export default function AccountPage() {
   const { loading, error, data } = useQuery(IS_LOGGED_IN)
 
   return (
-    <>
+    <Box fill={true} background="" style={{ flex: `1` }}>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
-      {data && data.isLoggedIn ? <UserAccount /> : <AuthTabs />}
-    </>
+      {data && data.isLoggedIn ? (
+        <UserAccount />
+      ) : (
+        <Box justify="center" justify="center" style={{ flex: "1" }}>
+          <AuthTabs />
+        </Box>
+      )}
+    </Box>
   )
 }
 
@@ -25,7 +31,7 @@ function UserAccount() {
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.me && (
-        <Box fill={true} align="center" background="red">
+        <Box>
           <Heading color="black" level="4">
             {data.me.email}
           </Heading>
