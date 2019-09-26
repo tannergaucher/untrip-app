@@ -18,7 +18,7 @@ export default function PostTemplate({ data }) {
         url={`https://untrip.app/posts/${sanityPost.category.slug.current}/${sanityPost.slug.current}`}
       />
       <Img fluid={sanityPost.mainImage.asset.fluid} />
-      <Box margin="medium">
+      <Box margin={{ top: "small" }}>
         <Anchor
           textAlign="center"
           onClick={() => {
@@ -29,7 +29,12 @@ export default function PostTemplate({ data }) {
             {sanityPost.category.category}
           </Heading>
         </Anchor>
-        <Heading level="1" margin="medium" textAlign="center" color="black">
+        <Heading
+          level="1"
+          margin={{ top: "small" }}
+          textAlign="center"
+          color="black"
+        >
           {sanityPost.title}
         </Heading>
       </Box>
