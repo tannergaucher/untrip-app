@@ -7,7 +7,7 @@ export default function Author({ author }) {
     <Box direction="row" align="center">
       <Img fixed={author.image.asset.fixed} style={{ borderRadius: `100%` }} />
       <Box margin={{ left: "small" }}>
-        <Heading level="4" margin="none">
+        <Heading level="4" margin="none" color="black">
           {author.name}
         </Heading>
         <Anchor

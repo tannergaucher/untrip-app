@@ -13,7 +13,7 @@ export default function Header({ location }) {
       justify="between"
       align="center"
       background="light-1"
-      style={{ position: `sticky`, top: "0", zIndex: "3" }}
+      style={{ position: `sticky`, top: "0", zIndex: "3", opacity: ".97" }}
     >
       <Button
         plain={true}
@@ -34,7 +34,7 @@ export default function Header({ location }) {
           color: `inherit`,
         }}
       >
-        <Heading level="3" margin="medium" color="black">
+        <Heading level="3" margin="small" color="black">
           Untrip
         </Heading>
       </Link>

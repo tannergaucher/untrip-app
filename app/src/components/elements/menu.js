@@ -36,7 +36,7 @@ export default function Menu() {
 }
 
 const MenuNav = () => (
-  <Box pad="medium" fill="vertical" justify="center">
+  <Box pad="large" fill="vertical" justify="center" align="end">
     <MenuItem text="Home" to="/" />
     <MenuItem text="Guide" to="guide" />
     <MenuItem text="Untrips" to="untrips" />

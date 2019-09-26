@@ -1,11 +1,17 @@
 import React from "react"
-import { Box, Anchor, Text, Accordion, AccordionPanel } from "grommet"
+import { Box, Anchor, Heading, Accordion, AccordionPanel } from "grommet"
 import { Facebook, Instagram, Twitter, Domain, Phone, Map } from "grommet-icons"
 
 export default function DetailsAccordion({ place }) {
   return (
     <Accordion>
-      <AccordionPanel label={<Text color="dark-1">Details</Text>}>
+      <AccordionPanel
+        label={
+          <Heading color="black" level="4" margin={{ vertical: "medium" }}>
+            Details
+          </Heading>
+        }
+      >
         <Box margin={{ vertical: "small" }}>
           {place.place.location && (
             <Box margin={{ vertical: "small" }}>

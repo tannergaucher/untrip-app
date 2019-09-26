@@ -25,7 +25,7 @@ export default function PostTemplate({ data }) {
             navigate(`/guide/categories/${sanityPost.category.slug.current}`)
           }}
         >
-          <Heading textAlign="center" level="4">
+          <Heading textAlign="center" level="4" color="black">
             {sanityPost.category.category}
           </Heading>
         </Anchor>
@@ -38,7 +38,7 @@ export default function PostTemplate({ data }) {
         <Box pad="small">
           <BlockContent blocks={sanityPost._rawBody} />
           <PostPlaces postPlaces={sanityPost.postPlaces} />
-          <Box margin={{ vertical: "large" }}>
+          <Box margin={{ vertical: "large", horizontal: "medium" }}>
             <Author author={sanityPost.author} />
           </Box>
         </Box>

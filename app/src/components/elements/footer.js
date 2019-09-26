@@ -19,7 +19,7 @@ function NavLink({ to, text }) {
         navigate(to)
       }}
     >
-      <Heading level="5" margin={{ vertical: "medium" }}>
+      <Heading level="5" margin={{ vertical: "medium" }} textAlign="center">
         {text}
       </Heading>
     </Anchor>

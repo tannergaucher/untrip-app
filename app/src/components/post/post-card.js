@@ -6,10 +6,10 @@ export default function PostCard({ post }) {
   return (
     <Box margin={{ bottom: "large" }}>
       <Img fluid={post.mainImage.asset.fluid} />
-      <Box pad="small">
+      <Box pad="medium">
         <Heading
           level="6"
-          margin={{ top: "small", bottom: "none" }}
+          margin={{ top: "none", bottom: "none" }}
           color="black"
         >
           {post.category.category}
