@@ -1,27 +1,20 @@
 import React from "react"
 import Img from "gatsby-image"
-import { Box, Heading, Text } from "grommet"
+import { Box, Heading } from "grommet"
 
 export default function PostCard({ post }) {
   return (
-    <Box
-      margin={{ horizontal: "small", vertical: "large" }}
-      round="small"
-      elevation="large"
-    >
-      <Box pad="small" direction="row">
+    <Box margin={{ bottom: "large" }}>
+      <Img fluid={post.mainImage.asset.fluid} />
+      <Box pad="medium">
         <Heading
           level="6"
-          margin={{ top: "small", bottom: "xsmall" }}
-          color="dark-2"
+          margin={{ top: "none", bottom: "none" }}
+          color="black"
         >
           {post.category.category}
         </Heading>
-      </Box>
-      <Img fluid={post.mainImage.asset.fluid} />
-
-      <Box pad="small">
-        <Heading level="2" margin={{ top: "small", bottom: "small" }}>
+        <Heading level="2" margin={{ top: "xsmall", bottom: "" }} color="black">
           {post.title}
         </Heading>
       </Box>

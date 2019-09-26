@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Merriweather|Montserrat&display=swap");
+
 :root {
-  /* TYPOGRAPHY */
   --sans: "Avenir", sans-serif;
+  --serif: "Merriweather", serif;
 }
 
 body {
@@ -8,4 +10,10 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  line-height: 1.5;
+  color: black;
+  font-family: var(--serif);
 }

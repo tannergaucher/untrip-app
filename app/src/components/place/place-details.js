@@ -1,31 +1,17 @@
-import React, { useState } from "react"
-import { Box, Button, Anchor, Text } from "grommet"
-import {
-  Facebook,
-  Instagram,
-  Twitter,
-  Domain,
-  Phone,
-  Map,
-  CaretNext,
-  CaretDown,
-} from "grommet-icons"
+import React from "react"
+import { Box, Anchor, Heading, Accordion, AccordionPanel } from "grommet"
+import { Facebook, Instagram, Twitter, Domain, Phone, Map } from "grommet-icons"
 
-export default function PlaceDetails({ place }) {
-  const [show, setShow] = useState(false)
-
+export default function DetailsAccordion({ place }) {
   return (
-    <Box>
-      <Button
-        onClick={() => setShow(!show)}
-        label={<Text color="dark-2">Details</Text>}
-        plain={true}
-        gap="xsmall"
-        icon={show ? <CaretDown size="small" /> : <CaretNext size="small" />}
-      />
-
-      {show && (
-        // TODO EXTRACT TO COMPONENT
+    <Accordion>
+      <AccordionPanel
+        label={
+          <Heading color="black" level="4" margin={{ vertical: "medium" }}>
+            Details
+          </Heading>
+        }
+      >
         <Box margin={{ vertical: "small" }}>
           {place.place.location && (
             <Box margin={{ vertical: "small" }}>
@@ -82,7 +68,7 @@ export default function PlaceDetails({ place }) {
             </Box>
           )}
         </Box>
-      )}
-    </Box>
+      </AccordionPanel>
+    </Accordion>
   )
 }
