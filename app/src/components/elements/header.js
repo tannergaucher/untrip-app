@@ -12,9 +12,7 @@ export default function Header({ location }) {
       direction="row"
       justify="between"
       align="center"
-      background="light-2"
-      elevation="small"
-      style={{ position: `sticky`, top: `0`, zIndex: `2`, opacity: `.95` }}
+      background="light-1"
     >
       <Button
         plain={true}
