@@ -4,17 +4,17 @@ import { Box, Heading } from "grommet"
 
 export default function PostCard({ post }) {
   return (
-    <Box margin={{ horizontal: "none", vertical: "large" }}>
+    <Box margin={{ bottom: "large" }}>
       <Img fluid={post.mainImage.asset.fluid} />
       <Box pad="small">
         <Heading
           level="6"
           margin={{ top: "small", bottom: "none" }}
-          color="dark-2"
+          color="black"
         >
           {post.category.category}
         </Heading>
-        <Heading level="2" margin={{ top: "small", bottom: "" }} color="black">
+        <Heading level="2" margin={{ top: "xsmall", bottom: "" }} color="black">
           {post.title}
         </Heading>
       </Box>

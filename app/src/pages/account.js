@@ -21,15 +21,17 @@ function UserAccount() {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
   return (
-    <Box>
+    <>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.me && (
-        <>
-          <Heading>{data.me.email}</Heading>
+        <Box fill={true} align="center" background="red">
+          <Heading color="black" level="4">
+            {data.me.email}
+          </Heading>
           <Logout />
-        </>
+        </Box>
       )}
-    </Box>
+    </>
   )
 }
