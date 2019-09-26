@@ -29,7 +29,7 @@ export default function PostTemplate({ data }) {
             {sanityPost.category.category}
           </Heading>
         </Anchor>
-        <Heading level="1" margin="medium" textAlign="center">
+        <Heading level="1" margin="medium" textAlign="center" color="black">
           {sanityPost.title}
         </Heading>
       </Box>

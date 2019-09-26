@@ -8,7 +8,14 @@ import { CURRENT_USER_QUERY } from "../apollo/graphql"
 import "./layout.css"
 
 const myTheme = {
-  global: {},
+  global: {
+    colors: {
+      brand: "black",
+      text: {
+        dark: "black",
+      },
+    },
+  },
   layer: {
     background: "light-2",
   },
@@ -21,7 +28,9 @@ export default function Layout({ children, location }) {
     <Grommet theme={myTheme}>
       <Box background="light-1">
         <Header location={location} />
-        <Box as="main">{children}</Box>
+        <Box as="main" style={{ minHeight: `100vh` }}>
+          {children}
+        </Box>
         <Footer />
       </Box>
     </Grommet>

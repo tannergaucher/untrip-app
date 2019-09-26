@@ -13,17 +13,16 @@ export default function PlaceCard({ postPlace }) {
     <Box elevation="large" round="small" margin={{ vertical: `large` }}>
       <Box direction="row" justify="between" align="center" pad="medium">
         <Box>
-          <Heading level="6" margin="none" color="dark-3">
+          <Heading level="6" margin="none" color="dark-1">
             {postPlace.place.placeType.type}
           </Heading>
-          <Heading level="2" margin="none">
+          <Heading level="2" margin="none" color="black">
             {postPlace.place.name}
           </Heading>
         </Box>
         <AddToListModal place={postPlace} />
       </Box>
       <Img fluid={postPlace.place.image.asset.fluid} />
-
       <Box pad="medium" direction="row" wrap={true}>
         {postPlace.place.tags.map(tag => (
           <Anchor

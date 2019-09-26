@@ -1,13 +1,13 @@
 import React from "react"
 import Img from "gatsby-image"
-import { Box, Heading, Text } from "grommet"
+import { Box, Heading } from "grommet"
 
 export default function PostCard({ post }) {
   return (
     <Box
       margin={{ horizontal: "small", vertical: "large" }}
       round="small"
-      elevation="large"
+      elevation="small"
     >
       <Box pad="small" direction="row">
         <Heading
