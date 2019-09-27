@@ -7,12 +7,16 @@ export default function DetailsAccordion({ place }) {
     <Accordion>
       <AccordionPanel
         label={
-          <Heading color="black" level="4" margin={{ vertical: "medium" }}>
+          <Heading
+            color="black"
+            level="4"
+            margin={{ vertical: "medium", horizontal: "small" }}
+          >
             Details
           </Heading>
         }
       >
-        <Box margin={{ vertical: "small" }}>
+        <Box margin="small">
           {place.place.location && (
             <Box margin={{ vertical: "small" }}>
               <Anchor label="On Google Maps" icon={<Map size="18px" />} />
