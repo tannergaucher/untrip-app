@@ -15,11 +15,21 @@ export default function UserLists({ place }) {
 
   return (
     <>
-      <Heading level="4">Add {place.name} to list</Heading>
+      {/* handle case of user not having any lists yet */}
+      {data && data.me && data.me.lists.length === 0 && (
+        <>
+          <Heading level="5">Create a new list with {`${place.name}`}</Heading>
+        </>
+      )}
+      {data && data.me && data.me.lists.length > 0 && (
+        <Heading level="4">Add {place.name} to list</Heading>
+      )}
       {data &&
         data.me &&
         data.me.lists.map(list => (
-          <TogglePlaceCheckBox key={list.id} list={list} place={place} />
+          <>
+            <TogglePlaceCheckBox key={list.id} list={list} place={place} />
+          </>
         ))}
       {!show && (
         <Button
