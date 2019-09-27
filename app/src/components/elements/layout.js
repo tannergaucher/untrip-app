@@ -31,7 +31,7 @@ export default function Layout({ children, location }) {
 
   return (
     <Grommet theme={myTheme}>
-      <Box background="light-1">
+      <Box>
         <Header location={location} />
         <Box as="main" style={{ minHeight: `100vh` }}>
           {children}

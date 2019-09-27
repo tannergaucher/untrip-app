@@ -31,8 +31,8 @@ function UserAccount() {
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.me && (
-        <Box>
-          <Heading color="black" level="4">
+        <Box margin={{ vertical: "large", horizontal: "medium" }}>
+          <Heading color="black" level="4" textAlign="center">
             {data.me.email}
           </Heading>
           <Logout />
