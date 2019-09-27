@@ -12,12 +12,12 @@ export default function Header({ location }) {
       direction="row"
       justify="between"
       align="center"
-      background="light-1"
+      background="white"
       style={{ position: `sticky`, top: "0", zIndex: "3", opacity: ".97" }}
     >
       <Button
         plain={true}
-        icon={<Previous color="black" />}
+        icon={<Previous color="black" size="18px" />}
         margin="small"
         style={{
           visibility: location.pathname === "/" ? "hidden" : "visible",
