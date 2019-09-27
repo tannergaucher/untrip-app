@@ -17,7 +17,7 @@ export default function Header({ location }) {
     >
       <Button
         plain={true}
-        icon={<Previous color="black" />}
+        icon={<Previous color="black" size="18px" />}
         margin="small"
         style={{
           visibility: location.pathname === "/" ? "hidden" : "visible",
