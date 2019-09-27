@@ -104,8 +104,8 @@ const resolvers = {
 
   Mutation: {
     signup: async (parent, { email, password }, context) => {
-      const salt = getSaltSync(10)
-      const hashedPassword = hashSynx(password, salt)
+      const salt = genSaltSync(10)
+      const hashedPassword = hashSync(password, salt)
 
       const user = await prisma.createUser({
         email,
