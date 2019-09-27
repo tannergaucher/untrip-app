@@ -16,6 +16,9 @@ export default function AccountPage() {
         <UserAccount />
       ) : (
         <Box justify="center" justify="center" style={{ flex: "1" }}>
+          <Heading level="4" textAlign="center">
+            Log in or sign up for an account
+          </Heading>
           <AuthTabs />
         </Box>
       )}
