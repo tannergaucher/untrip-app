@@ -9,6 +9,7 @@ export default function AccountPage() {
   const { loading, error, data } = useQuery(IS_LOGGED_IN)
 
   return (
+
     <Box fill={true} style={{ flex: "1" }}>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
@@ -35,7 +36,7 @@ function UserAccount() {
       {error && `Error: ${error.message}`}
       {data && data.me && (
         <Box margin={{ vertical: "large", horizontal: "medium" }}>
-          <Heading color="black" level="4">
+          <Heading color="black" level="4" textAlign="center">
             {data.me.email}
           </Heading>
           <Logout />
