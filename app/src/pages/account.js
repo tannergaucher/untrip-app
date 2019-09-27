@@ -9,13 +9,17 @@ export default function AccountPage() {
   const { loading, error, data } = useQuery(IS_LOGGED_IN)
 
   return (
-    <Box fill={true} background="" style={{ flex: `1` }}>
+
+    <Box fill={true} style={{ flex: "1" }}>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.isLoggedIn ? (
         <UserAccount />
       ) : (
         <Box justify="center" justify="center" style={{ flex: "1" }}>
+          <Heading level="4" textAlign="center">
+            Log in or sign up for an account
+          </Heading>
           <AuthTabs />
         </Box>
       )}
