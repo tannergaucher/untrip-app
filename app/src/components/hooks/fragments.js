@@ -19,6 +19,7 @@ export const SANITY_POST_FRAGMENT = graphql`
         fluid {
           ...GatsbySanityImageFluid
         }
+        url
       }
     }
     author {
