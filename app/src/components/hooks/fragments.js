@@ -83,6 +83,7 @@ export const SANITY_PLACE_FRAGMENT = graphql`
         fluid {
           ...GatsbySanityImageFluid
         }
+        url
       }
     }
     placeType {

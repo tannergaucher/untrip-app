@@ -1,5 +1,6 @@
 import React from "react"
 import { useQuery } from "@apollo/react-hooks"
+import { Heading, Box } from "grommet"
 
 import { LIST_QUERY } from "../apollo/graphql"
 import { SEO, Map, Loading } from "../elements"
@@ -22,6 +23,7 @@ export default function ListPage({ listId }) {
             zoom={11}
             places={data.list.places}
             name={data.list.title}
+            style={{ width: `100%`, height: `100%` }}
           />
         </>
       )}
