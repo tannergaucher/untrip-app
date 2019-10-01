@@ -23,7 +23,7 @@ function IndexHeader() {
         <PlainHeader light />
       </Box>
       <Box
-        pad="small"
+        pad="medium"
         style={{
           position: "absolute",
           top: "50%",
@@ -42,10 +42,10 @@ function IndexHeader() {
 }
 
 function PostHeader() {
-  return
+  return null
 }
 
-function PlainHeader({ light }) {
+export function PlainHeader({ light }) {
   const { heading } = useSanityHeroBanner()
   return (
     <Box
@@ -54,7 +54,6 @@ function PlainHeader({ light }) {
       justify="between"
       align="center"
       background={light ? "" : "white"}
-      // style={{ position: `sticky`, top: "0", zIndex: "3", opacity: ".97" }}
     >
       <Button
         plain={true}
@@ -76,13 +75,15 @@ function PlainHeader({ light }) {
           {heading}
         </Heading>
       </Link>
-      <Menu light />
+      <Menu light={light} />
     </Box>
   )
 }
 
 export default function Header({ location }) {
   if (location.pathname === "/") return <IndexHeader />
+
+  if (location.pathname.split("/")[1] === "posts") return <PostHeader />
 
   return <PlainHeader />
 }

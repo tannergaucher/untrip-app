@@ -11,7 +11,7 @@ export default function Posts() {
   return (
     <Box margin={{ vertical: "medium" }}>
       <Heading level="2" textAlign="center">
-        Latest Posts
+        Latest
       </Heading>
       {edges.map(edge => (
         <Link
