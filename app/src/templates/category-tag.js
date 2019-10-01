@@ -2,8 +2,8 @@ import React from "react"
 import { Box } from "grommet"
 import { Link, graphql } from "gatsby"
 
-import { HeroCard } from "../components/styles"
 import { SEO } from "../components/elements"
+import { PostCard } from "../components/post"
 
 export default function CategoryTag({ data }) {
   return (
@@ -14,12 +14,11 @@ export default function CategoryTag({ data }) {
           <Link
             to={`/posts/${edge.node.category.slug.current}/${edge.node.slug.current}`}
             key={edge.node.id}
+            style={{
+              textDecoration: "none",
+            }}
           >
-            <HeroCard
-              key={edge.node.id}
-              text={edge.node.title}
-              fluid={edge.node.mainImage.asset.fluid}
-            />
+            <PostCard post={edge.node} />
           </Link>
         ))}
       </Box>

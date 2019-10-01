@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import { Heading, Box, Anchor } from "grommet"
 import BlockContent from "@sanity/block-content-to-react"
 
-import { SEO, EmailSignup } from "../components/elements"
+import { SEO, EmailSignup, SignupBanner } from "../components/elements"
 import { PostPlaces, Share, Author, MorePosts } from "../components/post"
 import { PlainHeader } from "../components/elements/header"
 
@@ -65,7 +65,7 @@ export default function PostTemplate({ data }) {
       </Box>
       <EmailSignup />
       <MorePosts />
-      <EmailSignup />
+      <SignupBanner />
     </Box>
   )
 }
