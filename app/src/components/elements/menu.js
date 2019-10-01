@@ -3,7 +3,7 @@ import { navigate } from "gatsby"
 import { Layer, Heading, Box, Button, Anchor } from "grommet"
 import { Menu as MenuIcon } from "grommet-icons"
 
-export default function Menu() {
+export default function Menu({ light }) {
   const [show, setShow] = useState(false)
 
   return (
@@ -12,7 +12,7 @@ export default function Menu() {
         plain={true}
         onClick={() => setShow(!show)}
         margin="small"
-        icon={<MenuIcon color="black" />}
+        icon={<MenuIcon color={light ? "white" : "black"} />}
       />
       {show && (
         <>

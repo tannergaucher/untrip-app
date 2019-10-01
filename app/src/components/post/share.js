@@ -3,7 +3,6 @@ import { Box, Button } from "grommet"
 import { FacebookOption, Twitter, Pinterest } from "grommet-icons"
 
 export default function Share({ post }) {
-  console.log(post)
   return (
     <Box
       direction="row"
@@ -22,11 +21,12 @@ export default function Share({ post }) {
         margin={{ right: `medium` }}
         href={`https://twitter.com/intent/tweet?text=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}`}
       />
-      <Button
-        plain={true}
-        icon={<Pinterest color="black" />}
-        href={"http://pinterest.com"}
-      />
+      <a
+        href={`https://www.pinterest.com/pin/create/button/?url=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}&media=${post.mainImage.asset.url}`}
+        data-pin-do="buttonBookmark"
+      >
+        <Pinterest color="black" />
+      </a>
     </Box>
   )
 }

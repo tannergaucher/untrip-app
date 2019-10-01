@@ -19,6 +19,7 @@ export const SANITY_POST_FRAGMENT = graphql`
         fluid {
           ...GatsbySanityImageFluid
         }
+        url
       }
     }
     author {
@@ -82,6 +83,7 @@ export const SANITY_PLACE_FRAGMENT = graphql`
         fluid {
           ...GatsbySanityImageFluid
         }
+        url
       }
     }
     placeType {
@@ -123,6 +125,21 @@ export const SANITY_CATEGORY_FRAGMENT = graphql`
     slug {
       current
     }
+    image {
+      asset {
+        fluid {
+          ...GatsbySanityImageFluid
+        }
+      }
+    }
+  }
+`
+
+export const SANITY_HERO_BANNER_FRAGMENT = graphql`
+  fragment SanityHeroBannerFragment on SanityHeroBanner {
+    id
+    heading
+    subHeading
     image {
       asset {
         fluid {

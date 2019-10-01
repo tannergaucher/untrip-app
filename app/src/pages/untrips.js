@@ -54,7 +54,6 @@ function UserLists() {
                 <Message message={`Oops, ${list.title} has no places yet.`} />
               )
             }
-
             // Finally, render list places
             return (
               <Link to={`/app/lists/list/${list.id}`} key={list.id}>

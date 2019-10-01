@@ -5,5 +5,6 @@ import Menu from "./menu"
 import Layout from "./layout"
 import Map from "./map"
 import Loading from "./loading"
+import EmailSignup from "./email-signup"
 
-export { Header, SEO, Footer, Menu, Layout, Map, Loading }
+export { Header, SEO, Footer, Menu, Layout, Map, Loading, EmailSignup }
