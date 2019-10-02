@@ -7,12 +7,9 @@ export default function SignupBanner() {
     <Box
       background="white"
       round="medium"
-      elevation="medium"
+      elevation="xlarge"
       margin={{ vertical: "large", horizontal: "medium" }}
       pad="medium"
-      style={{
-        border: `2px solid black`,
-      }}
     >
       <Heading level="2" color="black">
         Sign up for an account.
@@ -30,8 +27,9 @@ export default function SignupBanner() {
           <Button
             margin={{ top: "small" }}
             fill
+            primary
             label={
-              <Heading level="4" margin="none">
+              <Heading level="4" margin="none" color="white">
                 Sign Up
               </Heading>
             }
