@@ -3,6 +3,7 @@ type User {
   email: String! @unique
   password: String!
   lists: [List!]
+  isEmailSubscriber: Boolean @default(value: false)
 }
 
 type List {

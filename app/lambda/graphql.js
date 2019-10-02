@@ -31,6 +31,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     lists: [List!]
+    isEmailSubscriber: Boolean
   }
 
   type List {
@@ -77,6 +78,8 @@ const typeDefs = gql`
       lat: Float
       lng: Float
     ): List!
+    subscribeToEmail: User!
+    unsubscribeToEmail: User!
   }
 `
 
@@ -143,6 +146,42 @@ const resolvers = {
         token,
         user,
       }
+    },
+    subscribeToEmail: async (parent, args, context) => {
+      const userId = getUserId(context)
+
+      if (!userId) {
+        throw new AuthError()
+      }
+
+      const user = await prisma.updateUser({
+        where: {
+          id: userId,
+        },
+        data: {
+          isEmailSubscriber: true,
+        },
+      })
+
+      return user
+    },
+    unsubscribeToEmail: async (parent, args, context) => {
+      const userId = getUserId(context)
+
+      if (!userId) {
+        throw new AuthError()
+      }
+
+      const user = await prisma.updateUser({
+        where: {
+          id: userId,
+        },
+        data: {
+          isEmailSubscriber: false,
+        },
+      })
+
+      return user
     },
     createList: async (
       parent,
