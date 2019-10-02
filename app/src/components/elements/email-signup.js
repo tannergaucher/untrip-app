@@ -8,8 +8,14 @@ export default function EmailSignup() {
       round="medium"
       margin={{ vertical: "large", horizontal: "medium" }}
       elevation="medium"
+      background="black"
     >
-      <Heading level="2">Sign up for our weekly newsletter</Heading>
+      <Heading level="2" color="white">
+        Subscribe to the Untrip newsletter.
+      </Heading>
+      <Heading level="3" color="white">
+        Never miss out on what's happening now KL.
+      </Heading>
       <Form>
         <TextInput placeholder="Email" />
         <Button
@@ -20,7 +26,6 @@ export default function EmailSignup() {
           }
           margin={{ vertical: "small" }}
           fill
-          primary
         />
       </Form>
     </Box>

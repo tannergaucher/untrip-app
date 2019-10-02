@@ -2,7 +2,7 @@ import React from "react"
 import Img from "gatsby-image"
 import { Link } from "gatsby"
 import { Previous } from "grommet-icons"
-import { Box, Heading, Button } from "grommet"
+import { Box, Heading, Button, Text } from "grommet"
 
 import { Menu } from "../elements"
 import { useSanityHeroBanner } from "../hooks"
@@ -36,7 +36,26 @@ function IndexHeader() {
           {subHeading}
         </Heading>
       </Box>
-      <Img fluid={image.asset.fluid} style={{ filter: `brightness(.6)` }} />
+      <Box
+        style={{
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          zIndex: "3",
+        }}
+        margin="large"
+        justify="center"
+      >
+        <Button
+          label={<Text color="white">Sign Up</Text>}
+          style={{ background: "rgba(0, 0, 0, .7)", borderColor: "white" }}
+        />
+      </Box>
+      <Img
+        fluid={image.asset.fluid}
+        style={{ filter: `brightness(.6)`, height: "90vh" }}
+      />
     </Box>
   )
 }
