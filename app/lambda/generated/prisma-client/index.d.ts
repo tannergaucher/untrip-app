@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  emailSubscriber: (where?: EmailSubscriberWhereInput) => Promise<boolean>;
   list: (where?: ListWhereInput) => Promise<boolean>;
   place: (where?: PlaceWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
@@ -40,6 +41,27 @@ export interface Prisma {
    * Queries
    */
 
+  emailSubscriber: (
+    where: EmailSubscriberWhereUniqueInput
+  ) => EmailSubscriberNullablePromise;
+  emailSubscribers: (args?: {
+    where?: EmailSubscriberWhereInput;
+    orderBy?: EmailSubscriberOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<EmailSubscriber>;
+  emailSubscribersConnection: (args?: {
+    where?: EmailSubscriberWhereInput;
+    orderBy?: EmailSubscriberOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => EmailSubscriberConnectionPromise;
   list: (where: ListWhereUniqueInput) => ListNullablePromise;
   lists: (args?: {
     where?: ListWhereInput;
@@ -103,6 +125,28 @@ export interface Prisma {
    * Mutations
    */
 
+  createEmailSubscriber: (
+    data: EmailSubscriberCreateInput
+  ) => EmailSubscriberPromise;
+  updateEmailSubscriber: (args: {
+    data: EmailSubscriberUpdateInput;
+    where: EmailSubscriberWhereUniqueInput;
+  }) => EmailSubscriberPromise;
+  updateManyEmailSubscribers: (args: {
+    data: EmailSubscriberUpdateManyMutationInput;
+    where?: EmailSubscriberWhereInput;
+  }) => BatchPayloadPromise;
+  upsertEmailSubscriber: (args: {
+    where: EmailSubscriberWhereUniqueInput;
+    create: EmailSubscriberCreateInput;
+    update: EmailSubscriberUpdateInput;
+  }) => EmailSubscriberPromise;
+  deleteEmailSubscriber: (
+    where: EmailSubscriberWhereUniqueInput
+  ) => EmailSubscriberPromise;
+  deleteManyEmailSubscribers: (
+    where?: EmailSubscriberWhereInput
+  ) => BatchPayloadPromise;
   createList: (data: ListCreateInput) => ListPromise;
   updateList: (args: {
     data: ListUpdateInput;
@@ -160,6 +204,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  emailSubscriber: (
+    where?: EmailSubscriberSubscriptionWhereInput
+  ) => EmailSubscriberSubscriptionPayloadSubscription;
   list: (
     where?: ListSubscriptionWhereInput
   ) => ListSubscriptionPayloadSubscription;
@@ -178,6 +225,12 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type EmailSubscriberOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "email_ASC"
+  | "email_DESC";
 
 export type PlaceOrderByInput =
   | "id_ASC"
@@ -212,6 +265,45 @@ export type UserOrderByInput =
   | "isEmailSubscriber_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type EmailSubscriberWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface EmailSubscriberWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  AND?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
+  OR?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
+  NOT?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
+}
 
 export type ListWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -409,6 +501,19 @@ export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   email?: Maybe<String>;
 }>;
+
+export interface EmailSubscriberCreateInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+}
+
+export interface EmailSubscriberUpdateInput {
+  email?: Maybe<String>;
+}
+
+export interface EmailSubscriberUpdateManyMutationInput {
+  email?: Maybe<String>;
+}
 
 export interface ListCreateInput {
   id?: Maybe<ID_Input>;
@@ -789,6 +894,26 @@ export interface UserUpdateManyMutationInput {
   isEmailSubscriber?: Maybe<Boolean>;
 }
 
+export interface EmailSubscriberSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<EmailSubscriberWhereInput>;
+  AND?: Maybe<
+    | EmailSubscriberSubscriptionWhereInput[]
+    | EmailSubscriberSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | EmailSubscriberSubscriptionWhereInput[]
+    | EmailSubscriberSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | EmailSubscriberSubscriptionWhereInput[]
+    | EmailSubscriberSubscriptionWhereInput
+  >;
+}
+
 export interface ListSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -824,6 +949,111 @@ export interface UserSubscriptionWhereInput {
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface EmailSubscriber {
+  id: ID_Output;
+  email: String;
+}
+
+export interface EmailSubscriberPromise
+  extends Promise<EmailSubscriber>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+}
+
+export interface EmailSubscriberSubscription
+  extends Promise<AsyncIterator<EmailSubscriber>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
+}
+
+export interface EmailSubscriberNullablePromise
+  extends Promise<EmailSubscriber | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+}
+
+export interface EmailSubscriberConnection {
+  pageInfo: PageInfo;
+  edges: EmailSubscriberEdge[];
+}
+
+export interface EmailSubscriberConnectionPromise
+  extends Promise<EmailSubscriberConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<EmailSubscriberEdge>>() => T;
+  aggregate: <T = AggregateEmailSubscriberPromise>() => T;
+}
+
+export interface EmailSubscriberConnectionSubscription
+  extends Promise<AsyncIterator<EmailSubscriberConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<EmailSubscriberEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateEmailSubscriberSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface EmailSubscriberEdge {
+  node: EmailSubscriber;
+  cursor: String;
+}
+
+export interface EmailSubscriberEdgePromise
+  extends Promise<EmailSubscriberEdge>,
+    Fragmentable {
+  node: <T = EmailSubscriberPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface EmailSubscriberEdgeSubscription
+  extends Promise<AsyncIterator<EmailSubscriberEdge>>,
+    Fragmentable {
+  node: <T = EmailSubscriberSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateEmailSubscriber {
+  count: Int;
+}
+
+export interface AggregateEmailSubscriberPromise
+  extends Promise<AggregateEmailSubscriber>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateEmailSubscriberSubscription
+  extends Promise<AsyncIterator<AggregateEmailSubscriber>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface List {
@@ -1007,29 +1237,6 @@ export interface ListConnectionSubscription
   aggregate: <T = AggregateListSubscription>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface ListEdge {
   node: List;
   cursor: String;
@@ -1185,6 +1392,50 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface EmailSubscriberSubscriptionPayload {
+  mutation: MutationType;
+  node: EmailSubscriber;
+  updatedFields: String[];
+  previousValues: EmailSubscriberPreviousValues;
+}
+
+export interface EmailSubscriberSubscriptionPayloadPromise
+  extends Promise<EmailSubscriberSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = EmailSubscriberPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = EmailSubscriberPreviousValuesPromise>() => T;
+}
+
+export interface EmailSubscriberSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<EmailSubscriberSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = EmailSubscriberSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = EmailSubscriberPreviousValuesSubscription>() => T;
+}
+
+export interface EmailSubscriberPreviousValues {
+  id: ID_Output;
+  email: String;
+}
+
+export interface EmailSubscriberPreviousValuesPromise
+  extends Promise<EmailSubscriberPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+}
+
+export interface EmailSubscriberPreviousValuesSubscription
+  extends Promise<AsyncIterator<EmailSubscriberPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ListSubscriptionPayload {
@@ -1352,9 +1603,9 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
-export type Float = number;
+export type Int = number;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -1362,9 +1613,9 @@ The `Boolean` scalar type represents `true` or `false`.
 export type Boolean = boolean;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
-export type Int = number;
+export type Float = number;
 
 export type Long = string;
 
@@ -1383,6 +1634,10 @@ export const models: Model[] = [
   },
   {
     name: "Place",
+    embedded: false
+  },
+  {
+    name: "EmailSubscriber",
     embedded: false
   }
 ];

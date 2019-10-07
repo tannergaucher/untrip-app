@@ -134,3 +134,18 @@ export const LIST_QUERY = gql`
   }
   ${LIST_FRAGMENT}
 `
+
+export const SUBSCRIBE_TO_EMAIL_MUTATION = gql`
+  mutation SubscribeToEmail($email: String!) {
+    subscribeToEmail(email: $email) {
+      message
+    }
+  }
+`
+
+export const UNSUBSCRIBE_TO_EMAIL_MUTATION = gql`
+  mutation UnsubscribeToEmail {
+    ...UserFragment
+  }
+  ${USER_FRAGMENT}
+`

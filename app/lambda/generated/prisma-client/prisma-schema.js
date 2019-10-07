@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateList {
+/* GraphQL */ `type AggregateEmailSubscriber {
+  count: Int!
+}
+
+type AggregateList {
   count: Int!
 }
 
@@ -17,6 +21,104 @@ type AggregateUser {
 
 type BatchPayload {
   count: Long!
+}
+
+type EmailSubscriber {
+  id: ID!
+  email: String!
+}
+
+type EmailSubscriberConnection {
+  pageInfo: PageInfo!
+  edges: [EmailSubscriberEdge]!
+  aggregate: AggregateEmailSubscriber!
+}
+
+input EmailSubscriberCreateInput {
+  id: ID
+  email: String!
+}
+
+type EmailSubscriberEdge {
+  node: EmailSubscriber!
+  cursor: String!
+}
+
+enum EmailSubscriberOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+}
+
+type EmailSubscriberPreviousValues {
+  id: ID!
+  email: String!
+}
+
+type EmailSubscriberSubscriptionPayload {
+  mutation: MutationType!
+  node: EmailSubscriber
+  updatedFields: [String!]
+  previousValues: EmailSubscriberPreviousValues
+}
+
+input EmailSubscriberSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EmailSubscriberWhereInput
+  AND: [EmailSubscriberSubscriptionWhereInput!]
+  OR: [EmailSubscriberSubscriptionWhereInput!]
+  NOT: [EmailSubscriberSubscriptionWhereInput!]
+}
+
+input EmailSubscriberUpdateInput {
+  email: String
+}
+
+input EmailSubscriberUpdateManyMutationInput {
+  email: String
+}
+
+input EmailSubscriberWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  AND: [EmailSubscriberWhereInput!]
+  OR: [EmailSubscriberWhereInput!]
+  NOT: [EmailSubscriberWhereInput!]
+}
+
+input EmailSubscriberWhereUniqueInput {
+  id: ID
+  email: String
 }
 
 type List {
@@ -241,6 +343,12 @@ input ListWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createEmailSubscriber(data: EmailSubscriberCreateInput!): EmailSubscriber!
+  updateEmailSubscriber(data: EmailSubscriberUpdateInput!, where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
+  updateManyEmailSubscribers(data: EmailSubscriberUpdateManyMutationInput!, where: EmailSubscriberWhereInput): BatchPayload!
+  upsertEmailSubscriber(where: EmailSubscriberWhereUniqueInput!, create: EmailSubscriberCreateInput!, update: EmailSubscriberUpdateInput!): EmailSubscriber!
+  deleteEmailSubscriber(where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
+  deleteManyEmailSubscribers(where: EmailSubscriberWhereInput): BatchPayload!
   createList(data: ListCreateInput!): List!
   updateList(data: ListUpdateInput!, where: ListWhereUniqueInput!): List
   updateManyLists(data: ListUpdateManyMutationInput!, where: ListWhereInput): BatchPayload!
@@ -626,6 +734,9 @@ input PlaceWhereUniqueInput {
 }
 
 type Query {
+  emailSubscriber(where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
+  emailSubscribers(where: EmailSubscriberWhereInput, orderBy: EmailSubscriberOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmailSubscriber]!
+  emailSubscribersConnection(where: EmailSubscriberWhereInput, orderBy: EmailSubscriberOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmailSubscriberConnection!
   list(where: ListWhereUniqueInput!): List
   lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List]!
   listsConnection(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ListConnection!
@@ -639,6 +750,7 @@ type Query {
 }
 
 type Subscription {
+  emailSubscriber(where: EmailSubscriberSubscriptionWhereInput): EmailSubscriberSubscriptionPayload
   list(where: ListSubscriptionWhereInput): ListSubscriptionPayload
   place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

@@ -22,4 +22,10 @@ type Place {
   lat: Float
   lng: Float
   list: List
+} 
+
+type EmailSubscriber {
+  id: ID! @id 
+  email: String! @unique
 }
+

@@ -26,6 +26,10 @@ const typeDefs = gql`
     user: User!
   }
 
+  type SuccessMessage {
+    message: String!
+  }
+
   type User {
     id: ID!
     email: String!
@@ -50,6 +54,11 @@ const typeDefs = gql`
     lat: Float
     lng: Float
     list: List
+  }
+
+  type EmailSubscriber {
+    id: ID!
+    email: String!
   }
 
   type Query {
@@ -78,8 +87,8 @@ const typeDefs = gql`
       lat: Float
       lng: Float
     ): List!
-    subscribeToEmail: User!
-    unsubscribeToEmail: User!
+    subscribeToEmail(email: String!): SuccessMessage!
+    unsubscribeToEmail(email: String!): SuccessMessage!
   }
 `
 
@@ -104,7 +113,6 @@ const resolvers = {
       return prisma.list({ id: listId })
     },
   },
-
   Mutation: {
     signup: async (parent, { email, password }, context) => {
       const salt = genSaltSync(10)
@@ -147,41 +155,69 @@ const resolvers = {
         user,
       }
     },
-    subscribeToEmail: async (parent, args, context) => {
-      const userId = getUserId(context)
+    subscribeToEmail: async (parent, { email }, context) => {
+      // TODO: sanitize all email
+      const userExists = await prisma.$exists.user({ email })
 
-      if (!userId) {
-        throw new AuthError()
+      if (userExists) {
+        //check to see if they are a subscriber
+        const user = await prisma.user({ email })
+        if (user.isEmailSubscriber) {
+          // return message saying already subscribed
+
+          return {
+            message: "Looks like you're already signed up!",
+          }
+        } else {
+          // update subscriber list
+          await prisma.createEmailSubscriber({
+            email: email,
+          })
+          //   update user
+          await prisma.updateUser({
+            where: {
+              email,
+            },
+            data: {
+              isEmailSubscriber: true,
+            },
+          })
+
+          return {
+            message: "Check your inbox and confirm your subscription",
+          }
+        }
       }
-
-      const user = await prisma.updateUser({
-        where: {
-          id: userId,
-        },
-        data: {
-          isEmailSubscriber: true,
-        },
+      // if user doesn't exist, simply add email to subscribers list
+      await prisma.createEmailSubscriber({
+        email: email,
       })
 
-      return user
+      return {
+        message: "Check your inbox and confirm your subscription",
+      }
     },
-    unsubscribeToEmail: async (parent, args, context) => {
-      const userId = getUserId(context)
-
-      if (!userId) {
-        throw new AuthError()
-      }
-
-      const user = await prisma.updateUser({
-        where: {
-          id: userId,
-        },
-        data: {
-          isEmailSubscriber: false,
-        },
+    unsubscribeToEmail: async (parent, { email }, context) => {
+      await prisma.deleteEmailSubscriber({
+        email,
       })
 
-      return user
+      const userExists = prisma.$exists.user({ email })
+
+      if (userExists) {
+        await prisma.updateUser({
+          where: {
+            email,
+          },
+          data: {
+            isEmailSubscriber: false,
+          },
+        })
+      }
+
+      return {
+        message: "You are unsubscribed from the Untrip newsletter",
+      }
     },
     createList: async (
       parent,
