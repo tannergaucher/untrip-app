@@ -3,6 +3,7 @@ type User {
   email: String! @unique
   password: String!
   lists: [List!]
+  isEmailSubscriber: Boolean @default(value: false)
 }
 
 type List {
@@ -21,4 +22,10 @@ type Place {
   lat: Float
   lng: Float
   list: List
+} 
+
+type EmailSubscriber {
+  id: ID! @id 
+  email: String! @unique
 }
+

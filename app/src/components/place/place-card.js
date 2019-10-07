@@ -1,8 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 import { navigate } from "gatsby"
-import { Heading, Text, Box, Anchor } from "grommet"
-
+import { Heading, Box, Anchor, Text } from "grommet"
 import BlockContent from "@sanity/block-content-to-react"
 
 import { PlaceDetails } from "../place"
@@ -35,7 +34,7 @@ export default function PlaceCard({ postPlace }) {
           </Anchor>
         ))}
       </Box>
-      <Box pad="small">
+      <Box pad={{ horizontal: "small" }}>
         <BlockContent blocks={postPlace._rawText} />
         <PlaceDetails place={postPlace} />
       </Box>

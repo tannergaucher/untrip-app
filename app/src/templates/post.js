@@ -33,7 +33,7 @@ export default function PostTemplate({ data }) {
         fluid={sanityPost.mainImage.asset.fluid}
         style={{ filter: `brightness(.8)` }}
       />
-      <Box margin={{ top: "small" }}>
+      <Box margin={{ top: "small" }} pad={{ horizontal: "medium" }}>
         <Anchor
           textAlign="center"
           onClick={() => {

@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import { AddCircle } from "grommet-icons"
-
 import { useQuery } from "@apollo/react-hooks"
 import { Layer, Button, Heading, Box } from "grommet"
 
-import { IS_LOGGED_IN } from "../apollo/graphql"
 import { AuthTabs } from "../auth"
 import { UserLists } from "../list"
+import { IS_LOGGED_IN } from "../apollo/graphql"
 
 export default function AddToListModal({ place }) {
   const [show, setShow] = useState(false)
