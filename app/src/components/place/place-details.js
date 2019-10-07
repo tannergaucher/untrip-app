@@ -1,6 +1,20 @@
 import React from "react"
-import { Box, Anchor, Heading, Accordion, AccordionPanel } from "grommet"
-import { Facebook, Instagram, Twitter, Domain, Phone, Map } from "grommet-icons"
+import {
+  Box,
+  Anchor,
+  Heading,
+  Accordion,
+  AccordionPanel,
+  Button,
+} from "grommet"
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Domain,
+  Phone,
+  MapLocation,
+} from "grommet-icons"
 
 export default function DetailsAccordion({ place }) {
   return (
@@ -19,10 +33,21 @@ export default function DetailsAccordion({ place }) {
         <Box margin="small">
           {place.place.location && (
             <Box margin={{ vertical: "small" }}>
-              <Anchor label="On Google Maps" icon={<Map size="18px" />} />
+              <Button
+                icon={<MapLocation size="18px" color="black" />}
+                plain={true}
+                alignSelf="start"
+                label={
+                  <Heading level="5" margin="none">
+                    View on map
+                  </Heading>
+                }
+                onClick={() => {
+                  console.log("display map and center place on map")
+                }}
+              />
             </Box>
           )}
-
           {place.place.facebookLink && (
             <Box margin={{ vertical: "small" }}>
               <Anchor
@@ -32,7 +57,6 @@ export default function DetailsAccordion({ place }) {
               />
             </Box>
           )}
-
           {place.place.instagramLink && (
             <Box margin={{ vertical: "small" }}>
               <Anchor
@@ -42,7 +66,6 @@ export default function DetailsAccordion({ place }) {
               />
             </Box>
           )}
-
           {place.place.twitterLink && (
             <Box margin={{ vertical: "small" }}>
               <Anchor

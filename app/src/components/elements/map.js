@@ -1,7 +1,6 @@
 import React from "react"
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
 import { Box, Heading } from "grommet"
-import Img from "gatsby-image"
 
 class MapContainer extends React.Component {
   state = {
@@ -16,8 +15,6 @@ class MapContainer extends React.Component {
       activeMarker: marker,
       showingInfoWindow: true,
     })
-
-    console.log(this.state.selectedPlace.image)
   }
 
   onMapClicked = props => {
