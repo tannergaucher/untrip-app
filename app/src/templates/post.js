@@ -65,7 +65,7 @@ export default function PostTemplate({ data }) {
       </Box>
       <EmailSignup />
       <MorePosts />
-      <EmailSignup />
+      <SignupBanner />
     </Box>
   )
 }

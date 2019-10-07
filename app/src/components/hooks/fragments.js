@@ -137,7 +137,6 @@ export const SANITY_CATEGORY_FRAGMENT = graphql`
 
 export const SANITY_HERO_BANNER_FRAGMENT = graphql`
   fragment SanityHeroBannerFragment on SanityHeroBanner {
-    id
     heading
     subHeading
     image {

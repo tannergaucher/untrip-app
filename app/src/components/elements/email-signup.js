@@ -11,6 +11,7 @@ export default function EmailSignup() {
       margin={{ vertical: "large", horizontal: "medium" }}
       background="black"
       elevation="medium"
+      background="black"
     >
       <Heading level="2" color="white">
         Sign up for our weekly newsletter

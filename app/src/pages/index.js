@@ -1,15 +1,15 @@
 import React from "react"
-import { Box } from "grommet"
 
-import { SEO, EmailSignup } from "../components/elements"
 import { Posts } from "../components/post"
+import { SEO, EmailSignup, SignupBanner } from "../components/elements"
 
 const IndexPage = () => (
-  <Box>
+  <>
     <SEO title="Home" />
     <Posts />
     <EmailSignup />
-  </Box>
+    <SignupBanner />
+  </>
 )
 
 export default IndexPage

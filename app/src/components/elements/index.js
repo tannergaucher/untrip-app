@@ -6,5 +6,16 @@ import Layout from "./layout"
 import Map from "./map"
 import Loading from "./loading"
 import EmailSignup from "./email-signup"
+import SignupBanner from "./signup-banner"
 
-export { Header, SEO, Footer, Menu, Layout, Map, Loading, EmailSignup }
+export {
+  Header,
+  SEO,
+  Footer,
+  Menu,
+  Layout,
+  Map,
+  Loading,
+  EmailSignup,
+  SignupBanner,
+}
