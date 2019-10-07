@@ -8,8 +8,6 @@ import { PostCard } from "."
 export default function MorePosts() {
   const { edges } = useMorePosts()
 
-  console.log(edges)
-
   return (
     <Box margin="medium">
       <Heading level="2">More From Untrip</Heading>
