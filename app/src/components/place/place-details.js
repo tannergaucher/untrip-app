@@ -1,101 +1,61 @@
-import React from "react"
-import {
-  Box,
-  Anchor,
-  Heading,
-  Accordion,
-  AccordionPanel,
-  Button,
-} from "grommet"
-import {
-  Facebook,
-  Instagram,
-  Twitter,
-  Domain,
-  Phone,
-  MapLocation,
-} from "grommet-icons"
+import React, { useState } from "react"
+import styled from "styled-components"
 
-export default function DetailsAccordion({ place }) {
+// import {
+//   Facebook,
+//   Instagram,
+//   Twitter,
+//   Domain,
+//   Phone,
+//   MapLocation,
+// } from "grommet-icons"
+
+import { Button } from "../styles"
+
+const StyledDetails = styled.div`
+  .show-details {
+    margin: 2rem 1rem;
+  }
+`
+
+export default function Details({ place }) {
+  const [show, setShow] = useState(false)
+
   return (
-    <Accordion>
-      <AccordionPanel
-        label={
-          <Heading
-            color="black"
-            level="4"
-            margin={{ vertical: "medium", horizontal: "small" }}
-          >
-            Details
-          </Heading>
-        }
-      >
-        <Box margin="small">
-          {place.place.location && (
-            <Box margin={{ vertical: "small" }}>
-              <Button
-                icon={<MapLocation size="18px" color="black" />}
-                plain={true}
-                alignSelf="start"
-                label={
-                  <Heading level="5" margin="none">
-                    View on map
-                  </Heading>
-                }
-                onClick={() => {
-                  console.log("display map and center place on map")
-                }}
-              />
-            </Box>
-          )}
+    <StyledDetails>
+      <Button onClick={() => setShow(!show)}>Details</Button>
+
+      {show && (
+        <div className="show-details">
+          {/* TODO DISPLAY SHOW ON MAP OPTION ONLY MOBILE */}
+
           {place.place.facebookLink && (
-            <Box margin={{ vertical: "small" }}>
-              <Anchor
-                href={place.place.facebookLink}
-                label="Facebook"
-                icon={<Facebook size="18px" />}
-              />
-            </Box>
+            <a href={place.place.facebookLink}>
+              <h5>Facebook</h5>
+            </a>
           )}
           {place.place.instagramLink && (
-            <Box margin={{ vertical: "small" }}>
-              <Anchor
-                href={place.place.instagramLink}
-                label="Instagram"
-                icon={<Instagram size="18px" />}
-              />
-            </Box>
+            <a href={place.place.instagramLink}>
+              <h5>Instagram</h5>
+            </a>
           )}
           {place.place.twitterLink && (
-            <Box margin={{ vertical: "small" }}>
-              <Anchor
-                href={place.place.twitterLink}
-                label="Twitter"
-                icon={<Twitter size="18px" />}
-              />
-            </Box>
+            <a href={place.place.twitterLink}>
+              <h5>Twitter</h5>
+            </a>
           )}
-
           {place.place.websiteLink && (
-            <Box margin={{ vertical: "small" }}>
-              <Anchor
-                href={place.place.websiteLink}
-                label="Website"
-                icon={<Domain size="18px" />}
-              />
-            </Box>
+            <a href={place.place.websiteLink}>
+              <h5>Website</h5>
+            </a>
           )}
-
           {place.place.phoneNumber && (
-            <Box margin={{ vertical: "small" }}>
-              <Anchor
-                icon={<Phone size="18px" />}
-                label={place.place.phoneNumber}
-              />
-            </Box>
+            <a href="#">
+              <h5>{place.place.phoneNumber}</h5>
+            </a>
           )}
-        </Box>
-      </AccordionPanel>
-    </Accordion>
+        </div>
+      )}
+    </StyledDetails>
   )
 }

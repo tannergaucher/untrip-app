@@ -1,27 +1,38 @@
 import React from "react"
 import { Link } from "gatsby"
-import { Box, Heading } from "grommet"
+import styled from "styled-components"
 
 import { PostCard } from "../post"
 import { useAllSanityPost } from "../hooks"
+
+const StyledPosts = styled.div`
+  margin: 2rem auto;
+  max-width: 1300px;
+
+  .posts-grid {
+    display: grid;
+    grid-gap: 4rem 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+`
 
 export default function Posts() {
   const { edges } = useAllSanityPost()
 
   return (
-    <Box margin={{ vertical: "medium" }}>
-      <Heading level="2" textAlign="center">
-        Latest
-      </Heading>
-      {edges.map(edge => (
-        <Link
-          to={`/posts/${edge.node.category.slug.current}/${edge.node.slug.current}`}
-          key={edge.node.id}
-          style={{ textDecoration: `none`, color: `inherit` }}
-        >
-          <PostCard key={edge.node.id} post={edge.node} />
-        </Link>
-      ))}
-    </Box>
+    <StyledPosts>
+      <h2>Latest</h2>
+      <div className="posts-grid">
+        {edges.map(edge => (
+          <Link
+            to={`/posts/${edge.node.category.slug.current}/${edge.node.slug.current}`}
+            key={edge.node.id}
+            style={{ textDecoration: `none`, color: `inherit` }}
+          >
+            <PostCard key={edge.node.id} post={edge.node} />
+          </Link>
+        ))}
+      </div>
+    </StyledPosts>
   )
 }

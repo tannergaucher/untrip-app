@@ -1,43 +1,66 @@
 import React from "react"
+
+import styled from "styled-components"
 import Img from "gatsby-image"
-import { navigate } from "gatsby"
-import { Heading, Box, Anchor, Text } from "grommet"
+import { Link } from "gatsby"
 import BlockContent from "@sanity/block-content-to-react"
 
 import { PlaceDetails } from "../place"
+import { Divider } from "../styles"
+
 import { AddToListModal } from "../list"
+
+const StyledPlace = styled.div`
+  margin-bottom: 6rem;
+
+  .place-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 1rem 0;
+  }
+
+  .place-details {
+  }
+
+  .place-type {
+    margin: 0;
+    color: grey;
+  }
+
+  .place-name {
+    margin: 0;
+  }
+
+  .place-tags {
+    display: flex;
+  }
+
+  .place-tags > a {
+    margin-right: 1rem;
+  }
+`
 
 export default function PlaceCard({ postPlace }) {
   return (
-    <Box elevation="large" round="small" margin={{ vertical: `large` }}>
-      <Box direction="row" justify="between" align="center" pad="medium">
-        <Box>
-          <Heading level="6" margin="none" color="dark-1">
-            {postPlace.place.placeType.type}
-          </Heading>
-          <Heading level="2" margin="none" color="black">
-            {postPlace.place.name}
-          </Heading>
-        </Box>
+    <StyledPlace>
+      <div className="place-info">
+        <div className="place-details">
+          <h5 className="place-type">{postPlace.place.placeType.type}</h5>
+          <h2 className="place-name">{postPlace.place.name}</h2>
+        </div>
         <AddToListModal place={postPlace} />
-      </Box>
+      </div>
       <Img fluid={postPlace.place.image.asset.fluid} />
-      <Box pad="medium" direction="row" wrap={true}>
+      <div className="place-tags">
         {postPlace.place.tags.map(tag => (
-          <Anchor
-            key={tag.id}
-            onClick={() => {
-              navigate(`/tags/${tag.slug.current}`)
-            }}
-          >
-            <Text margin={{ right: "small" }}>#{tag.tag}</Text>
-          </Anchor>
+          <Link key={tag.id} to={`/tags/${tag.slug.current}`}>
+            <h5>#{tag.tag}</h5>
+          </Link>
         ))}
-      </Box>
-      <Box pad={{ horizontal: "small" }}>
-        <BlockContent blocks={postPlace._rawText} />
-        <PlaceDetails place={postPlace} />
-      </Box>
-    </Box>
+      </div>
+      <BlockContent blocks={postPlace._rawText} />
+      <PlaceDetails place={postPlace} />
+      <Divider />
+    </StyledPlace>
   )
 }

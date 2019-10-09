@@ -1,23 +1,32 @@
 import React from "react"
 import Img from "gatsby-image"
-import { Box, Heading } from "grommet"
+import styled from "styled-components"
+
+const StyledCard = styled.div`
+  transition-duration: var(--duration);
+
+  .category {
+    color: grey;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .title {
+    margin: 0;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    transition-duration: var(--duration);
+  }
+`
 
 export default function PostCard({ post }) {
   return (
-    <Box margin={{ bottom: "large" }}>
+    <StyledCard>
+      {/* QUERY FOR A CARD IMAGE with aspect ration of maxWidth: 400px maxHeight: 300px */}
       <Img fluid={post.mainImage.asset.fluid} />
-      <Box pad="medium">
-        <Heading
-          level="6"
-          margin={{ top: "none", bottom: "none" }}
-          color="black"
-        >
-          {post.category.category}
-        </Heading>
-        <Heading level="2" margin={{ top: "xsmall", bottom: "" }} color="black">
-          {post.title}
-        </Heading>
-      </Box>
-    </Box>
+      <h4 className="category">{post.category.category}</h4>
+      <h2 className="title">{post.title}</h2>
+    </StyledCard>
   )
 }

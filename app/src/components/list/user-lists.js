@@ -32,7 +32,7 @@ export default function UserLists({ place }) {
           </>
         ))}
       {!show && (
-        <Button
+        <button
           onClick={() => setShow(!show)}
           label="New List"
           margin={{ top: "medium" }}

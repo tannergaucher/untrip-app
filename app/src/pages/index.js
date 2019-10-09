@@ -1,13 +1,12 @@
 import React from "react"
 
 import { Posts } from "../components/post"
-import { SEO, EmailSignup } from "../components/elements"
+import { SEO } from "../components/elements"
 
 const IndexPage = () => (
   <>
     <SEO title="Home" />
     <Posts />
-    <EmailSignup />
   </>
 )
 

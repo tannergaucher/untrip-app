@@ -1,6 +1,5 @@
 import React from "react"
 import { useQuery } from "@apollo/react-hooks"
-import { Heading, Box } from "grommet"
 
 import { LIST_QUERY } from "../apollo/graphql"
 import { SEO, Map, Loading } from "../elements"

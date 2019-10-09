@@ -1,15 +1,10 @@
 import React from "react"
 import Img from "gatsby-image"
 
-import { Box, Heading } from "grommet"
-
 export default function HeroCard({ text, fluid }) {
   return (
-    <Box margin={{ bottom: "large" }} style={{ position: `relative` }}>
-      <Heading
-        margin="none"
-        color="light-1"
-        level="3"
+    <div style={{ position: `relative` }}>
+      <h4
         style={{
           zIndex: `1`,
           position: `absolute`,
@@ -20,7 +15,7 @@ export default function HeroCard({ text, fluid }) {
         }}
       >
         {text}
-      </Heading>
+      </h4>
       <Img
         fluid={fluid}
         style={{
@@ -28,6 +23,6 @@ export default function HeroCard({ text, fluid }) {
           height: "250px",
         }}
       />
-    </Box>
+    </div>
   )
 }

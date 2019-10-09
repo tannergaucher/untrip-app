@@ -16,7 +16,7 @@ export const SANITY_POST_FRAGMENT = graphql`
     }
     mainImage {
       asset {
-        fluid {
+        fluid(maxWidth: 1000, maxHeight: 750) {
           ...GatsbySanityImageFluid
         }
         url
@@ -90,6 +90,7 @@ export const SANITY_PLACE_FRAGMENT = graphql`
       type
       image {
         asset {
+          # maxWidth
           fluid {
             ...GatsbySanityImageFluid
           }

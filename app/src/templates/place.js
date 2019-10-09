@@ -1,16 +1,15 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
-import { Heading, Text } from "grommet"
 
 export default function Place({ data }) {
   const { sanityPlace } = data
 
   return (
     <div>
-      <Heading>{sanityPlace.name}</Heading>
+      <h3>{sanityPlace.name}</h3>
       <Img fluid={sanityPlace.image.asset.fluid} />
-      <Text>{sanityPlace.imageCaption}</Text>
+      <p>{sanityPlace.imageCaption}</p>
       <Link to={sanityPlace.imageLink}>By {sanityPlace.imageCredit}</Link>
     </div>
   )

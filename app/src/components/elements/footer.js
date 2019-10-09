@@ -1,27 +1,27 @@
 import React from "react"
-import { Box, Heading, Anchor } from "grommet"
-import { navigate } from "gatsby"
+import styled from "styled-components"
+import { Link } from "gatsby"
+
+const StyledFooter = styled.footer`
+  background: var(--brand);
+  color: white;
+  padding: 1rem 0.5rem;
+
+  h3 {
+    margin: 0;
+  }
+`
 
 export default function Footer() {
   return (
-    <Box as="footer" background="light-2" pad="large">
-      <NavLink text="About" to="/about" />
-      <NavLink text="Contact" to="/contact" />
-      <NavLink text="Download the App" to="/download" />
-    </Box>
-  )
-}
-
-function NavLink({ to, text }) {
-  return (
-    <Anchor
-      onClick={() => {
-        navigate(to)
-      }}
-    >
-      <Heading level="5" margin={{ vertical: "medium" }} textAlign="center">
-        {text}
-      </Heading>
-    </Anchor>
+    <StyledFooter>
+      <Link
+        style={{
+          color: `inherit`,
+        }}
+      >
+        <h3>Untrip</h3>
+      </Link>
+    </StyledFooter>
   )
 }

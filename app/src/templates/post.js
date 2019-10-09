@@ -1,71 +1,89 @@
 import React from "react"
-import { graphql, navigate } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import { Heading, Box, Anchor } from "grommet"
+import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
-import { SEO, EmailSignup } from "../components/elements"
-import { PostPlaces, Share, Author, MorePosts } from "../components/post"
-import { PlainHeader } from "../components/elements/header"
+import { SEO, Map } from "../components/elements"
+import { PostPlaces } from "../components/post"
+import { Divider } from "../components/styles"
+
+const StyledPost = styled.div`
+  .image-wrapper {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .category,
+  .title {
+    text-align: center;
+  }
+
+  .post-text-container {
+    max-width: var(--container);
+    margin: 5rem auto 7rem;
+  }
+
+  .map-with-places {
+    display: grid;
+    grid-template-areas: "places map";
+    grid-template-columns: 5fr 3fr;
+  }
+
+  .places {
+    grid-area: places;
+    margin: 0 3rem;
+  }
+
+  .map {
+    grid-area: map;
+    position: sticky;
+    top: 15vh;
+    height: 70vh;
+    margin: 0 3rem;
+  }
+
+  .more-posts {
+    max-width: var(--max-width);
+    margin: 6rem auto;
+  }
+`
 
 export default function PostTemplate({ data }) {
   const { sanityPost } = data
 
   return (
-    <Box style={{ position: "relative" }}>
+    <StyledPost>
       <SEO
         title={sanityPost.title}
         image={sanityPost.mainImage.asset.fluid.src}
         url={`https://untrip.app/posts/${sanityPost.category.slug.current}/${sanityPost.slug.current}`}
       />
-      <Box
-        style={{
-          position: "absolute",
-          top: "0",
-          left: "0",
-          right: "0",
-          zIndex: "3",
-        }}
-      >
-        <PlainHeader light />
-      </Box>
-      <Img
-        fluid={sanityPost.mainImage.asset.fluid}
-        style={{ filter: `brightness(.8)` }}
-      />
-      <Box margin={{ top: "small" }} pad={{ horizontal: "medium" }}>
-        <Anchor
-          textAlign="center"
-          onClick={() => {
-            navigate(`/guide/categories/${sanityPost.category.slug.current}`)
-          }}
-        >
-          <Heading textAlign="center" level="4" color="black">
-            {sanityPost.category.category}
-          </Heading>
-        </Anchor>
-        <Heading
-          level="1"
-          margin={{ top: "small" }}
-          textAlign="center"
-          color="black"
-        >
-          {sanityPost.title}
-        </Heading>
-      </Box>
-      <Share post={sanityPost} />
-      <Box as="article">
-        <Box pad="small">
-          <BlockContent blocks={sanityPost._rawBody} />
+      <div className="image-wrapper">
+        {/* <Link>
+          <h4 className="category">{sanityPost.category.category}</h4>
+        </Link> */}
+        <h1 className="title">{sanityPost.title}</h1>
+        <Img fluid={sanityPost.mainImage.asset.fluid} />
+      </div>
+      <div className="post-text-container">
+        <BlockContent className="post-body" blocks={sanityPost._rawBody} />
+        <Divider />
+      </div>
+      <div className="map-with-places">
+        <div className="places">
           <PostPlaces postPlaces={sanityPost.postPlaces} />
-          <Box margin={{ vertical: "large", horizontal: "medium" }}>
-            <Author author={sanityPost.author} />
-          </Box>
-        </Box>
-      </Box>
-      <EmailSignup />
-      <MorePosts />
-    </Box>
+        </div>
+        <div className="map">
+          <h5>{sanityPost.title}</h5>
+          <Map places={sanityPost.postPlaces} />
+        </div>
+      </div>
+      <div className="more-posts">
+        <h2>More Posts</h2>
+        <br />
+      </div>
+    </StyledPost>
   )
 }
 
