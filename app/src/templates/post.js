@@ -14,11 +14,11 @@ const StyledPost = styled.div`
     margin: 0 auto;
   }
 
-  .category,
   .title {
     text-align: center;
     padding-left: 1rem;
     padding-right: 1rem;
+    /* font-weight: 900; */
   }
 
   .post-text-container {

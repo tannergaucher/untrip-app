@@ -15,8 +15,12 @@ const StyledHeader = styled.div`
     font-weight: 900;
   }
 
+  .heading {
+    margin: 0;
+  }
+
   .subHeading {
-    /* text-transform: uppercase; */
+    margin-top: 2rem;
   }
 `
 

@@ -1,14 +1,19 @@
 import React from "react"
-import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
+import { Map, Marker, GoogleApiWrapper } from "google-maps-react"
+
+import Icon from "../../images/location-pin.svg"
 
 class MapContainer extends React.Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
+    bounds: null,
   }
 
   onMarkerClick = (props, marker, e) => {
+    // TODO: SCROLL PLACE PLACE ON PAGE
+
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -25,6 +30,21 @@ class MapContainer extends React.Component {
     }
   }
 
+  makeBounds = () => {
+    let points = []
+    this.props.places.map(place => {
+      points.push(place.place.location)
+    })
+
+    let bounds = new this.props.google.maps.LatLngBounds()
+
+    for (var i = 0; i < points.length; i++) {
+      bounds.extend(points[i])
+    }
+
+    this.setState({ bounds })
+  }
+
   render() {
     const { google, zoom, style, name, lat, lng, places } = this.props
 
@@ -36,11 +56,21 @@ class MapContainer extends React.Component {
         name={name}
         zoom={zoom}
         onClick={this.onMapClicked}
+        onReady={this.makeBounds}
+        bounds={this.state.bounds}
       >
         {places.map(place => (
           <Marker
             name={place.place.name}
             title={place.place.title}
+            style={{
+              height: "40px",
+            }}
+            icon={{
+              url: Icon,
+              anchor: new google.maps.Point(45, 45),
+              scaledSize: new google.maps.Size(45, 45),
+            }}
             position={{
               lat: place.place.location.lat,
               lng: place.place.location.lng,
@@ -48,14 +78,6 @@ class MapContainer extends React.Component {
             onClick={this.onMarkerClick}
           />
         ))}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-        >
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow>
       </Map>
     )
   }
