@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
-import { PostCard } from "../post"
+import { Card } from "."
 import { useAllSanityPost } from "../hooks"
 
 const StyledPosts = styled.div`
@@ -17,6 +17,7 @@ const StyledPosts = styled.div`
 `
 
 export default function Posts() {
+  // change hook to useLatestSanityPosts
   const { edges } = useAllSanityPost()
 
   return (
@@ -29,7 +30,7 @@ export default function Posts() {
             key={edge.node.id}
             style={{ textDecoration: `none`, color: `inherit` }}
           >
-            <PostCard key={edge.node.id} post={edge.node} />
+            <Card key={edge.node.id} post={edge.node} />
           </Link>
         ))}
       </div>

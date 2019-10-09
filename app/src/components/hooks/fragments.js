@@ -142,6 +142,7 @@ export const SANITY_HERO_BANNER_FRAGMENT = graphql`
     subHeading
     image {
       asset {
+        # SET MAXHEIGHT
         fluid {
           ...GatsbySanityImageFluid
         }

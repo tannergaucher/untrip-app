@@ -1,8 +1,8 @@
-import PostCard from "./post-card"
+import Card from "./card"
 import PostPlaces from "./post-places"
-import Posts from "./posts"
 import Author from "./author"
 import Share from "./share"
+import LatestPosts from "./latest-posts"
 import MorePosts from "./more-posts"
 
-export { Posts, PostCard, Author, PostPlaces, Share, MorePosts }
+export { LatestPosts, Card, Author, PostPlaces, Share, MorePosts }

@@ -1,13 +1,32 @@
 import React from "react"
+import styled from "styled-components"
 
-import { Posts } from "../components/post"
-import { SEO } from "../components/elements"
+import { LatestPosts } from "../components/post"
+import { SEO, HeroBanner, NewsletterSignup } from "../components/elements"
+
+const StyledIndexPage = styled.div`
+  .latest-posts {
+    padding: 1rem;
+  }
+
+  .newsletter-signup {
+    margin-top: 10rem;
+  }
+`
 
 const IndexPage = () => (
-  <>
+  <StyledIndexPage>
     <SEO title="Home" />
-    <Posts />
-  </>
+    <HeroBanner />
+
+    <div className="latest-posts">
+      <LatestPosts />
+    </div>
+
+    <div className="newsletter-signup">
+      <NewsletterSignup />
+    </div>
+  </StyledIndexPage>
 )
 
 export default IndexPage

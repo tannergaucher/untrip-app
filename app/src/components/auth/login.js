@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { Button, TextInput, Form, Text, Box } from "grommet"
+import { useMutation, useApolloClient } from "@apollo/react-hooks"
 
 import { LOGIN_MUTATION } from "../apollo/graphql"
-import { useMutation, useApolloClient } from "@apollo/react-hooks"
+import { Button, Fieldset, Form, Input } from "../styles"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -13,8 +13,8 @@ export default function Login() {
   const client = useApolloClient()
 
   return (
-    <fieldset disabled={loading} style={{ border: `none` }}>
-      {error && <Text>{error.message}</Text>}
+    <Fieldset>
+      {error && `${error.message}`}
       <Form
         onSubmit={async e => {
           e.preventDefault()
@@ -28,30 +28,25 @@ export default function Login() {
           })
         }}
       >
-        <Box margin={{ vertical: "medium" }}>
-          <TextInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            disabled={loading}
-          />
-        </Box>
-        <TextInput
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          disabled={loading}
+        />
+        <Input
           type="password"
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
           disabled={loading}
         />
-        <Button
-          type="submit"
-          label="Log In"
-          fill={true}
-          margin={{ top: "medium" }}
-        />
+        <Button type="submit" primary>
+          Log In
+        </Button>
       </Form>
-    </fieldset>
+    </Fieldset>
   )
 }

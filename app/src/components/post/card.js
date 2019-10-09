@@ -5,28 +5,28 @@ import styled from "styled-components"
 const StyledCard = styled.div`
   transition-duration: var(--duration);
 
-  .category {
+  .card-category {
     color: grey;
     margin: 0.5rem 0 0 0;
   }
 
-  .title {
+  .card-title {
     margin: 0;
+    margin-top: 0.25rem;
   }
 
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
     transition-duration: var(--duration);
   }
 `
 
-export default function PostCard({ post }) {
+export default function Card({ post }) {
   return (
     <StyledCard>
-      {/* QUERY FOR A CARD IMAGE with aspect ration of maxWidth: 400px maxHeight: 300px */}
       <Img fluid={post.mainImage.asset.fluid} />
-      <h4 className="category">{post.category.category}</h4>
-      <h2 className="title">{post.title}</h2>
+      <h6 className="card-category">{post.category.category}</h6>
+      <h3 className="card-title">{post.title}</h3>
     </StyledCard>
   )
 }

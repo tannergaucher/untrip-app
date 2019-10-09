@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 
 import { Button } from "../styles"
 
@@ -31,8 +31,24 @@ export default function Header() {
         <h3>Untrip</h3>
       </Link>
       <nav>
-        <Button className="login-btn">Log In</Button>
-        <Button primary>Sign Up</Button>
+        <Button
+          className="login-btn"
+          onClick={e => {
+            e.preventDefault()
+            navigate("/login")
+          }}
+        >
+          Log In
+        </Button>
+        <Button
+          primary
+          onClick={e => {
+            e.preventDefault()
+            navigate("/signup")
+          }}
+        >
+          Sign Up
+        </Button>
       </nav>
     </StyledHeader>
   )

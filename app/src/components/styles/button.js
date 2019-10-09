@@ -13,6 +13,8 @@ const StyledButton = styled.button`
   &:hover {
     background: ${props => (props.primary ? "white" : "var(--brand)")};
     color: ${props => (props.primary ? "var(--brand)" : "white")};
+    border: ${props =>
+      props.primary ? "1px solid var(--brand)" : "1px solid white"};
   }
 `
 

@@ -31,12 +31,32 @@ class MapContainer extends React.Component {
     return (
       <Map
         google={google}
-        // initialCenter={{ lat, lng }}
-        // bounds={bounds}
+        initialCenter={{ lat: 3.139, lng: 101.6869 }}
         style={style}
         name={name}
         zoom={zoom}
-      ></Map>
+        onClick={this.onMapClicked}
+      >
+        {places.map(place => (
+          <Marker
+            name={place.place.name}
+            title={place.place.title}
+            position={{
+              lat: place.place.location.lat,
+              lng: place.place.location.lng,
+            }}
+            onClick={this.onMarkerClick}
+          />
+        ))}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+        >
+          <div>
+            <h1>{this.state.selectedPlace.name}</h1>
+          </div>
+        </InfoWindow>
+      </Map>
     )
   }
 }

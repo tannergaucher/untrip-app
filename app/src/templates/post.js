@@ -4,8 +4,8 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
-import { SEO, Map } from "../components/elements"
-import { PostPlaces, Author, Share } from "../components/post"
+import { SEO, Map, NewsletterSignup } from "../components/elements"
+import { PostPlaces, Author, Share, LatestPosts } from "../components/post"
 import { Divider } from "../components/styles"
 
 const StyledPost = styled.div`
@@ -43,11 +43,17 @@ const StyledPost = styled.div`
     top: 15vh;
     height: 70vh;
     margin: 0 3rem;
+
+    h4 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
   }
 
-  .more-posts {
-    max-width: var(--max-width);
-    margin: 6rem auto;
+  .latest-posts {
+    padding: 1rem;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
   }
 `
 
@@ -80,9 +86,12 @@ export default function PostTemplate({ data }) {
           <Map places={sanityPost.postPlaces} />
         </div>
       </div>
-      <div className="more-posts">
-        <h2>Latest Posts</h2>
-        <br />
+
+      <div className="latest-posts">
+        <LatestPosts />
+      </div>
+      <div>
+        <NewsletterSignup />
       </div>
     </StyledPost>
   )
