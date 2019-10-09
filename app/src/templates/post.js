@@ -5,7 +5,7 @@ import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
 import { SEO, Map } from "../components/elements"
-import { PostPlaces, Author } from "../components/post"
+import { PostPlaces, Author, Share } from "../components/post"
 import { Divider } from "../components/styles"
 
 const StyledPost = styled.div`
@@ -17,6 +17,8 @@ const StyledPost = styled.div`
   .category,
   .title {
     text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .post-text-container {
@@ -52,8 +54,6 @@ const StyledPost = styled.div`
 export default function PostTemplate({ data }) {
   const { sanityPost } = data
 
-  console.log(sanityPost)
-
   return (
     <StyledPost>
       <SEO
@@ -66,6 +66,7 @@ export default function PostTemplate({ data }) {
         <Img fluid={sanityPost.mainImage.asset.fluid} />
       </div>
       <div className="post-text-container">
+        <Share post={sanityPost} />
         <BlockContent className="post-body" blocks={sanityPost._rawBody} />
         <Author author={sanityPost.author} />
         <Divider />
@@ -75,12 +76,12 @@ export default function PostTemplate({ data }) {
           <PostPlaces postPlaces={sanityPost.postPlaces} />
         </div>
         <div className="map">
-          <h5>{sanityPost.title}</h5>
+          <h4>{sanityPost.title}</h4>
           <Map places={sanityPost.postPlaces} />
         </div>
       </div>
       <div className="more-posts">
-        <h2>More Posts</h2>
+        <h2>Latest Posts</h2>
         <br />
       </div>
     </StyledPost>
