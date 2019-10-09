@@ -5,7 +5,7 @@ import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
 import { SEO, Map } from "../components/elements"
-import { PostPlaces } from "../components/post"
+import { PostPlaces, Author } from "../components/post"
 import { Divider } from "../components/styles"
 
 const StyledPost = styled.div`
@@ -52,6 +52,8 @@ const StyledPost = styled.div`
 export default function PostTemplate({ data }) {
   const { sanityPost } = data
 
+  console.log(sanityPost)
+
   return (
     <StyledPost>
       <SEO
@@ -60,14 +62,12 @@ export default function PostTemplate({ data }) {
         url={`https://untrip.app/posts/${sanityPost.category.slug.current}/${sanityPost.slug.current}`}
       />
       <div className="image-wrapper">
-        {/* <Link>
-          <h4 className="category">{sanityPost.category.category}</h4>
-        </Link> */}
         <h1 className="title">{sanityPost.title}</h1>
         <Img fluid={sanityPost.mainImage.asset.fluid} />
       </div>
       <div className="post-text-container">
         <BlockContent className="post-body" blocks={sanityPost._rawBody} />
+        <Author author={sanityPost.author} />
         <Divider />
       </div>
       <div className="map-with-places">
