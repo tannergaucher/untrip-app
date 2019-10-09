@@ -2,6 +2,7 @@ import React from "react"
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react"
 
 import Icon from "../../images/location-pin.svg"
+import RedIcon from "../../images/location-pin-red.svg"
 
 class MapContainer extends React.Component {
   state = {
@@ -19,6 +20,8 @@ class MapContainer extends React.Component {
       activeMarker: marker,
       showingInfoWindow: true,
     })
+
+    console.log(this.state.selectedPlace)
   }
 
   onMapClicked = props => {
@@ -61,13 +64,15 @@ class MapContainer extends React.Component {
       >
         {places.map(place => (
           <Marker
+            key={place.place.id}
             name={place.place.name}
-            title={place.place.title}
-            style={{
-              height: "40px",
-            }}
+            title={place.place.name}
             icon={{
-              url: Icon,
+              // DISPLAY RED ICON FOR CURRENT PLACE
+              url:
+                this.state.selectedPlace.name === place.place.name
+                  ? RedIcon
+                  : Icon,
               anchor: new google.maps.Point(45, 45),
               scaledSize: new google.maps.Size(45, 45),
             }}
