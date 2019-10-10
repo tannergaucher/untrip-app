@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
@@ -58,6 +58,8 @@ const StyledPost = styled.div`
 `
 
 export default function PostTemplate({ data }) {
+  const [inView, setInView] = useState(null)
+
   const { sanityPost } = data
 
   return (
@@ -79,11 +81,14 @@ export default function PostTemplate({ data }) {
       </div>
       <div className="map-with-places">
         <div className="places">
-          <PostPlaces postPlaces={sanityPost.postPlaces} />
+          <PostPlaces
+            postPlaces={sanityPost.postPlaces}
+            setInView={setInView}
+          />
         </div>
         <div className="map">
           <h4>{sanityPost.title}</h4>
-          <Map places={sanityPost.postPlaces} />
+          <Map places={sanityPost.postPlaces} inView={inView} />
         </div>
       </div>
 

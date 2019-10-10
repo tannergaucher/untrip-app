@@ -1,13 +1,12 @@
 import React from "react"
-
 import styled from "styled-components"
 import Img from "gatsby-image"
 import { Link } from "gatsby"
 import BlockContent from "@sanity/block-content-to-react"
+import { useInView } from "react-intersection-observer"
 
 import { PlaceDetails } from "../place"
 import { Divider } from "../styles"
-
 import { AddToListModal } from "../list"
 
 const StyledPlace = styled.div`
@@ -40,11 +39,19 @@ const StyledPlace = styled.div`
   }
 `
 
-export default function PlaceCard({ postPlace }) {
+export default function PlaceCard({ postPlace, setInView }) {
+  const [ref, inView] = useInView({
+    threshold: 0,
+  })
+
+  if (inView) {
+    setInView(postPlace.place)
+  }
+
   return (
     <StyledPlace>
       <div className="place-info">
-        <div className="place-details">
+        <div className="place-details" ref={ref}>
           <h5 className="place-type">{postPlace.place.placeType.type}</h5>
           <h2 className="place-name">{postPlace.place.name}</h2>
         </div>

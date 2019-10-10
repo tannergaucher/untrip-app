@@ -6,29 +6,28 @@ import RedIcon from "../../images/location-pin-red.svg"
 
 class MapContainer extends React.Component {
   state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
     bounds: null,
+    mapCenter: null,
   }
 
-  onMarkerClick = (props, marker, e) => {
-    // TODO: SCROLL PLACE PLACE ON PAGE
-
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true,
-    })
-
-    console.log(this.state.selectedPlace)
+  onMarkerClick = marker => {
+    // if (this.state.mapCenter !== marker.position) {
+    //   this.setState({
+    //     mapCenter: marker.position,
+    //   })
+    // }
+    // this.setState({
+    //   mapCenter: marker.position,
+    // })
   }
 
-  onMapClicked = props => {
-    if (this.state.showingInfoWindow) {
+  componentDidUpdate = prevState => {
+    if (
+      this.props.inView &&
+      this.props.inView.location !== prevState.mapCenter
+    ) {
       this.setState({
-        showingInfoWindow: false,
-        activeMarker: null,
+        mapCenter: this.props.inView.location,
       })
     }
   }
@@ -49,16 +48,16 @@ class MapContainer extends React.Component {
   }
 
   render() {
-    const { google, zoom, style, name, lat, lng, places } = this.props
+    const { google, zoom, style, name, places } = this.props
 
     return (
       <Map
         google={google}
         initialCenter={{ lat: 3.139, lng: 101.6869 }}
+        center={this.state.mapCenter}
         style={style}
         name={name}
         zoom={zoom}
-        onClick={this.onMapClicked}
         onReady={this.makeBounds}
         bounds={this.state.bounds}
       >
@@ -67,12 +66,10 @@ class MapContainer extends React.Component {
             key={place.place.id}
             name={place.place.name}
             title={place.place.name}
+            placeId={place.place.id}
             icon={{
-              // DISPLAY RED ICON FOR CURRENT PLACE
               url:
-                this.state.selectedPlace.name === place.place.name
-                  ? RedIcon
-                  : Icon,
+                this.state.mapCenter === place.place.location ? RedIcon : Icon,
               anchor: new google.maps.Point(45, 45),
               scaledSize: new google.maps.Size(45, 45),
             }}

@@ -8,11 +8,11 @@ const StyledHeader = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 3rem;
+  margin-top: 5rem;
 
   .heading,
   .subHeading {
-    font-weight: 900;
+    /* font-weight: 900; */
   }
 
   .heading {

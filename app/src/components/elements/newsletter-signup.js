@@ -61,6 +61,7 @@ const Input = styled.input`
 
   ::placeholder {
     color: white;
+    text-transform: uppercase;
   }
 `
 
