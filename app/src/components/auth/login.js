@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useMutation, useApolloClient } from "@apollo/react-hooks"
+import { navigate } from "gatsby"
 
 import { LOGIN_MUTATION } from "../apollo/graphql"
 import { Button, Fieldset, Form, Input } from "../styles"
@@ -26,6 +27,7 @@ export default function Login() {
               me: data.login.user,
             },
           })
+          navigate("/")
         }}
       >
         <Input

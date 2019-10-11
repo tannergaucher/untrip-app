@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { navigate } from "gatsby"
 import { useMutation, useApolloClient } from "@apollo/react-hooks"
 
 import { SIGN_UP_MUTATION } from "../apollo/graphql"
@@ -27,6 +28,7 @@ export default function Signup() {
               me: data.signup.user,
             },
           })
+          navigate(`/`)
         }}
       >
         <Input

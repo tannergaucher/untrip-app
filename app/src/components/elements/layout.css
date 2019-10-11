@@ -5,7 +5,6 @@
   --font-size: 21px;
   --radius: 4px;
   --thickness: 1px;
-  --elevation-1: 0px 4px 12px rgba(0, 0, 0, 0.05);
   --link-color: blue;
   --container: 667px;
   --max-width: 1000px;
@@ -26,7 +25,7 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 p {

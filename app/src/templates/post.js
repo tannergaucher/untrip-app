@@ -85,7 +85,7 @@ const StyledPost = styled.div`
         margin-left: 0.5rem;
         margin-right: 0.5rem;
         margin-top: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
         text-align: center;
       }
     }
