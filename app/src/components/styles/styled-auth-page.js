@@ -2,14 +2,23 @@ import styled from "styled-components"
 
 const StyledAuthPage = styled.div`
   padding: 1rem;
-  display: flex;
+  display: grid;
+  grid-template-areas: "message auth";
 
   .welcome-message {
-    flex: 2;
+    grid-area: "message";
   }
 
   .auth {
-    flex: 1;
+    grid-area: "auth";
+  }
+
+  @media (max-width: 600px) {
+    grid-template-areas: "auth";
+
+    .welcome-message {
+      display: none;
+    }
   }
 `
 

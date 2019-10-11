@@ -22,7 +22,7 @@ const StyledHeader = styled.header`
 export default function Header() {
   return (
     <StyledHeader>
-      <Link to="/" style={{ color: `inherit`, textDecoration: `` }}>
+      <Link to="/" style={{ color: `inherit`, textDecoration: `none` }}>
         <h3>Untrip</h3>
       </Link>
       <nav>
