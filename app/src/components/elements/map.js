@@ -11,17 +11,17 @@ class MapContainer extends React.Component {
   }
 
   onMarkerClick = marker => {
-    // if (this.state.mapCenter !== marker.position) {
-    //   this.setState({
-    //     mapCenter: marker.position,
-    //   })
-    // }
-    // this.setState({
-    //   mapCenter: marker.position,
-    // })
+    if (this.state.mapCenter !== marker.position) {
+      this.setState({
+        mapCenter: marker.position,
+      })
+    }
+    this.setState({
+      mapCenter: marker.position,
+    })
   }
 
-  componentDidUpdate = prevState => {
+  componentDidUpdate = (prevProps, prevState) => {
     if (
       this.props.inView &&
       this.props.inView.location !== prevState.mapCenter

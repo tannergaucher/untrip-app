@@ -5,7 +5,7 @@ import { Link } from "gatsby"
 const StyledFooter = styled.footer`
   background: var(--brand);
   color: white;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
 
   h3 {
     margin: 0;

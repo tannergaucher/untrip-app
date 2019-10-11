@@ -6,7 +6,7 @@ import { SEO, HeroBanner, NewsletterSignup } from "../components/elements"
 
 const StyledIndexPage = styled.div`
   .latest-posts {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   .newsletter-signup {
@@ -17,12 +17,10 @@ const StyledIndexPage = styled.div`
 const IndexPage = () => (
   <StyledIndexPage>
     <SEO title="Home" />
-    <HeroBanner />
-
+    {/* <HeroBanner /> */}
     <div className="latest-posts">
       <LatestPosts />
     </div>
-
     <div className="newsletter-signup">
       <NewsletterSignup />
     </div>

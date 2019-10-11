@@ -12,7 +12,7 @@ const StyledNewsletter = styled.div`
   flex-direction: column;
   background: black;
   color: white;
-  padding: 1rem;
+  padding: 2rem;
 
   h2 {
     text-align: center;
@@ -30,8 +30,10 @@ export default function NewsletterSignup() {
 }
 
 const Fieldset = styled.fieldset`
-  border: none;
+  padding: 0;
+  margin: 0;
 `
+
 const Form = styled.form`
   display: flex;
 
@@ -77,26 +79,26 @@ function NewsletterForm() {
   )
 
   return (
-    <Fieldset disabled={loading}>
-      {error && `Error: ${error.message}`}
+    // <Fieldset disabled={loading}>
+    //   {error && `Error: ${error.message}`}
 
-      <Form
-        onSubmit={async e => {
-          e.preventDefault()
+    <Form
+      onSubmit={async e => {
+        e.preventDefault()
 
-          const { data } = await subscribeToEmail()
-          alert(data.subscribeToEmail.message)
-          setEmail("")
-        }}
-      >
-        <Input
-          placeholder="Email"
-          value={email}
-          required={true}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <button type="submit">Subscribe</button>
-      </Form>
-    </Fieldset>
+        const { data } = await subscribeToEmail()
+        alert(data.subscribeToEmail.message)
+        setEmail("")
+      }}
+    >
+      <Input
+        placeholder="Email"
+        value={email}
+        required={true}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <button type="submit">Subscribe</button>
+    </Form>
+    // </Fieldset>
   )
 }

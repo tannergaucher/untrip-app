@@ -8,12 +8,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 3;
-  padding: 1rem;
-  box-shadow: var(--elevation-1);
+  padding: 1rem 0.5rem;
 
   h3 {
     margin: 0;
@@ -27,12 +22,13 @@ const StyledHeader = styled.header`
 export default function Header() {
   return (
     <StyledHeader>
-      <Link to="/" style={{ color: `inherit` }}>
+      <Link to="/" style={{ color: `inherit`, textDecoration: `` }}>
         <h3>Untrip</h3>
       </Link>
       <nav>
         <Button
           className="login-btn"
+          plain
           onClick={e => {
             e.preventDefault()
             navigate("/login")
@@ -41,7 +37,6 @@ export default function Header() {
           Log In
         </Button>
         <Button
-          primary
           onClick={e => {
             e.preventDefault()
             navigate("/signup")

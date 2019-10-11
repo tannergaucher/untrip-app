@@ -29,7 +29,7 @@ export default function HeroBanner() {
 
   return (
     <StyledHeader>
-      <h1 className="heading">{heading}</h1>
+      {/* <h1 className="heading">{heading}</h1> */}
       <h3 className="subHeading">{subHeading}</h3>
     </StyledHeader>
   )

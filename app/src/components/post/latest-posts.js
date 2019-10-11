@@ -14,6 +14,12 @@ const StyledPosts = styled.div`
     grid-gap: 4rem 1rem;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   }
+
+  @media (max-width: 600px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 `
 
 export default function Posts() {

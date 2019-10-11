@@ -16,8 +16,8 @@ const StyledPost = styled.div`
 
   .title {
     text-align: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     /* font-weight: 900; */
   }
 
@@ -44,16 +44,55 @@ const StyledPost = styled.div`
     height: 70vh;
     margin: 0 3rem;
 
-    h4 {
+    .map-title {
       margin-top: 0;
       margin-bottom: 1rem;
     }
   }
 
   .latest-posts {
-    padding: 1rem;
-    margin-top: 10rem;
-    margin-bottom: 10rem;
+    margin: 10rem 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .title {
+      text-align: left;
+    }
+
+    .post-text-container {
+      margin: 2rem 0.5rem 3rem;
+    }
+
+    .map-with-places {
+      display: grid;
+      grid-template-areas:
+        "places"
+        "map";
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr;
+    }
+
+    .places {
+      margin: 0 0.5rem;
+    }
+
+    .map {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+
+      .map-title {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+    }
+
+    .latest-posts {
+      margin: 7rem 0.5rem;
+    }
   }
 `
 
@@ -87,7 +126,7 @@ export default function PostTemplate({ data }) {
           />
         </div>
         <div className="map">
-          <h4>{sanityPost.title}</h4>
+          <h3 className="map-title">{sanityPost.title}</h3>
           <Map places={sanityPost.postPlaces} inView={inView} />
         </div>
       </div>

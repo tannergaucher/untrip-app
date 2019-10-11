@@ -9,6 +9,7 @@
   --link-color: blue;
   --container: 667px;
   --max-width: 1000px;
+  --mobile: 600px;
 }
 
 body {

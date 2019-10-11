@@ -32,10 +32,19 @@ const StyledPlace = styled.div`
 
   .place-tags {
     display: flex;
+    margin: 2rem 0;
   }
 
   .place-tags > a {
     margin-right: 1rem;
+
+    h5 {
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 4rem;
   }
 `
 

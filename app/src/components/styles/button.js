@@ -6,7 +6,8 @@ const StyledButton = styled.button`
   padding: 0.5rem 1rem;
   font-family: var(--sans);
   font-size: calc(var(--font-size) - 5px);
-  border: var(--thickness) solid var(--brand);
+  border: ${props =>
+    props.plain ? "none" : "var(--thickness) solid var(--brand)"};
   border-radius: var(--radius);
   text-transform: uppercase;
 

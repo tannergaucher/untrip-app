@@ -1,11 +1,22 @@
 import React, { useState } from "react"
 import { useQuery } from "@apollo/react-hooks"
 import { Layer } from "grommet"
+import { Bookmark } from "grommet-icons"
+import styled from "styled-components"
 
 import { AuthTabs } from "../auth"
 import { UserLists } from "../list"
 import { Button } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
+
+const PlainBtn = styled(Button)`
+  border: none;
+
+  &:hover {
+    border: 1px solid black;
+    background: white;
+  }
+`
 
 export default function AddToListModal({ place }) {
   const [show, setShow] = useState(false)
@@ -16,7 +27,10 @@ export default function AddToListModal({ place }) {
 
   return (
     <>
-      <Button onClick={() => setShow(!show)}>Add to list</Button>
+      <PlainBtn onClick={() => setShow(!show)}>
+        <Bookmark color="black" />
+      </PlainBtn>
+
       {show && (
         <Layer
           onEsc={() => setShow(false)}
