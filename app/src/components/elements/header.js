@@ -35,7 +35,7 @@ export default function Header() {
       <Link to="/">
         <h3>Untrip</h3>
       </Link>
-      {data.isLoggedIn ? <AuthedNav /> : <Nav />}
+      {data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
     </StyledHeader>
   )
 }
@@ -92,10 +92,10 @@ function AuthedNav() {
   return (
     <StyledAuthedNav>
       <div className="full">
-        <Link to="/">
+        <Link to="/lists">
           <h3>Lists</h3>
         </Link>
-        <Link to="/">
+        <Link to="/account">
           <h3>Account</h3>
         </Link>
       </div>

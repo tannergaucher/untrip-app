@@ -21,12 +21,12 @@ const StyledCard = styled.div`
   }
 `
 
-export default function Card({ post }) {
+export default function Card({ fluid, title, subtitle }) {
   return (
     <StyledCard>
-      <Img fluid={post.mainImage.asset.fluid} />
-      <h6 className="card-category">{post.category.category}</h6>
-      <h3 className="card-title">{post.title}</h3>
+      <Img fluid={fluid} />
+      <h6 className="card-category">{subtitle}</h6>
+      <h3 className="card-title">{title}</h3>
     </StyledCard>
   )
 }

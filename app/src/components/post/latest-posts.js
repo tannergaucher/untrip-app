@@ -1,45 +1,33 @@
 import React from "react"
 import { Link } from "gatsby"
-import styled from "styled-components"
 
-import { Card } from "."
+import { Card } from "../elements"
 import { useAllSanityPost } from "../hooks"
-
-const StyledPosts = styled.div`
-  margin: 2rem auto;
-  max-width: 1300px;
-
-  .posts-grid {
-    display: grid;
-    grid-gap: 4rem 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  }
-
-  @media (max-width: 600px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-`
+import { StyledCardGrid } from "../styles"
 
 export default function Posts() {
-  // change hook to useLatestSanityPosts
+  // TODO change hook to useLatestSanityPosts
   const { edges } = useAllSanityPost()
 
   return (
-    <StyledPosts>
+    <StyledCardGrid>
       <h2>Latest</h2>
-      <div className="posts-grid">
+      <div className="card-grid">
         {edges.map(edge => (
           <Link
             to={`/posts/${edge.node.category.slug.current}/${edge.node.slug.current}`}
             key={edge.node.id}
             style={{ textDecoration: `none`, color: `inherit` }}
           >
-            <Card key={edge.node.id} post={edge.node} />
+            <Card
+              key={edge.node.id}
+              fluid={edge.node.mainImage.asset.fluid}
+              subtitle={edge.node.category.category}
+              title={edge.node.title}
+            />
           </Link>
         ))}
       </div>
-    </StyledPosts>
+    </StyledCardGrid>
   )
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { CheckBox, Text } from "grommet"
+import { CheckBox } from "grommet"
 
 import { useMutation } from "@apollo/react-hooks"
 import { TOGGLE_PLACE_MUTATION } from "../apollo/graphql"

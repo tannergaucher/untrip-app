@@ -27,7 +27,7 @@ export default function AuthTabs() {
 
   return (
     <StyledAuthTabs>
-      <h2>Please sign in to do that</h2>
+      <h2>Please sign in</h2>
       {show === "Login" ? <Login /> : <Signup />}
       {show === "Login" && (
         <div className="toggle-auth">
