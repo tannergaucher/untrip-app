@@ -13,6 +13,11 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   padding: 1rem 0.5rem;
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   h3 {
     margin: 0;
   }
@@ -23,14 +28,14 @@ const StyledHeader = styled.header`
 `
 
 export default function Header() {
-  const { data, loading, error } = useQuery(IS_LOGGED_IN)
+  const { data } = useQuery(IS_LOGGED_IN)
 
   return (
     <StyledHeader>
-      <Link to="/" style={{ color: `inherit`, textDecoration: `none` }}>
+      <Link to="/">
         <h3>Untrip</h3>
       </Link>
-      {data.isLoggedIn ? <AuthNav /> : <Nav />}
+      {data.isLoggedIn ? <AuthedNav /> : <Nav />}
     </StyledHeader>
   )
 }
@@ -48,6 +53,7 @@ function Nav() {
       >
         Log In
       </Button>
+
       <Button
         onClick={e => {
           e.preventDefault()
@@ -60,10 +66,7 @@ function Nav() {
   )
 }
 
-// Responsive auth nav
-// media query. Display nav links or menu icon
-
-const StyledAuthNav = styled.nav`
+const StyledAuthedNav = styled.nav`
   .full {
     display: flex;
 
@@ -85,33 +88,22 @@ const StyledAuthNav = styled.nav`
   }
 `
 
-function AuthNav() {
+function AuthedNav() {
   return (
-    <StyledAuthNav>
+    <StyledAuthedNav>
       <div className="full">
-        <Link
-          to="/"
-          style={{
-            color: `inherit`,
-          }}
-        >
+        <Link to="/">
           <h3>Lists</h3>
         </Link>
-        <Link
-          to="/"
-          style={{
-            color: `inherit`,
-          }}
-        >
+        <Link to="/">
           <h3>Account</h3>
         </Link>
       </div>
-
       <div className="mobile">
         <Button plain>
           <Menu color="black" />
         </Button>
       </div>
-    </StyledAuthNav>
+    </StyledAuthedNav>
   )
 }

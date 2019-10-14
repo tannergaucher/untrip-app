@@ -4,6 +4,7 @@ const StyledAuthPage = styled.div`
   padding: 1rem;
   display: grid;
   grid-template-areas: "message auth";
+  grid-template-columns: 5fr 2fr;
 
   .welcome-message {
     grid-area: "message";

@@ -28,6 +28,7 @@ const StyledPlace = styled.div`
 
   .place-name {
     margin: 0;
+    font-weight: 900;
   }
 
   .place-tags {
@@ -44,7 +45,7 @@ const StyledPlace = styled.div`
   }
 
   @media (max-width: 600px) {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
   }
 `
 

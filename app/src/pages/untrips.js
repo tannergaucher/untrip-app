@@ -14,11 +14,7 @@ export default function ListsPage() {
   return (
     <>
       {error && `Error: ${error.message}`}
-      {data && data.isLoggedIn ? (
-        <UserLists />
-      ) : (
-        <AuthTabs message="Log in to view your untrips" fullHeight />
-      )}
+      {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
     </>
   )
 }

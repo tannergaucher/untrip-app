@@ -10,11 +10,20 @@ import { Button } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const PlainBtn = styled(Button)`
-  border: none;
-
+  border: var(--thickness) solid white;
   &:hover {
-    border: 1px solid black;
+    border: var(--thickness) solid black;
     background: white;
+  }
+`
+
+const StyledLayer = styled(Layer)`
+  width: 50vw;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @media (max-width: 900px) {
+    width: 90vw;
   }
 `
 
@@ -32,7 +41,7 @@ export default function AddToListModal({ place }) {
       </PlainBtn>
 
       {show && (
-        <Layer
+        <StyledLayer
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
           responsive={false}
@@ -46,17 +55,18 @@ export default function AddToListModal({ place }) {
               <PleaseSignIn />
             )}
           </div>
-        </Layer>
+        </StyledLayer>
       )}
     </>
   )
 }
 
+const StyledPleaseSignin = styled.div``
+
 function PleaseSignIn() {
   return (
-    <>
-      <h4>You must be logged in to do that</h4>
+    <StyledPleaseSignin>
       <AuthTabs />
-    </>
+    </StyledPleaseSignin>
   )
 }

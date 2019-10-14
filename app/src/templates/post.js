@@ -18,7 +18,7 @@ const StyledPost = styled.div`
     text-align: center;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    /* font-weight: 900; */
+    font-weight: 900;
   }
 
   .post-text-container {

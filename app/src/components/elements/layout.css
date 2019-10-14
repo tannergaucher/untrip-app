@@ -4,7 +4,7 @@
   --brand: black;
   --font-size: 21px;
   --radius: 4px;
-  --thickness: 1px;
+  --thickness: 2px;
   --link-color: blue;
   --container: 667px;
   --max-width: 1000px;
@@ -35,4 +35,10 @@ p {
 
 a {
   color: var(--link-color);
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 18px;
+  }
 }
