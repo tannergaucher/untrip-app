@@ -52,21 +52,11 @@ export default function AddToListModal({ place }) {
             {data && data.isLoggedIn ? (
               <UserLists place={place.place} />
             ) : (
-              <PleaseSignIn />
+              <AuthTabs />
             )}
           </div>
         </StyledLayer>
       )}
     </>
-  )
-}
-
-const StyledPleaseSignin = styled.div``
-
-function PleaseSignIn() {
-  return (
-    <StyledPleaseSignin>
-      <AuthTabs />
-    </StyledPleaseSignin>
   )
 }

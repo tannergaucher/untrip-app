@@ -1,9 +1,20 @@
 import React from "react"
-import { CheckBox, Box, Text } from "grommet"
+import styled from "styled-components"
+import { CheckBox, Text } from "grommet"
 
 import { useMutation } from "@apollo/react-hooks"
 import { TOGGLE_PLACE_MUTATION } from "../apollo/graphql"
 import { isPlaceInList } from "../../utils"
+
+const StyledTogglePlaceCheckbox = styled.div`
+  .user-list {
+    margin: 1rem 0;
+  }
+
+  .user-list-title {
+    margin: 0;
+  }
+`
 
 export default function TogglePlaceCheckBox({ place, list }) {
   const [togglePlace, { loading }] = useMutation(TOGGLE_PLACE_MUTATION, {
@@ -41,16 +52,18 @@ export default function TogglePlaceCheckBox({ place, list }) {
   })
 
   return (
-    <Box margin="small">
-      <CheckBox
-        key={list.id}
-        disabled={loading}
-        label={<Text>{list.title}</Text>}
-        checked={isPlaceInList(list.places, place.id)}
-        onChange={async e => {
-          await togglePlace()
-        }}
-      />
-    </Box>
+    <StyledTogglePlaceCheckbox>
+      <div className="user-list">
+        <CheckBox
+          key={list.id}
+          disabled={loading}
+          label={<h4 className="user-list-title">{list.title}</h4>}
+          checked={isPlaceInList(list.places, place.id)}
+          onChange={async e => {
+            await togglePlace()
+          }}
+        />
+      </div>
+    </StyledTogglePlaceCheckbox>
   )
 }

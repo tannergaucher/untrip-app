@@ -1,10 +1,15 @@
 import React, { useState } from "react"
 import { useQuery } from "@apollo/react-hooks"
-import { Heading, Button } from "grommet"
+import styled from "styled-components"
 
 import { CreateList, TogglePlaceCheckBox } from "../list"
 import { Loading } from "../elements"
 import { CURRENT_USER_QUERY } from "../apollo/graphql"
+import { Button } from "../styles"
+
+const StyledUserLists = styled.div`
+  color: black;
+`
 
 export default function UserLists({ place }) {
   const [show, setShow] = useState(false)
@@ -14,16 +19,15 @@ export default function UserLists({ place }) {
   if (error) return `Error: ${error.message}`
 
   return (
-    <>
-      {/* handle case of user not having any lists yet */}
-      {data && data.me && data.me.lists.length === 0 && (
+    <StyledUserLists>
+      {data && data.me && data.me.lists.length === 0 ? (
         <>
-          <Heading level="5">Create a new list with {`${place.name}`}</Heading>
+          <h4>Create a new list with {`${place.name}`}</h4>
         </>
+      ) : (
+        <h4>Add {place.name} to list</h4>
       )}
-      {data && data.me && data.me.lists.length > 0 && (
-        <Heading level="4">Add {place.name} to list</Heading>
-      )}
+
       {data &&
         data.me &&
         data.me.lists.map(list => (
@@ -31,14 +35,12 @@ export default function UserLists({ place }) {
             <TogglePlaceCheckBox key={list.id} list={list} place={place} />
           </>
         ))}
-      {!show && (
-        <button
-          onClick={() => setShow(!show)}
-          label="New List"
-          margin={{ top: "medium" }}
-        />
+
+      {show ? (
+        <CreateList place={place} setShow={setShow} />
+      ) : (
+        <Button onClick={() => setShow(!show)}>New List</Button>
       )}
-      {show && <CreateList place={place} setShow={setShow} />}
-    </>
+    </StyledUserLists>
   )
 }
