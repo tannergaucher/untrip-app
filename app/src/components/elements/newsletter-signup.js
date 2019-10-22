@@ -29,11 +29,6 @@ export default function NewsletterSignup() {
   )
 }
 
-const Fieldset = styled.fieldset`
-  padding: 0;
-  margin: 0;
-`
-
 const Form = styled.form`
   display: flex;
 
@@ -69,23 +64,16 @@ const Input = styled.input`
 
 function NewsletterForm() {
   const [email, setEmail] = useState("")
-  const [subscribeToEmail, { loading, error }] = useMutation(
-    SUBSCRIBE_TO_EMAIL_MUTATION,
-    {
-      variables: {
-        email,
-      },
-    }
-  )
+  const [subscribeToEmail] = useMutation(SUBSCRIBE_TO_EMAIL_MUTATION, {
+    variables: {
+      email,
+    },
+  })
 
   return (
-    // <Fieldset disabled={loading}>
-    //   {error && `Error: ${error.message}`}
-
     <Form
       onSubmit={async e => {
         e.preventDefault()
-
         const { data } = await subscribeToEmail()
         alert(data.subscribeToEmail.message)
         setEmail("")
@@ -99,6 +87,5 @@ function NewsletterForm() {
       />
       <button type="submit">Subscribe</button>
     </Form>
-    // </Fieldset>
   )
 }

@@ -1,15 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-// import {
-//   Facebook,
-//   Instagram,
-//   Twitter,
-//   Domain,
-//   Phone,
-//   MapLocation,
-// } from "grommet-icons"
-
 import { Button } from "../styles"
 
 const StyledDetails = styled.div`
@@ -27,8 +18,6 @@ export default function Details({ place }) {
 
       {show && (
         <div className="show-details">
-          {/* TODO DISPLAY SHOW ON MAP OPTION ONLY MOBILE */}
-
           {place.place.facebookLink && (
             <a href={place.place.facebookLink}>
               <h5>Facebook</h5>
@@ -49,11 +38,7 @@ export default function Details({ place }) {
               <h5>Website</h5>
             </a>
           )}
-          {place.place.phoneNumber && (
-            <a href="#">
-              <h5>{place.place.phoneNumber}</h5>
-            </a>
-          )}
+          {place.place.phoneNumber && <h5>{place.place.phoneNumber}</h5>}
         </div>
       )}
     </StyledDetails>

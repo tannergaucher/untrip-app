@@ -7,7 +7,7 @@ import { CURRENT_USER_QUERY } from "../apollo/graphql"
 import "./layout.css"
 
 export default function Layout({ children, location }) {
-  const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
+  useQuery(CURRENT_USER_QUERY)
 
   return (
     <>

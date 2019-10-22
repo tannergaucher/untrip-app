@@ -1,6 +1,6 @@
 import React from "react"
 import Img from "gatsby-image"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 
 import { StyledPage } from "../components/styles"

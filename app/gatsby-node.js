@@ -97,19 +97,19 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   // Create page for each category tag with path of /:category/:tag.
-  categoriesWithTags.forEach(edge => {
-    edge.tags.forEach(tag => {
-      createPage({
-        path: `/guide/categories/${edge.slug.current}/${tag}`,
-        component: path.resolve(`./src/templates/category-tag.js`),
-        context: {
-          category: edge.category,
-          categorySlug: edge.slug.current,
-          tagSlug: tag,
-        },
-      })
-    })
-  })
+  // categoriesWithTags.forEach(edge => {
+  //   edge.tags.forEach(tag => {
+  //     createPage({
+  //       path: `/guide/categories/${edge.slug.current}/${tag}`,
+  //       component: path.resolve(`./src/templates/category-tag.js`),
+  //       context: {
+  //         category: edge.category,
+  //         categorySlug: edge.slug.current,
+  //         tagSlug: tag,
+  //       },
+  //     })
+  //   })
+  // })
 
   // query all places
   const placesQuery = await graphql(`
