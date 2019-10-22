@@ -1,21 +1,22 @@
-import React from "react"
+import React, { useState } from "react"
 import { useQuery } from "@apollo/react-hooks"
 import styled from "styled-components"
-import Img from "gatsby-image"
 
 import { LIST_QUERY } from "../apollo/graphql"
 import { SEO, ListPlaceMap } from "../elements"
-import { PlaceCard } from "../place"
+import { UserListPlaces } from "../list"
 
 const StyledListPage = styled.div`
   .list-title {
     text-align: center;
+    position: sticky;
+    margin: 0 0 1rem 0;
   }
 
   .map-with-places {
     display: grid;
     grid-template-areas: "places map";
-    grid-template-columns: 4fr 4fr;
+    grid-template-columns: 3fr 5fr;
   }
 
   .map {
@@ -23,16 +24,12 @@ const StyledListPage = styled.div`
     position: sticky;
     top: 15vh;
     height: 70vh;
-    margin: 2rem 3rem;
-
-    .list-title {
-      text-align: center;
-    }
+    margin: 1rem;
   }
 
   .places {
     grid-area: places;
-    margin: 0 0.5rem;
+    margin: 8rem 0.5rem;
   }
 `
 
@@ -41,26 +38,20 @@ export default function ListPage({ listId }) {
     variables: { listId },
   })
 
+  if (loading) return `Loading list...`
+  if (error) return `${error.message}`
+
   return (
-    <StyledListPage>
-      {loading && `Loading list...`}
-      {error && `Error: ${error.message}`}
-      {data && data.list && (
+    data &&
+    data.list && (
+      <StyledListPage>
+        <SEO title={data.list.title} />
         <div className="map-with-places">
           <div className="places">
-            {data.list.places.map(
-              place =>
-                console.log(place) || (
-                  <div>
-                    <h2>{place.placeName}</h2>
-                    <Img fluid={JSON.parse(place.placeImageUrl)} />
-                  </div>
-                )
-            )}
+            <UserListPlaces places={data.list.places} />
           </div>
-
           <div className="map">
-            <h3 className="list-title">{data.list.title}</h3>
+            <h2 className="list-title">{data.list.title}</h2>
             <ListPlaceMap
               lat={3.139}
               lng={101.6869}
@@ -70,7 +61,7 @@ export default function ListPage({ listId }) {
             />
           </div>
         </div>
-      )}
-    </StyledListPage>
+      </StyledListPage>
+    )
   )
 }

@@ -2,13 +2,14 @@ import React, { useState } from "react"
 import { useQuery } from "@apollo/react-hooks"
 import styled from "styled-components"
 
-import { CreateList, TogglePlaceCheckBox } from "../list"
+import { CreateListForm, ToggleListplaceCheckbox } from "../list"
 import { Loading } from "../elements"
 import { CURRENT_USER_QUERY } from "../apollo/graphql"
 import { Button } from "../styles"
 
 const StyledUserLists = styled.div`
   color: black;
+  /* display: grid; */
 `
 
 export default function UserLists({ place }) {
@@ -27,17 +28,13 @@ export default function UserLists({ place }) {
       ) : (
         <h4>Add {place.name} to list</h4>
       )}
-
       {data &&
         data.me &&
         data.me.lists.map(list => (
-          <>
-            <TogglePlaceCheckBox key={list.id} list={list} place={place} />
-          </>
+          <ToggleListplaceCheckbox key={list.id} list={list} place={place} />
         ))}
-
       {show ? (
-        <CreateList place={place} setShow={setShow} />
+        <CreateListForm place={place} setShow={setShow} />
       ) : (
         <Button onClick={() => setShow(!show)}>New List</Button>
       )}
