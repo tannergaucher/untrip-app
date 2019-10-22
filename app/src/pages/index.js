@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import { LatestPosts } from "../components/post"
-import { SEO, HeroBanner, NewsletterSignup } from "../components/elements"
+import { SEO, NewsletterSignup } from "../components/elements"
 
 const StyledIndexPage = styled.div`
   .latest-posts {
@@ -17,7 +17,6 @@ const StyledIndexPage = styled.div`
 const IndexPage = () => (
   <StyledIndexPage>
     <SEO title="Home" />
-    {/* <HeroBanner /> */}
     <div className="latest-posts">
       <LatestPosts />
     </div>
