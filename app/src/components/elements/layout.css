@@ -1,8 +1,14 @@
-/* @import url("https://fonts.googleapis.com/css?family=Merriweather|Montserrat&display=swap"); */
-
 :root {
   --sans: "Avenir", sans-serif;
-  /* --serif: "Merriweather", serif; */
+  --duration: 0.2s;
+  --brand: black;
+  --font-size: 21px;
+  --radius: 4px;
+  --thickness: 2px;
+  --link-color: blue;
+  --container: 667px;
+  --max-width: 1000px;
+  --mobile: 600px;
 }
 
 body {
@@ -10,11 +16,29 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: white;
+  font-size: var(--font-size);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.15;
 }
 
 p {
   line-height: 1.6;
   color: black;
-  /* font-family: var(--serif); */
+}
+
+a {
+  color: var(--link-color);
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 18px;
+  }
 }

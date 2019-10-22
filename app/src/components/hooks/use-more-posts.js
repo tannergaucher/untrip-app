@@ -4,8 +4,8 @@ export default function useMorePosts() {
   const { allSanityPost } = useStaticQuery(
     graphql`
       query UseMorePosts {
-        #   limit to five
-        # sort by created at
+        # limit to five
+        # TODO sort by created at
         allSanityPost(limit: 5) {
           edges {
             node {

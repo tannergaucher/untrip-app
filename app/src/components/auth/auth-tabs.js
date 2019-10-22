@@ -1,24 +1,46 @@
-import React from "react"
-import { Box, Tabs, Tab, Heading } from "grommet"
+import React, { useState } from "react"
+import styled from "styled-components"
 
 import { Login, Signup } from "../auth"
+import { Button } from "../styles"
 
-export default function AuthTabs({ message }) {
+const StyledAuthTabs = styled.div`
+  color: black;
+
+  h2 {
+    text-align: center;
+    font-weight: 900;
+  }
+
+  .toggle-auth {
+    text-align: center;
+
+    h4 {
+      margin-bottom: 1rem;
+      font-weight: lighter;
+    }
+  }
+`
+
+export default function AuthTabs() {
+  const [show, setShow] = useState("Login")
+
   return (
-    <Box>
-      {message && (
-        <Heading mb={[4]} textAlign="center">
-          {message}
-        </Heading>
+    <StyledAuthTabs>
+      <h2>Please sign in</h2>
+      {show === "Login" ? <Login /> : <Signup />}
+      {show === "Login" && (
+        <div className="toggle-auth">
+          <h4>Don't have an account yet? </h4>
+          <Button onClick={() => setShow("Signup")}>Sign up now</Button>
+        </div>
       )}
-      <Tabs>
-        <Tab title="Log In">
-          <Login />
-        </Tab>
-        <Tab title="Sign Up">
-          <Signup />
-        </Tab>
-      </Tabs>
-    </Box>
+      {show === "Signup" && (
+        <div className="toggle-auth">
+          <h4>Already have an account?</h4>
+          <Button onClick={() => setShow("Login")}>Log in</Button>
+        </div>
+      )}
+    </StyledAuthTabs>
   )
 }

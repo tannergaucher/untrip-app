@@ -1,29 +1,25 @@
 import React from "react"
-import { Heading, Box } from "grommet"
 import { useQuery } from "@apollo/react-hooks"
+import styled from "styled-components"
 
 import { AuthTabs, Logout } from "../components/auth"
 import { IS_LOGGED_IN, CURRENT_USER_QUERY } from "../components/apollo/graphql"
+
+const StyledAccountPage = styled.div`
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0.5rem;
+`
 
 export default function AccountPage() {
   const { loading, error, data } = useQuery(IS_LOGGED_IN)
 
   return (
-
-    <Box fill={true} style={{ flex: "1" }}>
+    <StyledAccountPage>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
-      {data && data.isLoggedIn ? (
-        <UserAccount />
-      ) : (
-        <Box justify="center" justify="center" style={{ flex: "1" }}>
-          <Heading level="4" textAlign="center">
-            Log in or sign up for an account
-          </Heading>
-          <AuthTabs />
-        </Box>
-      )}
-    </Box>
+      {data && data.isLoggedIn ? <UserAccount /> : <AuthTabs />}
+    </StyledAccountPage>
   )
 }
 
@@ -32,15 +28,14 @@ function UserAccount() {
 
   return (
     <>
+      <h2>Account</h2>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.me && (
-        <Box margin={{ vertical: "large", horizontal: "medium" }}>
-          <Heading color="black" level="4" textAlign="center">
-            {data.me.email}
-          </Heading>
+        <>
+          <h3>{data.me.email}</h3>
           <Logout />
-        </Box>
+        </>
       )}
     </>
   )

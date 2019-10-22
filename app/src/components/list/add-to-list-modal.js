@@ -1,11 +1,31 @@
 import React, { useState } from "react"
-import { AddCircle } from "grommet-icons"
 import { useQuery } from "@apollo/react-hooks"
-import { Layer, Button, Heading, Box } from "grommet"
+import { Layer } from "grommet"
+import { Bookmark } from "grommet-icons"
+import styled from "styled-components"
 
 import { AuthTabs } from "../auth"
 import { UserLists } from "../list"
+import { Button } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
+
+const PlainBtn = styled(Button)`
+  border: var(--thickness) solid white;
+  &:hover {
+    border: var(--thickness) solid black;
+    background: white;
+  }
+`
+
+const StyledLayer = styled(Layer)`
+  width: 50vw;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @media (max-width: 900px) {
+    width: 90vw;
+  }
+`
 
 export default function AddToListModal({ place }) {
   const [show, setShow] = useState(false)
@@ -16,40 +36,27 @@ export default function AddToListModal({ place }) {
 
   return (
     <>
-      <Button
-        plain={true}
-        onClick={() => setShow(!show)}
-        icon={<AddCircle color="black" />}
-      />
+      <PlainBtn onClick={() => setShow(!show)}>
+        <Bookmark color="black" />
+      </PlainBtn>
 
       {show && (
-        <Layer
+        <StyledLayer
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
           responsive={false}
           full="horizontal"
           margin="small"
         >
-          <Box pad="medium">
+          <div>
             {data && data.isLoggedIn ? (
               <UserLists place={place.place} />
             ) : (
-              <PleaseSignIn />
+              <AuthTabs />
             )}
-          </Box>
-        </Layer>
+          </div>
+        </StyledLayer>
       )}
-    </>
-  )
-}
-
-function PleaseSignIn() {
-  return (
-    <>
-      <Heading level="4" textAlign="center">
-        You must be logged in to do that
-      </Heading>
-      <AuthTabs />
     </>
   )
 }

@@ -1,108 +1,109 @@
 import React from "react"
-import Img from "gatsby-image"
-import { Link } from "gatsby"
-import { Previous } from "grommet-icons"
-import { Box, Heading, Button, Text } from "grommet"
+import styled from "styled-components"
+import { Link, navigate } from "gatsby"
+import { useQuery } from "@apollo/react-hooks"
+import { Menu } from "grommet-icons"
 
-import { Menu } from "../elements"
-import { useSanityHeroBanner } from "../hooks"
+import { Button } from "../styles"
+import { IS_LOGGED_IN } from "../apollo/graphql"
 
-function IndexHeader() {
-  const { subHeading, image } = useSanityHeroBanner()
+const StyledHeader = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  .login-btn {
+    margin-right: 0.5rem;
+  }
+`
+
+export default function Header() {
+  const { data } = useQuery(IS_LOGGED_IN)
+
   return (
-    <Box style={{ position: "relative" }}>
-      <Box
-        style={{
-          position: "absolute",
-          top: "0",
-          left: "0",
-          right: "0",
-          zIndex: "3",
-        }}
-      >
-        <PlainHeader light />
-      </Box>
-      <Box
-        pad="medium"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: "3",
-        }}
-      >
-        <Heading textAlign="center" color="white" level="1">
-          {subHeading}
-        </Heading>
-      </Box>
-      <Box
-        style={{
-          position: "absolute",
-          bottom: "0",
-          left: "0",
-          right: "0",
-          zIndex: "3",
-        }}
-        margin="large"
-        justify="center"
-      >
-        <Button
-          label={<Text color="white">Sign Up</Text>}
-          style={{ background: "rgba(0, 0, 0, .7)", borderColor: "white" }}
-        />
-      </Box>
-      <Img
-        fluid={image.asset.fluid}
-        style={{ filter: `brightness(.6)`, height: "90vh" }}
-      />
-    </Box>
+    <StyledHeader>
+      <Link to="/">
+        <h3>Untrip</h3>
+      </Link>
+      {data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
+    </StyledHeader>
   )
 }
 
-function PostHeader() {
-  return null
-}
-
-export function PlainHeader({ light }) {
-  const { heading } = useSanityHeroBanner()
+function Nav() {
   return (
-    <Box
-      as="header"
-      direction="row"
-      justify="between"
-      align="center"
-      background={light ? "" : "white"}
-    >
+    <nav>
       <Button
-        plain={true}
-        icon={<Previous color={light ? "white" : "black"} size="18px" />}
-        margin="small"
+        className="login-btn"
+        plain
         onClick={e => {
           e.preventDefault()
-          window.history.back()
-        }}
-      />
-      <Link
-        to="/"
-        style={{
-          textDecoration: `none`,
-          color: `inherit`,
+          navigate("/login")
         }}
       >
-        <Heading level="3" margin="small" color={light ? "white" : "black"}>
-          {heading}
-        </Heading>
-      </Link>
-      <Menu light={light} />
-    </Box>
+        Log In
+      </Button>
+
+      <Button
+        onClick={e => {
+          e.preventDefault()
+          navigate("/signup")
+        }}
+      >
+        Sign Up
+      </Button>
+    </nav>
   )
 }
 
-export default function Header({ location }) {
-  if (location.pathname === "/") return <IndexHeader />
+const StyledAuthedNav = styled.nav`
+  .full {
+    display: flex;
 
-  if (location.pathname.split("/")[1] === "posts") return <PostHeader />
+    a {
+      margin-left: 1rem;
+    }
+  }
 
-  return <PlainHeader />
+  @media (max-width: 600px) {
+    .full {
+      display: none;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .mobile {
+      display: none;
+    }
+  }
+`
+
+function AuthedNav() {
+  return (
+    <StyledAuthedNav>
+      <div className="full">
+        <Link to="/lists">
+          <h3>Lists</h3>
+        </Link>
+        <Link to="/account">
+          <h3>Account</h3>
+        </Link>
+      </div>
+      <div className="mobile">
+        <Button plain>
+          <Menu color="black" />
+        </Button>
+      </div>
+    </StyledAuthedNav>
+  )
 }

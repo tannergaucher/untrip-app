@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { navigate } from "gatsby"
-import { Layer, Heading, Box, Button, Anchor } from "grommet"
+import { Layer, Box, Button, Anchor } from "grommet"
 import { Menu as MenuIcon } from "grommet-icons"
 
 export default function Menu({ light }) {
@@ -50,6 +50,6 @@ const MenuItem = ({ text, to }) => (
       navigate(`/${to}`)
     }}
   >
-    <Heading level="2">{text}</Heading>
+    <h3>{text}</h3>
   </Anchor>
 )

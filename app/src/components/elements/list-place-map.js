@@ -10,32 +10,35 @@ class MapContainer extends React.Component {
     mapCenter: null,
   }
 
-  onMarkerClick = marker => {
-    if (this.state.mapCenter !== marker.position) {
-      this.setState({
-        mapCenter: marker.position,
-      })
-    }
-    this.setState({
-      mapCenter: marker.position,
-    })
-  }
+  //   onMarkerClick = marker => {
+  //     if (this.state.mapCenter !== marker.position) {
+  //       this.setState({
+  //         mapCenter: marker.position,
+  //       })
+  //     }
+  //     this.setState({
+  //       mapCenter: marker.position,
+  //     })
+  //   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    if (
-      this.props.inView &&
-      this.props.inView.location !== prevState.mapCenter
-    ) {
-      this.setState({
-        mapCenter: this.props.inView.location,
-      })
-    }
-  }
+  //   componentDidUpdate = (prevProps, prevState) => {
+  //     if (
+  //       this.props.inView &&
+  //       this.props.inView.location !== prevState.mapCenter
+  //     ) {
+  //       this.setState({
+  //         mapCenter: this.props.inView.location,
+  //       })
+  //     }
+  //   }
 
   makeBounds = () => {
     let points = []
     this.props.places.map(place => {
-      points.push(place.place.location)
+      points.push({
+        lat: place.lat,
+        lng: place.lng,
+      })
     })
 
     let bounds = new this.props.google.maps.LatLngBounds()
@@ -63,21 +66,22 @@ class MapContainer extends React.Component {
       >
         {places.map(place => (
           <Marker
-            key={place.place.id}
-            name={place.place.name}
-            title={place.place.name}
-            placeId={place.place.id}
+            key={place.id}
+            name={place.placeName}
+            title={place.placeName}
+            placeId={place.id}
             icon={{
-              url:
-                this.state.mapCenter === place.place.location ? RedIcon : Icon,
+              url: Icon,
+              //   NOT GOING TO WORK
+              // this.state.mapCenter === place.place.location ? RedIcon : Icon,
               anchor: new google.maps.Point(45, 45),
               scaledSize: new google.maps.Size(45, 45),
             }}
             position={{
-              lat: place.place.location.lat,
-              lng: place.place.location.lng,
+              lat: place.lat,
+              lng: place.lng,
             }}
-            onClick={this.onMarkerClick}
+            // onClick={this.onMarkerClick}
           />
         ))}
       </Map>
