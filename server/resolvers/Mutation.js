@@ -14,7 +14,7 @@ const Mutation = {
       password: hashedPassword,
     })
 
-    const token = sign({ userId: user.id }, process.env.GATSBY_APP_SECRET)
+    const token = sign({ userId: user.id }, process.env.APP_SECRET)
 
     return {
       token,
@@ -38,7 +38,7 @@ const Mutation = {
       {
         userId: user.id,
       },
-      process.env.GATSBY_APP_SECRET
+      process.env.APP_SECRET
     )
 
     return {
