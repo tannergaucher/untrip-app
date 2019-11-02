@@ -1,8 +1,8 @@
-const { sign } = require("jsonwebtoken")
-const { hashSync, genSaltSync, compareSync } = require("bcryptjs")
+const { sign } = require('jsonwebtoken')
+const { hashSync, genSaltSync, compareSync } = require('bcryptjs')
 
-const { getUserId } = require("../utils")
-const { prisma } = require("../prisma/generated/prisma-client")
+const { getUserId } = require('../utils')
+const { prisma } = require('../generated/prisma-client')
 
 const Mutation = {
   signup: async (parent, { email, password }, context) => {
@@ -72,7 +72,7 @@ const Mutation = {
         })
 
         return {
-          message: "Check your inbox and confirm your subscription",
+          message: 'Check your inbox and confirm your subscription',
         }
       }
     }
@@ -83,7 +83,7 @@ const Mutation = {
     })
 
     return {
-      message: "Check your inbox and confirm your subscription",
+      message: 'Check your inbox and confirm your subscription',
     }
   },
   unsubscribeToEmail: async (parent, { email }, context) => {
@@ -105,7 +105,7 @@ const Mutation = {
     }
 
     return {
-      message: "You are unsubscribed from the Untrip newsletter",
+      message: 'You are unsubscribed from the Untrip newsletter',
     }
   },
   createList: async (
