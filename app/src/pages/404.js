@@ -1,14 +1,14 @@
 import React from "react"
-import { Box } from "grommet"
 
 import { SEO } from "../components/elements"
+import { StyledPage } from "../components/styles"
 
 const NotFoundPage = () => (
-  <Box p={[2]}>
+  <StyledPage>
     <SEO title="404: Not found" />
     <h1>NOT FOUND</h1>
     <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Box>
+  </StyledPage>
 )
 
 export default NotFoundPage
