@@ -8,10 +8,14 @@ require('dotenv').config()
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cors: {
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  },
   playground: true,
   context: async request => {
     return {
-      request,
+      ...request,
     }
   },
 })

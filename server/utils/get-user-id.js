@@ -1,7 +1,7 @@
 const { verify } = require('jsonwebtoken')
 
 function getUserId(context) {
-  const Authorization = context.request.event.headers.authorization
+  const Authorization = context.req.headers.authorization
 
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
