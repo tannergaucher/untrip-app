@@ -29,3 +29,5 @@ type EmailSubscriber {
   email: String! @unique
 }
 
+
+
