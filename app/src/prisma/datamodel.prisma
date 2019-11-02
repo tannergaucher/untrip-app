@@ -2,8 +2,8 @@ type User {
   id: ID! @id
   email: String! @unique
   password: String!
-  lists: [List!]
   isEmailSubscriber: Boolean @default(value: false)
+  lists: [List!]
 }
 
 type List {

@@ -1,3 +1,4 @@
-import isPlaceInList from "./is-place-in-list"
+const { isPlaceInList } = require("./is-place-in-list")
+const { getUserId } = require("./get-user-id")
 
-export { isPlaceInList }
+module.exports = { isPlaceInList, getUserId }

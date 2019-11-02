@@ -760,8 +760,8 @@ type User {
   id: ID!
   email: String!
   password: String!
-  lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List!]
   isEmailSubscriber: Boolean
+  lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List!]
 }
 
 type UserConnection {
@@ -774,8 +774,8 @@ input UserCreateInput {
   id: ID
   email: String!
   password: String!
-  lists: ListCreateManyWithoutUserInput
   isEmailSubscriber: Boolean
+  lists: ListCreateManyWithoutUserInput
 }
 
 input UserCreateOneWithoutListsInput {
@@ -834,8 +834,8 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   email: String
   password: String
-  lists: ListUpdateManyWithoutUserInput
   isEmailSubscriber: Boolean
+  lists: ListUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -905,11 +905,11 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  isEmailSubscriber: Boolean
+  isEmailSubscriber_not: Boolean
   lists_every: ListWhereInput
   lists_some: ListWhereInput
   lists_none: ListWhereInput
-  isEmailSubscriber: Boolean
-  isEmailSubscriber_not: Boolean
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
