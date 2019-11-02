@@ -5,7 +5,7 @@ function getUserId(context) {
 
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
-    const verifiedToken = verify(token, process.env.GATSBY_APP_SECRET)
+    const verifiedToken = verify(token, process.env.APP_SECRET)
 
     return verifiedToken && verifiedToken.userId
   }
