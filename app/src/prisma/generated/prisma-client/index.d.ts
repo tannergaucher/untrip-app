@@ -483,11 +483,11 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  isEmailSubscriber?: Maybe<Boolean>;
+  isEmailSubscriber_not?: Maybe<Boolean>;
   lists_every?: Maybe<ListWhereInput>;
   lists_some?: Maybe<ListWhereInput>;
   lists_none?: Maybe<ListWhereInput>;
-  isEmailSubscriber?: Maybe<Boolean>;
-  isEmailSubscriber_not?: Maybe<Boolean>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
@@ -787,8 +787,8 @@ export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   email: String;
   password: String;
-  lists?: Maybe<ListCreateManyWithoutUserInput>;
   isEmailSubscriber?: Maybe<Boolean>;
+  lists?: Maybe<ListCreateManyWithoutUserInput>;
 }
 
 export interface ListCreateManyWithoutUserInput {
@@ -805,8 +805,8 @@ export interface ListCreateWithoutUserInput {
 export interface UserUpdateInput {
   email?: Maybe<String>;
   password?: Maybe<String>;
-  lists?: Maybe<ListUpdateManyWithoutUserInput>;
   isEmailSubscriber?: Maybe<Boolean>;
+  lists?: Maybe<ListUpdateManyWithoutUserInput>;
 }
 
 export interface ListUpdateManyWithoutUserInput {
@@ -1168,6 +1168,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  isEmailSubscriber: () => Promise<Boolean>;
   lists: <T = FragmentableArray<List>>(args?: {
     where?: ListWhereInput;
     orderBy?: ListOrderByInput;
@@ -1177,7 +1178,6 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
-  isEmailSubscriber: () => Promise<Boolean>;
 }
 
 export interface UserSubscription
@@ -1186,6 +1186,7 @@ export interface UserSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  isEmailSubscriber: () => Promise<AsyncIterator<Boolean>>;
   lists: <T = Promise<AsyncIterator<ListSubscription>>>(args?: {
     where?: ListWhereInput;
     orderBy?: ListOrderByInput;
@@ -1195,7 +1196,6 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
-  isEmailSubscriber: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface UserNullablePromise
@@ -1204,6 +1204,7 @@ export interface UserNullablePromise
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
   password: () => Promise<String>;
+  isEmailSubscriber: () => Promise<Boolean>;
   lists: <T = FragmentableArray<List>>(args?: {
     where?: ListWhereInput;
     orderBy?: ListOrderByInput;
@@ -1213,7 +1214,6 @@ export interface UserNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
-  isEmailSubscriber: () => Promise<Boolean>;
 }
 
 export interface ListConnection {

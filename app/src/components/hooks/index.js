@@ -3,8 +3,6 @@ import useAllSanityTag from "./use-all-sanity-tag"
 import useAllSanityPost from "./use-all-sanity-post"
 import useAllSanityPlace from "./use-all-sanity-place"
 import useAllSanityCategory from "./use-all-sanity-category"
-import useSanityHeroBanner from "./use-sanity-hero-banner"
-import useMorePosts from "./use-more-posts"
 
 export {
   useSiteMetadata,
@@ -12,6 +10,4 @@ export {
   useAllSanityTag,
   useAllSanityPlace,
   useAllSanityCategory,
-  useSanityHeroBanner,
-  useMorePosts,
 }

@@ -13,7 +13,6 @@ import postPlace from './postPlace'
 import placeType from './placeType'
 import social from './social'
 import authorSocial from './authorSocial'
-import heroBanner from './heroBanner'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -31,6 +30,5 @@ export default createSchema({
     placeType,
     social,
     authorSocial,
-    heroBanner,
   ]),
 })

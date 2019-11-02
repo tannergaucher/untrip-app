@@ -135,18 +135,3 @@ export const SANITY_CATEGORY_FRAGMENT = graphql`
     }
   }
 `
-
-export const SANITY_HERO_BANNER_FRAGMENT = graphql`
-  fragment SanityHeroBannerFragment on SanityHeroBanner {
-    heading
-    subHeading
-    image {
-      asset {
-        # SET MAXHEIGHT
-        fluid(maxWidth: 1000, maxHeight: 750) {
-          ...GatsbySanityImageFluid
-        }
-      }
-    }
-  }
-`
