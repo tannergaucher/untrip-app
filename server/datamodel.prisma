@@ -15,14 +15,14 @@ type List {
 
 type Place {
   id: ID! @id
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
   list: List
-} 
+}
 
 type EmailSubscriber {
   id: ID! @id 

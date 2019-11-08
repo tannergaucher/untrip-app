@@ -388,10 +388,10 @@ type PageInfo {
 
 type Place {
   id: ID!
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
   list: List
@@ -405,10 +405,10 @@ type PlaceConnection {
 
 input PlaceCreateInput {
   id: ID
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
   list: ListCreateOneWithoutPlacesInput
@@ -421,10 +421,10 @@ input PlaceCreateManyWithoutListInput {
 
 input PlaceCreateWithoutListInput {
   id: ID
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
 }
@@ -437,14 +437,14 @@ type PlaceEdge {
 enum PlaceOrderByInput {
   id_ASC
   id_DESC
-  placeSanityId_ASC
-  placeSanityId_DESC
-  placeName_ASC
-  placeName_DESC
-  placeImageUrl_ASC
-  placeImageUrl_DESC
-  placeSlug_ASC
-  placeSlug_DESC
+  sanityId_ASC
+  sanityId_DESC
+  name_ASC
+  name_DESC
+  imageUrl_ASC
+  imageUrl_DESC
+  slug_ASC
+  slug_DESC
   lat_ASC
   lat_DESC
   lng_ASC
@@ -453,10 +453,10 @@ enum PlaceOrderByInput {
 
 type PlacePreviousValues {
   id: ID!
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
 }
@@ -476,62 +476,62 @@ input PlaceScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  placeSanityId: String
-  placeSanityId_not: String
-  placeSanityId_in: [String!]
-  placeSanityId_not_in: [String!]
-  placeSanityId_lt: String
-  placeSanityId_lte: String
-  placeSanityId_gt: String
-  placeSanityId_gte: String
-  placeSanityId_contains: String
-  placeSanityId_not_contains: String
-  placeSanityId_starts_with: String
-  placeSanityId_not_starts_with: String
-  placeSanityId_ends_with: String
-  placeSanityId_not_ends_with: String
-  placeName: String
-  placeName_not: String
-  placeName_in: [String!]
-  placeName_not_in: [String!]
-  placeName_lt: String
-  placeName_lte: String
-  placeName_gt: String
-  placeName_gte: String
-  placeName_contains: String
-  placeName_not_contains: String
-  placeName_starts_with: String
-  placeName_not_starts_with: String
-  placeName_ends_with: String
-  placeName_not_ends_with: String
-  placeImageUrl: String
-  placeImageUrl_not: String
-  placeImageUrl_in: [String!]
-  placeImageUrl_not_in: [String!]
-  placeImageUrl_lt: String
-  placeImageUrl_lte: String
-  placeImageUrl_gt: String
-  placeImageUrl_gte: String
-  placeImageUrl_contains: String
-  placeImageUrl_not_contains: String
-  placeImageUrl_starts_with: String
-  placeImageUrl_not_starts_with: String
-  placeImageUrl_ends_with: String
-  placeImageUrl_not_ends_with: String
-  placeSlug: String
-  placeSlug_not: String
-  placeSlug_in: [String!]
-  placeSlug_not_in: [String!]
-  placeSlug_lt: String
-  placeSlug_lte: String
-  placeSlug_gt: String
-  placeSlug_gte: String
-  placeSlug_contains: String
-  placeSlug_not_contains: String
-  placeSlug_starts_with: String
-  placeSlug_not_starts_with: String
-  placeSlug_ends_with: String
-  placeSlug_not_ends_with: String
+  sanityId: String
+  sanityId_not: String
+  sanityId_in: [String!]
+  sanityId_not_in: [String!]
+  sanityId_lt: String
+  sanityId_lte: String
+  sanityId_gt: String
+  sanityId_gte: String
+  sanityId_contains: String
+  sanityId_not_contains: String
+  sanityId_starts_with: String
+  sanityId_not_starts_with: String
+  sanityId_ends_with: String
+  sanityId_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
   lat: Float
   lat_not: Float
   lat_in: [Float!]
@@ -572,29 +572,29 @@ input PlaceSubscriptionWhereInput {
 }
 
 input PlaceUpdateInput {
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
   list: ListUpdateOneWithoutPlacesInput
 }
 
 input PlaceUpdateManyDataInput {
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
 }
 
 input PlaceUpdateManyMutationInput {
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
 }
@@ -617,10 +617,10 @@ input PlaceUpdateManyWithWhereNestedInput {
 }
 
 input PlaceUpdateWithoutListDataInput {
-  placeSanityId: String
-  placeName: String
-  placeImageUrl: String
-  placeSlug: String
+  sanityId: String
+  name: String
+  imageUrl: String
+  slug: String
   lat: Float
   lng: Float
 }
@@ -651,62 +651,62 @@ input PlaceWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  placeSanityId: String
-  placeSanityId_not: String
-  placeSanityId_in: [String!]
-  placeSanityId_not_in: [String!]
-  placeSanityId_lt: String
-  placeSanityId_lte: String
-  placeSanityId_gt: String
-  placeSanityId_gte: String
-  placeSanityId_contains: String
-  placeSanityId_not_contains: String
-  placeSanityId_starts_with: String
-  placeSanityId_not_starts_with: String
-  placeSanityId_ends_with: String
-  placeSanityId_not_ends_with: String
-  placeName: String
-  placeName_not: String
-  placeName_in: [String!]
-  placeName_not_in: [String!]
-  placeName_lt: String
-  placeName_lte: String
-  placeName_gt: String
-  placeName_gte: String
-  placeName_contains: String
-  placeName_not_contains: String
-  placeName_starts_with: String
-  placeName_not_starts_with: String
-  placeName_ends_with: String
-  placeName_not_ends_with: String
-  placeImageUrl: String
-  placeImageUrl_not: String
-  placeImageUrl_in: [String!]
-  placeImageUrl_not_in: [String!]
-  placeImageUrl_lt: String
-  placeImageUrl_lte: String
-  placeImageUrl_gt: String
-  placeImageUrl_gte: String
-  placeImageUrl_contains: String
-  placeImageUrl_not_contains: String
-  placeImageUrl_starts_with: String
-  placeImageUrl_not_starts_with: String
-  placeImageUrl_ends_with: String
-  placeImageUrl_not_ends_with: String
-  placeSlug: String
-  placeSlug_not: String
-  placeSlug_in: [String!]
-  placeSlug_not_in: [String!]
-  placeSlug_lt: String
-  placeSlug_lte: String
-  placeSlug_gt: String
-  placeSlug_gte: String
-  placeSlug_contains: String
-  placeSlug_not_contains: String
-  placeSlug_starts_with: String
-  placeSlug_not_starts_with: String
-  placeSlug_ends_with: String
-  placeSlug_not_ends_with: String
+  sanityId: String
+  sanityId_not: String
+  sanityId_in: [String!]
+  sanityId_not_in: [String!]
+  sanityId_lt: String
+  sanityId_lte: String
+  sanityId_gt: String
+  sanityId_gte: String
+  sanityId_contains: String
+  sanityId_not_contains: String
+  sanityId_starts_with: String
+  sanityId_not_starts_with: String
+  sanityId_ends_with: String
+  sanityId_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
   lat: Float
   lat_not: Float
   lat_in: [Float!]

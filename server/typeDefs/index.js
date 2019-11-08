@@ -27,10 +27,10 @@ const typeDefs = gql`
 
   type Place {
     id: ID!
-    placeSanityId: String
-    placeName: String
-    placeImageUrl: String
-    placeSlug: String
+    sanityId: String
+    name: String
+    imageUrl: String
+    slug: String
     lat: Float
     lng: Float
     list: List
@@ -51,19 +51,20 @@ const typeDefs = gql`
     login(email: String!, password: String!): AuthPayload!
     createList(
       title: String!
-      placeSanityId: String!
-      placeName: String!
-      placeImageUrl: String!
-      placeSlug: String!
+      sanityId: String!
+      name: String!
+      imageUrl: String!
+      slug: String!
       lat: Float!
       lng: Float!
     ): List!
+
     togglePlace(
       listId: ID!
-      placeSanityId: String
-      placeName: String
-      placeImageUrl: String
-      placeSlug: String
+      sanityId: String
+      name: String
+      imageUrl: String
+      slug: String
       lat: Float
       lng: Float
     ): List!

@@ -11,10 +11,10 @@ export const USER_FRAGMENT = gql`
       title
       places {
         id
-        placeSanityId
-        placeName
-        placeImageUrl
-        placeSlug
+        sanityId
+        name
+        ImageUrl
+        slug
         lat
         lng
       }
@@ -28,10 +28,10 @@ export const LIST_FRAGMENT = gql`
     title
     places {
       id
-      placeSanityId
-      placeName
-      placeImageUrl
-      placeSlug
+      sanityId
+      name
+      ImageUrl
+      slug
       lat
       lng
     }
@@ -80,19 +80,19 @@ export const LOGIN_MUTATION = gql`
 export const CREATE_LIST_MUTATION = gql`
   mutation CREATE_LIST_MUTATION(
     $title: String!
-    $placeSanityId: String!
-    $placeName: String!
-    $placeImageUrl: String!
-    $placeSlug: String!
+    $sanityId: String!
+    $name: String!
+    $imageUrl: String!
+    $slug: String!
     $lat: Float!
     $lng: Float!
   ) {
     createList(
       title: $title
-      placeSanityId: $placeSanityId
-      placeName: $placeName
-      placeImageUrl: $placeImageUrl
-      placeSlug: $placeSlug
+      sanityId: $sanityId
+      name: $name
+      imageUrl: $imageUrl
+      slug: $slug
       lat: $lat
       lng: $lng
     ) {
@@ -105,19 +105,19 @@ export const CREATE_LIST_MUTATION = gql`
 export const TOGGLE_PLACE_MUTATION = gql`
   mutation TOGGLE_PLACE_MUTATION(
     $listId: ID!
-    $placeSanityId: String!
-    $placeName: String!
-    $placeImageUrl: String!
-    $placeSlug: String!
+    $sanityId: String!
+    $name: String!
+    $imageUrl: String!
+    $slug: String!
     $lat: Float!
     $lng: Float!
   ) {
     togglePlace(
       listId: $listId
-      placeSanityId: $placeSanityId
-      placeName: $placeName
-      placeImageUrl: $placeImageUrl
-      placeSlug: $placeSlug
+      sanityId: $sanityId
+      name: $name
+      imageUrl: $imageUrl
+      slug: $slug
       lat: $lat
       lng: $lng
     ) {

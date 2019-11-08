@@ -1,43 +1,36 @@
-import React from "react"
-import { Box } from "rebass"
-import { Link, graphql } from "gatsby"
+// import React from "react"
+// import { graphql } from "gatsby"
 
-import { HeroCard } from "../components/styles"
-import { SEO } from "../components/elements"
+// import { SEO } from "../components/elements"
+// import { ContentAsideGrid } from "../components/styles"
 
-export default function CategoryTemplate({ pageContext, data }) {
-  const { categorySlug } = pageContext
-  const { edges } = data.allSanityTag
+// export default function CategoryPage() {
+//   return (
+//     <>
+//       <SEO title={`Tags`} />
+//       <ContentAsideGrid>
+//         <div className="content">Content</div>
 
-  return (
-    <>
-      <SEO title={`Tags`} />
-      <Box>
-        {edges.map(edge => (
-          <Link
-            key={edge.node.id}
-            to={`/guide/categories/${categorySlug}/${edge.node.slug.current}`}
-          >
-            <HeroCard
-              text={edge.node.tag}
-              fluid={edge.node.image.asset.fluid}
-            />
-          </Link>
-        ))}
-      </Box>
-    </>
-  )
-}
+//         <aside>Aside</aside>
+//       </ContentAsideGrid>
+//     </>
+//   )
+// }
 
-// Query all tags in array of tag slugs
-export const CATEGORY_PAGE_QUERY = graphql`
-  query($tags: [String!]) {
-    allSanityTag(filter: { slug: { current: { in: $tags } } }) {
-      edges {
-        node {
-          ...SanityTagFragment
-        }
-      }
-    }
-  }
-`
+// Query cagegory of slug from page context.
+// export const CATEGORY_PAGE_QUERY = graphql`
+//   query($categorySlug: Slug!) {
+//     allSanityPost(
+//       filter: { category: { slug: { current: { eq: $categorySlug } } } }
+//     ) {
+//       edges {
+//         node {
+//           title
+//           category {
+//             category
+//           }
+//         }
+//       }
+//     }
+//   }
+// `

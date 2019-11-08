@@ -39,11 +39,11 @@ export default function UserListPlace({ place }) {
   return (
     <StyledUserListPlace>
       <div className="place-image">
-        <Img fluid={JSON.parse(place.placeImageUrl)} />
+        <Img fluid={JSON.parse(place.imageUrl)} />
       </div>
       <div className="place-info">
         <Link to="/">
-          <h2 className="place-name">{place.placeName}</h2>
+          <h2 className="place-name">{place.name}</h2>
         </Link>
       </div>
     </StyledUserListPlace>

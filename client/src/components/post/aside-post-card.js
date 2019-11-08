@@ -28,7 +28,6 @@ const Styled = styled.div`
   .post-category {
     text-transform: uppercase;
     font-weight: 100;
-    /* color: var(--accent); */
   }
 `
 

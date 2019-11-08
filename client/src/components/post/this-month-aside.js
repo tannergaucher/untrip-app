@@ -2,7 +2,7 @@ import React from "react"
 
 import { useLatestSanityPosts } from "../hooks"
 import { AsidePostCard } from "."
-import { Divider } from "../styles"
+import { Divider, Link } from "../styles"
 
 export default function LatestPostsAside() {
   // TODO: MAKE useTHisMonth hook
@@ -12,7 +12,12 @@ export default function LatestPostsAside() {
     <div className="side-section">
       <h2 className="side-title">This Month</h2>
       {latestPostEdges.map(edge => (
-        <AsidePostCard key={edge.node.id} post={edge.node} />
+        <Link
+          to={`${edge.node.category.slug.current}/${edge.node.slug.current}`}
+          plain
+        >
+          <AsidePostCard key={edge.node.id} post={edge.node} />
+        </Link>
       ))}
       <Divider />
     </div>

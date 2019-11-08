@@ -22,14 +22,14 @@ const StyledFullPostCard = styled.div`
   .post-category {
     text-transform: uppercase;
     margin: 0 0.5rem 0 0;
-    color: var(--accent);
-    /* font-weight: lighter; */
+    /* color: var(--accent); */
+    font-weight: lighter;
   }
 
   .post-date {
     margin: 0;
     text-transform: uppercase;
-    /* font-weight: lighter; */
+    font-weight: lighter;
   }
 `
 

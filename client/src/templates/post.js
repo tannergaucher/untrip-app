@@ -4,10 +4,10 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
+import { PlaceCard } from "../components/place"
 import { SEO, Map, NewsletterSignup } from "../components/elements"
 import { ContentAsideGrid, Button, Divider } from "../components/styles"
 import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
-import { PlaceCard } from "../components/place"
 
 const StyledPost = styled.div`
   .post-title {
@@ -28,11 +28,12 @@ const StyledPost = styled.div`
   }
 
   .post-category {
-    color: var(--accent);
+    font-weight: lighter;
   }
 
   .post-date {
     margin-left: 0.5rem;
+    font-weight: lighter;
   }
 
   .share-btns {
@@ -60,14 +61,17 @@ const StyledPost = styled.div`
       background: #c8232c;
     }
   }
+
+  .comments-btn {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+  }
 `
 
-export default function PostTemplate({ data }) {
+export default function PostPage({ data }) {
   const [inView, setInView] = useState(null)
-
   const { sanityPost: post } = data
-
-  console.log(post)
 
   return (
     <>
@@ -95,19 +99,20 @@ export default function PostTemplate({ data }) {
             <Divider />
             {post.postPlaces.map(postPlace => (
               <PlaceCard
-                postPlace={postPlace}
                 key={postPlace.id}
+                postPlace={postPlace}
                 setInView={setInView}
               />
             ))}
+            <Button className="comments-btn" primary>
+              Comments
+            </Button>
           </StyledPost>
           <NewsletterSignup />
-          {/* COMMENTS */}
         </article>
         <aside>
           <LatestPostsAside />
           <PopularPostsAside />
-
           <div className="map-container sticky">
             <h2>{post.title}</h2>
             <Map
@@ -124,8 +129,8 @@ export default function PostTemplate({ data }) {
 }
 
 export const POST_PAGE_QUERY = graphql`
-  query($slug: String!) {
-    sanityPost(slug: { current: { eq: $slug } }) {
+  query($postSlug: String!) {
+    sanityPost(slug: { current: { eq: $postSlug } }) {
       ...SanityPostFragment
     }
   }

@@ -5,14 +5,14 @@ import { Button, Input, Form } from "../styles"
 import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 export default function CreateList({ place, setShow }) {
-  const [listTitle, setListTitle] = useState("")
+  const [title, setTitle] = useState("")
   const [createList] = useMutation(CREATE_LIST_MUTATION, {
     variables: {
-      title: listTitle,
-      placeSanityId: place.id,
-      placeName: place.name,
-      placeImageUrl: JSON.stringify(place.image.asset.fluid),
-      placeSlug: place.slug.current,
+      title,
+      sanityId: place.id,
+      name: place.name,
+      imageUrl: JSON.stringify(place.image.asset.fluid),
+      slug: place.slug.current,
       lat: place.location.lat,
       lng: place.location.lng,
     },
@@ -27,15 +27,15 @@ export default function CreateList({ place, setShow }) {
       createList: {
         __typename: "List",
         id: new Date(),
-        title: listTitle,
+        title,
         places: [
           {
             __typename: "Place",
             id: new Date(),
-            placeSanityId: place.id,
-            placeName: place.name,
-            placeImageUrl: JSON.stringify(place.image.asset.fluid),
-            placeSlug: place.slug.current,
+            sanityId: place.id,
+            name: place.name,
+            imageUrl: JSON.stringify(place.image.asset.fluid),
+            slug: place.slug.current,
             lat: place.location.lat,
             lng: place.location.lng,
           },
@@ -53,12 +53,11 @@ export default function CreateList({ place, setShow }) {
       }}
     >
       <Input
-        value={listTitle}
-        onChange={e => setListTitle(e.target.value)}
+        value={title}
+        onChange={e => setTitle(e.target.value)}
         required={true}
         placeholder="List Name"
       />
-
       <Button type="submit" primary>
         Create List
       </Button>

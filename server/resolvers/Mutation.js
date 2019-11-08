@@ -5,7 +5,7 @@ const { getUserId } = require('../utils')
 const { prisma } = require('../generated/prisma-client')
 
 const Mutation = {
-  signup: async (parent, { email, password }, context) => {
+  signup: async (_parent, { email, password }, _context) => {
     const salt = genSaltSync(10)
     const hashedPassword = hashSync(password, salt)
 
@@ -21,7 +21,7 @@ const Mutation = {
       user,
     }
   },
-  login: async (parent, { email, password }, context) => {
+  login: async (_parent, { email, password }, _context) => {
     const user = await prisma.user({ email })
 
     if (!user) {
@@ -46,7 +46,7 @@ const Mutation = {
       user,
     }
   },
-  subscribeToEmail: async (parent, { email }, context) => {
+  subscribeToEmail: async (_parent, { email }, _context) => {
     const userExists = await prisma.$exists.user({ email })
 
     if (userExists) {
@@ -86,7 +86,7 @@ const Mutation = {
       message: 'Check your inbox and confirm your subscription',
     }
   },
-  unsubscribeToEmail: async (parent, { email }, context) => {
+  unsubscribeToEmail: async (_parent, { email }, _context) => {
     await prisma.deleteEmailSubscriber({
       email,
     })
@@ -109,8 +109,8 @@ const Mutation = {
     }
   },
   createList: async (
-    parent,
-    { title, placeSanityId, placeName, placeImageUrl, placeSlug, lat, lng },
+    _parent,
+    { title, sanityId, name, imageUrl, slug, lat, lng },
     context
   ) => {
     const userId = getUserId(context)
@@ -123,10 +123,10 @@ const Mutation = {
       title,
       places: {
         create: {
-          placeSanityId,
-          placeName,
-          placeImageUrl,
-          placeSlug,
+          sanityId,
+          name,
+          imageUrl,
+          slug,
           lat,
           lng,
         },
@@ -140,9 +140,10 @@ const Mutation = {
 
     return list
   },
+
   togglePlace: async (
-    parent,
-    { listId, placeSanityId, placeName, placeImageUrl, placeSlug, lat, lng },
+    _parent,
+    { listId, sanityId, name, imageUrl, slug, lat, lng },
     context
   ) => {
     const userId = getUserId(context)
@@ -160,7 +161,7 @@ const Mutation = {
       })
       .places({
         where: {
-          placeSanityId: placeSanityId,
+          sanityId,
         },
       })
 
@@ -187,12 +188,12 @@ const Mutation = {
         data: {
           places: {
             create: {
-              placeSanityId: placeSanityId,
-              placeName: placeName,
-              placeImageUrl: placeImageUrl,
-              placeSlug: placeSlug,
-              lat: lat,
-              lng: lng,
+              sanityId,
+              name,
+              imageUrl,
+              slug,
+              lat,
+              lng,
             },
           },
         },

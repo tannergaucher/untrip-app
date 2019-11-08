@@ -235,14 +235,14 @@ export type EmailSubscriberOrderByInput =
 export type PlaceOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "placeSanityId_ASC"
-  | "placeSanityId_DESC"
-  | "placeName_ASC"
-  | "placeName_DESC"
-  | "placeImageUrl_ASC"
-  | "placeImageUrl_DESC"
-  | "placeSlug_ASC"
-  | "placeSlug_DESC"
+  | "sanityId_ASC"
+  | "sanityId_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "imageUrl_ASC"
+  | "imageUrl_DESC"
+  | "slug_ASC"
+  | "slug_DESC"
   | "lat_ASC"
   | "lat_DESC"
   | "lng_ASC"
@@ -324,62 +324,62 @@ export interface PlaceWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  placeSanityId?: Maybe<String>;
-  placeSanityId_not?: Maybe<String>;
-  placeSanityId_in?: Maybe<String[] | String>;
-  placeSanityId_not_in?: Maybe<String[] | String>;
-  placeSanityId_lt?: Maybe<String>;
-  placeSanityId_lte?: Maybe<String>;
-  placeSanityId_gt?: Maybe<String>;
-  placeSanityId_gte?: Maybe<String>;
-  placeSanityId_contains?: Maybe<String>;
-  placeSanityId_not_contains?: Maybe<String>;
-  placeSanityId_starts_with?: Maybe<String>;
-  placeSanityId_not_starts_with?: Maybe<String>;
-  placeSanityId_ends_with?: Maybe<String>;
-  placeSanityId_not_ends_with?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeName_not?: Maybe<String>;
-  placeName_in?: Maybe<String[] | String>;
-  placeName_not_in?: Maybe<String[] | String>;
-  placeName_lt?: Maybe<String>;
-  placeName_lte?: Maybe<String>;
-  placeName_gt?: Maybe<String>;
-  placeName_gte?: Maybe<String>;
-  placeName_contains?: Maybe<String>;
-  placeName_not_contains?: Maybe<String>;
-  placeName_starts_with?: Maybe<String>;
-  placeName_not_starts_with?: Maybe<String>;
-  placeName_ends_with?: Maybe<String>;
-  placeName_not_ends_with?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeImageUrl_not?: Maybe<String>;
-  placeImageUrl_in?: Maybe<String[] | String>;
-  placeImageUrl_not_in?: Maybe<String[] | String>;
-  placeImageUrl_lt?: Maybe<String>;
-  placeImageUrl_lte?: Maybe<String>;
-  placeImageUrl_gt?: Maybe<String>;
-  placeImageUrl_gte?: Maybe<String>;
-  placeImageUrl_contains?: Maybe<String>;
-  placeImageUrl_not_contains?: Maybe<String>;
-  placeImageUrl_starts_with?: Maybe<String>;
-  placeImageUrl_not_starts_with?: Maybe<String>;
-  placeImageUrl_ends_with?: Maybe<String>;
-  placeImageUrl_not_ends_with?: Maybe<String>;
-  placeSlug?: Maybe<String>;
-  placeSlug_not?: Maybe<String>;
-  placeSlug_in?: Maybe<String[] | String>;
-  placeSlug_not_in?: Maybe<String[] | String>;
-  placeSlug_lt?: Maybe<String>;
-  placeSlug_lte?: Maybe<String>;
-  placeSlug_gt?: Maybe<String>;
-  placeSlug_gte?: Maybe<String>;
-  placeSlug_contains?: Maybe<String>;
-  placeSlug_not_contains?: Maybe<String>;
-  placeSlug_starts_with?: Maybe<String>;
-  placeSlug_not_starts_with?: Maybe<String>;
-  placeSlug_ends_with?: Maybe<String>;
-  placeSlug_not_ends_with?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  sanityId_not?: Maybe<String>;
+  sanityId_in?: Maybe<String[] | String>;
+  sanityId_not_in?: Maybe<String[] | String>;
+  sanityId_lt?: Maybe<String>;
+  sanityId_lte?: Maybe<String>;
+  sanityId_gt?: Maybe<String>;
+  sanityId_gte?: Maybe<String>;
+  sanityId_contains?: Maybe<String>;
+  sanityId_not_contains?: Maybe<String>;
+  sanityId_starts_with?: Maybe<String>;
+  sanityId_not_starts_with?: Maybe<String>;
+  sanityId_ends_with?: Maybe<String>;
+  sanityId_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  slug?: Maybe<String>;
+  slug_not?: Maybe<String>;
+  slug_in?: Maybe<String[] | String>;
+  slug_not_in?: Maybe<String[] | String>;
+  slug_lt?: Maybe<String>;
+  slug_lte?: Maybe<String>;
+  slug_gt?: Maybe<String>;
+  slug_gte?: Maybe<String>;
+  slug_contains?: Maybe<String>;
+  slug_not_contains?: Maybe<String>;
+  slug_starts_with?: Maybe<String>;
+  slug_not_starts_with?: Maybe<String>;
+  slug_ends_with?: Maybe<String>;
+  slug_not_ends_with?: Maybe<String>;
   lat?: Maybe<Float>;
   lat_not?: Maybe<Float>;
   lat_in?: Maybe<Float[] | Float>;
@@ -529,10 +529,10 @@ export interface PlaceCreateManyWithoutListInput {
 
 export interface PlaceCreateWithoutListInput {
   id?: Maybe<ID_Input>;
-  placeSanityId?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeSlug?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  slug?: Maybe<String>;
   lat?: Maybe<Float>;
   lng?: Maybe<Float>;
 }
@@ -581,10 +581,10 @@ export interface PlaceUpdateWithWhereUniqueWithoutListInput {
 }
 
 export interface PlaceUpdateWithoutListDataInput {
-  placeSanityId?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeSlug?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  slug?: Maybe<String>;
   lat?: Maybe<Float>;
   lng?: Maybe<Float>;
 }
@@ -610,62 +610,62 @@ export interface PlaceScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  placeSanityId?: Maybe<String>;
-  placeSanityId_not?: Maybe<String>;
-  placeSanityId_in?: Maybe<String[] | String>;
-  placeSanityId_not_in?: Maybe<String[] | String>;
-  placeSanityId_lt?: Maybe<String>;
-  placeSanityId_lte?: Maybe<String>;
-  placeSanityId_gt?: Maybe<String>;
-  placeSanityId_gte?: Maybe<String>;
-  placeSanityId_contains?: Maybe<String>;
-  placeSanityId_not_contains?: Maybe<String>;
-  placeSanityId_starts_with?: Maybe<String>;
-  placeSanityId_not_starts_with?: Maybe<String>;
-  placeSanityId_ends_with?: Maybe<String>;
-  placeSanityId_not_ends_with?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeName_not?: Maybe<String>;
-  placeName_in?: Maybe<String[] | String>;
-  placeName_not_in?: Maybe<String[] | String>;
-  placeName_lt?: Maybe<String>;
-  placeName_lte?: Maybe<String>;
-  placeName_gt?: Maybe<String>;
-  placeName_gte?: Maybe<String>;
-  placeName_contains?: Maybe<String>;
-  placeName_not_contains?: Maybe<String>;
-  placeName_starts_with?: Maybe<String>;
-  placeName_not_starts_with?: Maybe<String>;
-  placeName_ends_with?: Maybe<String>;
-  placeName_not_ends_with?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeImageUrl_not?: Maybe<String>;
-  placeImageUrl_in?: Maybe<String[] | String>;
-  placeImageUrl_not_in?: Maybe<String[] | String>;
-  placeImageUrl_lt?: Maybe<String>;
-  placeImageUrl_lte?: Maybe<String>;
-  placeImageUrl_gt?: Maybe<String>;
-  placeImageUrl_gte?: Maybe<String>;
-  placeImageUrl_contains?: Maybe<String>;
-  placeImageUrl_not_contains?: Maybe<String>;
-  placeImageUrl_starts_with?: Maybe<String>;
-  placeImageUrl_not_starts_with?: Maybe<String>;
-  placeImageUrl_ends_with?: Maybe<String>;
-  placeImageUrl_not_ends_with?: Maybe<String>;
-  placeSlug?: Maybe<String>;
-  placeSlug_not?: Maybe<String>;
-  placeSlug_in?: Maybe<String[] | String>;
-  placeSlug_not_in?: Maybe<String[] | String>;
-  placeSlug_lt?: Maybe<String>;
-  placeSlug_lte?: Maybe<String>;
-  placeSlug_gt?: Maybe<String>;
-  placeSlug_gte?: Maybe<String>;
-  placeSlug_contains?: Maybe<String>;
-  placeSlug_not_contains?: Maybe<String>;
-  placeSlug_starts_with?: Maybe<String>;
-  placeSlug_not_starts_with?: Maybe<String>;
-  placeSlug_ends_with?: Maybe<String>;
-  placeSlug_not_ends_with?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  sanityId_not?: Maybe<String>;
+  sanityId_in?: Maybe<String[] | String>;
+  sanityId_not_in?: Maybe<String[] | String>;
+  sanityId_lt?: Maybe<String>;
+  sanityId_lte?: Maybe<String>;
+  sanityId_gt?: Maybe<String>;
+  sanityId_gte?: Maybe<String>;
+  sanityId_contains?: Maybe<String>;
+  sanityId_not_contains?: Maybe<String>;
+  sanityId_starts_with?: Maybe<String>;
+  sanityId_not_starts_with?: Maybe<String>;
+  sanityId_ends_with?: Maybe<String>;
+  sanityId_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  slug?: Maybe<String>;
+  slug_not?: Maybe<String>;
+  slug_in?: Maybe<String[] | String>;
+  slug_not_in?: Maybe<String[] | String>;
+  slug_lt?: Maybe<String>;
+  slug_lte?: Maybe<String>;
+  slug_gt?: Maybe<String>;
+  slug_gte?: Maybe<String>;
+  slug_contains?: Maybe<String>;
+  slug_not_contains?: Maybe<String>;
+  slug_starts_with?: Maybe<String>;
+  slug_not_starts_with?: Maybe<String>;
+  slug_ends_with?: Maybe<String>;
+  slug_not_ends_with?: Maybe<String>;
   lat?: Maybe<Float>;
   lat_not?: Maybe<Float>;
   lat_in?: Maybe<Float[] | Float>;
@@ -693,10 +693,10 @@ export interface PlaceUpdateManyWithWhereNestedInput {
 }
 
 export interface PlaceUpdateManyDataInput {
-  placeSanityId?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeSlug?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  slug?: Maybe<String>;
   lat?: Maybe<Float>;
   lng?: Maybe<Float>;
 }
@@ -725,10 +725,10 @@ export interface ListUpdateManyMutationInput {
 
 export interface PlaceCreateInput {
   id?: Maybe<ID_Input>;
-  placeSanityId?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeSlug?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  slug?: Maybe<String>;
   lat?: Maybe<Float>;
   lng?: Maybe<Float>;
   list?: Maybe<ListCreateOneWithoutPlacesInput>;
@@ -746,10 +746,10 @@ export interface ListCreateWithoutPlacesInput {
 }
 
 export interface PlaceUpdateInput {
-  placeSanityId?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeSlug?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  slug?: Maybe<String>;
   lat?: Maybe<Float>;
   lng?: Maybe<Float>;
   list?: Maybe<ListUpdateOneWithoutPlacesInput>;
@@ -775,10 +775,10 @@ export interface ListUpsertWithoutPlacesInput {
 }
 
 export interface PlaceUpdateManyMutationInput {
-  placeSanityId?: Maybe<String>;
-  placeName?: Maybe<String>;
-  placeImageUrl?: Maybe<String>;
-  placeSlug?: Maybe<String>;
+  sanityId?: Maybe<String>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  slug?: Maybe<String>;
   lat?: Maybe<Float>;
   lng?: Maybe<Float>;
 }
@@ -1112,20 +1112,20 @@ export interface ListNullablePromise
 
 export interface Place {
   id: ID_Output;
-  placeSanityId?: String;
-  placeName?: String;
-  placeImageUrl?: String;
-  placeSlug?: String;
+  sanityId?: String;
+  name?: String;
+  imageUrl?: String;
+  slug?: String;
   lat?: Float;
   lng?: Float;
 }
 
 export interface PlacePromise extends Promise<Place>, Fragmentable {
   id: () => Promise<ID_Output>;
-  placeSanityId: () => Promise<String>;
-  placeName: () => Promise<String>;
-  placeImageUrl: () => Promise<String>;
-  placeSlug: () => Promise<String>;
+  sanityId: () => Promise<String>;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  slug: () => Promise<String>;
   lat: () => Promise<Float>;
   lng: () => Promise<Float>;
   list: <T = ListPromise>() => T;
@@ -1135,10 +1135,10 @@ export interface PlaceSubscription
   extends Promise<AsyncIterator<Place>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  placeSanityId: () => Promise<AsyncIterator<String>>;
-  placeName: () => Promise<AsyncIterator<String>>;
-  placeImageUrl: () => Promise<AsyncIterator<String>>;
-  placeSlug: () => Promise<AsyncIterator<String>>;
+  sanityId: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  slug: () => Promise<AsyncIterator<String>>;
   lat: () => Promise<AsyncIterator<Float>>;
   lng: () => Promise<AsyncIterator<Float>>;
   list: <T = ListSubscription>() => T;
@@ -1148,10 +1148,10 @@ export interface PlaceNullablePromise
   extends Promise<Place | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  placeSanityId: () => Promise<String>;
-  placeName: () => Promise<String>;
-  placeImageUrl: () => Promise<String>;
-  placeSlug: () => Promise<String>;
+  sanityId: () => Promise<String>;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  slug: () => Promise<String>;
   lat: () => Promise<Float>;
   lng: () => Promise<Float>;
   list: <T = ListPromise>() => T;
@@ -1509,10 +1509,10 @@ export interface PlaceSubscriptionPayloadSubscription
 
 export interface PlacePreviousValues {
   id: ID_Output;
-  placeSanityId?: String;
-  placeName?: String;
-  placeImageUrl?: String;
-  placeSlug?: String;
+  sanityId?: String;
+  name?: String;
+  imageUrl?: String;
+  slug?: String;
   lat?: Float;
   lng?: Float;
 }
@@ -1521,10 +1521,10 @@ export interface PlacePreviousValuesPromise
   extends Promise<PlacePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  placeSanityId: () => Promise<String>;
-  placeName: () => Promise<String>;
-  placeImageUrl: () => Promise<String>;
-  placeSlug: () => Promise<String>;
+  sanityId: () => Promise<String>;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  slug: () => Promise<String>;
   lat: () => Promise<Float>;
   lng: () => Promise<Float>;
 }
@@ -1533,10 +1533,10 @@ export interface PlacePreviousValuesSubscription
   extends Promise<AsyncIterator<PlacePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  placeSanityId: () => Promise<AsyncIterator<String>>;
-  placeName: () => Promise<AsyncIterator<String>>;
-  placeImageUrl: () => Promise<AsyncIterator<String>>;
-  placeSlug: () => Promise<AsyncIterator<String>>;
+  sanityId: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  slug: () => Promise<AsyncIterator<String>>;
   lat: () => Promise<AsyncIterator<Float>>;
   lng: () => Promise<AsyncIterator<Float>>;
 }

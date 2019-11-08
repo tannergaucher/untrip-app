@@ -1,6 +1,6 @@
 import React from "react"
 
-import { SEO, NewsletterSignup } from "../components/elements"
+import { SEO } from "../components/elements"
 import { Link, ContentAsideGrid, Button } from "../components/styles"
 import {
   FullPostCard,
@@ -36,7 +36,6 @@ export default function IndexPage() {
           </div>
         </aside>
       </ContentAsideGrid>
-      <NewsletterSignup />
     </>
   )
 }

@@ -23,7 +23,9 @@ export default function NewsletterSignup() {
   return (
     <StyledNewsletter>
       <MailOption color="white" size="large" />
-      <h2>Subscribe to the Untrip weekly newsletter</h2>
+      <h2>
+        Know what's happening in KL. Subscribe to our currated weekly email.
+      </h2>
       <NewsletterForm />
     </StyledNewsletter>
   )
@@ -55,7 +57,6 @@ const Input = styled.input`
   padding: 0.5rem 1rem;
   background: black;
   color: white;
-
   ::placeholder {
     color: white;
     text-transform: uppercase;
@@ -75,6 +76,7 @@ function NewsletterForm() {
       onSubmit={async e => {
         e.preventDefault()
         const { data } = await subscribeToEmail()
+        // TODO: Make a subscribed to email alert Modal.
         alert(data.subscribeToEmail.message)
         setEmail("")
       }}

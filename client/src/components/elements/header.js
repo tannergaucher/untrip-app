@@ -48,9 +48,11 @@ const StyledHeader = styled.header`
   .site-description {
     margin: 0;
     color: var(--accent);
+    font-weight: 900;
   }
 
-  .auth-btn {
+  .auth-btn,
+  .authed-btn {
     margin-right: 1rem;
 
     &:last-child {
@@ -62,9 +64,38 @@ const StyledHeader = styled.header`
     border: 6px solid black;
     background: black;
   }
+
+  .mobile {
+    display: none;
+  }
+
+  @media (max-width: 1200px) {
+    .full-size {
+      display: none;
+    }
+
+    .mobile {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 800px) {
+    padding: 0 0.5rem;
+
+    .site-title {
+      font-size: 40px;
+      /* font-size: inherit; */
+    }
+
+    .site-description {
+      display: none;
+    }
+  }
 `
 
 export default function Header() {
+  const { data } = useQuery(IS_LOGGED_IN)
+
   return (
     <StyledHeader>
       <div className="flex">
@@ -74,21 +105,19 @@ export default function Header() {
           </Link>
           <h6 className="site-description"> Curated Kuala Lumpur</h6>
         </div>
-
-        <nav>
-          <Link className="nav-link" to="/" plain>
+        <nav className="full-size">
+          <Link className="nav-link" to="/food-and-drink" plain>
             <h2>Food & Drink</h2>
           </Link>
-          <Link className="nav-link" to="/" plain>
+          <Link className="nav-link" to="/music" plain>
             <h2>Music</h2>
           </Link>
-          <Link className="nav-link" to="/" plain>
+          <Link className="nav-link" to="/culture" plain>
             <h2>Culture</h2>
           </Link>
         </nav>
-
         <div className="btns">
-          <AuthBtns />
+          {data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
         </div>
       </div>
       <div className="divider" />
@@ -100,7 +129,7 @@ function AuthBtns() {
   return (
     <>
       <Button
-        className="auth-btn"
+        className="auth-btn full-size"
         primary
         onClick={e => {
           e.preventDefault()
@@ -111,7 +140,7 @@ function AuthBtns() {
       </Button>
 
       <Button
-        className="auth-btn"
+        className="auth-btn full-size"
         onClick={e => {
           e.preventDefault()
           navigate("/login")
@@ -126,18 +155,23 @@ function AuthBtns() {
 function AuthedBtns() {
   return (
     <>
-      <Link to="/lists">
-        <h3>Lists</h3>
-      </Link>
-      <Link to="/account">
-        <h3>Account</h3>
-      </Link>
+      <Button
+        className="authed-btn full-size"
+        primary
+        onClick={() => navigate(`/lists`)}
+      >
+        My Lists
+      </Button>
+      <Button
+        className="authed-btn full-size"
+        onClick={() => navigate(`/account`)}
+      >
+        Account
+      </Button>
 
-      {/* <div className="mobile">
-        <Button plain>
-          <Menu color="black" />
-        </Button>
-      </div> */}
+      <div className="mobile">
+        <Button primary>Menu</Button>
+      </div>
     </>
   )
 }

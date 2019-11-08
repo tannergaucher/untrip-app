@@ -1,25 +1,18 @@
 import React from "react"
 import { useQuery } from "@apollo/react-hooks"
-import styled from "styled-components"
 
 import { AuthTabs, Logout } from "../components/auth"
 import { IS_LOGGED_IN, CURRENT_USER_QUERY } from "../components/apollo/graphql"
-
-const StyledAccountPage = styled.div`
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0.5rem;
-`
 
 export default function AccountPage() {
   const { loading, error, data } = useQuery(IS_LOGGED_IN)
 
   return (
-    <StyledAccountPage>
+    <>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.isLoggedIn ? <UserAccount /> : <AuthTabs />}
-    </StyledAccountPage>
+    </>
   )
 }
 

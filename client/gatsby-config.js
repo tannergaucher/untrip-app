@@ -1,12 +1,13 @@
 module.exports = {
   siteMetadata: {
     title: `Untrip`,
-    description: `Untrip.app, An Insider's Guide to Kuala Lumpur`,
+    description: `Untrip.app. Curated Guide to Kuala Lumpur`,
     author: `Tanner Gaucher <tannermichaelgaucher@gmail.com>`,
     social: {
       github: `http://github.com/tannergaucher`,
     },
   },
+
   plugins: [
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,

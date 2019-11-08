@@ -44,8 +44,8 @@ class MapContainer extends React.Component {
         {places.map(place => (
           <Marker
             key={place.id}
-            name={place.placeName}
-            title={place.placeName}
+            name={place.name}
+            title={place.name}
             placeId={place.id}
             icon={{
               url: Icon,
