@@ -9,6 +9,7 @@ const StyledFooter = styled.footer`
 
   .site-title {
     margin: 0;
+    text-transform: uppercase;
   }
 `
 
