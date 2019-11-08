@@ -5,6 +5,7 @@ export const SANITY_POST_FRAGMENT = graphql`
     id
     _rawBody
     title
+    publishedAt(formatString: "D MMMM YYYY")
     slug {
       current
     }

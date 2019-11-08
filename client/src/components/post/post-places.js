@@ -2,7 +2,6 @@ import React from "react"
 
 import { PlaceCard } from "../place"
 
-// TODO Co-locate where used
 export default function PostPlaces({ postPlaces, setInView }) {
   return (
     <>

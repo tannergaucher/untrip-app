@@ -5,93 +5,59 @@ import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
 import { SEO, Map, NewsletterSignup } from "../components/elements"
-import { PostPlaces, Author, Share, LatestPosts } from "../components/post"
-import { Divider } from "../components/styles"
+import { ContentAsideGrid, Button, Divider } from "../components/styles"
+import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
+import { PlaceCard } from "../components/place"
 
 const StyledPost = styled.div`
-  .image-wrapper {
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-
-  .title {
-    text-align: center;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+  .post-title {
     font-weight: 900;
+    font-size: 50px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
-  .post-text-container {
-    max-width: var(--container);
-    margin: 5rem auto 7rem;
+  .post-category-date {
+    display: flex;
   }
 
-  .map-with-places {
-    display: grid;
-    grid-template-areas: "places map";
-    grid-template-columns: 5fr 3fr;
+  .post-category,
+  .post-date {
+    margin: 0;
+    text-transform: uppercase;
   }
 
-  .places {
-    grid-area: places;
-    margin: 0 3rem;
+  .post-category {
+    color: var(--accent);
   }
 
-  .map {
-    grid-area: map;
-    position: sticky;
-    top: 15vh;
-    height: 70vh;
-    margin: 0 3rem;
+  .post-date {
+    margin-left: 0.5rem;
+  }
 
-    .map-title {
-      margin-top: 0;
-      margin-bottom: 1rem;
+  .share-btns {
+    margin-bottom: 2rem;
+
+    button {
+      margin-right: 1rem;
     }
   }
 
-  .latest-posts {
-    margin: 10rem 0.5rem;
+  .fb-btn {
+    &:hover {
+      background: #0000ff;
+    }
   }
 
-  @media (max-width: 600px) {
-    .title {
-      text-align: left;
+  .twitter-btn {
+    &:hover {
+      background: #1da1f2;
     }
+  }
 
-    .post-text-container {
-      margin: 2rem 0.5rem 3rem;
-    }
-
-    .map-with-places {
-      display: grid;
-      grid-template-areas:
-        "places"
-        "map";
-      grid-template-rows: auto auto;
-      grid-template-columns: 1fr;
-    }
-
-    .places {
-      margin: 0 0.5rem;
-    }
-
-    .map {
-      margin: 0;
-      width: 100vw;
-      height: 100vh;
-
-      .map-title {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        margin-top: 0;
-        margin-bottom: 3rem;
-        text-align: center;
-      }
-    }
-
-    .latest-posts {
-      margin: 7rem 0.5rem;
+  .pinterest-btn {
+    &:hover {
+      background: #c8232c;
     }
   }
 `
@@ -99,45 +65,61 @@ const StyledPost = styled.div`
 export default function PostTemplate({ data }) {
   const [inView, setInView] = useState(null)
 
-  const { sanityPost } = data
+  const { sanityPost: post } = data
+
+  console.log(post)
 
   return (
-    <StyledPost>
+    <>
       <SEO
-        title={sanityPost.title}
-        image={sanityPost.mainImage.asset.fluid.src}
-        url={`https://untrip.app/posts/${sanityPost.category.slug.current}/${sanityPost.slug.current}`}
+        title={post.title}
+        image={post.mainImage.asset.fluid.src}
+        url={`https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}`}
       />
-      <div className="image-wrapper">
-        <h1 className="title">{sanityPost.title}</h1>
-        <Img fluid={sanityPost.mainImage.asset.fluid} />
-      </div>
-      <div className="post-text-container">
-        <Share post={sanityPost} />
-        <BlockContent className="post-body" blocks={sanityPost._rawBody} />
-        <Author author={sanityPost.author} />
-        <Divider />
-      </div>
-      <div className="map-with-places">
-        <div className="places">
-          <PostPlaces
-            postPlaces={sanityPost.postPlaces}
-            setInView={setInView}
-          />
-        </div>
-        <div className="map">
-          <h3 className="map-title">{sanityPost.title}</h3>
-          <Map places={sanityPost.postPlaces} inView={inView} />
-        </div>
-      </div>
+      <ContentAsideGrid>
+        <article className="content">
+          <StyledPost>
+            <div className="post-category-date">
+              <h6 className="post-category">{post.category.category} /</h6>
+              <h6 className="post-date">{post.publishedAt}</h6>
+            </div>
+            <h1 className="post-title">{post.title}</h1>
+            <div className="share-btns">
+              <Button className="fb-btn">Share</Button>
+              <Button className="twitter-btn">Tweet</Button>
+              <Button className="pinterest-btn">Pin</Button>
+            </div>
+            <Img fluid={post.mainImage.asset.fluid} />
+            <BlockContent blocks={post._rawBody} />
+            <Author author={post.author} />
+            <Divider />
+            {post.postPlaces.map(postPlace => (
+              <PlaceCard
+                postPlace={postPlace}
+                key={postPlace.id}
+                setInView={setInView}
+              />
+            ))}
+          </StyledPost>
+          <NewsletterSignup />
+          {/* COMMENTS */}
+        </article>
+        <aside>
+          <LatestPostsAside />
+          <PopularPostsAside />
 
-      <div className="latest-posts">
-        <LatestPosts />
-      </div>
-      <div>
-        <NewsletterSignup />
-      </div>
-    </StyledPost>
+          <div className="map-container sticky">
+            <h2>{post.title}</h2>
+            <Map
+              places={post.postPlaces}
+              inView={inView}
+              style={{ height: `70vh`, maxWidth: `500px` }}
+            />
+            <Divider />
+          </div>
+        </aside>
+      </ContentAsideGrid>
+    </>
   )
 }
 

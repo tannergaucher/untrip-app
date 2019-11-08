@@ -1,13 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import { Link } from "../styles"
 
 const StyledFooter = styled.footer`
   background: var(--brand);
   color: white;
-  padding: 1rem 0.5rem;
+  padding: 2rem;
 
-  h3 {
+  .site-title {
     margin: 0;
   }
 `
@@ -15,12 +15,9 @@ const StyledFooter = styled.footer`
 export default function Footer() {
   return (
     <StyledFooter>
-      <Link
-        style={{
-          color: `inherit`,
-        }}
-      >
-        <h3>Untrip</h3>
+      <Link plain>
+        <h2 className="site-title">Untrip</h2>
+        <h5>Curated Kuala Lumpur</h5>
       </Link>
     </StyledFooter>
   )

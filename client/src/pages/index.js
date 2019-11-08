@@ -1,29 +1,42 @@
 import React from "react"
-import styled from "styled-components"
 
-import { LatestPosts } from "../components/post"
 import { SEO, NewsletterSignup } from "../components/elements"
+import { Link, ContentAsideGrid, Button } from "../components/styles"
+import {
+  FullPostCard,
+  PopularPostsAside,
+  ThisMonthAside,
+} from "../components/post"
 
-const StyledIndexPage = styled.div`
-  .latest-posts {
-    padding: 0.5rem;
-  }
+import { useLatestSanityPosts } from "../components/hooks"
 
-  .newsletter-signup {
-    margin-top: 10rem;
-  }
-`
+export default function IndexPage() {
+  const { edges: latestPostEdges } = useLatestSanityPosts()
 
-const IndexPage = () => (
-  <StyledIndexPage>
-    <SEO title="Home" />
-    <div className="latest-posts">
-      <LatestPosts />
-    </div>
-    <div className="newsletter-signup">
+  return (
+    <>
+      <SEO title="Home" />
+      <ContentAsideGrid>
+        <article className="content">
+          {latestPostEdges.map(edge => (
+            <Link
+              to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
+              plain
+            >
+              <FullPostCard key={edge.node.id} post={edge.node} />
+            </Link>
+          ))}
+          <Button primary>View More Posts</Button>
+        </article>
+        <aside>
+          <ThisMonthAside />
+          <PopularPostsAside />
+          <div className="sticky">
+            <h2 className="side-title">About Untrip</h2>
+          </div>
+        </aside>
+      </ContentAsideGrid>
       <NewsletterSignup />
-    </div>
-  </StyledIndexPage>
-)
-
-export default IndexPage
+    </>
+  )
+}

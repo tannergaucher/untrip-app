@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useQuery } from "@apollo/react-hooks"
 import { Layer } from "grommet"
-import { Bookmark } from "grommet-icons"
+import { AddCircle } from "grommet-icons"
 import styled from "styled-components"
 
 import { AuthTabs } from "../auth"
@@ -37,7 +37,7 @@ export default function AddToListModal({ place }) {
   return (
     <>
       <PlainBtn onClick={() => setShow(!show)}>
-        <Bookmark color="black" />
+        <AddCircle color="black" />
       </PlainBtn>
 
       {show && (

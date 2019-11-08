@@ -1,39 +1,36 @@
 import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import { Link } from "gatsby"
 import BlockContent from "@sanity/block-content-to-react"
 import { useInView } from "react-intersection-observer"
 
 import { PlaceDetails } from "../place"
-import { Divider } from "../styles"
+import { Divider, Link } from "../styles"
 import { AddToListModal } from "../list"
 
 const StyledPlace = styled.div`
-  margin-bottom: 6rem;
+  margin-bottom: 2rem;
 
   .place-info {
     display: flex;
     justify-content: space-between;
-    margin: 2rem 0 1rem 0;
-  }
-
-  .place-details {
+    margin: 0 0 1.5rem 0;
   }
 
   .place-type {
     margin: 0;
-    color: grey;
+    text-transform: uppercase;
   }
 
   .place-name {
     margin: 0;
+    margin-top: 0.25rem;
     font-weight: 900;
   }
 
   .place-tags {
     display: flex;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
   }
 
   .place-tags > a {
@@ -41,6 +38,7 @@ const StyledPlace = styled.div`
 
     h5 {
       margin: 0;
+      text-transform: uppercase;
     }
   }
 
@@ -62,15 +60,17 @@ export default function PlaceCard({ postPlace, setInView }) {
     <StyledPlace>
       <div className="place-info">
         <div className="place-details" ref={ref}>
-          <h5 className="place-type">{postPlace.place.placeType.type}</h5>
-          <h2 className="place-name">{postPlace.place.name}</h2>
+          {/* <h5 className="place-type">{postPlace.place.placeType.type}</h5> */}
+          <h2 className="place-name">
+            {postPlace.place.name} / {postPlace.place.placeType.type}
+          </h2>
         </div>
         <AddToListModal place={postPlace} />
       </div>
       <Img fluid={postPlace.place.image.asset.fluid} />
       <div className="place-tags">
         {postPlace.place.tags.map(tag => (
-          <Link key={tag.id} to={`/tags/${tag.slug.current}`}>
+          <Link key={tag.id} to={`/tags/${tag.slug.current}`} plain>
             <h5>#{tag.tag}</h5>
           </Link>
         ))}

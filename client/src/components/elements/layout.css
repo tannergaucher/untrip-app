@@ -2,8 +2,10 @@
   --sans: "Avenir", sans-serif;
   --duration: 0.2s;
   --brand: black;
+  --accent: red;
   --font-size: 21px;
-  --radius: 4px;
+  --heading: 50px;
+  --radius: 2px;
   --thickness: 2px;
   --link-color: blue;
   --container: 667px;

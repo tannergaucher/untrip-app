@@ -1,60 +1,107 @@
 import React from "react"
 import styled from "styled-components"
-import { Link, navigate } from "gatsby"
-import { useQuery } from "@apollo/react-hooks"
-import { Menu } from "grommet-icons"
+import { navigate } from "gatsby"
 
-import { Button } from "../styles"
+import { useQuery } from "@apollo/react-hooks"
+import { Menu, Facebook, Twitter } from "grommet-icons"
+
+import { Button, Link } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledHeader = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 0.5rem;
+  padding: 0 2rem 2rem 2rem;
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  h3 {
+  nav {
+    display: flex;
+  }
+
+  .nav-link {
+    margin-right: 2rem;
+    text-transform: uppercase;
+
+    > * {
+      font-weight: 900;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .site-title-description {
+    margin: 2rem 0;
+  }
+
+  .site-title {
+    font-size: var(--heading);
+    text-transform: uppercase;
+    font-weight: 900;
     margin: 0;
   }
 
-  .login-btn {
-    margin-right: 0.5rem;
+  .site-description {
+    margin: 0;
+    color: var(--accent);
+  }
+
+  .auth-btn {
+    margin-right: 1rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .divider {
+    border: 6px solid black;
+    background: black;
   }
 `
 
 export default function Header() {
-  const { data } = useQuery(IS_LOGGED_IN)
-
   return (
     <StyledHeader>
-      <Link to="/">
-        <h3>Untrip</h3>
-      </Link>
-      {data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
+      <div className="flex">
+        <div className="site-title-description">
+          <Link to="/" plain>
+            <h2 className="site-title">Untrip</h2>
+          </Link>
+          <h6 className="site-description"> Curated Kuala Lumpur</h6>
+        </div>
+
+        <nav>
+          <Link className="nav-link" to="/" plain>
+            <h2>Food & Drink</h2>
+          </Link>
+          <Link className="nav-link" to="/" plain>
+            <h2>Music</h2>
+          </Link>
+          <Link className="nav-link" to="/" plain>
+            <h2>Culture</h2>
+          </Link>
+        </nav>
+
+        <div className="btns">
+          <AuthBtns />
+        </div>
+      </div>
+      <div className="divider" />
     </StyledHeader>
   )
 }
 
-function Nav() {
+function AuthBtns() {
   return (
-    <nav>
+    <>
       <Button
-        className="login-btn"
-        plain
-        onClick={e => {
-          e.preventDefault()
-          navigate("/login")
-        }}
-      >
-        Log In
-      </Button>
-
-      <Button
+        className="auth-btn"
+        primary
         onClick={e => {
           e.preventDefault()
           navigate("/signup")
@@ -62,48 +109,35 @@ function Nav() {
       >
         Sign Up
       </Button>
-    </nav>
+
+      <Button
+        className="auth-btn"
+        onClick={e => {
+          e.preventDefault()
+          navigate("/login")
+        }}
+      >
+        Log In
+      </Button>
+    </>
   )
 }
 
-const StyledAuthedNav = styled.nav`
-  .full {
-    display: flex;
-
-    a {
-      margin-left: 1rem;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .full {
-      display: none;
-    }
-  }
-
-  @media (min-width: 600px) {
-    .mobile {
-      display: none;
-    }
-  }
-`
-
-function AuthedNav() {
+function AuthedBtns() {
   return (
-    <StyledAuthedNav>
-      <div className="full">
-        <Link to="/lists">
-          <h3>Lists</h3>
-        </Link>
-        <Link to="/account">
-          <h3>Account</h3>
-        </Link>
-      </div>
-      <div className="mobile">
+    <>
+      <Link to="/lists">
+        <h3>Lists</h3>
+      </Link>
+      <Link to="/account">
+        <h3>Account</h3>
+      </Link>
+
+      {/* <div className="mobile">
         <Button plain>
           <Menu color="black" />
         </Button>
-      </div>
-    </StyledAuthedNav>
+      </div> */}
+    </>
   )
 }

@@ -75,7 +75,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create page for each post.
   posts.forEach(edge => {
     createPage({
-      path: `/posts/${edge.node.category.slug.current}/${edge.node.slug.current}`,
+      path: `/${edge.node.category.slug.current}/${edge.node.slug.current}`,
       component: path.resolve(`./src/templates/post.js`),
       context: {
         slug: edge.node.slug.current,

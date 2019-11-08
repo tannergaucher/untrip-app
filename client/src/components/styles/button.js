@@ -6,7 +6,7 @@ const StyledButton = styled.button`
   padding: 0.5rem 1rem;
   font-family: var(--sans);
   font-weight: bolder;
-  font-size: calc(var(--font-size) - 6px);
+  font-size: calc(var(--font-size) - 4px);
   border: ${props =>
     props.plain
       ? "var(--thickness) solid white"
