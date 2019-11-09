@@ -46,7 +46,34 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   // Query all categories.
-  // Make pages for each category.
+  const categoriesQuery = await graphql(`
+    query {
+      allSanityCategory {
+        edges {
+          node {
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const categories = categoriesQuery.data.allSanityCategory.edges || []
+
+  console.log(categories)
+
+  // Create category page for each category
+  categories.forEach(edge => {
+    createPage({
+      path: `/${edge.node.slug.current}`,
+      component: path.resolve(`./src/templates/category.js`),
+      context: {
+        categorySlug: edge.node.slug.current,
+      },
+    })
+  })
 }
 
 exports.onCreatePage = async ({ page, actions }) => {

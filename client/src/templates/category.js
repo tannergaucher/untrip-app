@@ -1,36 +1,48 @@
-// import React from "react"
-// import { graphql } from "gatsby"
+import React from "react"
+import { graphql } from "gatsby"
 
-// import { SEO } from "../components/elements"
-// import { ContentAsideGrid } from "../components/styles"
+import { SEO } from "../components/elements"
+import { ContentAsideGrid, Link } from "../components/styles"
+import {
+  FullPostCard,
+  LatestPostsAside,
+  PopularPostsAside,
+} from "../components/post"
 
-// export default function CategoryPage() {
-//   return (
-//     <>
-//       <SEO title={`Tags`} />
-//       <ContentAsideGrid>
-//         <div className="content">Content</div>
+export default function CategoryPage({ data, pageContext }) {
+  return (
+    <>
+      <SEO title={`Tags`} />
+      <ContentAsideGrid>
+        <div className="content">
+          {data.allSanityPost.edges.map(edge => (
+            <Link
+              to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
+              plain
+            >
+              <FullPostCard key={edge.node.id} post={edge.node} />
+            </Link>
+          ))}
+        </div>
+        <aside>
+          <LatestPostsAside />
+          <PopularPostsAside />
+        </aside>
+      </ContentAsideGrid>
+    </>
+  )
+}
 
-//         <aside>Aside</aside>
-//       </ContentAsideGrid>
-//     </>
-//   )
-// }
-
-// Query cagegory of slug from page context.
-// export const CATEGORY_PAGE_QUERY = graphql`
-//   query($categorySlug: Slug!) {
-//     allSanityPost(
-//       filter: { category: { slug: { current: { eq: $categorySlug } } } }
-//     ) {
-//       edges {
-//         node {
-//           title
-//           category {
-//             category
-//           }
-//         }
-//       }
-//     }
-//   }
-// `
+export const CATEGORY_PAGE_QUERY = graphql`
+  query($categorySlug: String!) {
+    allSanityPost(
+      filter: { category: { slug: { current: { eq: $categorySlug } } } }
+    ) {
+      edges {
+        node {
+          ...SanityPostFragment
+        }
+      }
+    }
+  }
+`

@@ -104,11 +104,7 @@ export default function PostPage({ data }) {
                 setInView={setInView}
               />
             ))}
-            <Button className="comments-btn" primary>
-              Comments
-            </Button>
           </StyledPost>
-          <NewsletterSignup />
         </article>
         <aside>
           <LatestPostsAside />
@@ -124,6 +120,17 @@ export default function PostPage({ data }) {
           </div>
         </aside>
       </ContentAsideGrid>
+
+      {/* <ContentAsideGrid>
+        <div className="content">
+          <Button className="comments-btn" primary>
+            Comments
+          </Button>
+        </div>
+        <aside>
+          <NewsletterSignup />
+        </aside>
+      </ContentAsideGrid> */}
     </>
   )
 }

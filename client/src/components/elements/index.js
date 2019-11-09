@@ -1,3 +1,4 @@
+import About from "./about"
 import Header from "./header"
 import SEO from "./seo"
 import Footer from "./footer"
@@ -9,6 +10,7 @@ import NewsletterSignup from "./newsletter-signup"
 import ListPlaceMap from "./list-place-map"
 
 export {
+  About,
   Header,
   SEO,
   Footer,

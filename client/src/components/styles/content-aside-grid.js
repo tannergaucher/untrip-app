@@ -17,7 +17,7 @@ const ContentAsideGrid = styled.div`
   }
 
   .side-section {
-    margin-bottom: 7rem;
+    margin-bottom: 6rem;
   }
 
   .side-title {
@@ -28,7 +28,7 @@ const ContentAsideGrid = styled.div`
 
   .sticky {
     position: sticky;
-    top: 1rem;
+    top: 3rem;
   }
 
   @media (max-width: 900px) {

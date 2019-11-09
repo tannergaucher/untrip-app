@@ -1,6 +1,6 @@
 import React from "react"
 
-import { SEO } from "../components/elements"
+import { SEO, About } from "../components/elements"
 import { Link, ContentAsideGrid, Button } from "../components/styles"
 import {
   FullPostCard,
@@ -32,7 +32,7 @@ export default function IndexPage() {
           <ThisMonthAside />
           <PopularPostsAside />
           <div className="sticky">
-            <h2 className="side-title">About Untrip</h2>
+            <About />
           </div>
         </aside>
       </ContentAsideGrid>

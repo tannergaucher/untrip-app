@@ -5,7 +5,6 @@ import useAllSanityPlace from "./use-all-sanity-place"
 import useAllSanityCategory from "./use-all-sanity-category"
 import useLatestSanityPosts from "./use-latest-sanity-posts"
 import usePopularSanityPosts from "./use-popular-sanity-posts"
-import useAllFoodAndDrinkPosts from "./use-all-food-and-drink-posts"
 
 export {
   useSiteMetadata,
@@ -15,5 +14,4 @@ export {
   useAllSanityCategory,
   useLatestSanityPosts,
   usePopularSanityPosts,
-  useAllFoodAndDrinkPosts,
 }
