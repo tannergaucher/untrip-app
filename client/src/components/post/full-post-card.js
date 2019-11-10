@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Divider } from "../styles"
 
 const StyledFullPostCard = styled.div`
-  margin-bottom: 6rem;
+  margin-bottom: 3rem;
 
   .post-title {
     margin-top: 1.5rem;
@@ -22,7 +22,6 @@ const StyledFullPostCard = styled.div`
   .post-category {
     text-transform: uppercase;
     margin: 0 0.5rem 0 0;
-    /* color: var(--accent); */
     font-weight: lighter;
   }
 
@@ -30,6 +29,18 @@ const StyledFullPostCard = styled.div`
     margin: 0;
     text-transform: uppercase;
     font-weight: lighter;
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 2rem;
+
+    .post-title {
+      font-size: 40px;
+    }
+
+    .post-excerpt {
+      margin-bottom: 0;
+    }
   }
 `
 

@@ -33,12 +33,19 @@ const ContentAsideGrid = styled.div`
 
   @media (max-width: 900px) {
     margin: 2rem 0.5rem;
-
     grid-template-areas:
       "content"
       "aside";
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
+
+    aside {
+      margin: 0rem;
+    }
+
+    .side-section {
+      margin-bottom: 2rem;
+    }
 
     .map-container {
       display: none;

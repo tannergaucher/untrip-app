@@ -13,7 +13,7 @@ export const USER_FRAGMENT = gql`
         id
         sanityId
         name
-        ImageUrl
+        imageUrl
         slug
         lat
         lng
@@ -30,7 +30,7 @@ export const LIST_FRAGMENT = gql`
       id
       sanityId
       name
-      ImageUrl
+      imageUrl
       slug
       lat
       lng

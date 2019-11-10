@@ -26,7 +26,6 @@ export default function IndexPage() {
               <FullPostCard key={edge.node.id} post={edge.node} />
             </Link>
           ))}
-          <Button primary>View More Posts</Button>
         </article>
         <aside>
           <ThisMonthAside />

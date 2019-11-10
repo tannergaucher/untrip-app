@@ -5,9 +5,14 @@ import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
 import { PlaceCard } from "../components/place"
-import { SEO, Map, NewsletterSignup } from "../components/elements"
-import { ContentAsideGrid, Button, Divider } from "../components/styles"
-import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
+import { SEO, Map, Share } from "../components/elements"
+import { ContentAsideGrid, Divider } from "../components/styles"
+import {
+  LatestPostsAside,
+  PopularPostsAside,
+  Author,
+  Comments,
+} from "../components/post"
 
 const StyledPost = styled.div`
   .post-title {
@@ -36,36 +41,22 @@ const StyledPost = styled.div`
     font-weight: lighter;
   }
 
-  .share-btns {
-    margin-bottom: 2rem;
-
-    button {
-      margin-right: 1rem;
-    }
-  }
-
-  .fb-btn {
-    &:hover {
-      background: #0000ff;
-    }
-  }
-
-  .twitter-btn {
-    &:hover {
-      background: #1da1f2;
-    }
-  }
-
-  .pinterest-btn {
-    &:hover {
-      background: #c8232c;
-    }
-  }
-
-  .comments-btn {
-    width: 100%;
-    margin-top: 2rem;
+  .post-comments {
+    margin-top: 3rem;
     margin-bottom: 4rem;
+  }
+
+  @media (max-width: 600px) {
+    .post-title {
+      font-size: 40px;
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+`
+
+const StyledMap = styled.div`
+  .map-title {
   }
 `
 
@@ -88,11 +79,11 @@ export default function PostPage({ data }) {
               <h6 className="post-date">{post.publishedAt}</h6>
             </div>
             <h1 className="post-title">{post.title}</h1>
-            <div className="share-btns">
-              <Button className="fb-btn">Share</Button>
-              <Button className="twitter-btn">Tweet</Button>
-              <Button className="pinterest-btn">Pin</Button>
-            </div>
+            <Share
+              fbHref={`http://facebook.com/dialog/share?app_id=2159447634360678&display=popuphref=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}`}
+              twitterHref={`https://twitter.com/intent/tweet?text=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}`}
+              pinterestHref={`https://www.pinterest.com/pin/create/button/?url=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}&media=${post.mainImage.asset.url}`}
+            />
             <Img fluid={post.mainImage.asset.fluid} />
             <BlockContent blocks={post._rawBody} />
             <Author author={post.author} />
@@ -104,33 +95,32 @@ export default function PostPage({ data }) {
                 setInView={setInView}
               />
             ))}
+
+            <div className="post-comments">
+              <Comments />
+            </div>
           </StyledPost>
         </article>
         <aside>
           <LatestPostsAside />
           <PopularPostsAside />
           <div className="map-container sticky">
-            <h2>{post.title}</h2>
-            <Map
-              places={post.postPlaces}
-              inView={inView}
-              style={{ height: `70vh`, maxWidth: `500px` }}
-            />
-            <Divider />
+            <StyledMap>
+              <h2 className="map-title">{post.title}</h2>
+              <Map
+                places={post.postPlaces}
+                inView={inView}
+                style={{
+                  height: `71vh`,
+                  maxWidth: `500px`,
+                  marginTop: "5.5rem",
+                }}
+              />
+              <Share />
+            </StyledMap>
           </div>
         </aside>
       </ContentAsideGrid>
-
-      {/* <ContentAsideGrid>
-        <div className="content">
-          <Button className="comments-btn" primary>
-            Comments
-          </Button>
-        </div>
-        <aside>
-          <NewsletterSignup />
-        </aside>
-      </ContentAsideGrid> */}
     </>
   )
 }

@@ -5,7 +5,7 @@ const Input = styled.input`
   font-family: var(--sans);
   border: var(--thickness) solid var(--brand);
   border-radius: var(--radius);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   margin-bottom: 1rem;
 `
 

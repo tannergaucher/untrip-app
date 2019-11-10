@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "../styles"
 
 import { NewsletterSignup } from "../elements"
 
@@ -13,6 +12,24 @@ const StyledFooter = styled.footer`
   .site-title {
     margin: 0;
     text-transform: uppercase;
+    font-size: 50px;
+  }
+
+  .site-description {
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+
+    .site-title {
+      font-size: 40px;
+      justify-self: first baseline;
+    }
+
+    .site-description {
+      display: none;
+    }
   }
 `
 
@@ -21,7 +38,7 @@ export default function Footer() {
     <StyledFooter>
       <NewsletterSignup />
       <h2 className="site-title">Untrip</h2>
-      <h5>Curated Kuala Lumpur</h5>
+      <h5 className="site-description">Curated Kuala Lumpur</h5>
     </StyledFooter>
   )
 }

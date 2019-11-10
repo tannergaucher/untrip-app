@@ -14,7 +14,8 @@ const StyledPlace = styled.div`
   .place-info {
     display: flex;
     justify-content: space-between;
-    margin: 0 0 1.5rem 0;
+    align-items: center;
+    margin: 0 0 2rem 0;
   }
 
   .place-type {
@@ -33,17 +34,27 @@ const StyledPlace = styled.div`
     margin: 1.5rem 0;
   }
 
-  .place-tags > a {
+  .place-tag {
+    margin: 0;
     margin-right: 1rem;
-
-    h5 {
-      margin: 0;
-      text-transform: uppercase;
-    }
+    text-transform: uppercase;
   }
 
   @media (max-width: 600px) {
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+
+    .place-info {
+      margin-bottom: 0.5rem;
+    }
+
+    .place-name {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .place-tags {
+      margin: 1.5rem 0;
+    }
   }
 `
 
@@ -59,11 +70,8 @@ export default function PlaceCard({ postPlace, setInView }) {
   return (
     <StyledPlace>
       <div className="place-info">
-        <div className="place-details" ref={ref}>
-          {/* <h5 className="place-type">{postPlace.place.placeType.type}</h5> */}
-          <h2 className="place-name">
-            {postPlace.place.name} / {postPlace.place.placeType.type}
-          </h2>
+        <div className="place-name-type" ref={ref}>
+          <h2 className="place-name">{postPlace.place.name}</h2>
         </div>
         <AddToListModal place={postPlace} />
       </div>
@@ -71,7 +79,7 @@ export default function PlaceCard({ postPlace, setInView }) {
       <div className="place-tags">
         {postPlace.place.tags.map(tag => (
           <Link key={tag.id} to={`/tags/${tag.slug.current}`} plain>
-            <h5>#{tag.tag}</h5>
+            <h5 className="place-tag">{tag.tag}</h5>
           </Link>
         ))}
       </div>

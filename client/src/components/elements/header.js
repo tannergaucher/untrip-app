@@ -1,10 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import { navigate } from "gatsby"
-
 import { useQuery } from "@apollo/react-hooks"
-import { Menu, Facebook, Twitter } from "grommet-icons"
 
+import { Menu } from "../elements"
 import { Button, Link } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
@@ -19,15 +18,15 @@ const StyledHeader = styled.header`
 
   nav {
     display: flex;
+
+    a {
+      margin-right: 2rem;
+    }
   }
 
   .nav-link {
-    margin-right: 2rem;
     text-transform: uppercase;
-
-    > * {
-      font-weight: 900;
-    }
+    font-weight: 900;
 
     &:last-child {
       margin-right: 0;
@@ -54,7 +53,6 @@ const StyledHeader = styled.header`
   .auth-btn,
   .authed-btn {
     margin-right: 1rem;
-
     &:last-child {
       margin-right: 0;
     }
@@ -65,16 +63,22 @@ const StyledHeader = styled.header`
     background: black;
   }
 
-  .mobile {
+  .mobile-menu-btn {
     display: none;
   }
 
   @media (max-width: 1200px) {
+    .nav-link {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 1000px) {
     .full-size {
       display: none;
     }
 
-    .mobile {
+    .mobile-menu-btn {
       display: inline;
     }
   }
@@ -84,11 +88,6 @@ const StyledHeader = styled.header`
 
     .site-title {
       font-size: 40px;
-      /* font-size: inherit; */
-    }
-
-    .site-description {
-      display: none;
     }
   }
 `
@@ -106,18 +105,18 @@ export default function Header() {
           <h6 className="site-description"> Curated Kuala Lumpur</h6>
         </div>
         <nav className="full-size">
-          <Link className="nav-link" to="/food-and-drink" plain>
-            <h2>Food & Drink</h2>
+          <Link to="/food-and-drink" plain>
+            <h2 className="nav-link">Food & Drink</h2>
           </Link>
-          <Link className="nav-link" to="/music" plain>
-            <h2>Music</h2>
+          <Link to="/music" plain>
+            <h2 className="nav-link">Music</h2>
           </Link>
-          <Link className="nav-link" to="/culture" plain>
-            <h2>Culture</h2>
+          <Link to="/culture" plain>
+            <h2 className="nav-link">Culture</h2>
           </Link>
         </nav>
         <div className="btns">
-          {data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
+          {data && data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
         </div>
       </div>
       <div className="divider" />
@@ -138,7 +137,6 @@ function AuthBtns() {
       >
         Sign Up
       </Button>
-
       <Button
         className="auth-btn full-size"
         onClick={e => {
@@ -148,6 +146,9 @@ function AuthBtns() {
       >
         Log In
       </Button>
+      <div className="mobile-menu-btn">
+        <Menu />
+      </div>
     </>
   )
 }
@@ -168,9 +169,8 @@ function AuthedBtns() {
       >
         Account
       </Button>
-
-      <div className="mobile">
-        <Button primary>Menu</Button>
+      <div className="mobile-menu-btn">
+        <Menu />
       </div>
     </>
   )

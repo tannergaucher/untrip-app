@@ -14,17 +14,25 @@ const StyledNewsletter = styled.div`
   color: white;
   padding: 2rem;
 
-  h2 {
+  .mail-text {
     text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    align-items: flex-start;
+    padding: 0rem;
+
+    .mail-text {
+      text-align: left;
+    }
   }
 `
 
 export default function NewsletterSignup() {
   return (
     <StyledNewsletter>
-      <MailOption color="white" size="large" />
-      <h2>
-        Know what's happening in KL. Subscribe to our currated weekly email.
+      <h2 className="mail-text">
+        Get the latest on what's happening in KL, every week.
       </h2>
       <NewsletterForm />
     </StyledNewsletter>
@@ -42,10 +50,12 @@ const Form = styled.form`
     text-transform: uppercase;
   }
 
-  &:hover {
+  @media (max-width: 600px) {
+    flex-direction: column;
+
     button {
-      background: black;
-      color: white;
+      margin-top: 1rem;
+      width: 100%;
     }
   }
 `
@@ -54,7 +64,7 @@ const Input = styled.input`
   font-size: var(--font-size);
   font-family: var(--sans);
   border: 2px solid white;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   background: black;
   color: white;
   ::placeholder {

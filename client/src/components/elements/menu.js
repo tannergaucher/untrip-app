@@ -1,22 +1,36 @@
 import React, { useState } from "react"
-import { navigate } from "gatsby"
-import { Layer, Box, Button, Anchor } from "grommet"
-import { Menu as MenuIcon } from "grommet-icons"
+import styled from "styled-components"
+import { useQuery } from "@apollo/react-hooks"
+
+import { Layer } from "grommet"
+import { Button, Link } from "../styles"
+import { IS_LOGGED_IN } from "../apollo/graphql"
+
+const StyledLayer = styled(Layer)`
+  color: black;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  .menu-link {
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+`
 
 export default function Menu({ light }) {
   const [show, setShow] = useState(false)
+  const { data } = useQuery(IS_LOGGED_IN)
 
   return (
     <>
-      <Button
-        plain={true}
-        onClick={() => setShow(!show)}
-        margin="small"
-        icon={<MenuIcon color={light ? "white" : "black"} />}
-      />
+      <Button onClick={() => setShow(!show)} primary>
+        Menu
+      </Button>
       {show && (
         <>
-          <Layer
+          <StyledLayer
             onEsc={() => setShow(false)}
             onClickOutside={() => setShow(false)}
             onClickCapture={() => setShow(false)}
@@ -25,31 +39,41 @@ export default function Menu({ light }) {
             responsive={false}
             modal={true}
           >
-            <Box fill="vertical">
-              <MenuNav />
-            </Box>
-          </Layer>
+            <Link to="/food-and-drink" plain>
+              <h2 className="menu-link">Food / Drink</h2>
+            </Link>
+            <Link to="/music" plain>
+              <h2 className="menu-link">Music</h2>
+            </Link>
+            <Link to="/culture" plain>
+              <h2 className="menu-link">Culture</h2>
+            </Link>
+            {data && data.isLoggedIn ? <AuthedLinks /> : <AuthLinks />}
+          </StyledLayer>
         </>
       )}
     </>
   )
 }
 
-const MenuNav = () => (
-  <Box pad="large" fill="vertical" justify="center" align="end">
-    <MenuItem text="Home" to="/" />
-    <MenuItem text="Guide" to="guide" />
-    <MenuItem text="Untrips" to="untrips" />
-    <MenuItem text="Account" to="account" />
-  </Box>
+const AuthedLinks = () => (
+  <>
+    <Link to="/culture" plain>
+      <h2 className="menu-link">My Lists</h2>
+    </Link>
+    <Link to="/account" plain>
+      <h2 className="menu-link">Account</h2>
+    </Link>
+  </>
 )
 
-const MenuItem = ({ text, to }) => (
-  <Anchor
-    onClick={() => {
-      navigate(`/${to}`)
-    }}
-  >
-    <h3>{text}</h3>
-  </Anchor>
+const AuthLinks = () => (
+  <>
+    <Link to="/login" plain>
+      <h2 className="menu-link">Login</h2>
+    </Link>
+    <Link to="/signup" plain>
+      <h2 className="menu-link">Sign Up</h2>
+    </Link>
+  </>
 )

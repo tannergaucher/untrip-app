@@ -1,4 +1,5 @@
 import Button from "./button"
+import { LinkButton } from "./button"
 import Divider from "./divider"
 import Fieldset from "./fieldset"
 import Form from "./form"
@@ -9,6 +10,7 @@ import ContentAsideGrid from "./content-aside-grid"
 
 export {
   Button,
+  LinkButton,
   Divider,
   Fieldset,
   Form,
