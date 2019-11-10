@@ -23,11 +23,11 @@ class MapContainer extends React.Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (
-      this.props.inView &&
-      this.props.inView.location !== prevState.mapCenter
+      this.props.placeInView &&
+      this.props.placeInView.location !== prevState.mapCenter
     ) {
       this.setState({
-        mapCenter: this.props.inView.location,
+        mapCenter: this.props.placeInView.location,
       })
     }
   }

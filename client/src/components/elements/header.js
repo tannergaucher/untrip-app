@@ -47,7 +47,6 @@ const StyledHeader = styled.header`
   .site-description {
     margin: 0;
     color: var(--accent);
-    font-weight: 900;
   }
 
   .auth-btn,

@@ -17,7 +17,7 @@ const Styled = styled.div`
 
 export default function About() {
   return (
-    <Styled className="sticky">
+    <Styled className={`sticky`}>
       <h2 className="side-title">About Untrip</h2>
       <p className="site-description">
         We curate the best food and drink, music, culture and events happening

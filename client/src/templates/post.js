@@ -5,7 +5,7 @@ import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
 import { PlaceCard } from "../components/place"
-import { SEO, Map, Share } from "../components/elements"
+import { SEO, Map, Share, About } from "../components/elements"
 import { ContentAsideGrid, Divider } from "../components/styles"
 import {
   LatestPostsAside,
@@ -44,6 +44,8 @@ const StyledPost = styled.div`
   .post-comments {
     margin-top: 3rem;
     margin-bottom: 4rem;
+    position: sticky;
+    top: 0;
   }
 
   @media (max-width: 600px) {
@@ -61,7 +63,9 @@ const StyledMap = styled.div`
 `
 
 export default function PostPage({ data }) {
-  const [inView, setInView] = useState(null)
+  const [placeInView, setPlaceInView] = useState(null)
+  const [commentsInView, setCommentsInView] = useState(null)
+
   const { sanityPost: post } = data
 
   return (
@@ -92,12 +96,11 @@ export default function PostPage({ data }) {
               <PlaceCard
                 key={postPlace.id}
                 postPlace={postPlace}
-                setInView={setInView}
+                setPlaceInView={setPlaceInView}
               />
             ))}
-
             <div className="post-comments">
-              <Comments />
+              <Comments setCommentsInView={setCommentsInView} />
             </div>
           </StyledPost>
         </article>
@@ -105,25 +108,34 @@ export default function PostPage({ data }) {
           <LatestPostsAside />
           <PopularPostsAside />
           <div className="map-container sticky">
-            <StyledMap>
-              <h2 className="map-title">{post.title}</h2>
-              <Map
-                places={post.postPlaces}
-                inView={inView}
-                style={{
-                  height: `71vh`,
-                  maxWidth: `500px`,
-                  marginTop: "5.5rem",
-                }}
-              />
-              <Share />
-            </StyledMap>
+            {commentsInView ? (
+              <About />
+            ) : (
+              <MapAside post={post} placeInView={placeInView} />
+            )}
           </div>
         </aside>
       </ContentAsideGrid>
     </>
   )
 }
+
+const MapAside = ({ post, placeInView }) => (
+  <StyledMap>
+    <h2 className="map-title">{post.title}</h2>
+    <Map
+      places={post.postPlaces}
+      placeInView={placeInView}
+      style={{
+        height: `71vh`,
+        maxWidth: `500px`,
+        marginTop: "5.5rem",
+      }}
+    />
+    {/* TODO add post share props  */}
+    <Share />
+  </StyledMap>
+)
 
 export const POST_PAGE_QUERY = graphql`
   query($postSlug: String!) {

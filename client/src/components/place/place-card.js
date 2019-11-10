@@ -58,13 +58,13 @@ const StyledPlace = styled.div`
   }
 `
 
-export default function PlaceCard({ postPlace, setInView }) {
+export default function PlaceCard({ postPlace, setPlaceInView }) {
   const [ref, inView] = useInView({
     threshold: 0,
   })
 
   if (inView) {
-    setInView(postPlace.place)
+    setPlaceInView(postPlace.place)
   }
 
   return (
@@ -78,7 +78,7 @@ export default function PlaceCard({ postPlace, setInView }) {
       <Img fluid={postPlace.place.image.asset.fluid} />
       <div className="place-tags">
         {postPlace.place.tags.map(tag => (
-          <Link key={tag.id} to={`/tags/${tag.slug.current}`} plain>
+          <Link key={tag.slug.current} to={`/tags/${tag.slug.current}`} plain>
             <h5 className="place-tag">{tag.tag}</h5>
           </Link>
         ))}

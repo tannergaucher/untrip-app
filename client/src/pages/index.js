@@ -1,14 +1,13 @@
 import React from "react"
 
 import { SEO, About } from "../components/elements"
-import { Link, ContentAsideGrid, Button } from "../components/styles"
+import { Link, ContentAsideGrid } from "../components/styles"
+import { useLatestSanityPosts } from "../components/hooks"
 import {
   FullPostCard,
   PopularPostsAside,
   ThisMonthAside,
 } from "../components/post"
-
-import { useLatestSanityPosts } from "../components/hooks"
 
 export default function IndexPage() {
   const { edges: latestPostEdges } = useLatestSanityPosts()
@@ -20,8 +19,8 @@ export default function IndexPage() {
         <article className="content">
           {latestPostEdges.map(edge => (
             <Link
-              to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
               plain
+              to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
             >
               <FullPostCard key={edge.node.id} post={edge.node} />
             </Link>

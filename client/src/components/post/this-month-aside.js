@@ -5,7 +5,7 @@ import { AsidePostCard } from "."
 import { Divider, Link } from "../styles"
 
 export default function LatestPostsAside() {
-  // TODO: MAKE useTHisMonth hook
+  // TODO: Make useThisMonth hook.
   const { edges: latestPostEdges } = useLatestSanityPosts()
 
   return (
@@ -13,7 +13,7 @@ export default function LatestPostsAside() {
       <h2 className="side-title">This Month</h2>
       {latestPostEdges.map(edge => (
         <Link
-          to={`${edge.node.category.slug.current}/${edge.node.slug.current}`}
+          to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
           plain
         >
           <AsidePostCard key={edge.node.id} post={edge.node} />

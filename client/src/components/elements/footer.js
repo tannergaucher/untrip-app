@@ -1,13 +1,16 @@
 import React from "react"
 import styled from "styled-components"
 
-import { NewsletterSignup } from "../elements"
+import { NewsletterSignup, About } from "../elements"
 
 const StyledFooter = styled.footer`
   background: var(--brand);
   color: white;
   padding: 2rem;
   min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .site-title {
     margin: 0;
@@ -17,6 +20,7 @@ const StyledFooter = styled.footer`
 
   .site-description {
     margin: 0;
+    font-weight: 300;
   }
 
   @media (max-width: 600px) {
@@ -36,9 +40,12 @@ const StyledFooter = styled.footer`
 export default function Footer() {
   return (
     <StyledFooter>
+      <div className="site-details">
+        <h2 className="site-title">Untrip</h2>
+        <h5 className="site-description">Curated Kuala Lumpur</h5>
+      </div>
+      <About />
       <NewsletterSignup />
-      <h2 className="site-title">Untrip</h2>
-      <h5 className="site-description">Curated Kuala Lumpur</h5>
     </StyledFooter>
   )
 }

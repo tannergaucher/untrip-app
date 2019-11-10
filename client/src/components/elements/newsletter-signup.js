@@ -2,21 +2,12 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { useMutation } from "@apollo/react-hooks"
 import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
-import { MailOption } from "grommet-icons"
 
 const StyledNewsletter = styled.div`
-  height: 50vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   background: black;
   color: white;
-  padding: 2rem;
-
-  .mail-text {
-    text-align: center;
-  }
 
   @media (max-width: 600px) {
     align-items: flex-start;
