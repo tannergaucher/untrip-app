@@ -140,6 +140,28 @@ const Mutation = {
 
     return list
   },
+  updateList: async (_parent, { listId, title }, context) => {
+    const userId = getUserId(context)
+
+    console.log('UPDAET LIST')
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    const list = await prisma.updateList({
+      where: {
+        id: listId,
+      },
+      data: {
+        title,
+      },
+    })
+
+    console.log(list)
+
+    return list
+  },
   togglePlace: async (
     _parent,
     { listId, sanityId, name, imageUrl, slug, lat, lng },

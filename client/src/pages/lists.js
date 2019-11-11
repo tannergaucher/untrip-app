@@ -18,6 +18,7 @@ import {
   IS_LOGGED_IN,
   CURRENT_USER_QUERY,
   TOGGLE_PLACE_MUTATION,
+  UPDATE_LIST_MUTATION,
 } from "../components/apollo/graphql"
 
 const StyledListPage = styled.div`
@@ -36,8 +37,8 @@ export default function ListsPage() {
     <StyledListPage>
       <ContentAsideGrid>
         <div className="content">
-          <h2 className="content-title">My Lists</h2>
-          <Divider bgLight={true} />
+          {/* <h2 className="content-title">My Lists</h2>
+          <Divider bgLight={true} /> */}
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
         <aside>
@@ -111,6 +112,14 @@ const StyledListItem = styled.div`
 
 function ListItem({ list }) {
   const [isEdit, setIsEdit] = useState(false)
+  const [updatedTitle, setUpdatedTitle] = useState("")
+
+  const [updateList, { loading, error }] = useMutation(UPDATE_LIST_MUTATION, {
+    variables: {
+      listId: list.id,
+      title: updatedTitle,
+    },
+  })
 
   return (
     <StyledListItem>
@@ -123,12 +132,16 @@ function ListItem({ list }) {
       {isEdit && (
         <div className="edit-form">
           <Form
-            onSubmit={e => {
+            onSubmit={async e => {
               e.preventDefault()
-              // update list name mutation
+              const res = await updateList()
+              setIsEdit(false)
             }}
           >
-            <Input defaultValue={list.title} />
+            <Input
+              defaultValue={list.title}
+              onChange={e => setUpdatedTitle(e.target.value)}
+            />
             <Button primary>Save</Button>
           </Form>
         </div>

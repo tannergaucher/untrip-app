@@ -102,6 +102,15 @@ export const CREATE_LIST_MUTATION = gql`
   ${LIST_FRAGMENT}
 `
 
+export const UPDATE_LIST_MUTATION = gql`
+  mutation UPDATE_LIST_MUTATION($listId: String!, $title: String!) {
+    updateList(listId: $listId, title: $title) {
+      ...ListFragment
+    }
+  }
+  ${LIST_FRAGMENT}
+`
+
 export const TOGGLE_PLACE_MUTATION = gql`
   mutation TOGGLE_PLACE_MUTATION(
     $listId: ID!

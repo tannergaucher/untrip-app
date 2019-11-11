@@ -58,7 +58,7 @@ const typeDefs = gql`
       lat: Float!
       lng: Float!
     ): List!
-
+    updateList(listId: String!, title: String!): List!
     togglePlace(
       listId: ID!
       sanityId: String
