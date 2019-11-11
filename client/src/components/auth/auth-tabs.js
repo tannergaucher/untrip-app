@@ -5,7 +5,7 @@ import { Login, Signup } from "../auth"
 import { Button } from "../styles"
 
 const StyledAuthTabs = styled.div`
-  color: black;
+  color: var(--black);
 
   h2 {
     text-align: center;

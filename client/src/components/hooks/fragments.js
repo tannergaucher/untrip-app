@@ -91,7 +91,6 @@ export const SANITY_PLACE_FRAGMENT = graphql`
       type
       image {
         asset {
-          # maxWidth
           fluid(maxWidth: 1000, maxHeight: 750) {
             ...GatsbySanityImageFluid
           }

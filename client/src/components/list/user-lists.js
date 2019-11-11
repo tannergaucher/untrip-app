@@ -8,8 +8,7 @@ import { CURRENT_USER_QUERY } from "../apollo/graphql"
 import { Button } from "../styles"
 
 const StyledUserLists = styled.div`
-  color: black;
-  /* display: grid; */
+  color: var(--black);
 `
 
 export default function UserLists({ place }) {

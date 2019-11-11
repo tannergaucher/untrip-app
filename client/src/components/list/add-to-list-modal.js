@@ -10,11 +10,7 @@ import { Button } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const PlainBtn = styled(Button)`
-  border: var(--thickness) solid white;
-  &:hover {
-    border: var(--thickness) solid black;
-    background: white;
-  }
+  border: var(--thickness) solid var(--white);
 `
 
 const StyledLayer = styled(Layer)`
@@ -37,7 +33,7 @@ export default function AddToListModal({ place }) {
   return (
     <>
       <PlainBtn onClick={() => setShow(!show)}>
-        <AddCircle color="black" />
+        <AddCircle color="var(--black)" />
       </PlainBtn>
 
       {show && (

@@ -67,7 +67,7 @@ export default function IndexCard({ post }) {
       </div>
       <h2 className="post-title">{post.title}</h2>
       <p className="post-excerpt">{excerpt}</p>
-      <Divider />
+      <Divider bgLight={true} />
     </StyledFullPostCard>
   )
 }

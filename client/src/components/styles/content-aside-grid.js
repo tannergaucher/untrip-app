@@ -44,7 +44,7 @@ const ContentAsideGrid = styled.div`
     }
 
     .side-section {
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .map-container {

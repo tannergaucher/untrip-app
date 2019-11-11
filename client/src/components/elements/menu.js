@@ -3,11 +3,11 @@ import styled from "styled-components"
 import { useQuery } from "@apollo/react-hooks"
 
 import { Layer } from "grommet"
-import { Button, Link } from "../styles"
+import { Button, Link, Divider } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledLayer = styled(Layer)`
-  color: black;
+  color: var(--black);
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@ const StyledLayer = styled(Layer)`
   }
 `
 
-export default function Menu({ light }) {
+export default function Menu() {
   const [show, setShow] = useState(false)
   const { data } = useQuery(IS_LOGGED_IN)
 
@@ -48,6 +48,10 @@ export default function Menu({ light }) {
             <Link to="/culture" plain>
               <h2 className="menu-link">Culture</h2>
             </Link>
+            <Link to="/this-month" plain>
+              <h2 className="menu-link">This Month</h2>
+            </Link>
+            <Divider bgLight={true} />
             {data && data.isLoggedIn ? <AuthedLinks /> : <AuthLinks />}
           </StyledLayer>
         </>
@@ -58,7 +62,7 @@ export default function Menu({ light }) {
 
 const AuthedLinks = () => (
   <>
-    <Link to="/culture" plain>
+    <Link to="/lists" plain>
       <h2 className="menu-link">My Lists</h2>
     </Link>
     <Link to="/account" plain>

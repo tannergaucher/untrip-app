@@ -5,6 +5,7 @@ import styled from "styled-components"
 const StyledAuthor = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 2rem;
 
   .author-info {
     display: flex;
@@ -12,7 +13,7 @@ const StyledAuthor = styled.div`
     margin-left: 1rem;
 
     a {
-      text-decoration-color: black;
+      text-decoration-color: var(--black);
     }
   }
 
@@ -22,7 +23,7 @@ const StyledAuthor = styled.div`
   }
 
   .author-social {
-    color: black;
+    color: var(--black);
     font-weight: lighter;
   }
 `

@@ -1,8 +1,9 @@
 :root {
   --sans: "Avenir", sans-serif;
   --duration: 0.2s;
-  --brand: black;
   --accent: red;
+  --black: black;
+  --white: white;
   --font-size: 21px;
   --heading: 50px;
   --radius: 2px;
@@ -32,7 +33,6 @@ h6 {
 
 p {
   line-height: 1.6;
-  color: black;
 }
 
 a {
