@@ -140,7 +140,6 @@ const Mutation = {
 
     return list
   },
-
   togglePlace: async (
     _parent,
     { listId, sanityId, name, imageUrl, slug, lat, lng },

@@ -6,8 +6,8 @@ import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
 const StyledNewsletter = styled.div`
   display: flex;
   flex-direction: column;
-  background: black;
-  color: white;
+  background: var(--black);
+  color: var(--white);
 
   @media (max-width: 600px) {
     align-items: flex-start;
@@ -36,8 +36,8 @@ const Form = styled.form`
   button {
     font-family: var(--sans);
     font-size: var(--font-size);
-    border: 1px solid white;
-    background: white;
+    border: 1px solid var(--white);
+    background: var(--white);
     text-transform: uppercase;
   }
 
@@ -54,12 +54,12 @@ const Form = styled.form`
 const Input = styled.input`
   font-size: var(--font-size);
   font-family: var(--sans);
-  border: 2px solid white;
+  border: 2px solid var(--white);
   padding: 0.5rem;
-  background: black;
-  color: white;
+  background: var(--black);
+  color: var(--white);
   ::placeholder {
-    color: white;
+    color: var(--white);
     text-transform: uppercase;
   }
 `

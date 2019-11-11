@@ -44,8 +44,6 @@ const StyledPost = styled.div`
   .post-comments {
     margin-top: 3rem;
     margin-bottom: 4rem;
-    position: sticky;
-    top: 0;
   }
 
   @media (max-width: 600px) {
@@ -54,11 +52,11 @@ const StyledPost = styled.div`
       margin-top: 0.5rem;
       margin-bottom: 1.5rem;
     }
-  }
-`
 
-const StyledMap = styled.div`
-  .map-title {
+    .post-comments {
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+    }
   }
 `
 
@@ -91,7 +89,7 @@ export default function PostPage({ data }) {
             <Img fluid={post.mainImage.asset.fluid} />
             <BlockContent blocks={post._rawBody} />
             <Author author={post.author} />
-            <Divider />
+            <Divider bgLight={true} />
             {post.postPlaces.map(postPlace => (
               <PlaceCard
                 key={postPlace.id}
@@ -107,13 +105,13 @@ export default function PostPage({ data }) {
         <aside>
           <LatestPostsAside />
           <PopularPostsAside />
-          <div className="map-container sticky">
-            {commentsInView ? (
-              <About />
-            ) : (
+          {commentsInView ? (
+            <About />
+          ) : (
+            <div className="map-container sticky">
               <MapAside post={post} placeInView={placeInView} />
-            )}
-          </div>
+            </div>
+          )}
         </aside>
       </ContentAsideGrid>
     </>
@@ -121,7 +119,7 @@ export default function PostPage({ data }) {
 }
 
 const MapAside = ({ post, placeInView }) => (
-  <StyledMap>
+  <>
     <h2 className="map-title">{post.title}</h2>
     <Map
       places={post.postPlaces}
@@ -132,9 +130,8 @@ const MapAside = ({ post, placeInView }) => (
         marginTop: "5.5rem",
       }}
     />
-    {/* TODO add post share props  */}
     <Share />
-  </StyledMap>
+  </>
 )
 
 export const POST_PAGE_QUERY = graphql`

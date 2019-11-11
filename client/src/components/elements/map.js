@@ -3,6 +3,7 @@ import { Map, Marker, GoogleApiWrapper } from "google-maps-react"
 
 import Icon from "../../images/location-pin.svg"
 import RedIcon from "../../images/location-pin-red.svg"
+// grey icon
 
 class MapContainer extends React.Component {
   state = {
@@ -34,9 +35,10 @@ class MapContainer extends React.Component {
 
   makeBounds = () => {
     let points = []
-    this.props.places.map(place => {
-      points.push(place.place.location)
-    })
+    this.props.places &&
+      this.props.places.map(place => {
+        points.push(place.place.location)
+      })
 
     let bounds = new this.props.google.maps.LatLngBounds()
 
@@ -61,25 +63,28 @@ class MapContainer extends React.Component {
         onReady={this.makeBounds}
         bounds={this.state.bounds}
       >
-        {places.map(place => (
-          <Marker
-            key={place.place.id}
-            name={place.place.name}
-            title={place.place.name}
-            placeId={place.place.id}
-            icon={{
-              url:
-                this.state.mapCenter === place.place.location ? RedIcon : Icon,
-              anchor: new google.maps.Point(45, 45),
-              scaledSize: new google.maps.Size(45, 45),
-            }}
-            position={{
-              lat: place.place.location.lat,
-              lng: place.place.location.lng,
-            }}
-            onClick={this.onMarkerClick}
-          />
-        ))}
+        {places &&
+          places.map(place => (
+            <Marker
+              key={place.place.id}
+              name={place.place.name}
+              title={place.place.name}
+              placeId={place.place.id}
+              icon={{
+                url:
+                  this.state.mapCenter === place.place.location
+                    ? RedIcon
+                    : Icon,
+                anchor: new google.maps.Point(45, 45),
+                scaledSize: new google.maps.Size(45, 45),
+              }}
+              position={{
+                lat: place.place.location.lat,
+                lng: place.place.location.lng,
+              }}
+              onClick={this.onMarkerClick}
+            />
+          ))}
       </Map>
     )
   }

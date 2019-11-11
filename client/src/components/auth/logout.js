@@ -8,6 +8,7 @@ export default function Logout() {
 
   return (
     <Button
+      fillMobile
       onClick={() => {
         localStorage.removeItem("token")
         client.resetStore()
