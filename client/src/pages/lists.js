@@ -37,8 +37,6 @@ export default function ListsPage() {
     <StyledListPage>
       <ContentAsideGrid>
         <div className="content">
-          {/* <h2 className="content-title">My Lists</h2>
-          <Divider bgLight={true} /> */}
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
         <aside>
@@ -119,6 +117,14 @@ function ListItem({ list }) {
       listId: list.id,
       title: updatedTitle,
     },
+    optimisticResponse: {
+      __typename: "Mutation",
+      updateList: {
+        id: list.id,
+        __typename: "List",
+        title: updatedTitle,
+      },
+    },
   })
 
   return (
@@ -134,8 +140,8 @@ function ListItem({ list }) {
           <Form
             onSubmit={async e => {
               e.preventDefault()
-              const res = await updateList()
               setIsEdit(false)
+              const res = await updateList()
             }}
           >
             <Input
