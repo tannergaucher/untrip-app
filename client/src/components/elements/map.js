@@ -1,5 +1,5 @@
 import React from "react"
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react"
+import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
 
 import Icon from "../../images/location-pin.svg"
 import RedIcon from "../../images/location-pin-red.svg"
@@ -9,18 +9,10 @@ class MapContainer extends React.Component {
     bounds: null,
     mapCenter: null,
     sanitizedPlaces: "",
+    selectedPlace: "",
+    showingInfoWindow: false,
+    activeMarker: {},
   }
-
-  // onMarkerClick = marker => {
-  //   if (this.state.mapCenter !== marker.position) {
-  //     this.setState({
-  //       mapCenter: marker.position,
-  //     })
-  //   }
-  //   this.setState({
-  //     mapCenter: marker.position,
-  //   })
-  // }
 
   componentDidUpdate = (prevProps, prevState) => {
     if (
@@ -82,6 +74,23 @@ class MapContainer extends React.Component {
     this.setState({ bounds })
   }
 
+  handleMarkerClick = (props, marker) => {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+    })
+  }
+
+  handleMapClick = () => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null,
+      })
+    }
+  }
+
   render() {
     const { google, zoom, style, name } = this.props
 
@@ -95,6 +104,7 @@ class MapContainer extends React.Component {
         zoom={zoom}
         onReady={this.sanitizePlaces}
         bounds={this.state.bounds}
+        onClick={this.handleMapClick}
       >
         {this.state.sanitizedPlaces &&
           this.state.sanitizedPlaces.map(place => (
@@ -105,7 +115,10 @@ class MapContainer extends React.Component {
               placeId={place.id}
               icon={{
                 // FIX
-                url: this.state.mapCenter === place.location ? RedIcon : Icon,
+                url:
+                  this.state.selectedPlace.position === place.location
+                    ? RedIcon
+                    : Icon,
                 anchor: new google.maps.Point(45, 45),
                 scaledSize: new google.maps.Size(45, 45),
               }}
@@ -113,9 +126,18 @@ class MapContainer extends React.Component {
                 lat: place.location.lat,
                 lng: place.location.lng,
               }}
-              // onClick={this.onMarkerClick}
+              onClick={this.handleMarkerClick}
             />
           ))}
+
+        <InfoWindow
+          visible={this.state.showingInfoWindow}
+          marker={this.state.activeMarker}
+        >
+          <div>
+            <h1>{this.state.selectedPlace.name}</h1>
+          </div>
+        </InfoWindow>
       </Map>
     )
   }

@@ -36,7 +36,6 @@ const StyledListPage = styled.div`
     .list-details {
       flex-direction: column;
       align-items: flex-start;
-      /* justify-content: center; */
     }
 
     .share {
@@ -46,15 +45,7 @@ const StyledListPage = styled.div`
 `
 
 export default function UserListPage({ listId }) {
-  // const [windowSize, setWindowSize] = useState(null)
-
   const size = useWindowSize()
-
-  // useEffect(() => {
-  //   setWindowSize(size)
-  // }, [windowSize])
-
-  console.log(size)
 
   const { data, loading, error } = useQuery(LIST_QUERY, {
     variables: {
