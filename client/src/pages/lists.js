@@ -123,6 +123,7 @@ function ListItem({ list }) {
         id: list.id,
         __typename: "List",
         title: updatedTitle,
+        places: list.places,
       },
     },
   })
@@ -181,6 +182,7 @@ function ListPlace({ place, list, isEdit }) {
       lat: place.lat,
       lng: place.lng,
     },
+    // TODO: Optimistic response
   })
 
   return (
