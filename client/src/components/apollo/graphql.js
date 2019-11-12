@@ -111,6 +111,14 @@ export const UPDATE_LIST_MUTATION = gql`
   ${LIST_FRAGMENT}
 `
 
+export const DELETE_LIST_MUTATION = gql`
+  mutation DELETE_LIST_MUTATION($listId: String!) {
+    deleteList(listId: $listId) {
+      message
+    }
+  }
+`
+
 export const TOGGLE_PLACE_MUTATION = gql`
   mutation TOGGLE_PLACE_MUTATION(
     $listId: ID!

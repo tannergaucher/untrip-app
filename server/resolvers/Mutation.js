@@ -158,6 +158,22 @@ const Mutation = {
 
     return list
   },
+  deleteList: async (_parent, { listId }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    await prisma.deleteList({
+      id: listId,
+    })
+
+    return {
+      message: `You did it!`,
+    }
+  },
+
   togglePlace: async (
     _parent,
     { listId, sanityId, name, imageUrl, slug, lat, lng },

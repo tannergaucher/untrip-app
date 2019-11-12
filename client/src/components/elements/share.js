@@ -5,9 +5,11 @@ import { LinkButton } from "../styles"
 
 const StyledShare = styled.div`
   margin: 2rem 0;
+  display: flex;
+  flex-wrap: wrap;
 
   .share-btn {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
 
   .facebook {

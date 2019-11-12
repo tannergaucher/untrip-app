@@ -19,6 +19,7 @@ import {
   CURRENT_USER_QUERY,
   TOGGLE_PLACE_MUTATION,
   UPDATE_LIST_MUTATION,
+  DELETE_LIST_MUTATION,
 } from "../components/apollo/graphql"
 
 const StyledListPage = styled.div`
@@ -107,6 +108,11 @@ const StyledListItem = styled.div`
     display: flex;
     flex-direction: column;
   }
+
+  .delete-list-btn {
+    margin-top: 1rem;
+    color: var(--warning);
+  }
 `
 
 function ListItem({ list }) {
@@ -143,7 +149,7 @@ function ListItem({ list }) {
             onSubmit={async e => {
               e.preventDefault()
               setIsEdit(false)
-              const res = await updateList()
+              await updateList()
             }}
           >
             <Input
@@ -151,7 +157,6 @@ function ListItem({ list }) {
               onChange={e => setUpdatedTitle(e.target.value)}
             />
             <Button primary>Save</Button>
-            <Button>Delete List</Button>
           </Form>
         </div>
       )}
@@ -160,26 +165,51 @@ function ListItem({ list }) {
           <ListPlace key={place.id} place={place} list={list} isEdit={isEdit} />
         ))}
       </div>
-      <Share />
-      <Button primary onClick={() => navigate(`/app/list/${list.id}`)}>
-        View List
-      </Button>
+      {!isEdit && <Share />}
+
+      {!isEdit && (
+        <Button primary onClick={() => navigate(`/app/list/${list.id}`)}>
+          View List
+        </Button>
+      )}
+
+      {isEdit && <DeleteListButton listId={list.id} />}
+
       <Divider bgLight={true} />
     </StyledListItem>
+  )
+}
+
+function DeleteListButton({ listId }) {
+  const [deleteList, { loading, error }] = useMutation(DELETE_LIST_MUTATION, {
+    variables: {
+      listId,
+    },
+  })
+
+  return (
+    <Button
+      className="delete-list-btn"
+      disabled={loading}
+      onClick={() => deleteList()}
+    >
+      Delete List
+    </Button>
   )
 }
 
 const StyledListPlace = styled.div`
   .img-place-name {
     display: flex;
-    align-items: center;
+  }
+
+  .place-delete-btn {
+    height: 60px;
   }
 `
 
 function ListPlace({ place, list, isEdit }) {
-  console.log(place)
-
-  const [togglePlace, { loading, error }] = useMutation(TOGGLE_PLACE_MUTATION, {
+  const [togglePlace, { loading }] = useMutation(TOGGLE_PLACE_MUTATION, {
     variables: {
       listId: list.id,
       sanityId: place.sanityId,
@@ -193,31 +223,29 @@ function ListPlace({ place, list, isEdit }) {
 
   return (
     <StyledListPlace>
-      <div className="list-place">
-        <div className="img-place-name">
-          <Img
-            fluid={JSON.parse(place.imageUrl)}
-            style={{
-              height: `60px`,
-              width: `80px`,
-              marginRight: `1rem`,
-              marginBottom: `1rem`,
+      <div className="img-place-name">
+        <Img
+          fluid={JSON.parse(place.imageUrl)}
+          style={{
+            height: `60px`,
+            width: `80px`,
+            marginRight: `1rem`,
+            marginBottom: `1rem`,
+          }}
+        />
+        {isEdit ? (
+          <Button
+            className="place-delete-btn"
+            disabled={loading}
+            onClick={async () => {
+              await togglePlace()
             }}
-          />
-          {isEdit ? (
-            <Button
-              className="place-delete-btn"
-              disabled={loading}
-              onClick={async () => {
-                const res = await togglePlace()
-              }}
-            >
-              X {place.name}
-            </Button>
-          ) : (
-            <h2>{place.name}</h2>
-          )}
-        </div>
+          >
+            X {place.name}
+          </Button>
+        ) : (
+          <h2>{place.name}</h2>
+        )}
       </div>
     </StyledListPlace>
   )
