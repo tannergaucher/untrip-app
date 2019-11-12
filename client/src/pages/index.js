@@ -1,7 +1,7 @@
 import React from "react"
 
 import { SEO, About } from "../components/elements"
-import { Link, ContentAsideGrid } from "../components/styles"
+import { ContentAsideGrid } from "../components/styles"
 import { useLatestSanityPosts } from "../components/hooks"
 import {
   FullPostCard,
@@ -18,12 +18,7 @@ export default function IndexPage() {
       <ContentAsideGrid>
         <article className="content">
           {latestPostEdges.map(edge => (
-            <Link
-              plain
-              to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
-            >
-              <FullPostCard key={edge.node.id} post={edge.node} />
-            </Link>
+            <FullPostCard key={edge.node.id} post={edge.node} />
           ))}
         </article>
         <aside>

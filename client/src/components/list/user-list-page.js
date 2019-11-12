@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { useQuery } from "@apollo/react-hooks"
 import styled from "styled-components"
 
@@ -61,7 +61,8 @@ export default function UserListPage({ listId }) {
         <>
           <div className="list-details">
             <h1 className="list-title">{data.list.title}</h1>
-            <Share />
+            {/* get pinterest image from site metadata */}
+            <Share href={`/app/list/${data.list.id}`} pinterestImage={""} />
           </div>
 
           <div className="full-size-map">
@@ -75,17 +76,6 @@ export default function UserListPage({ listId }) {
               }}
             />
           </div>
-
-          {/* <div className="mobile-map">
-            <Map
-              places={data.list.places}
-              isUserList={true}
-              style={{
-                maxWidth: `calc(100% - 1rem)`,
-                height: `71vh`,
-              }}
-            />
-          </div> */}
         </>
       )}
     </StyledListPage>
