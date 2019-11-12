@@ -49,7 +49,7 @@ export default function Signup() {
             disabled={loading}
           />
 
-          <Button type="submit" primary>
+          <Button type="submit" primary loading={loading}>
             Sign Up
           </Button>
         </Form>

@@ -24,6 +24,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/tanner-gaucher/server/dev`
+  endpoint: `https://untrip-prod-3f0239fd8e.herokuapp.com/server/production`
 });
 exports.prisma = new exports.Prisma();

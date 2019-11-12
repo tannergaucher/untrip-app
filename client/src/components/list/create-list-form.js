@@ -6,7 +6,7 @@ import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 export default function CreateList({ place, setShow }) {
   const [title, setTitle] = useState("")
-  const [createList] = useMutation(CREATE_LIST_MUTATION, {
+  const [createList, { loading, error }] = useMutation(CREATE_LIST_MUTATION, {
     variables: {
       title,
       sanityId: place.id,
@@ -58,7 +58,7 @@ export default function CreateList({ place, setShow }) {
         required={true}
         placeholder="List Name"
       />
-      <Button type="submit" primary>
+      <Button type="submit" primary loading={loading}>
         Create List
       </Button>
     </Form>
