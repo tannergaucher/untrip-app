@@ -6,7 +6,6 @@ import Menu from "./menu"
 import Layout from "./layout"
 import Map from "./map"
 import Loading from "./loading"
-import NewsletterSignup from "./newsletter-signup"
 import ListPlaceMap from "./list-place-map"
 import Share from "./share"
 
@@ -19,7 +18,6 @@ export {
   Layout,
   Map,
   Loading,
-  NewsletterSignup,
   ListPlaceMap,
   Share,
 }

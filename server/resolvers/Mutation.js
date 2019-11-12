@@ -72,7 +72,7 @@ const Mutation = {
         })
 
         return {
-          message: 'Check your inbox and confirm your subscription',
+          message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
         }
       }
     }
@@ -83,7 +83,7 @@ const Mutation = {
     })
 
     return {
-      message: 'Check your inbox and confirm your subscription',
+      message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
     }
   },
   unsubscribeToEmail: async (_parent, { email }, _context) => {

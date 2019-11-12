@@ -10,6 +10,7 @@ const StyledShare = styled.div`
 
   .share-btn {
     margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .facebook {

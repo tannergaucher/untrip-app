@@ -1,17 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
+import { useMutation } from "@apollo/react-hooks"
 
-import { Divider, Button } from "../styles"
 import { Share } from "../elements"
+import { Divider, Button, Form, Input, StyledLayer } from "../styles"
+import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
 
 const Styled = styled.div`
   .site-description {
     margin-bottom: 1.5rem;
-  }
-
-  .create-account-btn {
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
   }
 `
 
@@ -24,13 +21,58 @@ export default function About() {
         in Kuala Lumpur.
       </p>
       <Share />
-      <Button className="newsletter-subscribe-btn">
-        Subscribe to weekly newsletter
-      </Button>
-      <Button className="create-account-btn" primary fillMobile>
-        Create an Account
-      </Button>
-      <Divider />
+      <EmailForm />
+      <Divider bgLight={true} />
     </Styled>
+  )
+}
+
+function EmailForm() {
+  const [message, setMessage] = useState("")
+  const [email, setEmail] = useState("")
+  const [subscribeToEmail, { loading, error }] = useMutation(
+    SUBSCRIBE_TO_EMAIL_MUTATION,
+    {
+      variables: {
+        email,
+      },
+    }
+  )
+
+  return (
+    <>
+      {error && `${error.message}`}
+      <Form
+        onSubmit={async e => {
+          e.preventDefault()
+          const { data } = await subscribeToEmail()
+          setEmail("")
+          setMessage(data.subscribeToEmail.message)
+        }}
+      >
+        <Input
+          placeholder="Email Address"
+          type="email"
+          value={email}
+          required="true"
+          onChange={e => setEmail(e.target.value)}
+        />
+        <Button type="submit" primary loading={loading}>
+          Subscribe to weekly newsletter
+        </Button>
+      </Form>
+      {message && (
+        <StyledLayer onEsc={() => setMessage("")} onEsc={() => setMessage("")}>
+          <div className="email-subscribe-modal">
+            <h1 className="center">🎉</h1>
+            <h2 className="center">{message}</h2>
+            <div className="end">
+              <h5>Change your mind already?</h5>
+              <Button>Unsubscribe</Button>
+            </div>
+          </div>
+        </StyledLayer>
+      )}
+    </>
   )
 }

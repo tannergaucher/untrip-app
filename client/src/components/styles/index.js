@@ -7,6 +7,7 @@ import Input from "./input"
 import Link from "./link"
 import StyledPage from "./styled-page"
 import ContentAsideGrid from "./content-aside-grid"
+import StyledLayer from "./styled-layer"
 
 export {
   Button,
@@ -18,4 +19,5 @@ export {
   StyledPage,
   Link,
   ContentAsideGrid,
+  StyledLayer,
 }

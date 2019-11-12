@@ -14,6 +14,7 @@ const Button = styled.button`
       : "var(--thickness) solid var(--black)"};
   border-radius: var(--radius);
   text-transform: uppercase;
+  opacity: ${props => (props.loading ? ".5" : "1")};
 
   @media (max-width: 600px) {
     width: ${props => (props.fillMobile ? "100%" : "")};
@@ -36,6 +37,7 @@ const LinkButton = styled.a`
       : "var(--thickness) solid var(--black)"};
   border-radius: var(--radius);
   text-transform: uppercase;
+  opacity: ${props => (props.loading ? ".5" : "1")};
 
   @media (max-width: 600px) {
     width: ${props => (props.fillMobile ? "100%" : "")};
