@@ -82,9 +82,8 @@ export default function PostPage({ data }) {
             </div>
             <h1 className="post-title">{post.title}</h1>
             <Share
-              fbHref={`http://facebook.com/dialog/share?app_id=2159447634360678&display=popuphref=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}`}
-              twitterHref={`https://twitter.com/intent/tweet?text=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}`}
-              pinterestHref={`https://www.pinterest.com/pin/create/button/?url=https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}&media=${post.mainImage.asset.url}`}
+              href={`/${post.category.slug.current}/${post.slug.current}`}
+              pinterestImageUrl={post.mainImage.asset.url}
             />
             <Img fluid={post.mainImage.asset.fluid} />
             <BlockContent blocks={post._rawBody} />
@@ -133,9 +132,13 @@ const MapAside = ({ post, placeInView }) => (
         height: `71vh`,
         maxWidth: `500px`,
         marginTop: "5.5rem",
+        zIndex: `-1`,
       }}
     />
-    <Share />
+    <Share
+      href={`/${post.category.slug.current}/${post.slug.current}`}
+      pinterestImageUrl={post.mainImage.asset.url}
+    />
   </>
 )
 

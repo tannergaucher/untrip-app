@@ -2,7 +2,7 @@ import React from "react"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
-import { Divider } from "../styles"
+import { Divider, Link } from "../styles"
 import { Share } from "../elements"
 
 const StyledFullPostCard = styled.div`
@@ -46,10 +46,11 @@ const StyledFullPostCard = styled.div`
 `
 
 export default function IndexCard({ post }) {
-  // TODO: Check for punctuation at index -1
   const postText = post._rawBody[0].children[0].text
   const textArr = postText.split(" ")
   const maxWordLength = 40
+
+  console.log(post)
 
   let excerpt
 
@@ -57,18 +58,24 @@ export default function IndexCard({ post }) {
     excerpt = textArr.join(" ")
   }
 
+  // TODO: Check for existing punctuation at index -1
   excerpt = `${textArr.slice(0, maxWordLength).join(" ")}...`
 
   return (
     <StyledFullPostCard>
-      <Img fluid={post.mainImage.asset.fluid} />
-      <div className="post-category-date">
-        <h6 className="post-category">{post.category.category} / </h6>
-        <h6 className="post-date">{post.publishedAt}</h6>
-      </div>
-      <h2 className="post-title">{post.title}</h2>
-      <p className="post-excerpt">{excerpt}</p>
-      <Share />
+      <Link to={`/${post.category.slug.current}/${post.slug.current}`} plain>
+        <Img fluid={post.mainImage.asset.fluid} />
+        <div className="post-category-date">
+          <h6 className="post-category">{post.category.category} / </h6>
+          <h6 className="post-date">{post.publishedAt}</h6>
+        </div>
+        <h2 className="post-title">{post.title}</h2>
+        <p className="post-excerpt">{excerpt}</p>
+      </Link>
+      <Share
+        href={`/${post.category.slug.current}/${post.slug.current}`}
+        pinterestImageUrl={post.mainImage.asset.url}
+      />
       <Divider bgLight={true} />
     </StyledFullPostCard>
   )
