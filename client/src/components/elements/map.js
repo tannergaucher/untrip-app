@@ -30,12 +30,15 @@ class MapContainer extends React.Component {
   sanitizePlaces = () => {
     const sanitizedPlaces = []
 
+    // PROBLEM: IMAGE IS SAVED IN DIFFERENT FORMATS
+
     if (this.props.isUserList) {
       this.props.places.forEach(place => {
         sanitizedPlaces.push({
           id: place.id,
           name: place.name,
-          image: place.imageUrl,
+          // image from db
+          image: JSON.parse(place.imageUrl),
           location: {
             lat: place.lat,
             lng: place.lng,
@@ -82,16 +85,11 @@ class MapContainer extends React.Component {
   }
 
   handleMarkerClick = (props, marker) => {
-    console.log(props)
-    console.log(marker)
-
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     })
-
-    console.log(this.state)
   }
 
   handleMapClick = () => {
@@ -144,15 +142,27 @@ class MapContainer extends React.Component {
             />
           ))}
 
-        <InfoWindow
-          visible={this.state.showingInfoWindow}
-          marker={this.state.activeMarker}
-        >
-          <div className="info-window">
-            <h1>{this.state.selectedPlace.name}</h1>
-            <LinkButton>View all posts</LinkButton>
-          </div>
-        </InfoWindow>
+        {this.state.selectedPlace && (
+          <InfoWindow
+            visible={this.state.showingInfoWindow}
+            marker={this.state.activeMarker}
+          >
+            <div className="info-window">
+              <h1>{this.state.selectedPlace.name}</h1>
+              <Img
+                fluid={this.state.selectedPlace.image}
+                style={{ marginBottom: `1rem` }}
+              />
+              <LinkButton
+                style={{
+                  border: `none`,
+                }}
+              >
+                View all posts
+              </LinkButton>
+            </div>
+          </InfoWindow>
+        )}
       </Map>
     )
   }
