@@ -58,7 +58,7 @@ const StyledPlace = styled.div`
   }
 `
 
-export default function PlaceCard({ postPlace, setPlaceInView }) {
+export default function PlaceCard({ postPlace, setPlaceInView, post }) {
   const [ref, inView] = useInView({
     threshold: 0,
   })
@@ -84,7 +84,7 @@ export default function PlaceCard({ postPlace, setPlaceInView }) {
         ))}
       </div>
       <BlockContent blocks={postPlace._rawText} />
-      <PlaceDetails place={postPlace} />
+      <PlaceDetails place={postPlace} post={post} />
       <Divider bgLight={true} />
     </StyledPlace>
   )

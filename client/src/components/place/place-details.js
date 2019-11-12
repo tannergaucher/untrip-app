@@ -1,15 +1,42 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 
-import { Button } from "../styles"
+import { Map } from "../elements"
+import { Button, StyledLayer, LinkButton } from "../styles"
 
 const StyledDetails = styled.div`
+  a {
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
   .show-details {
-    margin: 2rem 1rem;
+    margin: 1rem 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .only-mobile {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    a {
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .show-details {
+      flex-direction: column;
+    }
+
+    .only-mobile {
+      display: inline;
+    }
   }
 `
 
-export default function Details({ place }) {
+export default function Details({ place, post }) {
   const [show, setShow] = useState(false)
 
   return (
@@ -19,28 +46,72 @@ export default function Details({ place }) {
       {show && (
         <div className="show-details">
           {place.place.facebookLink && (
-            <a href={place.place.facebookLink}>
-              <h5>Facebook</h5>
-            </a>
+            <LinkButton
+              href={place.place.facebookLink}
+              style={{ color: `var(--facebook)` }}
+            >
+              Facebook
+            </LinkButton>
           )}
+
           {place.place.instagramLink && (
-            <a href={place.place.instagramLink}>
-              <h5>Instagram</h5>
-            </a>
+            <LinkButton
+              href={place.place.instagramLink}
+              style={{
+                color: `var(--instagram)`,
+              }}
+            >
+              Instagram
+            </LinkButton>
           )}
           {place.place.twitterLink && (
-            <a href={place.place.twitterLink}>
-              <h5>Twitter</h5>
-            </a>
+            <LinkButton
+              href={place.place.twitterLink}
+              style={{ color: `var(--twitter)` }}
+            >
+              Twitter
+            </LinkButton>
           )}
           {place.place.websiteLink && (
-            <a href={place.place.websiteLink}>
-              <h5>Website</h5>
-            </a>
+            <LinkButton
+              href={place.place.websiteLink}
+              style={{ color: `grey` }}
+            >
+              Website
+            </LinkButton>
           )}
-          {place.place.phoneNumber && <h5>{place.place.phoneNumber}</h5>}
+
+          {place.place.phoneNumber && (
+            <LinkButton href="#">{place.place.phoneNumber}</LinkButton>
+          )}
+          <div className="only-mobile">
+            <ShowOnMap post={post} />
+          </div>
         </div>
       )}
     </StyledDetails>
+  )
+}
+
+function ShowOnMap({ post }) {
+  const [show, setShow] = useState(false)
+
+  return (
+    <div style={{ marginTop: `.5rem` }}>
+      <Button onClick={() => setShow(true)} primary>
+        Show on map
+      </Button>
+      {show && (
+        <StyledLayer
+          onEsc={() => setShow(false)}
+          onClickOutside={() => setShow(false)}
+          style={{
+            padding: `0`,
+          }}
+        >
+          <Map isUserList={false} places={post.postPlaces} />
+        </StyledLayer>
+      )}
+    </div>
   )
 }

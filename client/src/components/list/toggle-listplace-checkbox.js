@@ -60,6 +60,9 @@ export default function TogglePlaceCheckBox({ place, list }) {
         onChange={async e => {
           await togglePlace()
         }}
+        style={{
+          color: `red`,
+        }}
       />
     </Styled>
   )

@@ -94,6 +94,7 @@ export default function PostPage({ data }) {
                 key={postPlace.id}
                 postPlace={postPlace}
                 setPlaceInView={setPlaceInView}
+                post={post}
               />
             ))}
             <div className="post-comments">

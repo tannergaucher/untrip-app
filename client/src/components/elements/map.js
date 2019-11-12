@@ -2,7 +2,7 @@ import React from "react"
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
 import Img from "gatsby-image"
 
-import { LinkButton } from "../styles"
+import { Link } from "../styles"
 import Icon from "../../images/location-pin.svg"
 import RedIcon from "../../images/location-pin-red.svg"
 
@@ -30,14 +30,11 @@ class MapContainer extends React.Component {
   sanitizePlaces = () => {
     const sanitizedPlaces = []
 
-    // PROBLEM: IMAGE IS SAVED IN DIFFERENT FORMATS
-
     if (this.props.isUserList) {
       this.props.places.forEach(place => {
         sanitizedPlaces.push({
           id: place.id,
           name: place.name,
-          // image from db
           image: JSON.parse(place.imageUrl),
           location: {
             lat: place.lat,
@@ -50,7 +47,6 @@ class MapContainer extends React.Component {
       this.setState({ sanitizedPlaces })
     } else {
       this.props.places.forEach(place => {
-        console.log(place)
         sanitizedPlaces.push({
           id: place.place.id,
           name: place.place.name,
@@ -153,13 +149,9 @@ class MapContainer extends React.Component {
                 fluid={this.state.selectedPlace.image}
                 style={{ marginBottom: `1rem` }}
               />
-              <LinkButton
-                style={{
-                  border: `none`,
-                }}
-              >
-                View all posts
-              </LinkButton>
+              <Link to={`/place/${this.state.selectedPlace.slug}`}>
+                <h2>View all posts</h2>
+              </Link>
             </div>
           </InfoWindow>
         )}

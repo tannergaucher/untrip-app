@@ -29,20 +29,9 @@ export default function Comments({ setCommentsInView }) {
       </Button>
       {show && (
         <>
-          <h2> Comments coming soon!</h2>
-          {/* <CreateComment /> */}
-          {/* <AllComments /> */}
+          <h2> Coming soon!</h2>
         </>
       )}
     </StyledComments>
-  )
-}
-
-function CreateComment() {
-  return (
-    <form>
-      <textarea />
-      <Button>Add Comment</Button>
-    </form>
   )
 }
