@@ -38,6 +38,7 @@ const LinkButton = styled.a`
   border-radius: var(--radius);
   text-transform: uppercase;
   opacity: ${props => (props.loading ? ".5" : "1")};
+  /* display: block; */
 
   @media (max-width: 600px) {
     width: ${props => (props.fillMobile ? "100%" : "")};

@@ -11,19 +11,6 @@ const StyledShare = styled.div`
   .share-btn {
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
-    z-index: 1000;
-  }
-
-  .facebook {
-    color: #3b5998;
-  }
-
-  .twitter {
-    color: #1da1f2;
-  }
-
-  .pinterest {
-    color: #c8232c;
   }
 
   .link {
@@ -43,16 +30,29 @@ export default function Share({ href, pinterestImageUrl }) {
 
   return (
     <StyledShare>
-      <LinkButton className="share-btn facebook" href={fb} target="_blank">
+      <LinkButton
+        className="share-btn"
+        href={fb}
+        target="_blank"
+        style={{
+          color: `var(--facebook)`,
+        }}
+      >
         Share
       </LinkButton>
-      <LinkButton className="share-btn twitter" href={twitter} target="_blank">
+      <LinkButton
+        className="share-btn"
+        href={twitter}
+        target="_blank"
+        style={{ color: `var(--twitter)` }}
+      >
         Tweet
       </LinkButton>
       <LinkButton
-        className="share-btn pinterest"
+        className="share-btn"
         href={pinterest}
         target="_blank"
+        style={{ color: `var(--pinterest)` }}
       >
         Pin
       </LinkButton>

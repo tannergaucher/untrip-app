@@ -14,43 +14,46 @@ export default function Login() {
   const client = useApolloClient()
 
   return (
-    <Fieldset>
-      {error && `${error.message}`}
-      <Form
-        onSubmit={async e => {
-          e.preventDefault()
-          const { data } = await login()
-          localStorage.setItem("token", data.login.token)
-          client.writeData({
-            data: {
-              isLoggedIn: true,
-              me: data.login.user,
-            },
-          })
-          navigate("/")
-        }}
-      >
-        <Input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          disabled={loading}
-          required="true"
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          disabled={loading}
-          required="true"
-        />
-        <Button type="submit" primary>
-          Log In
-        </Button>
-      </Form>
-    </Fieldset>
+    <>
+      <h2 style={{ textAlign: `center` }}>Login</h2>
+      <Fieldset>
+        {error && `${error.message}`}
+        <Form
+          onSubmit={async e => {
+            e.preventDefault()
+            const { data } = await login()
+            localStorage.setItem("token", data.login.token)
+            client.writeData({
+              data: {
+                isLoggedIn: true,
+                me: data.login.user,
+              },
+            })
+            navigate("/")
+          }}
+        >
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            disabled={loading}
+            required="true"
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            disabled={loading}
+            required="true"
+          />
+          <Button type="submit" primary>
+            Log In
+          </Button>
+        </Form>
+      </Fieldset>
+    </>
   )
 }

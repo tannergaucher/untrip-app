@@ -2,7 +2,7 @@ import React from "react"
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
 import Img from "gatsby-image"
 
-import { LinkButton } from "../styles"
+import { Link } from "../styles"
 import Icon from "../../images/location-pin.svg"
 import RedIcon from "../../images/location-pin-red.svg"
 
@@ -35,7 +35,7 @@ class MapContainer extends React.Component {
         sanitizedPlaces.push({
           id: place.id,
           name: place.name,
-          image: place.imageUrl,
+          image: JSON.parse(place.imageUrl),
           location: {
             lat: place.lat,
             lng: place.lng,
@@ -47,7 +47,6 @@ class MapContainer extends React.Component {
       this.setState({ sanitizedPlaces })
     } else {
       this.props.places.forEach(place => {
-        console.log(place)
         sanitizedPlaces.push({
           id: place.place.id,
           name: place.place.name,
@@ -82,16 +81,11 @@ class MapContainer extends React.Component {
   }
 
   handleMarkerClick = (props, marker) => {
-    console.log(props)
-    console.log(marker)
-
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     })
-
-    console.log(this.state)
   }
 
   handleMapClick = () => {
@@ -144,15 +138,23 @@ class MapContainer extends React.Component {
             />
           ))}
 
-        <InfoWindow
-          visible={this.state.showingInfoWindow}
-          marker={this.state.activeMarker}
-        >
-          <div className="info-window">
-            <h1>{this.state.selectedPlace.name}</h1>
-            <LinkButton>View all posts</LinkButton>
-          </div>
-        </InfoWindow>
+        {this.state.selectedPlace && (
+          <InfoWindow
+            visible={this.state.showingInfoWindow}
+            marker={this.state.activeMarker}
+          >
+            <div className="info-window">
+              <h1>{this.state.selectedPlace.name}</h1>
+              <Img
+                fluid={this.state.selectedPlace.image}
+                style={{ marginBottom: `1rem` }}
+              />
+              <Link to={`/place/${this.state.selectedPlace.slug}`}>
+                <h2>View all posts</h2>
+              </Link>
+            </div>
+          </InfoWindow>
+        )}
       </Map>
     )
   }
