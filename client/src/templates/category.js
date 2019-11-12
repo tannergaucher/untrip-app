@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import { SEO } from "../components/elements"
+import { SEO, About } from "../components/elements"
 import { ContentAsideGrid, Link } from "../components/styles"
 import {
   FullPostCard,
@@ -27,6 +27,7 @@ export default function CategoryPage({ data, pageContext }) {
         <aside>
           <LatestPostsAside />
           <PopularPostsAside />
+          <About />
         </aside>
       </ContentAsideGrid>
     </>

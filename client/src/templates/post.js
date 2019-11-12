@@ -105,13 +105,18 @@ export default function PostPage({ data }) {
         <aside>
           <LatestPostsAside />
           <PopularPostsAside />
-          {commentsInView ? (
+          <div className="only-mobile">
             <About />
-          ) : (
-            <div className="map-container sticky">
-              <MapAside post={post} placeInView={placeInView} />
-            </div>
-          )}
+          </div>
+          <div className="sticky">
+            {commentsInView ? (
+              <About />
+            ) : (
+              <div className="map-container">
+                <MapAside post={post} placeInView={placeInView} />
+              </div>
+            )}
+          </div>
         </aside>
       </ContentAsideGrid>
     </>

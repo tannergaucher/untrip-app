@@ -31,6 +31,10 @@ const ContentAsideGrid = styled.div`
     top: 3rem;
   }
 
+  .only-mobile {
+    display: none;
+  }
+
   @media (max-width: 900px) {
     margin: 2rem 0.5rem;
     grid-template-areas:
@@ -49,6 +53,10 @@ const ContentAsideGrid = styled.div`
 
     .map-container {
       display: none;
+    }
+
+    .only-mobile {
+      display: inline;
     }
   }
 `

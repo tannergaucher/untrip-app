@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import { Divider, Button } from "../styles"
+import { Menu } from "../elements"
 
 const StyledFooter = styled.footer`
   background: var(--black);
@@ -16,7 +17,10 @@ const StyledFooter = styled.footer`
 
   .site-description {
     margin: 0;
-    font-weight: 300;
+  }
+
+  .only-mobile {
+    display: none;
   }
 
   @media (max-width: 600px) {
@@ -32,6 +36,10 @@ const StyledFooter = styled.footer`
       justify-content: space-between;
       align-items: center;
     }
+
+    .only-mobile {
+      display: inline;
+    }
   }
 `
 
@@ -41,10 +49,12 @@ export default function Footer() {
       <div className="flex">
         <div className="site-details">
           <h2 className="site-title">Untrip</h2>
-          <h5 className="site-description">Curated Kuala Lumpur</h5>
+          <h6 className="site-description">Curated Kuala Lumpur</h6>
         </div>
 
-        {/* <Button>Menu</Button> */}
+        <div className="only-mobile">
+          <Menu />
+        </div>
       </div>
       <Divider bgLight={false} />
     </StyledFooter>
