@@ -16,7 +16,7 @@ export default function Login() {
   return (
     <>
       <h2 style={{ textAlign: `center` }}>Login</h2>
-      <Fieldset>
+      <Fieldset disabled={loading}>
         {error && `${error.message}`}
         <Form
           onSubmit={async e => {
@@ -49,7 +49,7 @@ export default function Login() {
             disabled={loading}
             required="true"
           />
-          <Button type="submit" primary>
+          <Button type="submit" primary loading={loading}>
             Log In
           </Button>
         </Form>
