@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import { Divider, Button } from "../styles"
+import { Divider } from "../styles"
 import { Menu } from "../elements"
 
 const StyledFooter = styled.footer`
@@ -51,7 +51,6 @@ export default function Footer() {
           <h2 className="site-title">Untrip</h2>
           <h6 className="site-description">Curated Kuala Lumpur</h6>
         </div>
-
         <div className="only-mobile">
           <Menu />
         </div>

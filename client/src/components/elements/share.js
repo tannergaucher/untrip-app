@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 
 import { LinkButton } from "../styles"
@@ -56,7 +56,42 @@ export default function Share({ href, pinterestImageUrl }) {
       >
         Pin
       </LinkButton>
-      <LinkButton className="share-btn link">Link</LinkButton>
+      <CopyLinkButton href={href} />
     </StyledShare>
+  )
+}
+
+function CopyLinkButton({ href }) {
+  const [copied, setCopied] = useState(false)
+  const buttonEl = useRef(null)
+
+  const handleClick = e => {
+    if (e.target === buttonEl.current) {
+      setCopied(true)
+      navigator.clipboard.writeText(`https://untrip.app${href ? href : ""}`)
+    } else {
+      setCopied(false)
+      navigator.clipboard.writeText("")
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick)
+    }
+  }, [handleClick])
+
+  return (
+    <LinkButton
+      className="share-btn link"
+      ref={buttonEl}
+      style={{
+        color: copied ? "green" : "",
+      }}
+    >
+      Link
+    </LinkButton>
   )
 }
