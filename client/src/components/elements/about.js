@@ -62,7 +62,10 @@ function EmailForm() {
         </Button>
       </Form>
       {message && (
-        <StyledLayer onEsc={() => setMessage("")} onEsc={() => setMessage("")}>
+        <StyledLayer
+          onEsc={() => setMessage("")}
+          onClickOutside={() => setMessage("")}
+        >
           <div className="email-subscribe-modal">
             <h1 className="center">🎉</h1>
             <h2 className="center">{message}</h2>
