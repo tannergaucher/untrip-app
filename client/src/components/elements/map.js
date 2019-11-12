@@ -1,6 +1,8 @@
 import React from "react"
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
+import Img from "gatsby-image"
 
+import { LinkButton } from "../styles"
 import Icon from "../../images/location-pin.svg"
 import RedIcon from "../../images/location-pin-red.svg"
 
@@ -33,23 +35,28 @@ class MapContainer extends React.Component {
         sanitizedPlaces.push({
           id: place.id,
           name: place.name,
+          image: place.imageUrl,
           location: {
             lat: place.lat,
             lng: place.lng,
           },
+          slug: place.slug,
         })
       })
 
       this.setState({ sanitizedPlaces })
     } else {
       this.props.places.forEach(place => {
+        console.log(place)
         sanitizedPlaces.push({
           id: place.place.id,
           name: place.place.name,
+          image: place.place.image.asset.fluid,
           location: {
             lat: place.place.location.lat,
             lng: place.place.location.lng,
           },
+          slug: place.place.slug.current,
         })
       })
     }
@@ -75,11 +82,16 @@ class MapContainer extends React.Component {
   }
 
   handleMarkerClick = (props, marker) => {
+    console.log(props)
+    console.log(marker)
+
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     })
+
+    console.log(this.state)
   }
 
   handleMapClick = () => {
@@ -110,9 +122,11 @@ class MapContainer extends React.Component {
           this.state.sanitizedPlaces.map(place => (
             <Marker
               key={place.id}
-              name={place.name}
               title={place.name}
-              placeId={place.id}
+              id={place.id}
+              name={place.name}
+              image={place.image}
+              slug={place.slug}
               icon={{
                 // FIX
                 url:
@@ -134,8 +148,9 @@ class MapContainer extends React.Component {
           visible={this.state.showingInfoWindow}
           marker={this.state.activeMarker}
         >
-          <div>
+          <div className="info-window">
             <h1>{this.state.selectedPlace.name}</h1>
+            <LinkButton>View all posts</LinkButton>
           </div>
         </InfoWindow>
       </Map>

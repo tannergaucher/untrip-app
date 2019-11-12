@@ -143,8 +143,6 @@ const Mutation = {
   updateList: async (_parent, { listId, title }, context) => {
     const userId = getUserId(context)
 
-    console.log('UPDAET LIST')
-
     if (!userId) {
       throw new AuthError()
     }
@@ -157,8 +155,6 @@ const Mutation = {
         title,
       },
     })
-
-    console.log(list)
 
     return list
   },

@@ -6,6 +6,7 @@ import { Button } from "../styles"
 
 const StyledAuthTabs = styled.div`
   color: var(--black);
+  margin: 0 auto;
 
   h2 {
     text-align: center;
@@ -27,7 +28,6 @@ export default function AuthTabs() {
 
   return (
     <StyledAuthTabs>
-      <h2>Please sign in</h2>
       {show === "Login" ? <Login /> : <Signup />}
       {show === "Login" && (
         <div className="toggle-auth">

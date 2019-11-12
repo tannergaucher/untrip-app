@@ -105,6 +105,7 @@ const StyledListItem = styled.div`
 
   .list-places {
     display: flex;
+    flex-direction: column;
   }
 `
 
@@ -150,6 +151,7 @@ function ListItem({ list }) {
               onChange={e => setUpdatedTitle(e.target.value)}
             />
             <Button primary>Save</Button>
+            <Button>Delete List</Button>
           </Form>
         </div>
       )}
@@ -167,7 +169,12 @@ function ListItem({ list }) {
   )
 }
 
-const StyledListPlace = styled.div``
+const StyledListPlace = styled.div`
+  .img-place-name {
+    display: flex;
+    align-items: center;
+  }
+`
 
 function ListPlace({ place, list, isEdit }) {
   console.log(place)
@@ -182,31 +189,35 @@ function ListPlace({ place, list, isEdit }) {
       lat: place.lat,
       lng: place.lng,
     },
-    // TODO: Optimistic response
   })
 
   return (
     <StyledListPlace>
       <div className="list-place">
-        <Img
-          fluid={JSON.parse(place.imageUrl)}
-          style={{
-            height: `60px`,
-            width: `80px`,
-            marginRight: `1rem`,
-            marginBottom: `1rem`,
-          }}
-        />
-        {isEdit && (
-          <Button
-            disabled={loading}
-            onClick={async () => {
-              const res = await togglePlace()
+        <div className="img-place-name">
+          <Img
+            fluid={JSON.parse(place.imageUrl)}
+            style={{
+              height: `60px`,
+              width: `80px`,
+              marginRight: `1rem`,
+              marginBottom: `1rem`,
             }}
-          >
-            X
-          </Button>
-        )}
+          />
+          {isEdit ? (
+            <Button
+              className="place-delete-btn"
+              disabled={loading}
+              onClick={async () => {
+                const res = await togglePlace()
+              }}
+            >
+              X {place.name}
+            </Button>
+          ) : (
+            <h2>{place.name}</h2>
+          )}
+        </div>
       </div>
     </StyledListPlace>
   )

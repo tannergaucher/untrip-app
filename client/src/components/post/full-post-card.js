@@ -3,6 +3,7 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 import { Divider } from "../styles"
+import { Share } from "../elements"
 
 const StyledFullPostCard = styled.div`
   margin-bottom: 3rem;
@@ -67,6 +68,7 @@ export default function IndexCard({ post }) {
       </div>
       <h2 className="post-title">{post.title}</h2>
       <p className="post-excerpt">{excerpt}</p>
+      <Share />
       <Divider bgLight={true} />
     </StyledFullPostCard>
   )

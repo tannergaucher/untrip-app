@@ -21,9 +21,18 @@ const StyledShare = styled.div`
   .pinterest {
     color: #c8232c;
   }
+
+  .link {
+    color: grey;
+  }
 `
 
-export default function Share({ fbHref, twitterHref, pinterestHref }) {
+export default function Share({
+  fbHref,
+  twitterHref,
+  pinterestHref,
+  linkHref,
+}) {
   return (
     <StyledShare>
       <LinkButton className="share-btn facebook" href={fbHref}>
@@ -34,6 +43,9 @@ export default function Share({ fbHref, twitterHref, pinterestHref }) {
       </LinkButton>
       <LinkButton className="share-btn pinterest" href={pinterestHref}>
         Pin
+      </LinkButton>
+      <LinkButton className="share-btn link" href={linkHref}>
+        Link
       </LinkButton>
     </StyledShare>
   )
