@@ -14,44 +14,46 @@ export default function Signup() {
   const client = useApolloClient()
 
   return (
-    <Fieldset disabled={loading}>
-      {error && `${error.message}`}
+    <>
+      <h2 style={{ textAlign: `center` }}>Sign Up</h2>
+      <Fieldset disabled={loading}>
+        {error && `${error.message}`}
+        <Form
+          onSubmit={async e => {
+            e.preventDefault()
+            const { data } = await signup()
+            localStorage.setItem("token", data.signup.token)
+            client.writeData({
+              data: {
+                isLoggedIn: true,
+                me: data.signup.user,
+              },
+            })
+            navigate(`/`)
+          }}
+        >
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            disabled={loading}
+          />
 
-      <Form
-        onSubmit={async e => {
-          e.preventDefault()
-          const { data } = await signup()
-          localStorage.setItem("token", data.signup.token)
-          client.writeData({
-            data: {
-              isLoggedIn: true,
-              me: data.signup.user,
-            },
-          })
-          navigate(`/`)
-        }}
-      >
-        <Input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          disabled={loading}
-        />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            disabled={loading}
+          />
 
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          disabled={loading}
-        />
-
-        <Button type="submit" primary>
-          Sign Up
-        </Button>
-      </Form>
-    </Fieldset>
+          <Button type="submit" primary>
+            Sign Up
+          </Button>
+        </Form>
+      </Fieldset>
+    </>
   )
 }

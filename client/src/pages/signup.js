@@ -1,17 +1,16 @@
 import React from "react"
 
 import { Signup } from "../components/auth"
+import { ContentAsideGrid } from "../components/styles"
 
 export default function SignupPage() {
   return (
-    <>
-      <div className="welcome-message">
-        <h2>Some message here</h2>
-      </div>
-      <div className="auth">
-        <h3>Sign up for an account </h3>
+    <ContentAsideGrid>
+      <div className="content">{/* <h2>Brand content here</h2> */}</div>
+
+      <aside>
         <Signup />
-      </div>
-    </>
+      </aside>
+    </ContentAsideGrid>
   )
 }

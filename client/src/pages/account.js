@@ -13,12 +13,9 @@ export default function AccountPage() {
       <div className="content">
         {loading && `Loading...`}
         {error && `Error: ${error.message}`}
-        {data && data.isLoggedIn ? <UserAccount /> : <AuthTabs />}
+        {data && data.isLoggedIn ? <UserAccount /> : null}
       </div>
-      <aside>
-        {/*  */}
-        {/*  */}
-      </aside>
+      <aside>{data && !data.isLoggedIn && <AuthTabs />}</aside>
     </ContentAsideGrid>
   )
 }

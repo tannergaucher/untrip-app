@@ -6,7 +6,6 @@ import { Button } from "../styles"
 
 const StyledAuthTabs = styled.div`
   color: var(--black);
-  margin: 0 auto;
 
   h2 {
     text-align: center;

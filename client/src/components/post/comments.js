@@ -29,8 +29,8 @@ export default function Comments({ setCommentsInView }) {
       </Button>
       {show && (
         <>
-          Comments
-          <CreateComment />
+          <h2> Comments coming soon!</h2>
+          {/* <CreateComment /> */}
           {/* <AllComments /> */}
         </>
       )}

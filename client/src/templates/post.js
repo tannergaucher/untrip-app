@@ -132,7 +132,6 @@ const MapAside = ({ post, placeInView }) => (
         height: `71vh`,
         maxWidth: `500px`,
         marginTop: "5.5rem",
-        zIndex: `-1`,
       }}
     />
     <Share

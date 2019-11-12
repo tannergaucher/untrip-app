@@ -11,7 +11,7 @@ const StyledShare = styled.div`
   .share-btn {
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
-    z-index: 1000;
+    /* z-index: 1000; */
   }
 
   .facebook {
