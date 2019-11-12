@@ -18,6 +18,8 @@ import {
   IS_LOGGED_IN,
   CURRENT_USER_QUERY,
   TOGGLE_PLACE_MUTATION,
+  UPDATE_LIST_MUTATION,
+  DELETE_LIST_MUTATION,
 } from "../components/apollo/graphql"
 
 const StyledListPage = styled.div`
@@ -36,8 +38,6 @@ export default function ListsPage() {
     <StyledListPage>
       <ContentAsideGrid>
         <div className="content">
-          <h2 className="content-title">My Lists</h2>
-          <Divider bgLight={true} />
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
         <aside>
@@ -106,11 +106,34 @@ const StyledListItem = styled.div`
 
   .list-places {
     display: flex;
+    flex-direction: column;
+  }
+
+  .delete-list-btn {
+    margin-top: 1rem;
+    color: var(--warning);
   }
 `
 
 function ListItem({ list }) {
   const [isEdit, setIsEdit] = useState(false)
+  const [updatedTitle, setUpdatedTitle] = useState("")
+
+  const [updateList, { loading, error }] = useMutation(UPDATE_LIST_MUTATION, {
+    variables: {
+      listId: list.id,
+      title: updatedTitle,
+    },
+    optimisticResponse: {
+      __typename: "Mutation",
+      updateList: {
+        id: list.id,
+        __typename: "List",
+        title: updatedTitle,
+        places: list.places,
+      },
+    },
+  })
 
   return (
     <StyledListItem>
@@ -123,12 +146,16 @@ function ListItem({ list }) {
       {isEdit && (
         <div className="edit-form">
           <Form
-            onSubmit={e => {
+            onSubmit={async e => {
               e.preventDefault()
-              // update list name mutation
+              setIsEdit(false)
+              await updateList()
             }}
           >
-            <Input defaultValue={list.title} />
+            <Input
+              defaultValue={list.title}
+              onChange={e => setUpdatedTitle(e.target.value)}
+            />
             <Button primary>Save</Button>
           </Form>
         </div>
@@ -138,21 +165,51 @@ function ListItem({ list }) {
           <ListPlace key={place.id} place={place} list={list} isEdit={isEdit} />
         ))}
       </div>
-      <Share />
-      <Button primary onClick={() => navigate(`/app/list/${list.id}`)}>
-        View List
-      </Button>
+      {!isEdit && <Share />}
+
+      {!isEdit && (
+        <Button primary onClick={() => navigate(`/app/list/${list.id}`)}>
+          View List
+        </Button>
+      )}
+
+      {isEdit && <DeleteListButton listId={list.id} />}
+
       <Divider bgLight={true} />
     </StyledListItem>
   )
 }
 
-const StyledListPlace = styled.div``
+function DeleteListButton({ listId }) {
+  const [deleteList, { loading, error }] = useMutation(DELETE_LIST_MUTATION, {
+    variables: {
+      listId,
+    },
+  })
+
+  return (
+    <Button
+      className="delete-list-btn"
+      disabled={loading}
+      onClick={() => deleteList()}
+    >
+      Delete List
+    </Button>
+  )
+}
+
+const StyledListPlace = styled.div`
+  .img-place-name {
+    display: flex;
+  }
+
+  .place-delete-btn {
+    height: 60px;
+  }
+`
 
 function ListPlace({ place, list, isEdit }) {
-  console.log(place)
-
-  const [togglePlace, { loading, error }] = useMutation(TOGGLE_PLACE_MUTATION, {
+  const [togglePlace, { loading }] = useMutation(TOGGLE_PLACE_MUTATION, {
     variables: {
       listId: list.id,
       sanityId: place.sanityId,
@@ -166,7 +223,7 @@ function ListPlace({ place, list, isEdit }) {
 
   return (
     <StyledListPlace>
-      <div className="list-place">
+      <div className="img-place-name">
         <Img
           fluid={JSON.parse(place.imageUrl)}
           style={{
@@ -176,15 +233,18 @@ function ListPlace({ place, list, isEdit }) {
             marginBottom: `1rem`,
           }}
         />
-        {isEdit && (
+        {isEdit ? (
           <Button
+            className="place-delete-btn"
             disabled={loading}
             onClick={async () => {
-              const res = await togglePlace()
+              await togglePlace()
             }}
           >
-            X
+            X {place.name}
           </Button>
+        ) : (
+          <h2>{place.name}</h2>
         )}
       </div>
     </StyledListPlace>

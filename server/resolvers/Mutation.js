@@ -72,7 +72,7 @@ const Mutation = {
         })
 
         return {
-          message: 'Check your inbox and confirm your subscription',
+          message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
         }
       }
     }
@@ -83,7 +83,7 @@ const Mutation = {
     })
 
     return {
-      message: 'Check your inbox and confirm your subscription',
+      message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
     }
   },
   unsubscribeToEmail: async (_parent, { email }, _context) => {
@@ -140,6 +140,40 @@ const Mutation = {
 
     return list
   },
+  updateList: async (_parent, { listId, title }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    const list = await prisma.updateList({
+      where: {
+        id: listId,
+      },
+      data: {
+        title,
+      },
+    })
+
+    return list
+  },
+  deleteList: async (_parent, { listId }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    await prisma.deleteList({
+      id: listId,
+    })
+
+    return {
+      message: `You did it!`,
+    }
+  },
+
   togglePlace: async (
     _parent,
     { listId, sanityId, name, imageUrl, slug, lat, lng },

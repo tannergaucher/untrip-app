@@ -37,6 +37,7 @@ export default function Login() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           disabled={loading}
+          required="true"
         />
         <Input
           type="password"
@@ -44,6 +45,7 @@ export default function Login() {
           value={password}
           onChange={e => setPassword(e.target.value)}
           disabled={loading}
+          required="true"
         />
         <Button type="submit" primary>
           Log In

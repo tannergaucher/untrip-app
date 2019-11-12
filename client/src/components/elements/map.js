@@ -1,25 +1,19 @@
 import React from "react"
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react"
+import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
+import Img from "gatsby-image"
 
+import { LinkButton } from "../styles"
 import Icon from "../../images/location-pin.svg"
 import RedIcon from "../../images/location-pin-red.svg"
-// grey icon
 
 class MapContainer extends React.Component {
   state = {
     bounds: null,
     mapCenter: null,
-  }
-
-  onMarkerClick = marker => {
-    if (this.state.mapCenter !== marker.position) {
-      this.setState({
-        mapCenter: marker.position,
-      })
-    }
-    this.setState({
-      mapCenter: marker.position,
-    })
+    sanitizedPlaces: "",
+    selectedPlace: "",
+    showingInfoWindow: false,
+    activeMarker: {},
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -33,12 +27,50 @@ class MapContainer extends React.Component {
     }
   }
 
+  sanitizePlaces = () => {
+    const sanitizedPlaces = []
+
+    if (this.props.isUserList) {
+      this.props.places.forEach(place => {
+        sanitizedPlaces.push({
+          id: place.id,
+          name: place.name,
+          image: place.imageUrl,
+          location: {
+            lat: place.lat,
+            lng: place.lng,
+          },
+          slug: place.slug,
+        })
+      })
+
+      this.setState({ sanitizedPlaces })
+    } else {
+      this.props.places.forEach(place => {
+        console.log(place)
+        sanitizedPlaces.push({
+          id: place.place.id,
+          name: place.place.name,
+          image: place.place.image.asset.fluid,
+          location: {
+            lat: place.place.location.lat,
+            lng: place.place.location.lng,
+          },
+          slug: place.place.slug.current,
+        })
+      })
+    }
+
+    this.setState({ sanitizedPlaces })
+    this.makeBounds()
+  }
+
   makeBounds = () => {
     let points = []
-    this.props.places &&
-      this.props.places.map(place => {
-        points.push(place.place.location)
-      })
+
+    this.state.sanitizedPlaces.map(place => {
+      points.push(place.location)
+    })
 
     let bounds = new this.props.google.maps.LatLngBounds()
 
@@ -49,8 +81,30 @@ class MapContainer extends React.Component {
     this.setState({ bounds })
   }
 
+  handleMarkerClick = (props, marker) => {
+    console.log(props)
+    console.log(marker)
+
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+    })
+
+    console.log(this.state)
+  }
+
+  handleMapClick = () => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null,
+      })
+    }
+  }
+
   render() {
-    const { google, zoom, style, name, places } = this.props
+    const { google, zoom, style, name } = this.props
 
     return (
       <Map
@@ -60,31 +114,45 @@ class MapContainer extends React.Component {
         style={style}
         name={name}
         zoom={zoom}
-        onReady={this.makeBounds}
+        onReady={this.sanitizePlaces}
         bounds={this.state.bounds}
+        onClick={this.handleMapClick}
       >
-        {places &&
-          places.map(place => (
+        {this.state.sanitizedPlaces &&
+          this.state.sanitizedPlaces.map(place => (
             <Marker
-              key={place.place.id}
-              name={place.place.name}
-              title={place.place.name}
-              placeId={place.place.id}
+              key={place.id}
+              title={place.name}
+              id={place.id}
+              name={place.name}
+              image={place.image}
+              slug={place.slug}
               icon={{
+                // FIX
                 url:
-                  this.state.mapCenter === place.place.location
+                  this.state.selectedPlace.position === place.location
                     ? RedIcon
                     : Icon,
                 anchor: new google.maps.Point(45, 45),
                 scaledSize: new google.maps.Size(45, 45),
               }}
               position={{
-                lat: place.place.location.lat,
-                lng: place.place.location.lng,
+                lat: place.location.lat,
+                lng: place.location.lng,
               }}
-              onClick={this.onMarkerClick}
+              onClick={this.handleMarkerClick}
             />
           ))}
+
+        <InfoWindow
+          visible={this.state.showingInfoWindow}
+          marker={this.state.activeMarker}
+        >
+          <div className="info-window">
+            <h1>{this.state.selectedPlace.name}</h1>
+            <LinkButton>View all posts</LinkButton>
+          </div>
+        </InfoWindow>
       </Map>
     )
   }

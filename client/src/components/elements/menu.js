@@ -62,6 +62,7 @@ export default function Menu() {
 
 const AuthedLinks = () => (
   <>
+    <br />
     <Link to="/lists" plain>
       <h2 className="menu-link">My Lists</h2>
     </Link>
