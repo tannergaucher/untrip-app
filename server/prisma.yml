@@ -1,6 +1,7 @@
-endpoint: https://eu1.prisma.sh/tanner-gaucher/server/dev
 datamodel: datamodel.prisma
 
 generate:
   - generator: javascript-client
     output: ./generated/prisma-client/
+
+endpoint: https://untrip-prod-3f0239fd8e.herokuapp.com/server/production
