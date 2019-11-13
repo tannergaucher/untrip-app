@@ -42,7 +42,11 @@ export default function UserLists({ place }) {
           <br />
           <Button
             onClick={() => setShow(!show)}
-            style={{ color: `red`, marginTop: `1rem` }}
+            style={{
+              borderColor: `var(--accent)`,
+              color: `var(--accent)`,
+              marginTop: `1.5rem`,
+            }}
           >
             New List
           </Button>
@@ -97,6 +101,8 @@ function AddPlace({ place, list }) {
     },
     update: (cache, payload) => {
       const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+      console.log(payload)
+      console.log(data)
     },
   })
 

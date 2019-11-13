@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useMutation, useApolloClient } from "@apollo/react-hooks"
+import { useMutation } from "@apollo/react-hooks"
 import { navigate } from "gatsby"
 
 import { LOGIN_MUTATION } from "../apollo/graphql"
@@ -8,10 +8,9 @@ import { Button, Fieldset, Form, Input } from "../styles"
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
+  const [login, { loading, error, client }] = useMutation(LOGIN_MUTATION, {
     variables: { email, password },
   })
-  const client = useApolloClient()
 
   return (
     <>

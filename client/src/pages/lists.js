@@ -110,7 +110,6 @@ const StyledListItem = styled.div`
 
   .delete-list-btn {
     margin-top: 1rem;
-    color: var(--warning);
   }
 `
 
@@ -191,6 +190,10 @@ function DeleteListButton({ listId }) {
       className="delete-list-btn"
       disabled={loading}
       onClick={() => deleteList()}
+      style={{
+        color: `var(--accent)`,
+        border: `var(--accent)`,
+      }}
     >
       Delete List
     </Button>

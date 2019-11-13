@@ -58,7 +58,8 @@ function EmailForm() {
           required={true}
           onChange={e => setEmail(e.target.value)}
         />
-        <Button type="submit" primary loading={loading.toString()}>
+
+        <Button type="submit" primary loading={loading}>
           Subscribe to weekly newsletter
         </Button>
       </Form>
