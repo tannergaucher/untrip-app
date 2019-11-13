@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require('apollo-server')
 
 const typeDefs = gql`
   type AuthPayload {
@@ -21,11 +21,11 @@ const typeDefs = gql`
   type List {
     id: ID!
     title: String!
-    places: [Place!]
+    places: [ListPlace!]
     user: User!
   }
 
-  type Place {
+  type ListPlace {
     id: ID!
     sanityId: String
     name: String
@@ -60,18 +60,19 @@ const typeDefs = gql`
     ): List!
     updateList(listId: String!, title: String!): List!
     deleteList(listId: String!): SuccessMessage!
-    togglePlace(
-      listId: ID!
+    addToList(
+      listId: ID
       sanityId: String
       name: String
       imageUrl: String
       slug: String
       lat: Float
       lng: Float
-    ): List!
+    ): ListPlace
+    removeFromList(sanityId: String): ListPlace
     subscribeToEmail(email: String!): SuccessMessage!
     unsubscribeToEmail(email: String!): SuccessMessage!
   }
-`;
+`
 
-module.exports = typeDefs;
+module.exports = typeDefs

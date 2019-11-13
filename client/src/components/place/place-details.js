@@ -41,8 +41,9 @@ export default function Details({ place, post }) {
 
   return (
     <StyledDetails>
-      <Button onClick={() => setShow(!show)}>Details</Button>
-
+      <Button onClick={() => setShow(!show)} primary={show}>
+        Details
+      </Button>
       {show && (
         <div className="show-details">
           {place.place.facebookLink && (

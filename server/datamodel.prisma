@@ -9,11 +9,11 @@ type User {
 type List {
   id: ID! @id 
   title: String!
-  places: [Place!]
+  places: [ListPlace!]
   user: User!
 }
 
-type Place {
+type ListPlace {
   id: ID! @id
   sanityId: String
   name: String

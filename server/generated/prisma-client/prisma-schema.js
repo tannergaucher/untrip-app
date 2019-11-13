@@ -11,7 +11,7 @@ type AggregateList {
   count: Int!
 }
 
-type AggregatePlace {
+type AggregateListPlace {
   count: Int!
 }
 
@@ -124,7 +124,7 @@ input EmailSubscriberWhereUniqueInput {
 type List {
   id: ID!
   title: String!
-  places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place!]
+  places(where: ListPlaceWhereInput, orderBy: ListPlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ListPlace!]
   user: User!
 }
 
@@ -137,7 +137,7 @@ type ListConnection {
 input ListCreateInput {
   id: ID
   title: String!
-  places: PlaceCreateManyWithoutListInput
+  places: ListPlaceCreateManyWithoutListInput
   user: UserCreateOneWithoutListsInput!
 }
 
@@ -160,7 +160,7 @@ input ListCreateWithoutPlacesInput {
 input ListCreateWithoutUserInput {
   id: ID
   title: String!
-  places: PlaceCreateManyWithoutListInput
+  places: ListPlaceCreateManyWithoutListInput
 }
 
 type ListEdge {
@@ -175,218 +175,7 @@ enum ListOrderByInput {
   title_DESC
 }
 
-type ListPreviousValues {
-  id: ID!
-  title: String!
-}
-
-input ListScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
-  AND: [ListScalarWhereInput!]
-  OR: [ListScalarWhereInput!]
-  NOT: [ListScalarWhereInput!]
-}
-
-type ListSubscriptionPayload {
-  mutation: MutationType!
-  node: List
-  updatedFields: [String!]
-  previousValues: ListPreviousValues
-}
-
-input ListSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ListWhereInput
-  AND: [ListSubscriptionWhereInput!]
-  OR: [ListSubscriptionWhereInput!]
-  NOT: [ListSubscriptionWhereInput!]
-}
-
-input ListUpdateInput {
-  title: String
-  places: PlaceUpdateManyWithoutListInput
-  user: UserUpdateOneRequiredWithoutListsInput
-}
-
-input ListUpdateManyDataInput {
-  title: String
-}
-
-input ListUpdateManyMutationInput {
-  title: String
-}
-
-input ListUpdateManyWithoutUserInput {
-  create: [ListCreateWithoutUserInput!]
-  delete: [ListWhereUniqueInput!]
-  connect: [ListWhereUniqueInput!]
-  set: [ListWhereUniqueInput!]
-  disconnect: [ListWhereUniqueInput!]
-  update: [ListUpdateWithWhereUniqueWithoutUserInput!]
-  upsert: [ListUpsertWithWhereUniqueWithoutUserInput!]
-  deleteMany: [ListScalarWhereInput!]
-  updateMany: [ListUpdateManyWithWhereNestedInput!]
-}
-
-input ListUpdateManyWithWhereNestedInput {
-  where: ListScalarWhereInput!
-  data: ListUpdateManyDataInput!
-}
-
-input ListUpdateOneWithoutPlacesInput {
-  create: ListCreateWithoutPlacesInput
-  update: ListUpdateWithoutPlacesDataInput
-  upsert: ListUpsertWithoutPlacesInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: ListWhereUniqueInput
-}
-
-input ListUpdateWithoutPlacesDataInput {
-  title: String
-  user: UserUpdateOneRequiredWithoutListsInput
-}
-
-input ListUpdateWithoutUserDataInput {
-  title: String
-  places: PlaceUpdateManyWithoutListInput
-}
-
-input ListUpdateWithWhereUniqueWithoutUserInput {
-  where: ListWhereUniqueInput!
-  data: ListUpdateWithoutUserDataInput!
-}
-
-input ListUpsertWithoutPlacesInput {
-  update: ListUpdateWithoutPlacesDataInput!
-  create: ListCreateWithoutPlacesInput!
-}
-
-input ListUpsertWithWhereUniqueWithoutUserInput {
-  where: ListWhereUniqueInput!
-  update: ListUpdateWithoutUserDataInput!
-  create: ListCreateWithoutUserInput!
-}
-
-input ListWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
-  places_every: PlaceWhereInput
-  places_some: PlaceWhereInput
-  places_none: PlaceWhereInput
-  user: UserWhereInput
-  AND: [ListWhereInput!]
-  OR: [ListWhereInput!]
-  NOT: [ListWhereInput!]
-}
-
-input ListWhereUniqueInput {
-  id: ID
-}
-
-scalar Long
-
-type Mutation {
-  createEmailSubscriber(data: EmailSubscriberCreateInput!): EmailSubscriber!
-  updateEmailSubscriber(data: EmailSubscriberUpdateInput!, where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
-  updateManyEmailSubscribers(data: EmailSubscriberUpdateManyMutationInput!, where: EmailSubscriberWhereInput): BatchPayload!
-  upsertEmailSubscriber(where: EmailSubscriberWhereUniqueInput!, create: EmailSubscriberCreateInput!, update: EmailSubscriberUpdateInput!): EmailSubscriber!
-  deleteEmailSubscriber(where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
-  deleteManyEmailSubscribers(where: EmailSubscriberWhereInput): BatchPayload!
-  createList(data: ListCreateInput!): List!
-  updateList(data: ListUpdateInput!, where: ListWhereUniqueInput!): List
-  updateManyLists(data: ListUpdateManyMutationInput!, where: ListWhereInput): BatchPayload!
-  upsertList(where: ListWhereUniqueInput!, create: ListCreateInput!, update: ListUpdateInput!): List!
-  deleteList(where: ListWhereUniqueInput!): List
-  deleteManyLists(where: ListWhereInput): BatchPayload!
-  createPlace(data: PlaceCreateInput!): Place!
-  updatePlace(data: PlaceUpdateInput!, where: PlaceWhereUniqueInput!): Place
-  updateManyPlaces(data: PlaceUpdateManyMutationInput!, where: PlaceWhereInput): BatchPayload!
-  upsertPlace(where: PlaceWhereUniqueInput!, create: PlaceCreateInput!, update: PlaceUpdateInput!): Place!
-  deletePlace(where: PlaceWhereUniqueInput!): Place
-  deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-interface Node {
-  id: ID!
-}
-
-type PageInfo {
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-  endCursor: String
-}
-
-type Place {
+type ListPlace {
   id: ID!
   sanityId: String
   name: String
@@ -397,13 +186,13 @@ type Place {
   list: List
 }
 
-type PlaceConnection {
+type ListPlaceConnection {
   pageInfo: PageInfo!
-  edges: [PlaceEdge]!
-  aggregate: AggregatePlace!
+  edges: [ListPlaceEdge]!
+  aggregate: AggregateListPlace!
 }
 
-input PlaceCreateInput {
+input ListPlaceCreateInput {
   id: ID
   sanityId: String
   name: String
@@ -414,12 +203,12 @@ input PlaceCreateInput {
   list: ListCreateOneWithoutPlacesInput
 }
 
-input PlaceCreateManyWithoutListInput {
-  create: [PlaceCreateWithoutListInput!]
-  connect: [PlaceWhereUniqueInput!]
+input ListPlaceCreateManyWithoutListInput {
+  create: [ListPlaceCreateWithoutListInput!]
+  connect: [ListPlaceWhereUniqueInput!]
 }
 
-input PlaceCreateWithoutListInput {
+input ListPlaceCreateWithoutListInput {
   id: ID
   sanityId: String
   name: String
@@ -429,12 +218,12 @@ input PlaceCreateWithoutListInput {
   lng: Float
 }
 
-type PlaceEdge {
-  node: Place!
+type ListPlaceEdge {
+  node: ListPlace!
   cursor: String!
 }
 
-enum PlaceOrderByInput {
+enum ListPlaceOrderByInput {
   id_ASC
   id_DESC
   sanityId_ASC
@@ -451,7 +240,7 @@ enum PlaceOrderByInput {
   lng_DESC
 }
 
-type PlacePreviousValues {
+type ListPlacePreviousValues {
   id: ID!
   sanityId: String
   name: String
@@ -461,7 +250,7 @@ type PlacePreviousValues {
   lng: Float
 }
 
-input PlaceScalarWhereInput {
+input ListPlaceScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -548,30 +337,30 @@ input PlaceScalarWhereInput {
   lng_lte: Float
   lng_gt: Float
   lng_gte: Float
-  AND: [PlaceScalarWhereInput!]
-  OR: [PlaceScalarWhereInput!]
-  NOT: [PlaceScalarWhereInput!]
+  AND: [ListPlaceScalarWhereInput!]
+  OR: [ListPlaceScalarWhereInput!]
+  NOT: [ListPlaceScalarWhereInput!]
 }
 
-type PlaceSubscriptionPayload {
+type ListPlaceSubscriptionPayload {
   mutation: MutationType!
-  node: Place
+  node: ListPlace
   updatedFields: [String!]
-  previousValues: PlacePreviousValues
+  previousValues: ListPlacePreviousValues
 }
 
-input PlaceSubscriptionWhereInput {
+input ListPlaceSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: PlaceWhereInput
-  AND: [PlaceSubscriptionWhereInput!]
-  OR: [PlaceSubscriptionWhereInput!]
-  NOT: [PlaceSubscriptionWhereInput!]
+  node: ListPlaceWhereInput
+  AND: [ListPlaceSubscriptionWhereInput!]
+  OR: [ListPlaceSubscriptionWhereInput!]
+  NOT: [ListPlaceSubscriptionWhereInput!]
 }
 
-input PlaceUpdateInput {
+input ListPlaceUpdateInput {
   sanityId: String
   name: String
   imageUrl: String
@@ -581,7 +370,7 @@ input PlaceUpdateInput {
   list: ListUpdateOneWithoutPlacesInput
 }
 
-input PlaceUpdateManyDataInput {
+input ListPlaceUpdateManyDataInput {
   sanityId: String
   name: String
   imageUrl: String
@@ -590,7 +379,7 @@ input PlaceUpdateManyDataInput {
   lng: Float
 }
 
-input PlaceUpdateManyMutationInput {
+input ListPlaceUpdateManyMutationInput {
   sanityId: String
   name: String
   imageUrl: String
@@ -599,24 +388,24 @@ input PlaceUpdateManyMutationInput {
   lng: Float
 }
 
-input PlaceUpdateManyWithoutListInput {
-  create: [PlaceCreateWithoutListInput!]
-  delete: [PlaceWhereUniqueInput!]
-  connect: [PlaceWhereUniqueInput!]
-  set: [PlaceWhereUniqueInput!]
-  disconnect: [PlaceWhereUniqueInput!]
-  update: [PlaceUpdateWithWhereUniqueWithoutListInput!]
-  upsert: [PlaceUpsertWithWhereUniqueWithoutListInput!]
-  deleteMany: [PlaceScalarWhereInput!]
-  updateMany: [PlaceUpdateManyWithWhereNestedInput!]
+input ListPlaceUpdateManyWithoutListInput {
+  create: [ListPlaceCreateWithoutListInput!]
+  delete: [ListPlaceWhereUniqueInput!]
+  connect: [ListPlaceWhereUniqueInput!]
+  set: [ListPlaceWhereUniqueInput!]
+  disconnect: [ListPlaceWhereUniqueInput!]
+  update: [ListPlaceUpdateWithWhereUniqueWithoutListInput!]
+  upsert: [ListPlaceUpsertWithWhereUniqueWithoutListInput!]
+  deleteMany: [ListPlaceScalarWhereInput!]
+  updateMany: [ListPlaceUpdateManyWithWhereNestedInput!]
 }
 
-input PlaceUpdateManyWithWhereNestedInput {
-  where: PlaceScalarWhereInput!
-  data: PlaceUpdateManyDataInput!
+input ListPlaceUpdateManyWithWhereNestedInput {
+  where: ListPlaceScalarWhereInput!
+  data: ListPlaceUpdateManyDataInput!
 }
 
-input PlaceUpdateWithoutListDataInput {
+input ListPlaceUpdateWithoutListDataInput {
   sanityId: String
   name: String
   imageUrl: String
@@ -625,18 +414,18 @@ input PlaceUpdateWithoutListDataInput {
   lng: Float
 }
 
-input PlaceUpdateWithWhereUniqueWithoutListInput {
-  where: PlaceWhereUniqueInput!
-  data: PlaceUpdateWithoutListDataInput!
+input ListPlaceUpdateWithWhereUniqueWithoutListInput {
+  where: ListPlaceWhereUniqueInput!
+  data: ListPlaceUpdateWithoutListDataInput!
 }
 
-input PlaceUpsertWithWhereUniqueWithoutListInput {
-  where: PlaceWhereUniqueInput!
-  update: PlaceUpdateWithoutListDataInput!
-  create: PlaceCreateWithoutListInput!
+input ListPlaceUpsertWithWhereUniqueWithoutListInput {
+  where: ListPlaceWhereUniqueInput!
+  update: ListPlaceUpdateWithoutListDataInput!
+  create: ListPlaceCreateWithoutListInput!
 }
 
-input PlaceWhereInput {
+input ListPlaceWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -724,13 +513,224 @@ input PlaceWhereInput {
   lng_gt: Float
   lng_gte: Float
   list: ListWhereInput
-  AND: [PlaceWhereInput!]
-  OR: [PlaceWhereInput!]
-  NOT: [PlaceWhereInput!]
+  AND: [ListPlaceWhereInput!]
+  OR: [ListPlaceWhereInput!]
+  NOT: [ListPlaceWhereInput!]
 }
 
-input PlaceWhereUniqueInput {
+input ListPlaceWhereUniqueInput {
   id: ID
+}
+
+type ListPreviousValues {
+  id: ID!
+  title: String!
+}
+
+input ListScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  AND: [ListScalarWhereInput!]
+  OR: [ListScalarWhereInput!]
+  NOT: [ListScalarWhereInput!]
+}
+
+type ListSubscriptionPayload {
+  mutation: MutationType!
+  node: List
+  updatedFields: [String!]
+  previousValues: ListPreviousValues
+}
+
+input ListSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ListWhereInput
+  AND: [ListSubscriptionWhereInput!]
+  OR: [ListSubscriptionWhereInput!]
+  NOT: [ListSubscriptionWhereInput!]
+}
+
+input ListUpdateInput {
+  title: String
+  places: ListPlaceUpdateManyWithoutListInput
+  user: UserUpdateOneRequiredWithoutListsInput
+}
+
+input ListUpdateManyDataInput {
+  title: String
+}
+
+input ListUpdateManyMutationInput {
+  title: String
+}
+
+input ListUpdateManyWithoutUserInput {
+  create: [ListCreateWithoutUserInput!]
+  delete: [ListWhereUniqueInput!]
+  connect: [ListWhereUniqueInput!]
+  set: [ListWhereUniqueInput!]
+  disconnect: [ListWhereUniqueInput!]
+  update: [ListUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [ListUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [ListScalarWhereInput!]
+  updateMany: [ListUpdateManyWithWhereNestedInput!]
+}
+
+input ListUpdateManyWithWhereNestedInput {
+  where: ListScalarWhereInput!
+  data: ListUpdateManyDataInput!
+}
+
+input ListUpdateOneWithoutPlacesInput {
+  create: ListCreateWithoutPlacesInput
+  update: ListUpdateWithoutPlacesDataInput
+  upsert: ListUpsertWithoutPlacesInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ListWhereUniqueInput
+}
+
+input ListUpdateWithoutPlacesDataInput {
+  title: String
+  user: UserUpdateOneRequiredWithoutListsInput
+}
+
+input ListUpdateWithoutUserDataInput {
+  title: String
+  places: ListPlaceUpdateManyWithoutListInput
+}
+
+input ListUpdateWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput!
+  data: ListUpdateWithoutUserDataInput!
+}
+
+input ListUpsertWithoutPlacesInput {
+  update: ListUpdateWithoutPlacesDataInput!
+  create: ListCreateWithoutPlacesInput!
+}
+
+input ListUpsertWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput!
+  update: ListUpdateWithoutUserDataInput!
+  create: ListCreateWithoutUserInput!
+}
+
+input ListWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  places_every: ListPlaceWhereInput
+  places_some: ListPlaceWhereInput
+  places_none: ListPlaceWhereInput
+  user: UserWhereInput
+  AND: [ListWhereInput!]
+  OR: [ListWhereInput!]
+  NOT: [ListWhereInput!]
+}
+
+input ListWhereUniqueInput {
+  id: ID
+}
+
+scalar Long
+
+type Mutation {
+  createEmailSubscriber(data: EmailSubscriberCreateInput!): EmailSubscriber!
+  updateEmailSubscriber(data: EmailSubscriberUpdateInput!, where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
+  updateManyEmailSubscribers(data: EmailSubscriberUpdateManyMutationInput!, where: EmailSubscriberWhereInput): BatchPayload!
+  upsertEmailSubscriber(where: EmailSubscriberWhereUniqueInput!, create: EmailSubscriberCreateInput!, update: EmailSubscriberUpdateInput!): EmailSubscriber!
+  deleteEmailSubscriber(where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
+  deleteManyEmailSubscribers(where: EmailSubscriberWhereInput): BatchPayload!
+  createList(data: ListCreateInput!): List!
+  updateList(data: ListUpdateInput!, where: ListWhereUniqueInput!): List
+  updateManyLists(data: ListUpdateManyMutationInput!, where: ListWhereInput): BatchPayload!
+  upsertList(where: ListWhereUniqueInput!, create: ListCreateInput!, update: ListUpdateInput!): List!
+  deleteList(where: ListWhereUniqueInput!): List
+  deleteManyLists(where: ListWhereInput): BatchPayload!
+  createListPlace(data: ListPlaceCreateInput!): ListPlace!
+  updateListPlace(data: ListPlaceUpdateInput!, where: ListPlaceWhereUniqueInput!): ListPlace
+  updateManyListPlaces(data: ListPlaceUpdateManyMutationInput!, where: ListPlaceWhereInput): BatchPayload!
+  upsertListPlace(where: ListPlaceWhereUniqueInput!, create: ListPlaceCreateInput!, update: ListPlaceUpdateInput!): ListPlace!
+  deleteListPlace(where: ListPlaceWhereUniqueInput!): ListPlace
+  deleteManyListPlaces(where: ListPlaceWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
 }
 
 type Query {
@@ -740,9 +740,9 @@ type Query {
   list(where: ListWhereUniqueInput!): List
   lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List]!
   listsConnection(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ListConnection!
-  place(where: PlaceWhereUniqueInput!): Place
-  places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place]!
-  placesConnection(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceConnection!
+  listPlace(where: ListPlaceWhereUniqueInput!): ListPlace
+  listPlaces(where: ListPlaceWhereInput, orderBy: ListPlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ListPlace]!
+  listPlacesConnection(where: ListPlaceWhereInput, orderBy: ListPlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ListPlaceConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -752,7 +752,7 @@ type Query {
 type Subscription {
   emailSubscriber(where: EmailSubscriberSubscriptionWhereInput): EmailSubscriberSubscriptionPayload
   list(where: ListSubscriptionWhereInput): ListSubscriptionPayload
-  place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
+  listPlace(where: ListPlaceSubscriptionWhereInput): ListPlaceSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

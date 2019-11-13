@@ -12,8 +12,9 @@ export default function PopularPostsAside() {
       <h2 className="side-title">Popular</h2>
       {popularPostEdges.map(edge => (
         <Link
+          plain="true"
+          key={edge.node.id}
           to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
-          plain
         >
           <AsidePostCard key={edge.node.id} post={edge.node} />
         </Link>

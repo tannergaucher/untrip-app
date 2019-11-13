@@ -13,7 +13,7 @@ var models = [
     embedded: false
   },
   {
-    name: "Place",
+    name: "ListPlace",
     embedded: false
   },
   {

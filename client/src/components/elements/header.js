@@ -102,19 +102,19 @@ export default function Header() {
     <StyledHeader>
       <div className="flex">
         <div className="site-title-description">
-          <Link to="/" plain>
+          <Link to="/" plain="true">
             <h2 className="site-title">Untrip</h2>
           </Link>
           <h6 className="site-description"> Curated Kuala Lumpur</h6>
         </div>
         <nav className="full-size">
-          <Link to="/food-and-drink" plain>
+          <Link to="/food-and-drink" plain="true">
             <h2 className="nav-link">Food & Drink</h2>
           </Link>
-          <Link to="/music" plain>
+          <Link to="/music" plain="true">
             <h2 className="nav-link">Music</h2>
           </Link>
-          <Link to="/culture" plain>
+          <Link to="/culture" plain="true">
             <h2 className="nav-link">Culture</h2>
           </Link>
         </nav>

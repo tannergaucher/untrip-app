@@ -173,65 +173,29 @@ const Mutation = {
       message: `You did it!`,
     }
   },
-
-  togglePlace: async (
+  addToList: async (
     _parent,
     { listId, sanityId, name, imageUrl, slug, lat, lng },
-    context
+    _context
   ) => {
-    const userId = getUserId(context)
-
-    if (!userId) {
-      throw new AuthError()
-    }
-
-    const [existing] = await prisma
-      .user({ id: userId })
-      .lists({
-        where: {
+    const listPlace = await prisma.createListPlace({
+      sanityId,
+      name,
+      imageUrl,
+      slug,
+      lat,
+      lng,
+      list: {
+        connect: {
           id: listId,
         },
-      })
-      .places({
-        where: {
-          sanityId,
-        },
-      })
+      },
+    })
 
-    if (existing.places.length) {
-      // remove place from list
-      return prisma.updateList({
-        where: {
-          id: listId,
-        },
-        data: {
-          places: {
-            delete: {
-              id: existing.places[0].id,
-            },
-          },
-        },
-      })
-    } else {
-      // add place to list
-      return prisma.updateList({
-        where: {
-          id: listId,
-        },
-        data: {
-          places: {
-            create: {
-              sanityId,
-              name,
-              imageUrl,
-              slug,
-              lat,
-              lng,
-            },
-          },
-        },
-      })
-    }
+    return listPlace
+  },
+  removeFromList: async (parent, args, context) => {
+    //
   },
 }
 

@@ -38,9 +38,30 @@ export const LIST_FRAGMENT = gql`
   }
 `
 
+export const LIST_PLACE_FRAGMENT = gql`
+  fragment ListPlaceFragment on ListPlace {
+    id
+    sanityId
+    name
+    imageUrl
+    slug
+    lat
+    lng
+    list {
+      id
+    }
+  }
+`
+
 export const IS_LOGGED_IN = gql`
   query IS_LOGGED_IN {
     isLoggedIn @client
+  }
+`
+
+export const IS_IN_LIST = gql`
+  query IS_IN_LIST($places: Array!, $placeSanityId: String!) {
+    isInList(places: $places, placeSanityId: $placeSanityId) @client
   }
 `
 
@@ -119,8 +140,8 @@ export const DELETE_LIST_MUTATION = gql`
   }
 `
 
-export const TOGGLE_PLACE_MUTATION = gql`
-  mutation TOGGLE_PLACE_MUTATION(
+export const ADD_TO_LIST_MUTATION = gql`
+  mutation ADD_TO_LIST_MUTATION(
     $listId: ID!
     $sanityId: String!
     $name: String!
@@ -129,7 +150,7 @@ export const TOGGLE_PLACE_MUTATION = gql`
     $lat: Float!
     $lng: Float!
   ) {
-    togglePlace(
+    addToList(
       listId: $listId
       sanityId: $sanityId
       name: $name
@@ -138,10 +159,10 @@ export const TOGGLE_PLACE_MUTATION = gql`
       lat: $lat
       lng: $lng
     ) {
-      ...ListFragment
+      ...ListPlaceFragment
     }
   }
-  ${LIST_FRAGMENT}
+  ${LIST_PLACE_FRAGMENT}
 `
 
 export const LIST_QUERY = gql`

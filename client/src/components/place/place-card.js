@@ -78,7 +78,11 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
       <Img fluid={postPlace.place.image.asset.fluid} />
       <div className="place-tags">
         {postPlace.place.tags.map(tag => (
-          <Link key={tag.slug.current} to={`/tags/${tag.slug.current}`} plain>
+          <Link
+            key={tag.slug.current}
+            to={`/tags/${tag.slug.current}`}
+            plain="true"
+          >
             <h5 className="place-tag">{tag.tag}</h5>
           </Link>
         ))}

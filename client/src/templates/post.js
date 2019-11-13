@@ -33,7 +33,7 @@ const StyledPost = styled.div`
   }
 
   .post-date {
-    margin-left: 0.5rem;
+    margin-left: 1rem;
   }
 
   .post-comments {
@@ -72,7 +72,7 @@ export default function PostPage({ data }) {
         <article className="content">
           <StyledPost>
             <div className="post-category-date">
-              <h6 className="post-category">{post.category.category} /</h6>
+              <h6 className="post-category">{post.category.category} </h6>
               <h6 className="post-date">{post.publishedAt}</h6>
             </div>
             <h1 className="post-title">{post.title}</h1>
@@ -86,7 +86,7 @@ export default function PostPage({ data }) {
             <Divider bgLight={true} />
             {post.postPlaces.map(postPlace => (
               <PlaceCard
-                key={postPlace.id}
+                key={postPlace.place.id}
                 postPlace={postPlace}
                 setPlaceInView={setPlaceInView}
                 post={post}

@@ -18,7 +18,7 @@ export type Maybe<T> = T | undefined | null;
 export interface Exists {
   emailSubscriber: (where?: EmailSubscriberWhereInput) => Promise<boolean>;
   list: (where?: ListWhereInput) => Promise<boolean>;
-  place: (where?: PlaceWhereInput) => Promise<boolean>;
+  listPlace: (where?: ListPlaceWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -81,25 +81,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ListConnectionPromise;
-  place: (where: PlaceWhereUniqueInput) => PlaceNullablePromise;
-  places: (args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
+  listPlace: (where: ListPlaceWhereUniqueInput) => ListPlaceNullablePromise;
+  listPlaces: (args?: {
+    where?: ListPlaceWhereInput;
+    orderBy?: ListPlaceOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<Place>;
-  placesConnection: (args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
+  }) => FragmentableArray<ListPlace>;
+  listPlacesConnection: (args?: {
+    where?: ListPlaceWhereInput;
+    orderBy?: ListPlaceOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => PlaceConnectionPromise;
+  }) => ListPlaceConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -163,22 +163,22 @@ export interface Prisma {
   }) => ListPromise;
   deleteList: (where: ListWhereUniqueInput) => ListPromise;
   deleteManyLists: (where?: ListWhereInput) => BatchPayloadPromise;
-  createPlace: (data: PlaceCreateInput) => PlacePromise;
-  updatePlace: (args: {
-    data: PlaceUpdateInput;
-    where: PlaceWhereUniqueInput;
-  }) => PlacePromise;
-  updateManyPlaces: (args: {
-    data: PlaceUpdateManyMutationInput;
-    where?: PlaceWhereInput;
+  createListPlace: (data: ListPlaceCreateInput) => ListPlacePromise;
+  updateListPlace: (args: {
+    data: ListPlaceUpdateInput;
+    where: ListPlaceWhereUniqueInput;
+  }) => ListPlacePromise;
+  updateManyListPlaces: (args: {
+    data: ListPlaceUpdateManyMutationInput;
+    where?: ListPlaceWhereInput;
   }) => BatchPayloadPromise;
-  upsertPlace: (args: {
-    where: PlaceWhereUniqueInput;
-    create: PlaceCreateInput;
-    update: PlaceUpdateInput;
-  }) => PlacePromise;
-  deletePlace: (where: PlaceWhereUniqueInput) => PlacePromise;
-  deleteManyPlaces: (where?: PlaceWhereInput) => BatchPayloadPromise;
+  upsertListPlace: (args: {
+    where: ListPlaceWhereUniqueInput;
+    create: ListPlaceCreateInput;
+    update: ListPlaceUpdateInput;
+  }) => ListPlacePromise;
+  deleteListPlace: (where: ListPlaceWhereUniqueInput) => ListPlacePromise;
+  deleteManyListPlaces: (where?: ListPlaceWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -210,9 +210,9 @@ export interface Subscription {
   list: (
     where?: ListSubscriptionWhereInput
   ) => ListSubscriptionPayloadSubscription;
-  place: (
-    where?: PlaceSubscriptionWhereInput
-  ) => PlaceSubscriptionPayloadSubscription;
+  listPlace: (
+    where?: ListPlaceSubscriptionWhereInput
+  ) => ListPlaceSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -232,7 +232,7 @@ export type EmailSubscriberOrderByInput =
   | "email_ASC"
   | "email_DESC";
 
-export type PlaceOrderByInput =
+export type ListPlaceOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "sanityId_ASC"
@@ -309,7 +309,7 @@ export type ListWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface PlaceWhereInput {
+export interface ListPlaceWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -397,9 +397,9 @@ export interface PlaceWhereInput {
   lng_gt?: Maybe<Float>;
   lng_gte?: Maybe<Float>;
   list?: Maybe<ListWhereInput>;
-  AND?: Maybe<PlaceWhereInput[] | PlaceWhereInput>;
-  OR?: Maybe<PlaceWhereInput[] | PlaceWhereInput>;
-  NOT?: Maybe<PlaceWhereInput[] | PlaceWhereInput>;
+  AND?: Maybe<ListPlaceWhereInput[] | ListPlaceWhereInput>;
+  OR?: Maybe<ListPlaceWhereInput[] | ListPlaceWhereInput>;
+  NOT?: Maybe<ListPlaceWhereInput[] | ListPlaceWhereInput>;
 }
 
 export interface ListWhereInput {
@@ -431,9 +431,9 @@ export interface ListWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
-  places_every?: Maybe<PlaceWhereInput>;
-  places_some?: Maybe<PlaceWhereInput>;
-  places_none?: Maybe<PlaceWhereInput>;
+  places_every?: Maybe<ListPlaceWhereInput>;
+  places_some?: Maybe<ListPlaceWhereInput>;
+  places_none?: Maybe<ListPlaceWhereInput>;
   user?: Maybe<UserWhereInput>;
   AND?: Maybe<ListWhereInput[] | ListWhereInput>;
   OR?: Maybe<ListWhereInput[] | ListWhereInput>;
@@ -493,7 +493,7 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export type PlaceWhereUniqueInput = AtLeastOne<{
+export type ListPlaceWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -518,16 +518,18 @@ export interface EmailSubscriberUpdateManyMutationInput {
 export interface ListCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
-  places?: Maybe<PlaceCreateManyWithoutListInput>;
+  places?: Maybe<ListPlaceCreateManyWithoutListInput>;
   user: UserCreateOneWithoutListsInput;
 }
 
-export interface PlaceCreateManyWithoutListInput {
-  create?: Maybe<PlaceCreateWithoutListInput[] | PlaceCreateWithoutListInput>;
-  connect?: Maybe<PlaceWhereUniqueInput[] | PlaceWhereUniqueInput>;
+export interface ListPlaceCreateManyWithoutListInput {
+  create?: Maybe<
+    ListPlaceCreateWithoutListInput[] | ListPlaceCreateWithoutListInput
+  >;
+  connect?: Maybe<ListPlaceWhereUniqueInput[] | ListPlaceWhereUniqueInput>;
 }
 
-export interface PlaceCreateWithoutListInput {
+export interface ListPlaceCreateWithoutListInput {
   id?: Maybe<ID_Input>;
   sanityId?: Maybe<String>;
   name?: Maybe<String>;
@@ -551,36 +553,39 @@ export interface UserCreateWithoutListsInput {
 
 export interface ListUpdateInput {
   title?: Maybe<String>;
-  places?: Maybe<PlaceUpdateManyWithoutListInput>;
+  places?: Maybe<ListPlaceUpdateManyWithoutListInput>;
   user?: Maybe<UserUpdateOneRequiredWithoutListsInput>;
 }
 
-export interface PlaceUpdateManyWithoutListInput {
-  create?: Maybe<PlaceCreateWithoutListInput[] | PlaceCreateWithoutListInput>;
-  delete?: Maybe<PlaceWhereUniqueInput[] | PlaceWhereUniqueInput>;
-  connect?: Maybe<PlaceWhereUniqueInput[] | PlaceWhereUniqueInput>;
-  set?: Maybe<PlaceWhereUniqueInput[] | PlaceWhereUniqueInput>;
-  disconnect?: Maybe<PlaceWhereUniqueInput[] | PlaceWhereUniqueInput>;
+export interface ListPlaceUpdateManyWithoutListInput {
+  create?: Maybe<
+    ListPlaceCreateWithoutListInput[] | ListPlaceCreateWithoutListInput
+  >;
+  delete?: Maybe<ListPlaceWhereUniqueInput[] | ListPlaceWhereUniqueInput>;
+  connect?: Maybe<ListPlaceWhereUniqueInput[] | ListPlaceWhereUniqueInput>;
+  set?: Maybe<ListPlaceWhereUniqueInput[] | ListPlaceWhereUniqueInput>;
+  disconnect?: Maybe<ListPlaceWhereUniqueInput[] | ListPlaceWhereUniqueInput>;
   update?: Maybe<
-    | PlaceUpdateWithWhereUniqueWithoutListInput[]
-    | PlaceUpdateWithWhereUniqueWithoutListInput
+    | ListPlaceUpdateWithWhereUniqueWithoutListInput[]
+    | ListPlaceUpdateWithWhereUniqueWithoutListInput
   >;
   upsert?: Maybe<
-    | PlaceUpsertWithWhereUniqueWithoutListInput[]
-    | PlaceUpsertWithWhereUniqueWithoutListInput
+    | ListPlaceUpsertWithWhereUniqueWithoutListInput[]
+    | ListPlaceUpsertWithWhereUniqueWithoutListInput
   >;
-  deleteMany?: Maybe<PlaceScalarWhereInput[] | PlaceScalarWhereInput>;
+  deleteMany?: Maybe<ListPlaceScalarWhereInput[] | ListPlaceScalarWhereInput>;
   updateMany?: Maybe<
-    PlaceUpdateManyWithWhereNestedInput[] | PlaceUpdateManyWithWhereNestedInput
+    | ListPlaceUpdateManyWithWhereNestedInput[]
+    | ListPlaceUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface PlaceUpdateWithWhereUniqueWithoutListInput {
-  where: PlaceWhereUniqueInput;
-  data: PlaceUpdateWithoutListDataInput;
+export interface ListPlaceUpdateWithWhereUniqueWithoutListInput {
+  where: ListPlaceWhereUniqueInput;
+  data: ListPlaceUpdateWithoutListDataInput;
 }
 
-export interface PlaceUpdateWithoutListDataInput {
+export interface ListPlaceUpdateWithoutListDataInput {
   sanityId?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
@@ -589,13 +594,13 @@ export interface PlaceUpdateWithoutListDataInput {
   lng?: Maybe<Float>;
 }
 
-export interface PlaceUpsertWithWhereUniqueWithoutListInput {
-  where: PlaceWhereUniqueInput;
-  update: PlaceUpdateWithoutListDataInput;
-  create: PlaceCreateWithoutListInput;
+export interface ListPlaceUpsertWithWhereUniqueWithoutListInput {
+  where: ListPlaceWhereUniqueInput;
+  update: ListPlaceUpdateWithoutListDataInput;
+  create: ListPlaceCreateWithoutListInput;
 }
 
-export interface PlaceScalarWhereInput {
+export interface ListPlaceScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -682,17 +687,17 @@ export interface PlaceScalarWhereInput {
   lng_lte?: Maybe<Float>;
   lng_gt?: Maybe<Float>;
   lng_gte?: Maybe<Float>;
-  AND?: Maybe<PlaceScalarWhereInput[] | PlaceScalarWhereInput>;
-  OR?: Maybe<PlaceScalarWhereInput[] | PlaceScalarWhereInput>;
-  NOT?: Maybe<PlaceScalarWhereInput[] | PlaceScalarWhereInput>;
+  AND?: Maybe<ListPlaceScalarWhereInput[] | ListPlaceScalarWhereInput>;
+  OR?: Maybe<ListPlaceScalarWhereInput[] | ListPlaceScalarWhereInput>;
+  NOT?: Maybe<ListPlaceScalarWhereInput[] | ListPlaceScalarWhereInput>;
 }
 
-export interface PlaceUpdateManyWithWhereNestedInput {
-  where: PlaceScalarWhereInput;
-  data: PlaceUpdateManyDataInput;
+export interface ListPlaceUpdateManyWithWhereNestedInput {
+  where: ListPlaceScalarWhereInput;
+  data: ListPlaceUpdateManyDataInput;
 }
 
-export interface PlaceUpdateManyDataInput {
+export interface ListPlaceUpdateManyDataInput {
   sanityId?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
@@ -723,7 +728,7 @@ export interface ListUpdateManyMutationInput {
   title?: Maybe<String>;
 }
 
-export interface PlaceCreateInput {
+export interface ListPlaceCreateInput {
   id?: Maybe<ID_Input>;
   sanityId?: Maybe<String>;
   name?: Maybe<String>;
@@ -745,7 +750,7 @@ export interface ListCreateWithoutPlacesInput {
   user: UserCreateOneWithoutListsInput;
 }
 
-export interface PlaceUpdateInput {
+export interface ListPlaceUpdateInput {
   sanityId?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
@@ -774,7 +779,7 @@ export interface ListUpsertWithoutPlacesInput {
   create: ListCreateWithoutPlacesInput;
 }
 
-export interface PlaceUpdateManyMutationInput {
+export interface ListPlaceUpdateManyMutationInput {
   sanityId?: Maybe<String>;
   name?: Maybe<String>;
   imageUrl?: Maybe<String>;
@@ -799,7 +804,7 @@ export interface ListCreateManyWithoutUserInput {
 export interface ListCreateWithoutUserInput {
   id?: Maybe<ID_Input>;
   title: String;
-  places?: Maybe<PlaceCreateManyWithoutListInput>;
+  places?: Maybe<ListPlaceCreateManyWithoutListInput>;
 }
 
 export interface UserUpdateInput {
@@ -836,7 +841,7 @@ export interface ListUpdateWithWhereUniqueWithoutUserInput {
 
 export interface ListUpdateWithoutUserDataInput {
   title?: Maybe<String>;
-  places?: Maybe<PlaceUpdateManyWithoutListInput>;
+  places?: Maybe<ListPlaceUpdateManyWithoutListInput>;
 }
 
 export interface ListUpsertWithWhereUniqueWithoutUserInput {
@@ -925,15 +930,21 @@ export interface ListSubscriptionWhereInput {
   NOT?: Maybe<ListSubscriptionWhereInput[] | ListSubscriptionWhereInput>;
 }
 
-export interface PlaceSubscriptionWhereInput {
+export interface ListPlaceSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<PlaceWhereInput>;
-  AND?: Maybe<PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput>;
-  OR?: Maybe<PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput>;
-  NOT?: Maybe<PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput>;
+  node?: Maybe<ListPlaceWhereInput>;
+  AND?: Maybe<
+    ListPlaceSubscriptionWhereInput[] | ListPlaceSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    ListPlaceSubscriptionWhereInput[] | ListPlaceSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    ListPlaceSubscriptionWhereInput[] | ListPlaceSubscriptionWhereInput
+  >;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -1064,9 +1075,9 @@ export interface List {
 export interface ListPromise extends Promise<List>, Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
-  places: <T = FragmentableArray<Place>>(args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
+  places: <T = FragmentableArray<ListPlace>>(args?: {
+    where?: ListPlaceWhereInput;
+    orderBy?: ListPlaceOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1081,9 +1092,9 @@ export interface ListSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
-  places: <T = Promise<AsyncIterator<PlaceSubscription>>>(args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
+  places: <T = Promise<AsyncIterator<ListPlaceSubscription>>>(args?: {
+    where?: ListPlaceWhereInput;
+    orderBy?: ListPlaceOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1098,9 +1109,9 @@ export interface ListNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
-  places: <T = FragmentableArray<Place>>(args?: {
-    where?: PlaceWhereInput;
-    orderBy?: PlaceOrderByInput;
+  places: <T = FragmentableArray<ListPlace>>(args?: {
+    where?: ListPlaceWhereInput;
+    orderBy?: ListPlaceOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1110,7 +1121,7 @@ export interface ListNullablePromise
   user: <T = UserPromise>() => T;
 }
 
-export interface Place {
+export interface ListPlace {
   id: ID_Output;
   sanityId?: String;
   name?: String;
@@ -1120,7 +1131,7 @@ export interface Place {
   lng?: Float;
 }
 
-export interface PlacePromise extends Promise<Place>, Fragmentable {
+export interface ListPlacePromise extends Promise<ListPlace>, Fragmentable {
   id: () => Promise<ID_Output>;
   sanityId: () => Promise<String>;
   name: () => Promise<String>;
@@ -1131,8 +1142,8 @@ export interface PlacePromise extends Promise<Place>, Fragmentable {
   list: <T = ListPromise>() => T;
 }
 
-export interface PlaceSubscription
-  extends Promise<AsyncIterator<Place>>,
+export interface ListPlaceSubscription
+  extends Promise<AsyncIterator<ListPlace>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   sanityId: () => Promise<AsyncIterator<String>>;
@@ -1144,8 +1155,8 @@ export interface PlaceSubscription
   list: <T = ListSubscription>() => T;
 }
 
-export interface PlaceNullablePromise
-  extends Promise<Place | null>,
+export interface ListPlaceNullablePromise
+  extends Promise<ListPlace | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   sanityId: () => Promise<String>;
@@ -1270,56 +1281,58 @@ export interface AggregateListSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface PlaceConnection {
+export interface ListPlaceConnection {
   pageInfo: PageInfo;
-  edges: PlaceEdge[];
+  edges: ListPlaceEdge[];
 }
 
-export interface PlaceConnectionPromise
-  extends Promise<PlaceConnection>,
+export interface ListPlaceConnectionPromise
+  extends Promise<ListPlaceConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<PlaceEdge>>() => T;
-  aggregate: <T = AggregatePlacePromise>() => T;
+  edges: <T = FragmentableArray<ListPlaceEdge>>() => T;
+  aggregate: <T = AggregateListPlacePromise>() => T;
 }
 
-export interface PlaceConnectionSubscription
-  extends Promise<AsyncIterator<PlaceConnection>>,
+export interface ListPlaceConnectionSubscription
+  extends Promise<AsyncIterator<ListPlaceConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<PlaceEdgeSubscription>>>() => T;
-  aggregate: <T = AggregatePlaceSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ListPlaceEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateListPlaceSubscription>() => T;
 }
 
-export interface PlaceEdge {
-  node: Place;
+export interface ListPlaceEdge {
+  node: ListPlace;
   cursor: String;
 }
 
-export interface PlaceEdgePromise extends Promise<PlaceEdge>, Fragmentable {
-  node: <T = PlacePromise>() => T;
+export interface ListPlaceEdgePromise
+  extends Promise<ListPlaceEdge>,
+    Fragmentable {
+  node: <T = ListPlacePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface PlaceEdgeSubscription
-  extends Promise<AsyncIterator<PlaceEdge>>,
+export interface ListPlaceEdgeSubscription
+  extends Promise<AsyncIterator<ListPlaceEdge>>,
     Fragmentable {
-  node: <T = PlaceSubscription>() => T;
+  node: <T = ListPlaceSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregatePlace {
+export interface AggregateListPlace {
   count: Int;
 }
 
-export interface AggregatePlacePromise
-  extends Promise<AggregatePlace>,
+export interface AggregateListPlacePromise
+  extends Promise<AggregateListPlace>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregatePlaceSubscription
-  extends Promise<AsyncIterator<AggregatePlace>>,
+export interface AggregateListPlaceSubscription
+  extends Promise<AsyncIterator<AggregateListPlace>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -1482,32 +1495,32 @@ export interface ListPreviousValuesSubscription
   title: () => Promise<AsyncIterator<String>>;
 }
 
-export interface PlaceSubscriptionPayload {
+export interface ListPlaceSubscriptionPayload {
   mutation: MutationType;
-  node: Place;
+  node: ListPlace;
   updatedFields: String[];
-  previousValues: PlacePreviousValues;
+  previousValues: ListPlacePreviousValues;
 }
 
-export interface PlaceSubscriptionPayloadPromise
-  extends Promise<PlaceSubscriptionPayload>,
+export interface ListPlaceSubscriptionPayloadPromise
+  extends Promise<ListPlaceSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = PlacePromise>() => T;
+  node: <T = ListPlacePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = PlacePreviousValuesPromise>() => T;
+  previousValues: <T = ListPlacePreviousValuesPromise>() => T;
 }
 
-export interface PlaceSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<PlaceSubscriptionPayload>>,
+export interface ListPlaceSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ListPlaceSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = PlaceSubscription>() => T;
+  node: <T = ListPlaceSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = PlacePreviousValuesSubscription>() => T;
+  previousValues: <T = ListPlacePreviousValuesSubscription>() => T;
 }
 
-export interface PlacePreviousValues {
+export interface ListPlacePreviousValues {
   id: ID_Output;
   sanityId?: String;
   name?: String;
@@ -1517,8 +1530,8 @@ export interface PlacePreviousValues {
   lng?: Float;
 }
 
-export interface PlacePreviousValuesPromise
-  extends Promise<PlacePreviousValues>,
+export interface ListPlacePreviousValuesPromise
+  extends Promise<ListPlacePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   sanityId: () => Promise<String>;
@@ -1529,8 +1542,8 @@ export interface PlacePreviousValuesPromise
   lng: () => Promise<Float>;
 }
 
-export interface PlacePreviousValuesSubscription
-  extends Promise<AsyncIterator<PlacePreviousValues>>,
+export interface ListPlacePreviousValuesSubscription
+  extends Promise<AsyncIterator<ListPlacePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   sanityId: () => Promise<AsyncIterator<String>>;
@@ -1633,7 +1646,7 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "Place",
+    name: "ListPlace",
     embedded: false
   },
   {

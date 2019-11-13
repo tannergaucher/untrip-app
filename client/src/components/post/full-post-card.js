@@ -22,7 +22,7 @@ const StyledFullPostCard = styled.div`
 
   .post-category {
     text-transform: uppercase;
-    margin: 0 0.5rem 0 0;
+    margin: 0 1rem 0 0;
   }
 
   .post-date {
@@ -48,8 +48,6 @@ export default function IndexCard({ post }) {
   const textArr = postText.split(" ")
   const maxWordLength = 40
 
-  console.log(post)
-
   let excerpt
 
   if (textArr.length < maxWordLength) {
@@ -64,7 +62,7 @@ export default function IndexCard({ post }) {
       <Link to={`/${post.category.slug.current}/${post.slug.current}`} plain>
         <Img fluid={post.mainImage.asset.fluid} />
         <div className="post-category-date">
-          <h6 className="post-category">{post.category.category} / </h6>
+          <h6 className="post-category">{post.category.category} </h6>
           <h6 className="post-date">{post.publishedAt}</h6>
         </div>
         <h2 className="post-title">{post.title}</h2>

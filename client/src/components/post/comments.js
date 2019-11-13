@@ -21,7 +21,7 @@ export default function Comments({ setCommentsInView }) {
     <StyledComments ref={ref}>
       <Button
         className="toggle-comments-btn"
-        primary
+        primary={!show}
         fillMobile
         onClick={() => setShow(!show)}
       >

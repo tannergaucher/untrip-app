@@ -1,9 +1,9 @@
 const { prisma } = require('../generated/prisma-client')
 
-const Place = {
+const ListPlace = {
   list: ({ id }, args, context) => {
-    return prisma.place({ id }).list()
+    return prisma.listPlace({ id }).list()
   },
 }
 
-module.exports = Place
+module.exports = ListPlace

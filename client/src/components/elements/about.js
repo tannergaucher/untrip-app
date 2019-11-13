@@ -30,6 +30,7 @@ export default function About() {
 function EmailForm() {
   const [message, setMessage] = useState("")
   const [email, setEmail] = useState("")
+
   const [subscribeToEmail, { loading, error }] = useMutation(
     SUBSCRIBE_TO_EMAIL_MUTATION,
     {
@@ -54,10 +55,10 @@ function EmailForm() {
           placeholder="Email Address"
           type="email"
           value={email}
-          required="true"
+          required={true}
           onChange={e => setEmail(e.target.value)}
         />
-        <Button type="submit" primary loading={loading}>
+        <Button type="submit" primary loading={loading.toString()}>
           Subscribe to weekly newsletter
         </Button>
       </Form>

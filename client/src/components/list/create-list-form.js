@@ -30,7 +30,7 @@ export default function CreateList({ place, setShow }) {
         title,
         places: [
           {
-            __typename: "Place",
+            __typename: "ListPlace",
             id: new Date(),
             sanityId: place.id,
             name: place.name,
@@ -57,6 +57,9 @@ export default function CreateList({ place, setShow }) {
         onChange={e => setTitle(e.target.value)}
         required={true}
         placeholder="List Name"
+        style={{
+          marginTop: `1rem`,
+        }}
       />
       <Button type="submit" primary loading={loading}>
         Create List

@@ -12,8 +12,9 @@ export default function LatestPostsAside() {
       <h2 className="side-title">Latest Posts </h2>
       {latestPostEdges.map(edge => (
         <Link
+          key={edge.node.id}
+          plain="true"
           to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
-          plain
         >
           <AsidePostCard key={edge.node.id} post={edge.node} />
         </Link>
