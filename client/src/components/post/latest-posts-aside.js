@@ -18,7 +18,7 @@ export default function LatestPostsAside() {
           <AsidePostCard key={edge.node.id} post={edge.node} />
         </Link>
       ))}
-      <Divider bgLight={true} />
+      <Divider />
     </div>
   )
 }

@@ -46,7 +46,6 @@ const StyledHeader = styled.header`
 
   .site-description {
     margin: 0;
-    color: var(--accent);
   }
 
   .auth-btn,
@@ -86,6 +85,12 @@ const StyledHeader = styled.header`
 
     .site-title {
       font-size: 40px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .divider {
+      border: 3px solid var(--black);
     }
   }
 `

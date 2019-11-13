@@ -51,7 +51,7 @@ export default function Menu() {
             <Link to="/this-month" plain>
               <h2 className="menu-link">This Month</h2>
             </Link>
-            <Divider bgLight={true} />
+            <Divider />
             {data && data.isLoggedIn ? <AuthedLinks /> : <AuthLinks />}
           </StyledLayer>
         </>

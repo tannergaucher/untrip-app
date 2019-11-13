@@ -48,7 +48,7 @@ export default function Details({ place, post }) {
           {place.place.facebookLink && (
             <LinkButton
               href={place.place.facebookLink}
-              style={{ color: `var(--facebook)` }}
+              style={{ background: `var(--facebook)`, color: `white` }}
             >
               Facebook
             </LinkButton>
@@ -58,7 +58,8 @@ export default function Details({ place, post }) {
             <LinkButton
               href={place.place.instagramLink}
               style={{
-                color: `var(--instagram)`,
+                background: `var(--instagram)`,
+                color: `white`,
               }}
             >
               Instagram
@@ -75,7 +76,7 @@ export default function Details({ place, post }) {
           {place.place.websiteLink && (
             <LinkButton
               href={place.place.websiteLink}
-              style={{ color: `grey` }}
+              style={{ background: `grey`, color: `white` }}
             >
               Website
             </LinkButton>

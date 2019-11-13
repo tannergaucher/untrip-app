@@ -85,7 +85,7 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
       </div>
       <BlockContent blocks={postPlace._rawText} />
       <PlaceDetails place={postPlace} post={post} />
-      <Divider bgLight={true} />
+      <Divider />
     </StyledPlace>
   )
 }

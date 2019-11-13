@@ -29,8 +29,7 @@ export default function TogglePlaceCheckBox({ place, list }) {
       __typename: "Mutation",
       togglePlace: {
         __typename: "List",
-
-        id: list.id,
+        id: new Date(),
         listId: list.id,
         title: list.title,
         places: [
@@ -59,9 +58,6 @@ export default function TogglePlaceCheckBox({ place, list }) {
         checked={isPlaceInList(list.places, place.id)}
         onChange={async e => {
           await togglePlace()
-        }}
-        style={{
-          color: `red`,
         }}
       />
     </Styled>

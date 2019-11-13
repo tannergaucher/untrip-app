@@ -22,7 +22,7 @@ export default function About() {
       </p>
       <Share />
       <EmailForm />
-      <Divider bgLight={true} />
+      <Divider />
     </Styled>
   )
 }

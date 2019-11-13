@@ -1,7 +1,7 @@
 :root {
   --sans: "Avenir", sans-serif;
   --duration: 0.2s;
-  --accent: red;
+  --accent: darkred;
   --black: black;
   --white: white;
   --warning: red;

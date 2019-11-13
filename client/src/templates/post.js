@@ -32,13 +32,8 @@ const StyledPost = styled.div`
     text-transform: uppercase;
   }
 
-  .post-category {
-    font-weight: lighter;
-  }
-
   .post-date {
     margin-left: 0.5rem;
-    font-weight: lighter;
   }
 
   .post-comments {

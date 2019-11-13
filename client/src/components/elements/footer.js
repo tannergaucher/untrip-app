@@ -55,7 +55,7 @@ export default function Footer() {
           <Menu />
         </div>
       </div>
-      <Divider bgLight={false} />
+      <Divider bgDark />
     </StyledFooter>
   )
 }

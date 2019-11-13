@@ -4,4 +4,4 @@ generate:
   - generator: javascript-client
     output: ./generated/prisma-client/
 
-endpoint: https://untrip-prod-3f0239fd8e.herokuapp.com/server/production
+endpoint: https://us1.prisma.sh/untrip/untrip-dev/dev

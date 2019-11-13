@@ -23,13 +23,11 @@ const StyledFullPostCard = styled.div`
   .post-category {
     text-transform: uppercase;
     margin: 0 0.5rem 0 0;
-    font-weight: lighter;
   }
 
   .post-date {
     margin: 0;
     text-transform: uppercase;
-    font-weight: lighter;
   }
 
   @media (max-width: 600px) {
@@ -76,7 +74,7 @@ export default function IndexCard({ post }) {
         href={`/${post.category.slug.current}/${post.slug.current}`}
         pinterestImageUrl={post.mainImage.asset.url}
       />
-      <Divider bgLight={true} />
+      <Divider />
     </StyledFullPostCard>
   )
 }
