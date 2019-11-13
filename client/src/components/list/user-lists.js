@@ -5,9 +5,10 @@ import { useQuery, useMutation } from "@apollo/react-hooks"
 import { Button } from "../styles"
 import { CreateListForm } from "../list"
 import {
+  IS_IN_LIST,
   CURRENT_USER_QUERY,
   ADD_TO_LIST_MUTATION,
-  IS_IN_LIST,
+  REMOVE_FROM_LIST_MUTATION,
 } from "../apollo/graphql"
 
 const StyledUserLists = styled.div`
@@ -59,10 +60,8 @@ function TogglePlace({ place, list }) {
     },
   })
 
-  console.log(data)
-
   return data && data.isInList ? (
-    <DeletePlace place={place} list={list} />
+    <RemovePlace place={place} list={list} />
   ) : (
     <AddPlace place={place} list={list} />
   )
@@ -98,15 +97,12 @@ function AddPlace({ place, list }) {
     },
     update: (cache, payload) => {
       const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-      // do updates
-      // cache.writeQuery({ query: CURRENT_USER_QUERY, data })
     },
   })
 
   return (
     <Button
       style={{ marginTop: `.5rem`, marginRight: `.5rem` }}
-      // loading={loading}
       onClick={() => {
         addToList()
       }}
@@ -116,14 +112,22 @@ function AddPlace({ place, list }) {
   )
 }
 
-function DeletePlace({ place, list }) {
-  // removefromlist mutation
+function RemovePlace({ place, list }) {
+  // Becuase need to get a listPlace id from db, not cms
+  const myList = list.places.filter(place => place.sanityId === place.sanityId)
+  const [myPlace] = myList.filter(myPlace => myPlace.sanityId === place.id)
+
+  const [removePlace] = useMutation(REMOVE_FROM_LIST_MUTATION, {
+    variables: {
+      listPlaceId: myPlace.id,
+    },
+  })
 
   return (
     <Button
-      primary
+      primary="true"
+      onClick={() => removePlace()}
       style={{ marginTop: `.5rem`, marginRight: `.5rem` }}
-      disabled
     >
       {list.title}
     </Button>

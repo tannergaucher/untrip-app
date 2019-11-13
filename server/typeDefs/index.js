@@ -69,7 +69,7 @@ const typeDefs = gql`
       lat: Float
       lng: Float
     ): ListPlace
-    removeFromList(sanityId: String): ListPlace
+    removeFromList(listPlaceId: ID!): ListPlace
     subscribeToEmail(email: String!): SuccessMessage!
     unsubscribeToEmail(email: String!): SuccessMessage!
   }

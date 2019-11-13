@@ -194,8 +194,17 @@ const Mutation = {
 
     return listPlace
   },
-  removeFromList: async (parent, args, context) => {
-    //
+
+  removeFromList: async (_parent, { listPlaceId }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    await prisma.deleteListPlace({
+      id: listPlaceId,
+    })
   },
 }
 

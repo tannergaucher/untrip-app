@@ -4,8 +4,6 @@ import { createHttpLink } from "apollo-link-http"
 import { setContext } from "apollo-link-context"
 import fetch from "isomorphic-fetch"
 
-import { CURRENT_USER_QUERY } from "../apollo/graphql"
-
 const isBrowser = () => typeof window !== "undefined"
 
 const httpLink = createHttpLink({
@@ -36,7 +34,6 @@ export const client = new ApolloClient({
         const isInList = places.filter(
           place => place.sanityId === placeSanityId
         )
-
         return isInList.length ? true : false
       },
     },

@@ -165,8 +165,17 @@ export const ADD_TO_LIST_MUTATION = gql`
   ${LIST_PLACE_FRAGMENT}
 `
 
+export const REMOVE_FROM_LIST_MUTATION = gql`
+  mutation REMOVE_FROM_LIST($listPlaceId: ID!) {
+    removeFromList(listPlaceId: $listPlaceId) {
+      ...ListPlaceFragment
+    }
+  }
+  ${LIST_PLACE_FRAGMENT}
+`
+
 export const LIST_QUERY = gql`
-  query list($listId: ID!) {
+  query LIST_QUERY($listId: ID!) {
     list(listId: $listId) {
       ...ListFragment
     }
