@@ -122,14 +122,16 @@ const Mutation = {
     const list = await prisma.createList({
       title,
       places: {
-        create: {
-          sanityId,
-          name,
-          imageUrl,
-          slug,
-          lat,
-          lng,
-        },
+        create: [
+          {
+            sanityId,
+            name,
+            imageUrl,
+            slug,
+            lat,
+            lng,
+          },
+        ],
       },
       user: {
         connect: {
@@ -200,11 +202,13 @@ const Mutation = {
   removeFromList: async (_parent, { listPlaceId }, context, info) => {
     const userId = getUserId(context)
 
+    console.log(info)
+
     if (!userId) {
       throw new AuthError()
     }
 
-    return prisma.deleteListPlace(
+    return await prisma.deleteListPlace(
       {
         id: listPlaceId,
       },

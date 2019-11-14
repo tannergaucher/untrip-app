@@ -18,8 +18,13 @@ export default function RemovePlace({ place, list }) {
     },
     update: (cache, payload) => {
       const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-      console.log(data)
+
       console.log(payload)
+      console.log(data)
+
+      // const updatedListIndex = data.me.lists.findIndex(
+      //   list => list.id === payload.data.removeFromList.list.id
+      // )
     },
   })
 
