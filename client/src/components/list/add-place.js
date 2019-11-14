@@ -15,26 +15,35 @@ export default function AddPlace({ place, list }) {
       lat: place.location.lat,
       lng: place.location.lng,
     },
-    optimisticResponse: {
-      typename: "Mutation",
-      addToList: {
-        __typename: "ListPlace",
-        id: new Date(),
-        sanityId: place.id,
-        name: place.name,
-        imageUrl: JSON.stringify(place.image.asset.fluid),
-        slug: place.slug.current,
-        lat: place.location.lat,
-        lng: place.location.lng,
-      },
-    },
+    // optimisticResponse: {
+    //   typename: "Mutation",
+    //   addToList: {
+    //     __typename: "ListPlace",
+    //     id: new Date(),
+    //     sanityId: place.id,
+    //     name: place.name,
+    //     imageUrl: JSON.stringify(place.image.asset.fluid),
+    //     slug: place.slug.current,
+    //     lat: place.location.lat,
+    //     lng: place.location.lng,
+    //   },
+    // },
     update: (cache, payload) => {
       const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-      console.log(payload)
-      console.log(data)
-      // filter the right list from data.me.lists
-      // concat payload.data.addToList to that list
+
+      // get the index of the list to be updated
+      const updatedListIndex = data.me.lists.findIndex(
+        list => list.id === payload.data.addToList.list.id
+      )
+
+      // add place to list
+      data.me.lists[updatedListIndex].places = [
+        ...data.me.lists[updatedListIndex].places,
+        payload.data.addToList,
+      ]
+
       // write data back to cache
+      cache.writeQuery({ query: CURRENT_USER_QUERY, data })
     },
   })
 

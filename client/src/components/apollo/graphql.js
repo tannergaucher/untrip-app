@@ -11,6 +11,9 @@ export const LIST_PLACE_FRAGMENT = gql`
     slug
     lat
     lng
+    list {
+      id
+    }
   }
 `
 

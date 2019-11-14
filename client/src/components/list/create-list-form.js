@@ -38,6 +38,10 @@ export default function CreateList({ place, setShow }) {
             slug: place.slug.current,
             lat: place.location.lat,
             lng: place.location.lng,
+            list: {
+              __typename: "List",
+              id: new Date(),
+            },
           },
         ],
       },
