@@ -14,17 +14,15 @@
   --twitter: #1da1f2;
   --pinterest: #c8232c;
   --instagram: #5851db;
-  --container: 667px;
   --max-width: 1000px;
-  --mobile: 600px;
 }
 
 body {
   margin: 0;
-  font-family: var(--sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-size: var(--font-size);
+  font-family: var(--sans);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,

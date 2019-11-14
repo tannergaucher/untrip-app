@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
-import { PlaceCard } from "../components/place"
+import { PostPlaces } from "../components/place"
 import { SEO, Map, Share, About } from "../components/elements"
 import { ContentAsideGrid, Divider } from "../components/styles"
 import {
@@ -84,14 +84,11 @@ export default function PostPage({ data }) {
             <BlockContent blocks={post._rawBody} />
             <Author author={post.author} />
             <Divider bgLight={true} />
-            {post.postPlaces.map(postPlace => (
-              <PlaceCard
-                key={postPlace.place.id}
-                postPlace={postPlace}
-                setPlaceInView={setPlaceInView}
-                post={post}
-              />
-            ))}
+            <PostPlaces
+              postPlaces={post.postPlaces}
+              post={post}
+              setPlaceInView={setPlaceInView}
+            />
             <div className="post-comments">
               <Comments setCommentsInView={setCommentsInView} />
             </div>

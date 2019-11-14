@@ -21,14 +21,14 @@ export default createSchema({
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    author,
-    category,
     post,
     tag,
     place,
+    category,
+    author,
+    authorSocial,
+    social,
     postPlace,
     placeType,
-    social,
-    authorSocial,
   ]),
 })

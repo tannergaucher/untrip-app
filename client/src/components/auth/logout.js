@@ -10,8 +10,8 @@ export default function Logout() {
     <Button
       fillMobile
       onClick={() => {
-        localStorage.removeItem("token")
         client.resetStore()
+        localStorage.removeItem("token")
       }}
     >
       Log Out

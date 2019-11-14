@@ -9,14 +9,6 @@ export default {
       type: 'string',
     },
     {
-      name: 'image',
-      title: 'Tag Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    },
-    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',

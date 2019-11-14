@@ -1,42 +1,6 @@
 import gql from "graphql-tag"
 
-export const USER_FRAGMENT = gql`
-  fragment UserFragment on User {
-    id
-    email
-    password
-    isEmailSubscriber
-    lists {
-      id
-      title
-      places {
-        id
-        sanityId
-        name
-        imageUrl
-        slug
-        lat
-        lng
-      }
-    }
-  }
-`
-
-export const LIST_FRAGMENT = gql`
-  fragment ListFragment on List {
-    id
-    title
-    places {
-      id
-      sanityId
-      name
-      imageUrl
-      slug
-      lat
-      lng
-    }
-  }
-`
+// Fragments
 
 export const LIST_PLACE_FRAGMENT = gql`
   fragment ListPlaceFragment on ListPlace {
@@ -47,11 +11,34 @@ export const LIST_PLACE_FRAGMENT = gql`
     slug
     lat
     lng
-    list {
-      id
-    }
   }
 `
+
+export const LIST_FRAGMENT = gql`
+  fragment ListFragment on List {
+    id
+    title
+    places {
+      ...ListPlaceFragment
+    }
+  }
+  ${LIST_PLACE_FRAGMENT}
+`
+
+export const USER_FRAGMENT = gql`
+  fragment UserFragment on User {
+    id
+    email
+    password
+    isEmailSubscriber
+    lists {
+      ...ListFragment
+    }
+  }
+  ${LIST_FRAGMENT}
+`
+
+// Client side resolvers
 
 export const IS_LOGGED_IN = gql`
   query IS_LOGGED_IN {
@@ -65,6 +52,8 @@ export const IS_IN_LIST = gql`
   }
 `
 
+// Queries
+
 export const CURRENT_USER_QUERY = gql`
   query CURRENT_USER_QUERY {
     me {
@@ -73,6 +62,17 @@ export const CURRENT_USER_QUERY = gql`
   }
   ${USER_FRAGMENT}
 `
+
+export const LIST_QUERY = gql`
+  query LIST_QUERY($listId: ID!) {
+    list(listId: $listId) {
+      ...ListFragment
+    }
+  }
+  ${LIST_FRAGMENT}
+`
+
+// Mutations
 
 export const SIGN_UP_MUTATION = gql`
   mutation SIGN_UP_MUTATION($email: String!, $password: String!) {
@@ -172,15 +172,6 @@ export const REMOVE_FROM_LIST_MUTATION = gql`
     }
   }
   ${LIST_PLACE_FRAGMENT}
-`
-
-export const LIST_QUERY = gql`
-  query LIST_QUERY($listId: ID!) {
-    list(listId: $listId) {
-      ...ListFragment
-    }
-  }
-  ${LIST_FRAGMENT}
 `
 
 export const SUBSCRIBE_TO_EMAIL_MUTATION = gql`

@@ -3,10 +3,10 @@ import styled from "styled-components"
 import { useMutation } from "@apollo/react-hooks"
 
 import { Share } from "../elements"
-import { Divider, Button, Form, Input, StyledLayer } from "../styles"
 import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
+import { Divider, Button, Form, Input, StyledLayer } from "../styles"
 
-const Styled = styled.div`
+const StyledAbout = styled.div`
   .site-description {
     margin-bottom: 1.5rem;
   }
@@ -14,7 +14,7 @@ const Styled = styled.div`
 
 export default function About() {
   return (
-    <Styled className={`sticky`}>
+    <StyledAbout className="sticky">
       <h2 className="side-title">About Untrip</h2>
       <p className="site-description">
         We curate the best food and drink, music, culture and events happening
@@ -23,7 +23,7 @@ export default function About() {
       <Share />
       <EmailForm />
       <Divider />
-    </Styled>
+    </StyledAbout>
   )
 }
 

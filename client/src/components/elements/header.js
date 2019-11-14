@@ -10,7 +10,7 @@ import { IS_LOGGED_IN } from "../apollo/graphql"
 const StyledHeader = styled.header`
   padding: 0 2rem 2rem 2rem;
 
-  .flex {
+  .responsive-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -71,7 +71,7 @@ const StyledHeader = styled.header`
   }
 
   @media (max-width: 1000px) {
-    .full-size {
+    .only-full-size {
       display: none;
     }
 
@@ -100,14 +100,14 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <div className="flex">
+      <div className="responsive-flex">
         <div className="site-title-description">
           <Link to="/" plain="true">
             <h2 className="site-title">Untrip</h2>
           </Link>
           <h6 className="site-description"> Curated Kuala Lumpur</h6>
         </div>
-        <nav className="full-size">
+        <nav className="only-full-size">
           <Link to="/food-and-drink" plain="true">
             <h2 className="nav-link">Food & Drink</h2>
           </Link>
@@ -127,27 +127,21 @@ export default function Header() {
   )
 }
 
-function AuthBtns() {
+function AuthedBtns() {
   return (
     <>
       <Button
-        className="auth-btn full-size"
         primary
-        onClick={e => {
-          e.preventDefault()
-          navigate("/signup")
-        }}
+        className="authed-btn only-full-size"
+        onClick={() => navigate(`/lists`)}
       >
-        Sign Up
+        My Lists
       </Button>
       <Button
-        className="auth-btn full-size"
-        onClick={e => {
-          e.preventDefault()
-          navigate("/login")
-        }}
+        onClick={() => navigate(`/account`)}
+        className="authed-btn only-full-size"
       >
-        Log In
+        Account
       </Button>
       <div className="mobile-menu-btn">
         <Menu />
@@ -156,21 +150,27 @@ function AuthBtns() {
   )
 }
 
-function AuthedBtns() {
+function AuthBtns() {
   return (
     <>
       <Button
-        className="authed-btn full-size"
         primary
-        onClick={() => navigate(`/lists`)}
+        className="auth-btn only-full-size"
+        onClick={e => {
+          e.preventDefault()
+          navigate("/signup")
+        }}
       >
-        My Lists
+        Sign Up
       </Button>
       <Button
-        className="authed-btn full-size"
-        onClick={() => navigate(`/account`)}
+        className="auth-btn only-full-size"
+        onClick={e => {
+          e.preventDefault()
+          navigate("/login")
+        }}
       >
-        Account
+        Log In
       </Button>
       <div className="mobile-menu-btn">
         <Menu />

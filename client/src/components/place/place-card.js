@@ -5,8 +5,8 @@ import BlockContent from "@sanity/block-content-to-react"
 import { useInView } from "react-intersection-observer"
 
 import { PlaceDetails } from "../place"
-import { Divider, Link } from "../styles"
 import { AddToListModal } from "../list"
+import { Divider, Link } from "../styles"
 
 const StyledPlace = styled.div`
   margin-bottom: 2rem;
@@ -79,9 +79,9 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
       <div className="place-tags">
         {postPlace.place.tags.map(tag => (
           <Link
+            plain="true"
             key={tag.slug.current}
             to={`/tags/${tag.slug.current}`}
-            plain="true"
           >
             <h5 className="place-tag">{tag.tag}</h5>
           </Link>

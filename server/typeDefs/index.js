@@ -1,5 +1,7 @@
 const { gql } = require('apollo-server')
 
+// Public facing API
+
 const typeDefs = gql`
   type AuthPayload {
     token: String!

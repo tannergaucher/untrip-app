@@ -7,6 +7,7 @@ import { Button, Link, Divider } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledLayer = styled(Layer)`
+  /* override grommet default */
   color: var(--black);
   padding: 1rem;
   display: flex;

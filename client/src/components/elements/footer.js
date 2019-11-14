@@ -19,10 +19,6 @@ const StyledFooter = styled.footer`
     margin: 0;
   }
 
-  .only-mobile {
-    display: none;
-  }
-
   @media (max-width: 600px) {
     padding: 2rem 1rem;
 
@@ -31,14 +27,10 @@ const StyledFooter = styled.footer`
       justify-self: first baseline;
     }
 
-    .flex {
+    .responsive-flex {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    .only-mobile {
-      display: inline;
     }
   }
 `
@@ -46,12 +38,12 @@ const StyledFooter = styled.footer`
 export default function Footer() {
   return (
     <StyledFooter>
-      <div className="flex">
+      <div className="responsive-flex">
         <div className="site-details">
           <h2 className="site-title">Untrip</h2>
           <h6 className="site-description">Curated Kuala Lumpur</h6>
         </div>
-        <div className="only-mobile">
+        <div className="">
           <Menu />
         </div>
       </div>

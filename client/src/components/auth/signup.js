@@ -37,7 +37,6 @@ export default function Signup() {
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            disabled={loading}
           />
 
           <Input
@@ -45,7 +44,6 @@ export default function Signup() {
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            disabled={loading}
           />
 
           <Button type="submit" primary loading={loading}>
