@@ -13,7 +13,7 @@ var models = [
     embedded: false
   },
   {
-    name: "Place",
+    name: "ListPlace",
     embedded: false
   },
   {
@@ -24,6 +24,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://untrip-prod-3f0239fd8e.herokuapp.com/server/production`
+  endpoint: `https://us1.prisma.sh/untrip/untrip-dev/dev`
 });
 exports.prisma = new exports.Prisma();

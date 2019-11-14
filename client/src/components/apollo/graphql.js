@@ -1,24 +1,16 @@
 import gql from "graphql-tag"
 
-export const USER_FRAGMENT = gql`
-  fragment UserFragment on User {
+// Fragments
+
+export const LIST_PLACE_FRAGMENT = gql`
+  fragment ListPlaceFragment on ListPlace {
     id
-    email
-    password
-    isEmailSubscriber
-    lists {
-      id
-      title
-      places {
-        id
-        sanityId
-        name
-        imageUrl
-        slug
-        lat
-        lng
-      }
-    }
+    sanityId
+    name
+    imageUrl
+    slug
+    lat
+    lng
   }
 `
 
@@ -27,22 +19,40 @@ export const LIST_FRAGMENT = gql`
     id
     title
     places {
-      id
-      sanityId
-      name
-      imageUrl
-      slug
-      lat
-      lng
+      ...ListPlaceFragment
     }
   }
+  ${LIST_PLACE_FRAGMENT}
 `
+
+export const USER_FRAGMENT = gql`
+  fragment UserFragment on User {
+    id
+    email
+    password
+    isEmailSubscriber
+    lists {
+      ...ListFragment
+    }
+  }
+  ${LIST_FRAGMENT}
+`
+
+// Client side resolvers
 
 export const IS_LOGGED_IN = gql`
   query IS_LOGGED_IN {
     isLoggedIn @client
   }
 `
+
+export const IS_IN_LIST = gql`
+  query IS_IN_LIST($places: Array!, $placeSanityId: String!) {
+    isInList(places: $places, placeSanityId: $placeSanityId) @client
+  }
+`
+
+// Queries
 
 export const CURRENT_USER_QUERY = gql`
   query CURRENT_USER_QUERY {
@@ -52,6 +62,17 @@ export const CURRENT_USER_QUERY = gql`
   }
   ${USER_FRAGMENT}
 `
+
+export const LIST_QUERY = gql`
+  query LIST_QUERY($listId: ID!) {
+    list(listId: $listId) {
+      ...ListFragment
+    }
+  }
+  ${LIST_FRAGMENT}
+`
+
+// Mutations
 
 export const SIGN_UP_MUTATION = gql`
   mutation SIGN_UP_MUTATION($email: String!, $password: String!) {
@@ -119,8 +140,8 @@ export const DELETE_LIST_MUTATION = gql`
   }
 `
 
-export const TOGGLE_PLACE_MUTATION = gql`
-  mutation TOGGLE_PLACE_MUTATION(
+export const ADD_TO_LIST_MUTATION = gql`
+  mutation ADD_TO_LIST_MUTATION(
     $listId: ID!
     $sanityId: String!
     $name: String!
@@ -129,7 +150,7 @@ export const TOGGLE_PLACE_MUTATION = gql`
     $lat: Float!
     $lng: Float!
   ) {
-    togglePlace(
+    addToList(
       listId: $listId
       sanityId: $sanityId
       name: $name
@@ -138,19 +159,19 @@ export const TOGGLE_PLACE_MUTATION = gql`
       lat: $lat
       lng: $lng
     ) {
-      ...ListFragment
+      ...ListPlaceFragment
     }
   }
-  ${LIST_FRAGMENT}
+  ${LIST_PLACE_FRAGMENT}
 `
 
-export const LIST_QUERY = gql`
-  query list($listId: ID!) {
-    list(listId: $listId) {
-      ...ListFragment
+export const REMOVE_FROM_LIST_MUTATION = gql`
+  mutation REMOVE_FROM_LIST($listPlaceId: ID!) {
+    removeFromList(listPlaceId: $listPlaceId) {
+      ...ListPlaceFragment
     }
   }
-  ${LIST_FRAGMENT}
+  ${LIST_PLACE_FRAGMENT}
 `
 
 export const SUBSCRIBE_TO_EMAIL_MUTATION = gql`

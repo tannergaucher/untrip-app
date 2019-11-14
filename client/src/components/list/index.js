@@ -1,13 +1,15 @@
 import AddToListModal from "./add-to-list-modal"
 import CreateListForm from "./create-list-form"
-import ToggleListplaceCheckbox from "./toggle-listplace-checkbox"
 import UserLists from "./user-lists"
 import UserListPage from "./user-list-page"
+import AddPlace from "./add-place"
+import RemovePlace from "./remove-place"
 
 export {
   AddToListModal,
   CreateListForm,
-  ToggleListplaceCheckbox,
   UserLists,
   UserListPage,
+  AddPlace,
+  RemovePlace,
 }

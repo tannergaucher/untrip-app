@@ -29,7 +29,14 @@ export const client = new ApolloClient({
   link: authLink.concat(httpLink),
   resolvers: {
     Mutation: {},
-    Query: {},
+    Query: {
+      isInList: (_parent, { places, placeSanityId }, _context) => {
+        const isInList = places.filter(
+          place => place.sanityId === placeSanityId
+        )
+        return isInList.length ? true : false
+      },
+    },
   },
   connectToDevTools: true,
 })

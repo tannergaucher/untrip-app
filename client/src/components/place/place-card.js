@@ -5,8 +5,8 @@ import BlockContent from "@sanity/block-content-to-react"
 import { useInView } from "react-intersection-observer"
 
 import { PlaceDetails } from "../place"
-import { Divider, Link } from "../styles"
 import { AddToListModal } from "../list"
+import { Divider, Link } from "../styles"
 
 const StyledPlace = styled.div`
   margin-bottom: 2rem;
@@ -78,14 +78,18 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
       <Img fluid={postPlace.place.image.asset.fluid} />
       <div className="place-tags">
         {postPlace.place.tags.map(tag => (
-          <Link key={tag.slug.current} to={`/tags/${tag.slug.current}`} plain>
+          <Link
+            plain="true"
+            key={tag.slug.current}
+            to={`/tags/${tag.slug.current}`}
+          >
             <h5 className="place-tag">{tag.tag}</h5>
           </Link>
         ))}
       </div>
       <BlockContent blocks={postPlace._rawText} />
       <PlaceDetails place={postPlace} post={post} />
-      <Divider bgLight={true} />
+      <Divider />
     </StyledPlace>
   )
 }

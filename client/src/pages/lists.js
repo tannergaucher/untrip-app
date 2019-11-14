@@ -1,11 +1,12 @@
 import React, { useState } from "react"
-import { navigate } from "gatsby"
-import { useQuery, useMutation } from "@apollo/react-hooks"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import { Edit } from "grommet-icons"
+import { navigate } from "gatsby"
+import { useQuery, useMutation } from "@apollo/react-hooks"
 
 import { AuthTabs } from "../components/auth"
+import { SEO, Loading, Share } from "../components/elements"
 import {
   ContentAsideGrid,
   Divider,
@@ -13,11 +14,9 @@ import {
   Form,
   Input,
 } from "../components/styles"
-import { SEO, Loading, Share } from "../components/elements"
 import {
   IS_LOGGED_IN,
   CURRENT_USER_QUERY,
-  TOGGLE_PLACE_MUTATION,
   UPDATE_LIST_MUTATION,
   DELETE_LIST_MUTATION,
 } from "../components/apollo/graphql"
@@ -111,7 +110,6 @@ const StyledListItem = styled.div`
 
   .delete-list-btn {
     margin-top: 1rem;
-    color: var(--warning);
   }
 `
 
@@ -127,8 +125,8 @@ function ListItem({ list }) {
     optimisticResponse: {
       __typename: "Mutation",
       updateList: {
-        id: list.id,
         __typename: "List",
+        id: list.id,
         title: updatedTitle,
         places: list.places,
       },
@@ -192,6 +190,10 @@ function DeleteListButton({ listId }) {
       className="delete-list-btn"
       disabled={loading}
       onClick={() => deleteList()}
+      style={{
+        color: `var(--accent)`,
+        border: `var(--accent)`,
+      }}
     >
       Delete List
     </Button>
@@ -209,18 +211,6 @@ const StyledListPlace = styled.div`
 `
 
 function ListPlace({ place, list, isEdit }) {
-  const [togglePlace, { loading }] = useMutation(TOGGLE_PLACE_MUTATION, {
-    variables: {
-      listId: list.id,
-      sanityId: place.sanityId,
-      name: place.name,
-      imageUrl: place.imageUrl,
-      slug: place.slug,
-      lat: place.lat,
-      lng: place.lng,
-    },
-  })
-
   return (
     <StyledListPlace>
       <div className="img-place-name">
@@ -236,9 +226,9 @@ function ListPlace({ place, list, isEdit }) {
         {isEdit ? (
           <Button
             className="place-delete-btn"
-            disabled={loading}
             onClick={async () => {
-              await togglePlace()
+              // await togglePlace()
+              // change to delete place
             }}
           >
             X {place.name}

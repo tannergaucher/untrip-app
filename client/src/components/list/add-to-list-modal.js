@@ -8,7 +8,7 @@ import { UserLists } from "../list"
 import { Button, StyledLayer } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
-const PlainBtn = styled(Button)`
+const PlainButton = styled(Button)`
   border: var(--thickness) solid var(--white);
 `
 
@@ -21,10 +21,9 @@ export default function AddToListModal({ place }) {
 
   return (
     <>
-      <PlainBtn onClick={() => setShow(!show)}>
+      <PlainButton onClick={() => setShow(!show)}>
         <AddCircle color="var(--black)" />
-      </PlainBtn>
-
+      </PlainButton>
       {show && (
         <StyledLayer
           onEsc={() => setShow(false)}

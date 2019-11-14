@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import { useMutation, useApolloClient } from "@apollo/react-hooks"
 import { navigate } from "gatsby"
+import { useMutation } from "@apollo/react-hooks"
 
 import { LOGIN_MUTATION } from "../apollo/graphql"
 import { Button, Fieldset, Form, Input } from "../styles"
@@ -8,10 +8,9 @@ import { Button, Fieldset, Form, Input } from "../styles"
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
+  const [login, { loading, error, client }] = useMutation(LOGIN_MUTATION, {
     variables: { email, password },
   })
-  const client = useApolloClient()
 
   return (
     <>
@@ -38,7 +37,6 @@ export default function Login() {
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            disabled={loading}
             required="true"
           />
           <Input
@@ -46,7 +44,6 @@ export default function Login() {
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            disabled={loading}
             required="true"
           />
           <Button type="submit" primary loading={loading}>

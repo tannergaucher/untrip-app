@@ -3,10 +3,10 @@ import styled from "styled-components"
 import { useMutation } from "@apollo/react-hooks"
 
 import { Share } from "../elements"
-import { Divider, Button, Form, Input, StyledLayer } from "../styles"
 import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
+import { Divider, Button, Form, Input, StyledLayer } from "../styles"
 
-const Styled = styled.div`
+const StyledAbout = styled.div`
   .site-description {
     margin-bottom: 1.5rem;
   }
@@ -14,7 +14,7 @@ const Styled = styled.div`
 
 export default function About() {
   return (
-    <Styled className={`sticky`}>
+    <StyledAbout className="sticky">
       <h2 className="side-title">About Untrip</h2>
       <p className="site-description">
         We curate the best food and drink, music, culture and events happening
@@ -22,14 +22,15 @@ export default function About() {
       </p>
       <Share />
       <EmailForm />
-      <Divider bgLight={true} />
-    </Styled>
+      <Divider />
+    </StyledAbout>
   )
 }
 
 function EmailForm() {
   const [message, setMessage] = useState("")
   const [email, setEmail] = useState("")
+
   const [subscribeToEmail, { loading, error }] = useMutation(
     SUBSCRIBE_TO_EMAIL_MUTATION,
     {
@@ -54,9 +55,10 @@ function EmailForm() {
           placeholder="Email Address"
           type="email"
           value={email}
-          required="true"
+          required={true}
           onChange={e => setEmail(e.target.value)}
         />
+
         <Button type="submit" primary loading={loading}>
           Subscribe to weekly newsletter
         </Button>

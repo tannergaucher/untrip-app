@@ -10,12 +10,13 @@ const Styled = styled.div`
     flex: 1;
   }
 
-  .text {
+  .post-details {
     flex: 3;
     margin: 0 1rem;
   }
 
   .post-title,
+  .post-date,
   .post-category {
     margin: 0;
   }
@@ -25,9 +26,13 @@ const Styled = styled.div`
     font-weight: 900;
   }
 
-  .post-category {
+  .post-category,
+  .post-date {
     text-transform: uppercase;
-    font-weight: 100;
+  }
+
+  .post-date {
+    margin-top: 0.5rem;
   }
 `
 
@@ -37,9 +42,10 @@ export default function AsidePostCard({ post }) {
       <div className="img-wrapper">
         <Img fluid={post.mainImage.asset.fluid} />
       </div>
-      <div className="text">
+      <div className="post-details">
         <h6 className="post-category">{post.category.category}</h6>
         <h4 className="post-title">{post.title}</h4>
+        {/* <h6 className="post-date">{post.publishedAt}</h6> */}
       </div>
     </Styled>
   )

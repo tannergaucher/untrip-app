@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
-import { PlaceCard } from "../components/place"
+import { PostPlaces } from "../components/place"
 import { SEO, Map, Share, About } from "../components/elements"
 import { ContentAsideGrid, Divider } from "../components/styles"
 import {
@@ -32,13 +32,8 @@ const StyledPost = styled.div`
     text-transform: uppercase;
   }
 
-  .post-category {
-    font-weight: lighter;
-  }
-
   .post-date {
-    margin-left: 0.5rem;
-    font-weight: lighter;
+    margin-left: 1rem;
   }
 
   .post-comments {
@@ -77,7 +72,7 @@ export default function PostPage({ data }) {
         <article className="content">
           <StyledPost>
             <div className="post-category-date">
-              <h6 className="post-category">{post.category.category} /</h6>
+              <h6 className="post-category">{post.category.category} </h6>
               <h6 className="post-date">{post.publishedAt}</h6>
             </div>
             <h1 className="post-title">{post.title}</h1>
@@ -89,14 +84,11 @@ export default function PostPage({ data }) {
             <BlockContent blocks={post._rawBody} />
             <Author author={post.author} />
             <Divider bgLight={true} />
-            {post.postPlaces.map(postPlace => (
-              <PlaceCard
-                key={postPlace.id}
-                postPlace={postPlace}
-                setPlaceInView={setPlaceInView}
-                post={post}
-              />
-            ))}
+            <PostPlaces
+              postPlaces={post.postPlaces}
+              post={post}
+              setPlaceInView={setPlaceInView}
+            />
             <div className="post-comments">
               <Comments setCommentsInView={setCommentsInView} />
             </div>

@@ -3,8 +3,7 @@ const path = require("path")
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  // Query all posts.
-  // Can I use a fragment inside gatsby-node?
+  // Query all posts
   const postsQuery = await graphql(`
     query {
       allSanityPost {
@@ -61,8 +60,6 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   const categories = categoriesQuery.data.allSanityCategory.edges || []
-
-  console.log(categories)
 
   // Create category page for each category
   categories.forEach(edge => {
