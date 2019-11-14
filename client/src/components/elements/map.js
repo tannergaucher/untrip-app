@@ -4,7 +4,6 @@ import Img from "gatsby-image"
 
 import { Link } from "../styles"
 import Icon from "../../images/location-pin.svg"
-import RedIcon from "../../images/location-pin-red.svg"
 
 class MapContainer extends React.Component {
   state = {
@@ -125,7 +124,8 @@ class MapContainer extends React.Component {
                 // FIX
                 url:
                   this.state.selectedPlace.position === place.location
-                    ? RedIcon
+                    ? // TODO
+                      ""
                     : Icon,
                 anchor: new google.maps.Point(45, 45),
                 scaledSize: new google.maps.Size(45, 45),

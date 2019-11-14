@@ -43,9 +43,6 @@ export default function Footer() {
           <h2 className="site-title">Untrip</h2>
           <h6 className="site-description">Curated Kuala Lumpur</h6>
         </div>
-        <div className="">
-          <Menu />
-        </div>
       </div>
       <Divider bgDark />
     </StyledFooter>

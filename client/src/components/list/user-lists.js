@@ -54,7 +54,7 @@ export default function UserLists({ place }) {
 function ToggleListPlace({ list, place }) {
   const { data } = useQuery(IS_IN_LIST, {
     variables: {
-      places: list.places,
+      listId: list.id,
       placeSanityId: place.id,
     },
   })

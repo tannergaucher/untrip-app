@@ -50,8 +50,8 @@ export const IS_LOGGED_IN = gql`
 `
 
 export const IS_IN_LIST = gql`
-  query IS_IN_LIST($places: Array!, $placeSanityId: String!) {
-    isInList(places: $places, placeSanityId: $placeSanityId) @client
+  query IS_IN_LIST($listId: ID!, $placeSanityId: String!) {
+    isInList(listId: $listId, placeSanityId: $placeSanityId) @client
   }
 `
 

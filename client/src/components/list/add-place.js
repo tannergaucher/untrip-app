@@ -2,7 +2,11 @@ import React from "react"
 
 import { Button } from "../styles"
 import { useMutation } from "@apollo/react-hooks"
-import { ADD_TO_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
+import {
+  ADD_TO_LIST_MUTATION,
+  CURRENT_USER_QUERY,
+  IS_IN_LIST,
+} from "../apollo/graphql"
 
 export default function AddPlace({ place, list }) {
   const [addToList] = useMutation(ADD_TO_LIST_MUTATION, {
@@ -29,9 +33,7 @@ export default function AddPlace({ place, list }) {
     //   },
     // },
     update: (cache, payload) => {
-      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-      console.log(data)
-      console.log(payload)
+      const data = { ...cache.readQuery({ query: CURRENT_USER_QUERY }) }
 
       // get the index of the list to be updated
       const updatedListIndex = data.me.lists.findIndex(
@@ -44,11 +46,18 @@ export default function AddPlace({ place, list }) {
         payload.data.addToList,
       ]
 
-      console.log(data)
-
       // write data back to cache
       cache.writeQuery({ query: CURRENT_USER_QUERY, data })
     },
+    refetchQueries: [
+      {
+        query: IS_IN_LIST,
+        variables: {
+          listId: list.id,
+          placeSanityId: place.id,
+        },
+      },
+    ],
   })
 
   return (

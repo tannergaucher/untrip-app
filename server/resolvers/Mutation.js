@@ -72,7 +72,7 @@ const Mutation = {
         })
 
         return {
-          message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
+          message: `Hooray! You've signed up for the Untrip weekly newsletter. Some more product description goes here.`,
         }
       }
     }
@@ -83,7 +83,7 @@ const Mutation = {
     })
 
     return {
-      message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
+      message: `Hooray! You've signed up for the Untrip weekly newsletter. Some more product description goes here.`,
     }
   },
   unsubscribeToEmail: async (_parent, { email }, _context) => {
@@ -194,15 +194,11 @@ const Mutation = {
       },
     })
 
-    console.log(listPlace)
-
     return listPlace
   },
 
   removeFromList: async (_parent, { listPlaceId }, context, info) => {
     const userId = getUserId(context)
-
-    console.log(info)
 
     if (!userId) {
       throw new AuthError()
