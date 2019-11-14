@@ -2,7 +2,10 @@ import React from "react"
 import { Button } from "../styles"
 
 import { useMutation } from "@apollo/react-hooks"
-import { REMOVE_FROM_LIST_MUTATION } from "../apollo/graphql"
+import {
+  REMOVE_FROM_LIST_MUTATION,
+  CURRENT_USER_QUERY,
+} from "../apollo/graphql"
 
 export default function RemovePlace({ place, list }) {
   // Because need to get a listPlace db id, not cms
@@ -12,6 +15,11 @@ export default function RemovePlace({ place, list }) {
   const [removePlace] = useMutation(REMOVE_FROM_LIST_MUTATION, {
     variables: {
       listPlaceId: myPlace.id,
+    },
+    update: (cache, payload) => {
+      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+      console.log(data)
+      console.log(payload)
     },
   })
 
