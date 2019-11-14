@@ -24,6 +24,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/untrip/untrip-dev/dev`
+  endpoint: `https://us1.prisma.sh/tanner-gaucher/untrip-demo/dev`
 });
 exports.prisma = new exports.Prisma();

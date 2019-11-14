@@ -30,6 +30,8 @@ export default function AddPlace({ place, list }) {
     // },
     update: (cache, payload) => {
       const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+      console.log(data)
+      console.log(payload)
 
       // get the index of the list to be updated
       const updatedListIndex = data.me.lists.findIndex(
@@ -41,6 +43,8 @@ export default function AddPlace({ place, list }) {
         ...data.me.lists[updatedListIndex].places,
         payload.data.addToList,
       ]
+
+      console.log(data)
 
       // write data back to cache
       cache.writeQuery({ query: CURRENT_USER_QUERY, data })
