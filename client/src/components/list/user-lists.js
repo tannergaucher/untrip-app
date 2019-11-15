@@ -52,15 +52,24 @@ export default function UserLists({ place }) {
 }
 
 function ToggleListPlace({ list, place }) {
-  const { data } = useQuery(IS_IN_LIST, {
-    variables: {
-      listId: list.id,
-      placeSanityId: place.id,
-    },
-  })
+  const { data } = useQuery(CURRENT_USER_QUERY)
 
-  return data && data.isInList ? (
-    <RemovePlace list={list} place={place} />
+  const listIndex = data.me.lists.findIndex(
+    cacheList => cacheList.id === list.id
+  )
+
+  const testList = data.me.lists[listIndex]
+
+  const [isInList] = testList.places.filter(
+    listPlace => listPlace.sanityId === place.id
+  )
+
+  // get listPlace
+  const myList = list.places.filter(place => place.sanityId === place.sanityId)
+  const [listPlace] = myList.filter(myPlace => myPlace.sanityId === place.id)
+
+  return isInList ? (
+    <RemovePlace list={list} listPlace={listPlace} />
   ) : (
     <AddPlace list={list} place={place} />
   )

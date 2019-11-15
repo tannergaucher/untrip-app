@@ -4,7 +4,7 @@ import { navigate } from "gatsby"
 import { useQuery } from "@apollo/react-hooks"
 
 import { Menu } from "../elements"
-import { Button, Link, Divider } from "../styles"
+import { Button, Link } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledHeader = styled.header`

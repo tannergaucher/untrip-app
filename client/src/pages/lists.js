@@ -57,7 +57,7 @@ function UserLists() {
     <>
       <SEO title={`My Untrips | Untrip`} />
       <>
-        {loading && <Loading message="Loading lists..." />}
+        {loading && `loading...`}
         {error && `Error: ${error.message}`}
         {data && data.me && data.me.lists.length === 0 && (
           <h1>You don't have any lists yet. Make one!</h1>

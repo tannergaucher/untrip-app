@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/react-hooks"
 import { ADD_TO_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 export default function AddPlace({ place, list }) {
-  const [addToList] = useMutation(ADD_TO_LIST_MUTATION, {
+  const [addToList, { client }] = useMutation(ADD_TO_LIST_MUTATION, {
     variables: {
       listId: list.id,
       sanityId: place.id,
@@ -14,6 +14,23 @@ export default function AddPlace({ place, list }) {
       slug: place.slug.current,
       lat: place.location.lat,
       lng: place.location.lng,
+    },
+    optimisticResponse: {
+      __typename: "Mutation",
+      addToList: {
+        __typename: "ListPlace",
+        id: new Date(),
+        sanityId: place.id,
+        name: place.name,
+        imageUrl: JSON.stringify(place.image.asset.fluid),
+        slug: place.slug.current,
+        lat: place.location.lat,
+        lng: place.location.lng,
+        list: {
+          __typename: "List",
+          id: list.id,
+        },
+      },
     },
     update: (cache, payload) => {
       try {
@@ -27,7 +44,7 @@ export default function AddPlace({ place, list }) {
           places: [...data.me.lists[listIndex].places, payload.data.addToList],
         }
 
-        cache.writeQuery({
+        client.writeQuery({
           query: CURRENT_USER_QUERY,
           data: {
             ...data,
