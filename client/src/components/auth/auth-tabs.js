@@ -10,7 +10,7 @@ const StyledAuthTabs = styled.div`
   .toggle-auth {
     text-align: center;
 
-    h4 {
+    .auth-message {
       margin-bottom: 1rem;
       font-weight: lighter;
     }
@@ -18,6 +18,7 @@ const StyledAuthTabs = styled.div`
 `
 
 export default function AuthTabs() {
+  // Boolean better?
   const [show, setShow] = useState("Login")
 
   return (
