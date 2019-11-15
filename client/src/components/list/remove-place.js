@@ -18,16 +18,6 @@ export default function RemovePlace({ list, listPlace }) {
       removeFromList: {
         __typename: "ListPlace",
         id: listPlace.id,
-        sanityId: listPlace.sanityId,
-        name: listPlace.name,
-        imageUrl: listPlace.imageUrl,
-        slug: listPlace.slug,
-        lat: listPlace.lat,
-        lng: listPlace.lng,
-        list: {
-          __typename: "List",
-          id: list.id,
-        },
       },
     },
 

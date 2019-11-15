@@ -61,7 +61,7 @@ const typeDefs = gql`
       lng: Float!
     ): List!
     updateList(listId: String!, title: String!): List!
-    deleteList(listId: String!): SuccessMessage!
+    deleteList(listId: String!): List
     addToList(
       listId: ID
       sanityId: String

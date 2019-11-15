@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 import { useQuery, useMutation } from "@apollo/react-hooks"
 
 import { AuthTabs } from "../components/auth"
-import { SEO, Loading, Share } from "../components/elements"
+import { SEO, Share } from "../components/elements"
 import {
   ContentAsideGrid,
   Divider,
@@ -19,6 +19,7 @@ import {
   CURRENT_USER_QUERY,
   UPDATE_LIST_MUTATION,
   DELETE_LIST_MUTATION,
+  REMOVE_FROM_LIST_MUTATION,
 } from "../components/apollo/graphql"
 
 const StyledListPage = styled.div`
@@ -117,7 +118,7 @@ function ListItem({ list }) {
   const [isEdit, setIsEdit] = useState(false)
   const [updatedTitle, setUpdatedTitle] = useState("")
 
-  const [updateList, { loading, error }] = useMutation(UPDATE_LIST_MUTATION, {
+  const [updateList] = useMutation(UPDATE_LIST_MUTATION, {
     variables: {
       listId: list.id,
       title: updatedTitle,
@@ -170,18 +171,39 @@ function ListItem({ list }) {
           View List
         </Button>
       )}
-
       {isEdit && <DeleteListButton listId={list.id} />}
-
       <Divider bgLight={true} />
     </StyledListItem>
   )
 }
 
 function DeleteListButton({ listId }) {
-  const [deleteList, { loading, error }] = useMutation(DELETE_LIST_MUTATION, {
+  const [deleteList, { loading }] = useMutation(DELETE_LIST_MUTATION, {
     variables: {
       listId,
+    },
+
+    optimisticResponse: {
+      __typename: "Mutation",
+      deleteList: {
+        __typename: "List",
+        id: listId,
+      },
+    },
+
+    update: cache => {
+      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+      const updatedLists = data.me.lists.filter(list => list.id !== listId)
+      cache.writeQuery({
+        query: CURRENT_USER_QUERY,
+        data: {
+          ...data,
+          me: {
+            ...data.me,
+            lists: updatedLists,
+          },
+        },
+      })
     },
   })
 
@@ -211,6 +233,17 @@ const StyledListPlace = styled.div`
 `
 
 function ListPlace({ place, list, isEdit }) {
+  console.log(list)
+  console.log(place)
+
+  // GET listPlaceId from
+
+  const [removeFromList] = useMutation(REMOVE_FROM_LIST_MUTATION, {
+    variables: {
+      listPlaceId: "",
+    },
+  })
+
   return (
     <StyledListPlace>
       <div className="img-place-name">
@@ -224,13 +257,7 @@ function ListPlace({ place, list, isEdit }) {
           }}
         />
         {isEdit ? (
-          <Button
-            className="place-delete-btn"
-            onClick={async () => {
-              // await togglePlace()
-              // change to delete place
-            }}
-          >
+          <Button className="place-delete-btn" onClick={() => removeFromList()}>
             X {place.name}
           </Button>
         ) : (

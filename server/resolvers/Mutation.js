@@ -160,20 +160,19 @@ const Mutation = {
 
     return list
   },
-  deleteList: async (_parent, { listId }, context) => {
+  deleteList: async (_parent, { listId }, context, info) => {
     const userId = getUserId(context)
 
     if (!userId) {
       throw new AuthError()
     }
 
-    await prisma.deleteList({
-      id: listId,
-    })
-
-    return {
-      message: `You did it!`,
-    }
+    return await prisma.deleteList(
+      {
+        id: listId,
+      },
+      info
+    )
   },
   addToList: async (
     _parent,

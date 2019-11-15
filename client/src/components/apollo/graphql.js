@@ -138,7 +138,7 @@ export const UPDATE_LIST_MUTATION = gql`
 export const DELETE_LIST_MUTATION = gql`
   mutation DELETE_LIST_MUTATION($listId: String!) {
     deleteList(listId: $listId) {
-      message
+      id
     }
   }
 `
@@ -171,10 +171,9 @@ export const ADD_TO_LIST_MUTATION = gql`
 export const REMOVE_FROM_LIST_MUTATION = gql`
   mutation REMOVE_FROM_LIST($listPlaceId: ID!) {
     removeFromList(listPlaceId: $listPlaceId) {
-      ...ListPlaceFragment
+      id
     }
   }
-  ${LIST_PLACE_FRAGMENT}
 `
 
 export const SUBSCRIBE_TO_EMAIL_MUTATION = gql`
