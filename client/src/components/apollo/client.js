@@ -3,6 +3,7 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 import { createHttpLink } from "apollo-link-http"
 import { setContext } from "apollo-link-context"
 import fetch from "isomorphic-fetch"
+import { CURRENT_USER_QUERY } from "./graphql"
 
 const isBrowser = () => typeof window !== "undefined"
 
@@ -21,7 +22,9 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const cache = new InMemoryCache()
+const cache = new InMemoryCache({
+  freezeResults: true,
+})
 
 export const client = new ApolloClient({
   fetch,
@@ -30,15 +33,22 @@ export const client = new ApolloClient({
   resolvers: {
     Mutation: {},
     Query: {
-      isInList: (_parent, { places, placeSanityId }, _context) => {
-        const isInList = places.filter(
+      isInList: (_parent, { listId, placeSanityId }, { client }) => {
+        console.log("IS IN LIST RAN")
+
+        // use client or cache?
+        const data = client.readQuery({ query: CURRENT_USER_QUERY })
+        const [myList] = data.me.lists.filter(list => list.id === listId)
+        const [existingPlace] = myList.places.filter(
           place => place.sanityId === placeSanityId
         )
-        return isInList.length ? true : false
+
+        return existingPlace ? true : false
       },
     },
   },
   connectToDevTools: true,
+  assumeImmutableResults: true,
 })
 
 const data = {

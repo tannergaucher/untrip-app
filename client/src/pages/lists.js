@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 import { useQuery, useMutation } from "@apollo/react-hooks"
 
 import { AuthTabs } from "../components/auth"
-import { SEO, Loading, Share } from "../components/elements"
+import { SEO, Share } from "../components/elements"
 import {
   ContentAsideGrid,
   Divider,
@@ -19,6 +19,7 @@ import {
   CURRENT_USER_QUERY,
   UPDATE_LIST_MUTATION,
   DELETE_LIST_MUTATION,
+  REMOVE_FROM_LIST_MUTATION,
 } from "../components/apollo/graphql"
 
 const StyledListPage = styled.div`
@@ -39,12 +40,12 @@ export default function ListsPage() {
         <div className="content">
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
-        <aside>
+        {/* <aside>
           <div className="sticky">
             <h2 className="aside-title">Favorites</h2>
             <Divider bgLight={true} />
           </div>
-        </aside>
+        </aside> */}
       </ContentAsideGrid>
     </StyledListPage>
   )
@@ -57,7 +58,7 @@ function UserLists() {
     <>
       <SEO title={`My Untrips | Untrip`} />
       <>
-        {loading && <Loading message="Loading lists..." />}
+        {loading && `loading...`}
         {error && `Error: ${error.message}`}
         {data && data.me && data.me.lists.length === 0 && (
           <h1>You don't have any lists yet. Make one!</h1>
@@ -69,7 +70,7 @@ function UserLists() {
               if (list.places.length === 0) {
                 return <h4>{`Oops, ${list.title}has no places yet`}</h4>
               }
-              return <ListItem list={list} />
+              return <ListItem list={list} key={list.id} />
             })}
         </>
       </>
@@ -117,7 +118,7 @@ function ListItem({ list }) {
   const [isEdit, setIsEdit] = useState(false)
   const [updatedTitle, setUpdatedTitle] = useState("")
 
-  const [updateList, { loading, error }] = useMutation(UPDATE_LIST_MUTATION, {
+  const [updateList] = useMutation(UPDATE_LIST_MUTATION, {
     variables: {
       listId: list.id,
       title: updatedTitle,
@@ -164,24 +165,44 @@ function ListItem({ list }) {
         ))}
       </div>
       {!isEdit && <Share />}
-
       {!isEdit && (
         <Button primary onClick={() => navigate(`/app/list/${list.id}`)}>
           View List
         </Button>
       )}
-
       {isEdit && <DeleteListButton listId={list.id} />}
-
       <Divider bgLight={true} />
     </StyledListItem>
   )
 }
 
 function DeleteListButton({ listId }) {
-  const [deleteList, { loading, error }] = useMutation(DELETE_LIST_MUTATION, {
+  const [deleteList, { loading }] = useMutation(DELETE_LIST_MUTATION, {
     variables: {
       listId,
+    },
+
+    optimisticResponse: {
+      __typename: "Mutation",
+      deleteList: {
+        __typename: "List",
+        id: listId,
+      },
+    },
+
+    update: cache => {
+      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+      const updatedLists = data.me.lists.filter(list => list.id !== listId)
+      cache.writeQuery({
+        query: CURRENT_USER_QUERY,
+        data: {
+          ...data,
+          me: {
+            ...data.me,
+            lists: updatedLists,
+          },
+        },
+      })
     },
   })
 
@@ -211,6 +232,48 @@ const StyledListPlace = styled.div`
 `
 
 function ListPlace({ place, list, isEdit }) {
+  const [removeFromList] = useMutation(REMOVE_FROM_LIST_MUTATION, {
+    variables: {
+      listPlaceId: place.id,
+    },
+    optimisticResponse: {
+      __typename: "Mutation",
+      removeFromList: {
+        __typename: "ListPlace",
+        id: place.id,
+      },
+    },
+    update: cache => {
+      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+
+      const listIndex = data.me.lists.findIndex(
+        cacheList => cacheList.id === list.id
+      )
+
+      const updatedList = {
+        ...data.me.lists[listIndex],
+        places: data.me.lists[listIndex].places.filter(
+          cachePlace => cachePlace.id !== place.id
+        ),
+      }
+
+      cache.writeQuery({
+        query: CURRENT_USER_QUERY,
+        data: {
+          ...data,
+          me: {
+            ...data.me,
+            lists: [
+              ...data.me.lists.slice(0, listIndex),
+              updatedList,
+              ...data.me.lists.slice(listIndex + 1),
+            ],
+          },
+        },
+      })
+    },
+  })
+
   return (
     <StyledListPlace>
       <div className="img-place-name">
@@ -224,13 +287,7 @@ function ListPlace({ place, list, isEdit }) {
           }}
         />
         {isEdit ? (
-          <Button
-            className="place-delete-btn"
-            onClick={async () => {
-              // await togglePlace()
-              // change to delete place
-            }}
-          >
+          <Button className="place-delete-btn" onClick={() => removeFromList()}>
             X {place.name}
           </Button>
         ) : (

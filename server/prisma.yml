@@ -4,4 +4,4 @@ generate:
   - generator: javascript-client
     output: ./generated/prisma-client/
 
-endpoint: https://us1.prisma.sh/untrip/untrip-dev/dev
+endpoint: https://us1.prisma.sh/tanner-gaucher/untrip-demo/dev

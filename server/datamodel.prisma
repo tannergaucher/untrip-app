@@ -3,14 +3,14 @@ type User {
   email: String! @unique
   password: String!
   isEmailSubscriber: Boolean @default(value: false)
-  lists: [List!]
+  lists: [List!] @relation(name: "UserOnList" onDelete: CASCADE) 
 }
 
 type List {
   id: ID! @id 
   title: String!
-  places: [ListPlace!]
-  user: User!
+  places: [ListPlace!] @relation(name: "ListOnPlace" onDelete: CASCADE)
+  user: User! @relation(name: "UserOnList")
 }
 
 type ListPlace {
@@ -21,7 +21,7 @@ type ListPlace {
   slug: String
   lat: Float
   lng: Float
-  list: List
+  list: List @relation(name: "ListOnPlace")
 }
 
 type EmailSubscriber {

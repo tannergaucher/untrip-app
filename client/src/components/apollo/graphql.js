@@ -11,6 +11,9 @@ export const LIST_PLACE_FRAGMENT = gql`
     slug
     lat
     lng
+    list {
+      id
+    }
   }
 `
 
@@ -47,8 +50,8 @@ export const IS_LOGGED_IN = gql`
 `
 
 export const IS_IN_LIST = gql`
-  query IS_IN_LIST($places: Array!, $placeSanityId: String!) {
-    isInList(places: $places, placeSanityId: $placeSanityId) @client
+  query IS_IN_LIST($listId: ID!, $placeSanityId: String!) {
+    isInList(listId: $listId, placeSanityId: $placeSanityId) @client
   }
 `
 
@@ -135,7 +138,7 @@ export const UPDATE_LIST_MUTATION = gql`
 export const DELETE_LIST_MUTATION = gql`
   mutation DELETE_LIST_MUTATION($listId: String!) {
     deleteList(listId: $listId) {
-      message
+      id
     }
   }
 `
@@ -168,10 +171,9 @@ export const ADD_TO_LIST_MUTATION = gql`
 export const REMOVE_FROM_LIST_MUTATION = gql`
   mutation REMOVE_FROM_LIST($listPlaceId: ID!) {
     removeFromList(listPlaceId: $listPlaceId) {
-      ...ListPlaceFragment
+      id
     }
   }
-  ${LIST_PLACE_FRAGMENT}
 `
 
 export const SUBSCRIBE_TO_EMAIL_MUTATION = gql`

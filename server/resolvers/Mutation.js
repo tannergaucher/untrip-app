@@ -72,7 +72,7 @@ const Mutation = {
         })
 
         return {
-          message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
+          message: `Hooray! You've signed up for the Untrip weekly newsletter. Some more product description goes here.`,
         }
       }
     }
@@ -83,7 +83,7 @@ const Mutation = {
     })
 
     return {
-      message: `Hooray! You've signed up for the Untrip weekly newsletter.`,
+      message: `Hooray! You've signed up for the Untrip weekly newsletter. Some more product description goes here.`,
     }
   },
   unsubscribeToEmail: async (_parent, { email }, _context) => {
@@ -122,14 +122,16 @@ const Mutation = {
     const list = await prisma.createList({
       title,
       places: {
-        create: {
-          sanityId,
-          name,
-          imageUrl,
-          slug,
-          lat,
-          lng,
-        },
+        create: [
+          {
+            sanityId,
+            name,
+            imageUrl,
+            slug,
+            lat,
+            lng,
+          },
+        ],
       },
       user: {
         connect: {
@@ -158,20 +160,19 @@ const Mutation = {
 
     return list
   },
-  deleteList: async (_parent, { listId }, context) => {
+  deleteList: async (_parent, { listId }, context, info) => {
     const userId = getUserId(context)
 
     if (!userId) {
       throw new AuthError()
     }
 
-    await prisma.deleteList({
-      id: listId,
-    })
-
-    return {
-      message: `You did it!`,
-    }
+    return await prisma.deleteList(
+      {
+        id: listId,
+      },
+      info
+    )
   },
   addToList: async (
     _parent,
@@ -195,16 +196,19 @@ const Mutation = {
     return listPlace
   },
 
-  removeFromList: async (_parent, { listPlaceId }, context) => {
+  removeFromList: async (_parent, { listPlaceId }, context, info) => {
     const userId = getUserId(context)
 
     if (!userId) {
       throw new AuthError()
     }
 
-    await prisma.deleteListPlace({
-      id: listPlaceId,
-    })
+    return await prisma.deleteListPlace(
+      {
+        id: listPlaceId,
+      },
+      info
+    )
   },
 }
 

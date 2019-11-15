@@ -69,9 +69,19 @@ function EmailForm() {
           onClickOutside={() => setMessage("")}
         >
           <div className="email-subscribe-modal">
-            <h1 className="center">🎉</h1>
-            <h2 className="center">{message}</h2>
-            <div className="end">
+            <div>
+              <h1 className="">🎉</h1>
+              <h2 className="">{message}</h2>
+            </div>
+            <Button
+              primary
+              style={{ marginTop: `3rem` }}
+              // Closes modal.
+              onClick={() => setMessage("")}
+            >
+              Close
+            </Button>
+            <div className="">
               <h5>Change your mind already?</h5>
               <Button>Unsubscribe</Button>
             </div>

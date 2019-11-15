@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/react-hooks"
 import { ADD_TO_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 export default function AddPlace({ place, list }) {
-  const [addToList] = useMutation(ADD_TO_LIST_MUTATION, {
+  const [addToList, { client }] = useMutation(ADD_TO_LIST_MUTATION, {
     variables: {
       listId: list.id,
       sanityId: place.id,
@@ -16,7 +16,7 @@ export default function AddPlace({ place, list }) {
       lng: place.location.lng,
     },
     optimisticResponse: {
-      typename: "Mutation",
+      __typename: "Mutation",
       addToList: {
         __typename: "ListPlace",
         id: new Date(),
@@ -26,15 +26,41 @@ export default function AddPlace({ place, list }) {
         slug: place.slug.current,
         lat: place.location.lat,
         lng: place.location.lng,
+        list: {
+          __typename: "List",
+          id: list.id,
+        },
       },
     },
     update: (cache, payload) => {
-      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-      console.log(payload)
-      console.log(data)
-      // filter the right list from data.me.lists
-      // concat payload.data.addToList to that list
-      // write data back to cache
+      try {
+        const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+        const listIndex = data.me.lists.findIndex(
+          list => list.id === payload.data.addToList.list.id
+        )
+
+        const updatedList = {
+          ...data.me.lists[listIndex],
+          places: [...data.me.lists[listIndex].places, payload.data.addToList],
+        }
+
+        client.writeQuery({
+          query: CURRENT_USER_QUERY,
+          data: {
+            ...data,
+            me: {
+              ...data.me,
+              lists: [
+                ...data.me.lists.slice(0, listIndex),
+                updatedList,
+                ...data.me.lists.slice(listIndex + 1),
+              ],
+            },
+          },
+        })
+      } catch (error) {
+        console.log(error)
+      }
     },
   })
 
