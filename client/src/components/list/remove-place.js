@@ -46,7 +46,7 @@ export default function RemovePlace({ list, listPlace }) {
               lists: [
                 ...data.me.lists.slice(0, listIndex),
                 updatedList,
-                ...data.me.lists.slice(listIndex + 1, data.me.lists.length),
+                ...data.me.lists.slice(listIndex + 1),
               ],
             },
           },

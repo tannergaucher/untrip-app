@@ -40,12 +40,12 @@ export default function ListsPage() {
         <div className="content">
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
-        <aside>
+        {/* <aside>
           <div className="sticky">
             <h2 className="aside-title">Favorites</h2>
             <Divider bgLight={true} />
           </div>
-        </aside>
+        </aside> */}
       </ContentAsideGrid>
     </StyledListPage>
   )
@@ -165,7 +165,6 @@ function ListItem({ list }) {
         ))}
       </div>
       {!isEdit && <Share />}
-
       {!isEdit && (
         <Button primary onClick={() => navigate(`/app/list/${list.id}`)}>
           View List
@@ -233,14 +232,45 @@ const StyledListPlace = styled.div`
 `
 
 function ListPlace({ place, list, isEdit }) {
-  console.log(list)
-  console.log(place)
-
-  // GET listPlaceId from
-
   const [removeFromList] = useMutation(REMOVE_FROM_LIST_MUTATION, {
     variables: {
-      listPlaceId: "",
+      listPlaceId: place.id,
+    },
+    optimisticResponse: {
+      __typename: "Mutation",
+      removeFromList: {
+        __typename: "ListPlace",
+        id: place.id,
+      },
+    },
+    update: cache => {
+      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+
+      const listIndex = data.me.lists.findIndex(
+        cacheList => cacheList.id === list.id
+      )
+
+      const updatedList = {
+        ...data.me.lists[listIndex],
+        places: data.me.lists[listIndex].places.filter(
+          cachePlace => cachePlace.id !== place.id
+        ),
+      }
+
+      cache.writeQuery({
+        query: CURRENT_USER_QUERY,
+        data: {
+          ...data,
+          me: {
+            ...data.me,
+            lists: [
+              ...data.me.lists.slice(0, listIndex),
+              updatedList,
+              ...data.me.lists.slice(listIndex + 1),
+            ],
+          },
+        },
+      })
     },
   })
 
