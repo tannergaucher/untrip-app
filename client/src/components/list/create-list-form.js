@@ -17,11 +17,21 @@ export default function CreateList({ place, setShow }) {
       lng: place.location.lng,
     },
     update: (cache, payload) => {
-      const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-      data.me.lists = [...data.me.lists, payload.data.createList]
-
-      const newData = { ...data }
-      cache.writeQuery({ query: CURRENT_USER_QUERY, data: newData })
+      try {
+        const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+        cache.writeQuery({
+          query: CURRENT_USER_QUERY,
+          data: {
+            ...data,
+            me: {
+              ...data.me,
+              lists: [...data.me.lists, payload.data.createList],
+            },
+          },
+        })
+      } catch (error) {
+        console.log(error)
+      }
     },
 
     optimisticResponse: {
