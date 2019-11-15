@@ -4,15 +4,11 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
 
+import { Comments } from "../components/comment"
 import { PostPlaces } from "../components/place"
 import { SEO, Map, Share, About } from "../components/elements"
 import { ContentAsideGrid, Divider } from "../components/styles"
-import {
-  LatestPostsAside,
-  PopularPostsAside,
-  Author,
-  Comments,
-} from "../components/post"
+import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
 
 const StyledPost = styled.div`
   .post-title {

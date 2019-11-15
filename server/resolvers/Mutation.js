@@ -1,4 +1,5 @@
 const { sign } = require('jsonwebtoken')
+// import { AuthenticationError } from 'apollo-server'
 const { hashSync, genSaltSync, compareSync } = require('bcryptjs')
 
 const { getUserId } = require('../utils')

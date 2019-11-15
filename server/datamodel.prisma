@@ -29,5 +29,10 @@ type EmailSubscriber {
   email: String! @unique
 }
 
-
-
+type Comment {
+  id: ID! @id
+  text: String!
+  post: ID!
+  author: User!
+  claps: Int
+}
