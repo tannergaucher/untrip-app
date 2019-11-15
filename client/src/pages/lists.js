@@ -69,7 +69,7 @@ function UserLists() {
               if (list.places.length === 0) {
                 return <h4>{`Oops, ${list.title}has no places yet`}</h4>
               }
-              return <ListItem list={list} />
+              return <ListItem list={list} key={list.id} />
             })}
         </>
       </>

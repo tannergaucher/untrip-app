@@ -2,11 +2,7 @@ import React from "react"
 
 import { Button } from "../styles"
 import { useMutation } from "@apollo/react-hooks"
-import {
-  ADD_TO_LIST_MUTATION,
-  CURRENT_USER_QUERY,
-  IS_IN_LIST,
-} from "../apollo/graphql"
+import { ADD_TO_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 export default function AddPlace({ place, list }) {
   const [addToList] = useMutation(ADD_TO_LIST_MUTATION, {
@@ -19,45 +15,28 @@ export default function AddPlace({ place, list }) {
       lat: place.location.lat,
       lng: place.location.lng,
     },
-    // optimisticResponse: {
-    //   typename: "Mutation",
-    //   addToList: {
-    //     __typename: "ListPlace",
-    //     id: new Date(),
-    //     sanityId: place.id,
-    //     name: place.name,
-    //     imageUrl: JSON.stringify(place.image.asset.fluid),
-    //     slug: place.slug.current,
-    //     lat: place.location.lat,
-    //     lng: place.location.lng,
-    //   },
-    // },
     update: (cache, payload) => {
-      const data = { ...cache.readQuery({ query: CURRENT_USER_QUERY }) }
+      try {
+        const data = cache.readQuery({ query: CURRENT_USER_QUERY })
 
-      // get the index of the list to be updated
-      const updatedListIndex = data.me.lists.findIndex(
-        list => list.id === payload.data.addToList.list.id
-      )
+        // find index of my list where the id === payload.data.addToList.id
+        const listIndex = data.me.lists.findIndex(
+          list => list.id === payload.data.addToList.list.id
+        )
 
-      // add place to list
-      data.me.lists[updatedListIndex].places = [
-        ...data.me.lists[updatedListIndex].places,
-        payload.data.addToList,
-      ]
+        // add listPlace to that list
+        data.me.lists[listIndex].places = data.me.lists[
+          listIndex
+        ].places.concat(payload.data.addToList)
 
-      // write data back to cache
-      cache.writeQuery({ query: CURRENT_USER_QUERY, data })
+        console.log(data)
+
+        // write data back to cache
+        cache.writeQuery({ query: CURRENT_USER_QUERY, data })
+      } catch (error) {
+        console.log(error)
+      }
     },
-    refetchQueries: [
-      {
-        query: IS_IN_LIST,
-        variables: {
-          listId: list.id,
-          placeSanityId: place.id,
-        },
-      },
-    ],
   })
 
   return (

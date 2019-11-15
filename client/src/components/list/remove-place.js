@@ -9,32 +9,30 @@ import {
 
 export default function RemovePlace({ place, list }) {
   // Because need to get a listPlace db id, not cms
-  // const myList = list.places.filter(place => place.sanityId === place.sanityId)
-  // const [myPlace] = myList.filter(myPlace => myPlace.sanityId === place.id)
 
-  // const [removePlace] = useMutation(REMOVE_FROM_LIST_MUTATION, {
-  //   variables: {
-  //     listPlaceId: myPlace.id,
-  //   },
-  //   update: (cache, payload) => {
-  //     const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+  const myList = list.places.filter(place => place.sanityId === place.sanityId)
+  const [myPlace] = myList.filter(myPlace => myPlace.sanityId === place.id)
 
-  //     const updatedListIndex = data.me.lists.findIndex(
-  //       cacheList => cacheList.id === list.id
-  //     )
+  const [removeFromList] = useMutation(REMOVE_FROM_LIST_MUTATION, {
+    variables: {
+      listPlaceId: myPlace.id,
+    },
+    update: (cache, payload) => {
+      try {
+        const data = cache.readQuery({ query: CURRENT_USER_QUERY })
 
-  //     data.me.lists[updatedListIndex].places = data.me.lists[
-  //       updatedListIndex
-  //     ].places.filter(place => place.id === payload.data.removeFromList.id)
-
-  //     cache.writeQuery({ query: CURRENT_USER_QUERY, data })
-  //   },
-  // })
+        console.log(data)
+        console.log(payload)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  })
 
   return (
     <Button
       primary="true"
-      // onClick={() => removePlace()}
+      onClick={() => removeFromList()}
       style={{ marginTop: `.5rem`, marginRight: `.5rem` }}
     >
       {list.title}

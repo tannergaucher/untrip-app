@@ -32,8 +32,6 @@ export const client = new ApolloClient({
     Mutation: {},
     Query: {
       isInList: (_parent, { listId, placeSanityId }, { cache }) => {
-        console.log("ran!")
-
         const data = cache.readQuery({ query: CURRENT_USER_QUERY })
         const [myList] = data.me.lists.filter(list => list.id === listId)
         const [existingPlace] = myList.places.filter(

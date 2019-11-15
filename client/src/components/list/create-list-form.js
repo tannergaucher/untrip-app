@@ -6,7 +6,7 @@ import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 export default function CreateList({ place, setShow }) {
   const [title, setTitle] = useState("")
-  const [createList, { loading, error }] = useMutation(CREATE_LIST_MUTATION, {
+  const [createList, { loading }] = useMutation(CREATE_LIST_MUTATION, {
     variables: {
       title,
       sanityId: place.id,
@@ -16,12 +16,14 @@ export default function CreateList({ place, setShow }) {
       lat: place.location.lat,
       lng: place.location.lng,
     },
-
     update: (cache, payload) => {
       const data = cache.readQuery({ query: CURRENT_USER_QUERY })
       data.me.lists = [...data.me.lists, payload.data.createList]
-      cache.writeQuery({ query: CURRENT_USER_QUERY, data })
+
+      const newData = { ...data }
+      cache.writeQuery({ query: CURRENT_USER_QUERY, data: newData })
     },
+
     optimisticResponse: {
       __typename: "Mutation",
       createList: {
