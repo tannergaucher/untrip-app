@@ -18,21 +18,29 @@ export default function AddPlace({ place, list }) {
     update: (cache, payload) => {
       try {
         const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-
-        // find index of my list where the id === payload.data.addToList.id
         const listIndex = data.me.lists.findIndex(
           list => list.id === payload.data.addToList.list.id
         )
 
-        // add listPlace to that list
-        data.me.lists[listIndex].places = data.me.lists[
-          listIndex
-        ].places.concat(payload.data.addToList)
+        const updatedList = {
+          ...data.me.lists[listIndex],
+          places: [...data.me.lists[listIndex].places, payload.data.addToList],
+        }
 
-        console.log(data)
-
-        // write data back to cache
-        cache.writeQuery({ query: CURRENT_USER_QUERY, data })
+        cache.writeQuery({
+          query: CURRENT_USER_QUERY,
+          data: {
+            ...data,
+            me: {
+              ...data.me,
+              lists: [
+                ...data.me.lists.slice(0, listIndex),
+                updatedList,
+                ...data.me.lists.slice(listIndex + 1, data.me.lists.length),
+              ],
+            },
+          },
+        })
       } catch (error) {
         console.log(error)
       }
