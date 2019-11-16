@@ -1,7 +1,7 @@
 const { prisma } = require('../generated/prisma-client')
 
 const User = {
-  lists: ({ id }, args, context) => {
+  lists: ({ id }, _args, _context) => {
     return prisma.user({ id }).lists()
   },
 }

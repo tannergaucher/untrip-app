@@ -13,7 +13,7 @@ import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
 const StyledPost = styled.div`
   .post-title {
     font-weight: 900;
-    font-size: 50px;
+    font-size: 50px
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }

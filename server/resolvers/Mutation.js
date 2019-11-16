@@ -1,17 +1,16 @@
 const { sign } = require('jsonwebtoken')
-// import { AuthenticationError } from 'apollo-server'
 const { hashSync, genSaltSync, compareSync } = require('bcryptjs')
 
 const { getUserId } = require('../utils')
 const { prisma } = require('../generated/prisma-client')
 
 const Mutation = {
-  signup: async (_parent, { email, password }, _context) => {
+  signup: async (_parent, { authInput }, _context) => {
     const salt = genSaltSync(10)
-    const hashedPassword = hashSync(password, salt)
+    const hashedPassword = hashSync(authInput.password, salt)
 
     const user = await prisma.createUser({
-      email,
+      email: authInput.email,
       password: hashedPassword,
     })
 
@@ -22,14 +21,14 @@ const Mutation = {
       user,
     }
   },
-  login: async (_parent, { email, password }, _context) => {
-    const user = await prisma.user({ email })
+  login: async (_parent, { authInput }, _context) => {
+    const user = await prisma.user({ email: authInput.email })
 
     if (!user) {
       throw new Error(`No user found for this email`)
     }
 
-    const passwordValid = compareSync(password, user.password)
+    const passwordValid = compareSync(authInput.password, user.password)
 
     if (!passwordValid) {
       throw new Error(`Invalid password`)

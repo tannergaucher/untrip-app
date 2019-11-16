@@ -9,7 +9,12 @@ export default function Signup() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [signup, { loading, error, client }] = useMutation(SIGN_UP_MUTATION, {
-    variables: { email, password },
+    variables: {
+      authInput: {
+        email,
+        password,
+      },
+    },
   })
 
   return (
@@ -38,14 +43,12 @@ export default function Signup() {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-
           <Input
             type="password"
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-
           <Button type="submit" primary loading={loading}>
             Sign Up
           </Button>

@@ -78,8 +78,8 @@ export const LIST_QUERY = gql`
 // Mutations
 
 export const SIGN_UP_MUTATION = gql`
-  mutation SIGN_UP_MUTATION($email: String!, $password: String!) {
-    signup(email: $email, password: $password) {
+  mutation SIGN_UP_MUTATION($authInput: AuthInput!) {
+    signup(authInput: $authInput) {
       token
       user {
         ...UserFragment
@@ -90,8 +90,8 @@ export const SIGN_UP_MUTATION = gql`
 `
 
 export const LOGIN_MUTATION = gql`
-  mutation LOGIN_MUTATION($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation LOGIN_MUTATION($authInput: AuthInput!) {
+    login(authInput: $authInput) {
       token
       user {
         ...UserFragment
