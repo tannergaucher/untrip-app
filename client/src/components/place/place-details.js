@@ -41,7 +41,7 @@ export default function Details({ place, post }) {
 
   return (
     <StyledDetails>
-      <Button onClick={() => setShow(!show)} primary={show}>
+      <Button onClick={() => setShow(!show)} primary={!show}>
         Details
       </Button>
       {show && (
@@ -86,6 +86,7 @@ export default function Details({ place, post }) {
           {place.place.phoneNumber && (
             <LinkButton href="#">{place.place.phoneNumber}</LinkButton>
           )}
+
           <div className="only-mobile">
             <ShowOnMap post={post} />
           </div>
@@ -100,7 +101,15 @@ function ShowOnMap({ post }) {
 
   return (
     <div style={{ marginTop: `.5rem` }}>
-      <Button onClick={() => setShow(true)} primary>
+      <Button
+        onClick={() => setShow(true)}
+        fillMobile
+        style={{
+          textAlign: `left`,
+          background: `var(--red)`,
+          color: `var(--white)`,
+        }}
+      >
         Show on map
       </Button>
       {show && (
@@ -109,9 +118,28 @@ function ShowOnMap({ post }) {
           onClickOutside={() => setShow(false)}
           style={{
             padding: `0`,
+            position: `relative`,
           }}
         >
-          <Map isUserList={false} places={post.postPlaces} />
+          <Map
+            isUserList={false}
+            places={post.postPlaces}
+            style={{
+              height: `93vh`,
+            }}
+          />
+          <Button
+            primary
+            fillMobile
+            style={{
+              position: `absolute`,
+              bottom: `0`,
+              height: `7vh`,
+            }}
+            onClick={() => setShow(false)}
+          >
+            Close
+          </Button>
         </StyledLayer>
       )}
     </div>

@@ -22,7 +22,10 @@ export default function UserLists({ place }) {
   return (
     <StyledUserLists>
       {data && data.me && data.me.lists.length === 0 ? (
-        <h4>Create a new list with {`${place.name}`}</h4>
+        <>
+          <h4>Create a new list with {`${place.name}`}</h4>
+          <CreateListForm place={place} setShow={setShow} />
+        </>
       ) : (
         <h4>Add {place.name} to list</h4>
       )}
@@ -34,16 +37,18 @@ export default function UserLists({ place }) {
       {!show && (
         <>
           <br />
-          <Button
-            onClick={() => setShow(!show)}
-            style={{
-              marginTop: `1.5rem`,
-              color: `var(--accent)`,
-              borderColor: `var(--accent)`,
-            }}
-          >
-            New List
-          </Button>
+          {data && data.me && data.me.lists.length > 0 && (
+            <Button
+              onClick={() => setShow(!show)}
+              style={{
+                marginTop: `1.5rem`,
+                color: `var(--accent)`,
+                borderColor: `var(--accent)`,
+              }}
+            >
+              New List
+            </Button>
+          )}
         </>
       )}
       {show && <CreateListForm place={place} setShow={setShow} />}
