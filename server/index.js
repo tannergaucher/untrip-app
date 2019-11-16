@@ -12,6 +12,7 @@ const server = new ApolloServer({
     credentials: true,
   },
   playground: true,
+  introspection: true,
   context: async request => {
     return {
       ...request,
