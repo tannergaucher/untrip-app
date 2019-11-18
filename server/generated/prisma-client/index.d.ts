@@ -306,6 +306,8 @@ export type EmailSubscriberOrderByInput =
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "username_ASC"
+  | "username_DESC"
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
@@ -465,6 +467,20 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  username?: Maybe<String>;
+  username_not?: Maybe<String>;
+  username_in?: Maybe<String[] | String>;
+  username_not_in?: Maybe<String[] | String>;
+  username_lt?: Maybe<String>;
+  username_lte?: Maybe<String>;
+  username_gt?: Maybe<String>;
+  username_gte?: Maybe<String>;
+  username_contains?: Maybe<String>;
+  username_not_contains?: Maybe<String>;
+  username_starts_with?: Maybe<String>;
+  username_not_starts_with?: Maybe<String>;
+  username_ends_with?: Maybe<String>;
+  username_not_ends_with?: Maybe<String>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -609,6 +625,7 @@ export type ListPlaceWhereUniqueInput = AtLeastOne<{
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  username?: Maybe<String>;
   email?: Maybe<String>;
 }>;
 
@@ -627,6 +644,7 @@ export interface UserCreateOneInput {
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
+  username: String;
   email: String;
   password: String;
   isEmailSubscriber?: Maybe<Boolean>;
@@ -676,6 +694,7 @@ export interface UserUpdateOneRequiredInput {
 }
 
 export interface UserUpdateDataInput {
+  username?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
@@ -948,6 +967,7 @@ export interface UserCreateOneWithoutListsInput {
 
 export interface UserCreateWithoutListsInput {
   id?: Maybe<ID_Input>;
+  username: String;
   email: String;
   password: String;
   isEmailSubscriber?: Maybe<Boolean>;
@@ -967,6 +987,7 @@ export interface UserUpdateOneRequiredWithoutListsInput {
 }
 
 export interface UserUpdateWithoutListsDataInput {
+  username?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
@@ -1042,6 +1063,7 @@ export interface ListPlaceUpdateManyMutationInput {
 }
 
 export interface UserUpdateInput {
+  username?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
@@ -1049,6 +1071,7 @@ export interface UserUpdateInput {
 }
 
 export interface UserUpdateManyMutationInput {
+  username?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
@@ -1165,6 +1188,7 @@ export interface CommentNullablePromise
 
 export interface User {
   id: ID_Output;
+  username: String;
   email: String;
   password: String;
   isEmailSubscriber?: Boolean;
@@ -1172,6 +1196,7 @@ export interface User {
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   isEmailSubscriber: () => Promise<Boolean>;
@@ -1190,6 +1215,7 @@ export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  username: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   isEmailSubscriber: () => Promise<AsyncIterator<Boolean>>;
@@ -1208,6 +1234,7 @@ export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   isEmailSubscriber: () => Promise<Boolean>;
@@ -1886,6 +1913,7 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
+  username: String;
   email: String;
   password: String;
   isEmailSubscriber?: Boolean;
@@ -1895,6 +1923,7 @@ export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   isEmailSubscriber: () => Promise<Boolean>;
@@ -1904,6 +1933,7 @@ export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  username: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   isEmailSubscriber: () => Promise<AsyncIterator<Boolean>>;

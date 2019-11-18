@@ -4,6 +4,7 @@ const { gql } = require('apollo-server')
 
 const typeDefs = gql`
   input AuthInput {
+    username: String!
     email: String!
     password: String!
   }
@@ -24,6 +25,7 @@ const typeDefs = gql`
 
   type User {
     id: ID!
+    username: String!
     email: String!
     password: String!
     lists: [List!]

@@ -10,9 +10,12 @@ const Mutation = {
     const hashedPassword = hashSync(authInput.password, salt)
 
     const user = await prisma.createUser({
+      username: authInput.username,
       email: authInput.email,
       password: hashedPassword,
     })
+
+    console.log(user)
 
     const token = sign({ userId: user.id }, process.env.APP_SECRET)
 

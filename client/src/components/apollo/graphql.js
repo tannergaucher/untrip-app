@@ -31,6 +31,7 @@ export const LIST_FRAGMENT = gql`
 export const USER_FRAGMENT = gql`
   fragment UserFragment on User {
     id
+    username
     email
     password
     isEmailSubscriber
