@@ -31,6 +31,7 @@ export default function AddComment({ post }) {
         <Textarea
           value={text}
           onChange={e => setText(e.target.value)}
+          required="true"
         ></Textarea>
         <Button primary fillMobile type="submit">
           Add Comment

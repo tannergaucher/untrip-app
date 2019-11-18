@@ -3,7 +3,9 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import BlockContent from "@sanity/block-content-to-react"
+import { useQuery } from "@apollo/react-hooks"
 
+import { COMMENTS_QUERY } from "../components/apollo/graphql"
 import { Comments } from "../components/comment"
 import { PostPlaces } from "../components/place"
 import { SEO, Map, Share, About } from "../components/elements"
@@ -57,6 +59,16 @@ export default function PostPage({ data }) {
 
   const { sanityPost: post } = data
 
+  const {
+    data: commentsData,
+    loading: commentsLoading,
+    error: commentsError,
+  } = useQuery(COMMENTS_QUERY, {
+    variables: {
+      sanityPostId: post.id,
+    },
+  })
+
   return (
     <>
       <SEO
@@ -86,7 +98,13 @@ export default function PostPage({ data }) {
               setPlaceInView={setPlaceInView}
             />
             <div className="post-comments">
-              <Comments setCommentsInView={setCommentsInView} post={post} />
+              <Comments
+                post={post}
+                setCommentsInView={setCommentsInView}
+                commentsData={commentsData}
+                commentsError={commentsError}
+                commentsLoading={commentsLoading}
+              />
             </div>
           </StyledPost>
         </article>

@@ -10,10 +10,8 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const [login, { loading, error, client }] = useMutation(LOGIN_MUTATION, {
     variables: {
-      authInput: {
-        email,
-        password,
-      },
+      email,
+      password,
     },
   })
 

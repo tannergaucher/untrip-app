@@ -3,6 +3,8 @@ const { gql } = require('apollo-server')
 // Public facing API
 
 const typeDefs = gql`
+  scalar DateTime
+
   input AuthInput {
     username: String!
     email: String!
@@ -57,6 +59,8 @@ const typeDefs = gql`
 
   type Comment {
     id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime
     sanityPostId: String!
     text: String!
     author: User!
@@ -71,7 +75,7 @@ const typeDefs = gql`
 
   type Mutation {
     signup(authInput: AuthInput!): AuthPayload!
-    login(authInput: AuthInput!): AuthPayload!
+    login(email: String!, password: String!): AuthPayload!
     createList(
       title: String!
       sanityId: String!

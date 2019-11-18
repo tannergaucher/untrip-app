@@ -45,6 +45,8 @@ export const USER_FRAGMENT = gql`
 export const COMMENT_FRAGMENT = gql`
   fragment CommentFragment on Comment {
     id
+    createdAt
+    updatedAt
     text
     sanityPostId
     author {
@@ -113,8 +115,8 @@ export const SIGN_UP_MUTATION = gql`
 `
 
 export const LOGIN_MUTATION = gql`
-  mutation LOGIN_MUTATION($authInput: AuthInput!) {
-    login(authInput: $authInput) {
+  mutation LOGIN_MUTATION($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       token
       user {
         ...UserFragment

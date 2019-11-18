@@ -25,6 +25,7 @@ const Query = {
       where: {
         sanityPostId,
       },
+      orderBy: 'createdAt_DESC',
     })
 
     return comments

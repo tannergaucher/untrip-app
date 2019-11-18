@@ -15,8 +15,6 @@ const Mutation = {
       password: hashedPassword,
     })
 
-    console.log(user)
-
     const token = sign({ userId: user.id }, process.env.APP_SECRET)
 
     return {
@@ -24,14 +22,14 @@ const Mutation = {
       user,
     }
   },
-  login: async (_parent, { authInput }, _context) => {
-    const user = await prisma.user({ email: authInput.email })
+  login: async (_parent, { email, password }, _context) => {
+    const user = await prisma.user({ email })
 
     if (!user) {
       throw new Error(`No user found for this email`)
     }
 
-    const passwordValid = compareSync(authInput.password, user.password)
+    const passwordValid = compareSync(password, user.password)
 
     if (!passwordValid) {
       throw new Error(`Invalid password`)
@@ -119,7 +117,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     const list = await prisma.createList({
@@ -149,7 +147,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     const list = await prisma.updateList({
@@ -167,7 +165,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     return await prisma.deleteList(
@@ -203,7 +201,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     return await prisma.deleteListPlace(
@@ -218,7 +216,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     const comment = await prisma.createComment({

@@ -32,6 +32,8 @@ type EmailSubscriber {
 
 type Comment {
   id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
   text: String!
   sanityPostId: String!
   author: User!

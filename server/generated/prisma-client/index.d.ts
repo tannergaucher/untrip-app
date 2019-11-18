@@ -290,6 +290,10 @@ export type ListPlaceOrderByInput =
 export type CommentOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
   | "text_ASC"
   | "text_DESC"
   | "sanityPostId_ASC"
@@ -534,6 +538,22 @@ export interface CommentWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   text?: Maybe<String>;
   text_not?: Maybe<String>;
   text_in?: Maybe<String[] | String>;
@@ -1153,6 +1173,8 @@ export interface NodeNode {
 
 export interface Comment {
   id: ID_Output;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
   text: String;
   sanityPostId: String;
   claps?: Int;
@@ -1160,6 +1182,8 @@ export interface Comment {
 
 export interface CommentPromise extends Promise<Comment>, Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   text: () => Promise<String>;
   sanityPostId: () => Promise<String>;
   author: <T = UserPromise>() => T;
@@ -1170,6 +1194,8 @@ export interface CommentSubscription
   extends Promise<AsyncIterator<Comment>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   text: () => Promise<AsyncIterator<String>>;
   sanityPostId: () => Promise<AsyncIterator<String>>;
   author: <T = UserSubscription>() => T;
@@ -1180,6 +1206,8 @@ export interface CommentNullablePromise
   extends Promise<Comment | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   text: () => Promise<String>;
   sanityPostId: () => Promise<String>;
   author: <T = UserPromise>() => T;
@@ -1716,6 +1744,8 @@ export interface CommentSubscriptionPayloadSubscription
 
 export interface CommentPreviousValues {
   id: ID_Output;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
   text: String;
   sanityPostId: String;
   claps?: Int;
@@ -1725,6 +1755,8 @@ export interface CommentPreviousValuesPromise
   extends Promise<CommentPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   text: () => Promise<String>;
   sanityPostId: () => Promise<String>;
   claps: () => Promise<Int>;
@@ -1734,6 +1766,8 @@ export interface CommentPreviousValuesSubscription
   extends Promise<AsyncIterator<CommentPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   text: () => Promise<AsyncIterator<String>>;
   sanityPostId: () => Promise<AsyncIterator<String>>;
   claps: () => Promise<AsyncIterator<Int>>;
@@ -1944,6 +1978,16 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 */
 export type ID_Input = string | number;
 export type ID_Output = string;
+
+/*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
