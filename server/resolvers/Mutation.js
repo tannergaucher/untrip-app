@@ -231,6 +231,25 @@ const Mutation = {
 
     return comment
   },
+
+  editComment: async (_parent, { commentId, text }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new Error(`Sign In!`)
+    }
+
+    const updatedComment = await prisma.updateComment({
+      where: {
+        id: commentId,
+      },
+      data: {
+        text,
+      },
+    })
+
+    return updatedComment
+  },
 }
 
 module.exports = Mutation

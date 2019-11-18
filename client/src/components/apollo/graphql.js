@@ -50,11 +50,11 @@ export const COMMENT_FRAGMENT = gql`
     text
     sanityPostId
     author {
-      ...UserFragment
+      id
+      username
     }
     claps
   }
-  ${USER_FRAGMENT}
 `
 
 // Client side resolvers
@@ -219,6 +219,15 @@ export const UNSUBSCRIBE_TO_EMAIL_MUTATION = gql`
 export const ADD_COMMENT_MUTATION = gql`
   mutation ADD_COMMENT_MUTATION($commentInput: CommentInput!) {
     addComment(commentInput: $commentInput) {
+      ...CommentFragment
+    }
+  }
+  ${COMMENT_FRAGMENT}
+`
+
+export const EDIT_COMMENT_MUTATION = gql`
+  mutation EDIT_COMMENT_MUTATION($commentId: ID!, $text: String!) {
+    editComment(commentId: $commentId, text: $text) {
       ...CommentFragment
     }
   }

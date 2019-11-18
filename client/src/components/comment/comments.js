@@ -4,9 +4,9 @@ import { useQuery } from "@apollo/react-hooks"
 import styled from "styled-components"
 import moment from "moment"
 
-import { Button, Divider } from "../styles"
+import { Button, Divider, Textarea, Fieldset, Form } from "../styles"
 import { AddComment } from "."
-import { COMMENTS_QUERY } from "../apollo/graphql"
+import { COMMENTS_QUERY, CURRENT_USER_QUERY } from "../apollo/graphql"
 
 const StyledComments = styled.div`
   margin-top: 1rem;
@@ -16,13 +16,14 @@ export default function Comments({
   setCommentsInView,
   post,
   commentsData,
-  commentsError,
   commentsLoading,
 }) {
   const [show, setShow] = useState(false)
   const [ref, inView] = useInView({
     threshold: 1,
   })
+
+  const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
 
   useEffect(() => {
     setCommentsInView(inView)
@@ -47,7 +48,12 @@ export default function Comments({
       </Button>
       {show && (
         <StyledComments>
-          <AddComment post={post} />
+          {loading && `Loading comments`}
+          {data && data.me ? (
+            <AddComment post={post} />
+          ) : (
+            "Sign in to add a comment"
+          )}
           <AllComments post={post} />
         </StyledComments>
       )}
@@ -76,8 +82,8 @@ function AllComments({ post }) {
 }
 
 const StyledComment = styled.div`
-  margin-top: 1rem;
-  padding: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0.5rem;
   border-radius: var(--radius);
 
   .comment-author {
@@ -103,15 +109,72 @@ const StyledComment = styled.div`
 `
 
 function Comment({ comment }) {
+  const [edit, setEdit] = useState(false)
+  const [editedText, setEditedText] = useState("")
+
   return (
     <StyledComment>
       <div className="comment-info">
         <h5 className="comment-author">{comment.author.username}</h5>
         <h5 className="comment-date">
-          {moment(comment.createdAt).format("D MMMM h:mm A")}
+          {moment(comment.createdAt).format("h:mm A D MMMM")}
         </h5>
       </div>
-      <p className="comment-text">{comment.text}</p>
+
+      {edit ? (
+        <>
+          <Fieldset
+            onSubmit={e => {
+              e.preventDefault()
+            }}
+          >
+            <Form>
+              <Textarea
+                defaultValue={comment.text}
+                value={editedText}
+                fillMobile
+                onChange={e => setEditedText(e.target.value)}
+              />
+              <Button
+                primary
+                fillMobile
+                type="submit"
+                style={{
+                  marginBottom: `2rem`,
+                  background: `var(--grey)`,
+                }}
+              >
+                Save
+              </Button>
+            </Form>
+          </Fieldset>
+        </>
+      ) : (
+        <p className="comment-text">{comment.text}</p>
+      )}
+
+      {/* {data && data.me && data.me.id === comment.author.id && (
+        <>
+          <Button
+            onClick={() => setEdit(!edit)}
+            style={{
+              marginRight: `1rem`,
+              color: `var(--grey)`,
+              borderColor: `grey`,
+            }}
+          >
+            {edit ? "Close" : "Edit"}
+          </Button>
+          <Button
+            style={{
+              color: `var(--grey)`,
+              border: `none`,
+            }}
+          >
+            Delete
+          </Button>
+        </>
+      )} */}
       <Divider />
     </StyledComment>
   )
