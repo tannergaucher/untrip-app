@@ -75,6 +75,15 @@ export const LIST_QUERY = gql`
   ${LIST_FRAGMENT}
 `
 
+export const USER_QUERY = gql`
+  query USER_QUERY($userId: ID!) {
+    user(userId: $userId) {
+      ...UserFragment
+    }
+  }
+  ${USER_FRAGMENT}
+`
+
 // Mutations
 
 export const SIGN_UP_MUTATION = gql`
