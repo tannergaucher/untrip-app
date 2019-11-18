@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  comment: (where?: CommentWhereInput) => Promise<boolean>;
   emailSubscriber: (where?: EmailSubscriberWhereInput) => Promise<boolean>;
   list: (where?: ListWhereInput) => Promise<boolean>;
   listPlace: (where?: ListPlaceWhereInput) => Promise<boolean>;
@@ -41,6 +42,25 @@ export interface Prisma {
    * Queries
    */
 
+  comment: (where: CommentWhereUniqueInput) => CommentNullablePromise;
+  comments: (args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Comment>;
+  commentsConnection: (args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => CommentConnectionPromise;
   emailSubscriber: (
     where: EmailSubscriberWhereUniqueInput
   ) => EmailSubscriberNullablePromise;
@@ -125,6 +145,22 @@ export interface Prisma {
    * Mutations
    */
 
+  createComment: (data: CommentCreateInput) => CommentPromise;
+  updateComment: (args: {
+    data: CommentUpdateInput;
+    where: CommentWhereUniqueInput;
+  }) => CommentPromise;
+  updateManyComments: (args: {
+    data: CommentUpdateManyMutationInput;
+    where?: CommentWhereInput;
+  }) => BatchPayloadPromise;
+  upsertComment: (args: {
+    where: CommentWhereUniqueInput;
+    create: CommentCreateInput;
+    update: CommentUpdateInput;
+  }) => CommentPromise;
+  deleteComment: (where: CommentWhereUniqueInput) => CommentPromise;
+  deleteManyComments: (where?: CommentWhereInput) => BatchPayloadPromise;
   createEmailSubscriber: (
     data: EmailSubscriberCreateInput
   ) => EmailSubscriberPromise;
@@ -204,6 +240,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  comment: (
+    where?: CommentSubscriptionWhereInput
+  ) => CommentSubscriptionPayloadSubscription;
   emailSubscriber: (
     where?: EmailSubscriberSubscriptionWhereInput
   ) => EmailSubscriberSubscriptionPayloadSubscription;
@@ -226,11 +265,11 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type EmailSubscriberOrderByInput =
+export type ListOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "email_ASC"
-  | "email_DESC";
+  | "title_ASC"
+  | "title_DESC";
 
 export type ListPlaceOrderByInput =
   | "id_ASC"
@@ -248,15 +287,31 @@ export type ListPlaceOrderByInput =
   | "lng_ASC"
   | "lng_DESC";
 
-export type ListOrderByInput =
+export type CommentOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "title_ASC"
-  | "title_DESC";
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "sanityPostId_ASC"
+  | "sanityPostId_DESC"
+  | "claps_ASC"
+  | "claps_DESC";
+
+export type EmailSubscriberOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "email_ASC"
+  | "email_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "username_ASC"
+  | "username_DESC"
   | "email_ASC"
   | "email_DESC"
   | "password_ASC"
@@ -266,12 +321,11 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type EmailSubscriberWhereUniqueInput = AtLeastOne<{
+export type CommentWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  email?: Maybe<String>;
 }>;
 
-export interface EmailSubscriberWhereInput {
+export interface ListWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -286,28 +340,28 @@ export interface EmailSubscriberWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  AND?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
-  OR?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
-  NOT?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  places_every?: Maybe<ListPlaceWhereInput>;
+  places_some?: Maybe<ListPlaceWhereInput>;
+  places_none?: Maybe<ListPlaceWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  AND?: Maybe<ListWhereInput[] | ListWhereInput>;
+  OR?: Maybe<ListWhereInput[] | ListWhereInput>;
+  NOT?: Maybe<ListWhereInput[] | ListWhereInput>;
 }
-
-export type ListWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
 
 export interface ListPlaceWhereInput {
   id?: Maybe<ID_Input>;
@@ -402,44 +456,6 @@ export interface ListPlaceWhereInput {
   NOT?: Maybe<ListPlaceWhereInput[] | ListPlaceWhereInput>;
 }
 
-export interface ListWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  places_every?: Maybe<ListPlaceWhereInput>;
-  places_some?: Maybe<ListPlaceWhereInput>;
-  places_none?: Maybe<ListPlaceWhereInput>;
-  user?: Maybe<UserWhereInput>;
-  AND?: Maybe<ListWhereInput[] | ListWhereInput>;
-  OR?: Maybe<ListWhereInput[] | ListWhereInput>;
-  NOT?: Maybe<ListWhereInput[] | ListWhereInput>;
-}
-
 export interface UserWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
@@ -455,6 +471,20 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  username?: Maybe<String>;
+  username_not?: Maybe<String>;
+  username_in?: Maybe<String[] | String>;
+  username_not_in?: Maybe<String[] | String>;
+  username_lt?: Maybe<String>;
+  username_lte?: Maybe<String>;
+  username_gt?: Maybe<String>;
+  username_gte?: Maybe<String>;
+  username_contains?: Maybe<String>;
+  username_not_contains?: Maybe<String>;
+  username_starts_with?: Maybe<String>;
+  username_not_starts_with?: Maybe<String>;
+  username_ends_with?: Maybe<String>;
+  username_not_ends_with?: Maybe<String>;
   email?: Maybe<String>;
   email_not?: Maybe<String>;
   email_in?: Maybe<String[] | String>;
@@ -493,33 +523,163 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
+export interface CommentWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  sanityPostId?: Maybe<String>;
+  sanityPostId_not?: Maybe<String>;
+  sanityPostId_in?: Maybe<String[] | String>;
+  sanityPostId_not_in?: Maybe<String[] | String>;
+  sanityPostId_lt?: Maybe<String>;
+  sanityPostId_lte?: Maybe<String>;
+  sanityPostId_gt?: Maybe<String>;
+  sanityPostId_gte?: Maybe<String>;
+  sanityPostId_contains?: Maybe<String>;
+  sanityPostId_not_contains?: Maybe<String>;
+  sanityPostId_starts_with?: Maybe<String>;
+  sanityPostId_not_starts_with?: Maybe<String>;
+  sanityPostId_ends_with?: Maybe<String>;
+  sanityPostId_not_ends_with?: Maybe<String>;
+  author?: Maybe<UserWhereInput>;
+  claps?: Maybe<Int>;
+  claps_not?: Maybe<Int>;
+  claps_in?: Maybe<Int[] | Int>;
+  claps_not_in?: Maybe<Int[] | Int>;
+  claps_lt?: Maybe<Int>;
+  claps_lte?: Maybe<Int>;
+  claps_gt?: Maybe<Int>;
+  claps_gte?: Maybe<Int>;
+  AND?: Maybe<CommentWhereInput[] | CommentWhereInput>;
+  OR?: Maybe<CommentWhereInput[] | CommentWhereInput>;
+  NOT?: Maybe<CommentWhereInput[] | CommentWhereInput>;
+}
+
+export type EmailSubscriberWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface EmailSubscriberWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  AND?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
+  OR?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
+  NOT?: Maybe<EmailSubscriberWhereInput[] | EmailSubscriberWhereInput>;
+}
+
+export type ListWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export type ListPlaceWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  username?: Maybe<String>;
   email?: Maybe<String>;
 }>;
 
-export interface EmailSubscriberCreateInput {
+export interface CommentCreateInput {
   id?: Maybe<ID_Input>;
+  text: String;
+  sanityPostId: String;
+  author: UserCreateOneInput;
+  claps?: Maybe<Int>;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  username: String;
   email: String;
+  password: String;
+  isEmailSubscriber?: Maybe<Boolean>;
+  lists?: Maybe<ListCreateManyWithoutUserInput>;
 }
 
-export interface EmailSubscriberUpdateInput {
-  email?: Maybe<String>;
+export interface ListCreateManyWithoutUserInput {
+  create?: Maybe<ListCreateWithoutUserInput[] | ListCreateWithoutUserInput>;
+  connect?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
 }
 
-export interface EmailSubscriberUpdateManyMutationInput {
-  email?: Maybe<String>;
-}
-
-export interface ListCreateInput {
+export interface ListCreateWithoutUserInput {
   id?: Maybe<ID_Input>;
   title: String;
   places?: Maybe<ListPlaceCreateManyWithoutListInput>;
-  user: UserCreateOneWithoutListsInput;
 }
 
 export interface ListPlaceCreateManyWithoutListInput {
@@ -539,22 +699,56 @@ export interface ListPlaceCreateWithoutListInput {
   lng?: Maybe<Float>;
 }
 
-export interface UserCreateOneWithoutListsInput {
-  create?: Maybe<UserCreateWithoutListsInput>;
+export interface CommentUpdateInput {
+  text?: Maybe<String>;
+  sanityPostId?: Maybe<String>;
+  author?: Maybe<UserUpdateOneRequiredInput>;
+  claps?: Maybe<Int>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface UserCreateWithoutListsInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  password: String;
+export interface UserUpdateDataInput {
+  username?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
+  lists?: Maybe<ListUpdateManyWithoutUserInput>;
 }
 
-export interface ListUpdateInput {
+export interface ListUpdateManyWithoutUserInput {
+  create?: Maybe<ListCreateWithoutUserInput[] | ListCreateWithoutUserInput>;
+  delete?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
+  connect?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
+  set?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
+  disconnect?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
+  update?: Maybe<
+    | ListUpdateWithWhereUniqueWithoutUserInput[]
+    | ListUpdateWithWhereUniqueWithoutUserInput
+  >;
+  upsert?: Maybe<
+    | ListUpsertWithWhereUniqueWithoutUserInput[]
+    | ListUpsertWithWhereUniqueWithoutUserInput
+  >;
+  deleteMany?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
+  updateMany?: Maybe<
+    ListUpdateManyWithWhereNestedInput[] | ListUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ListUpdateWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput;
+  data: ListUpdateWithoutUserDataInput;
+}
+
+export interface ListUpdateWithoutUserDataInput {
   title?: Maybe<String>;
   places?: Maybe<ListPlaceUpdateManyWithoutListInput>;
-  user?: Maybe<UserUpdateOneRequiredWithoutListsInput>;
 }
 
 export interface ListPlaceUpdateManyWithoutListInput {
@@ -706,6 +900,105 @@ export interface ListPlaceUpdateManyDataInput {
   lng?: Maybe<Float>;
 }
 
+export interface ListUpsertWithWhereUniqueWithoutUserInput {
+  where: ListWhereUniqueInput;
+  update: ListUpdateWithoutUserDataInput;
+  create: ListCreateWithoutUserInput;
+}
+
+export interface ListScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
+  OR?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
+  NOT?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
+}
+
+export interface ListUpdateManyWithWhereNestedInput {
+  where: ListScalarWhereInput;
+  data: ListUpdateManyDataInput;
+}
+
+export interface ListUpdateManyDataInput {
+  title?: Maybe<String>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface CommentUpdateManyMutationInput {
+  text?: Maybe<String>;
+  sanityPostId?: Maybe<String>;
+  claps?: Maybe<Int>;
+}
+
+export interface EmailSubscriberCreateInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+}
+
+export interface EmailSubscriberUpdateInput {
+  email?: Maybe<String>;
+}
+
+export interface EmailSubscriberUpdateManyMutationInput {
+  email?: Maybe<String>;
+}
+
+export interface ListCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  places?: Maybe<ListPlaceCreateManyWithoutListInput>;
+  user: UserCreateOneWithoutListsInput;
+}
+
+export interface UserCreateOneWithoutListsInput {
+  create?: Maybe<UserCreateWithoutListsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutListsInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+  email: String;
+  password: String;
+  isEmailSubscriber?: Maybe<Boolean>;
+}
+
+export interface ListUpdateInput {
+  title?: Maybe<String>;
+  places?: Maybe<ListPlaceUpdateManyWithoutListInput>;
+  user?: Maybe<UserUpdateOneRequiredWithoutListsInput>;
+}
+
 export interface UserUpdateOneRequiredWithoutListsInput {
   create?: Maybe<UserCreateWithoutListsInput>;
   update?: Maybe<UserUpdateWithoutListsDataInput>;
@@ -714,6 +1007,7 @@ export interface UserUpdateOneRequiredWithoutListsInput {
 }
 
 export interface UserUpdateWithoutListsDataInput {
+  username?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
@@ -788,115 +1082,30 @@ export interface ListPlaceUpdateManyMutationInput {
   lng?: Maybe<Float>;
 }
 
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  password: String;
-  isEmailSubscriber?: Maybe<Boolean>;
-  lists?: Maybe<ListCreateManyWithoutUserInput>;
-}
-
-export interface ListCreateManyWithoutUserInput {
-  create?: Maybe<ListCreateWithoutUserInput[] | ListCreateWithoutUserInput>;
-  connect?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
-}
-
-export interface ListCreateWithoutUserInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  places?: Maybe<ListPlaceCreateManyWithoutListInput>;
-}
-
 export interface UserUpdateInput {
+  username?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
   lists?: Maybe<ListUpdateManyWithoutUserInput>;
 }
 
-export interface ListUpdateManyWithoutUserInput {
-  create?: Maybe<ListCreateWithoutUserInput[] | ListCreateWithoutUserInput>;
-  delete?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
-  connect?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
-  set?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
-  disconnect?: Maybe<ListWhereUniqueInput[] | ListWhereUniqueInput>;
-  update?: Maybe<
-    | ListUpdateWithWhereUniqueWithoutUserInput[]
-    | ListUpdateWithWhereUniqueWithoutUserInput
-  >;
-  upsert?: Maybe<
-    | ListUpsertWithWhereUniqueWithoutUserInput[]
-    | ListUpsertWithWhereUniqueWithoutUserInput
-  >;
-  deleteMany?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
-  updateMany?: Maybe<
-    ListUpdateManyWithWhereNestedInput[] | ListUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ListUpdateWithWhereUniqueWithoutUserInput {
-  where: ListWhereUniqueInput;
-  data: ListUpdateWithoutUserDataInput;
-}
-
-export interface ListUpdateWithoutUserDataInput {
-  title?: Maybe<String>;
-  places?: Maybe<ListPlaceUpdateManyWithoutListInput>;
-}
-
-export interface ListUpsertWithWhereUniqueWithoutUserInput {
-  where: ListWhereUniqueInput;
-  update: ListUpdateWithoutUserDataInput;
-  create: ListCreateWithoutUserInput;
-}
-
-export interface ListScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  AND?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
-  OR?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
-  NOT?: Maybe<ListScalarWhereInput[] | ListScalarWhereInput>;
-}
-
-export interface ListUpdateManyWithWhereNestedInput {
-  where: ListScalarWhereInput;
-  data: ListUpdateManyDataInput;
-}
-
-export interface ListUpdateManyDataInput {
-  title?: Maybe<String>;
-}
-
 export interface UserUpdateManyMutationInput {
+  username?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
   isEmailSubscriber?: Maybe<Boolean>;
+}
+
+export interface CommentSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CommentWhereInput>;
+  AND?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
+  OR?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
+  NOT?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
 }
 
 export interface EmailSubscriberSubscriptionWhereInput {
@@ -962,109 +1171,110 @@ export interface NodeNode {
   id: ID_Output;
 }
 
-export interface EmailSubscriber {
+export interface Comment {
   id: ID_Output;
-  email: String;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  text: String;
+  sanityPostId: String;
+  claps?: Int;
 }
 
-export interface EmailSubscriberPromise
-  extends Promise<EmailSubscriber>,
-    Fragmentable {
+export interface CommentPromise extends Promise<Comment>, Fragmentable {
   id: () => Promise<ID_Output>;
-  email: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  text: () => Promise<String>;
+  sanityPostId: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  claps: () => Promise<Int>;
 }
 
-export interface EmailSubscriberSubscription
-  extends Promise<AsyncIterator<EmailSubscriber>>,
+export interface CommentSubscription
+  extends Promise<AsyncIterator<Comment>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  email: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  text: () => Promise<AsyncIterator<String>>;
+  sanityPostId: () => Promise<AsyncIterator<String>>;
+  author: <T = UserSubscription>() => T;
+  claps: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface EmailSubscriberNullablePromise
-  extends Promise<EmailSubscriber | null>,
+export interface CommentNullablePromise
+  extends Promise<Comment | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  text: () => Promise<String>;
+  sanityPostId: () => Promise<String>;
+  author: <T = UserPromise>() => T;
+  claps: () => Promise<Int>;
+}
+
+export interface User {
+  id: ID_Output;
+  username: String;
+  email: String;
+  password: String;
+  isEmailSubscriber?: Boolean;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
   email: () => Promise<String>;
+  password: () => Promise<String>;
+  isEmailSubscriber: () => Promise<Boolean>;
+  lists: <T = FragmentableArray<List>>(args?: {
+    where?: ListWhereInput;
+    orderBy?: ListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface EmailSubscriberConnection {
-  pageInfo: PageInfo;
-  edges: EmailSubscriberEdge[];
-}
-
-export interface EmailSubscriberConnectionPromise
-  extends Promise<EmailSubscriberConnection>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<EmailSubscriberEdge>>() => T;
-  aggregate: <T = AggregateEmailSubscriberPromise>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  username: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  isEmailSubscriber: () => Promise<AsyncIterator<Boolean>>;
+  lists: <T = Promise<AsyncIterator<ListSubscription>>>(args?: {
+    where?: ListWhereInput;
+    orderBy?: ListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface EmailSubscriberConnectionSubscription
-  extends Promise<AsyncIterator<EmailSubscriberConnection>>,
+export interface UserNullablePromise
+  extends Promise<User | null>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<EmailSubscriberEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateEmailSubscriberSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface EmailSubscriberEdge {
-  node: EmailSubscriber;
-  cursor: String;
-}
-
-export interface EmailSubscriberEdgePromise
-  extends Promise<EmailSubscriberEdge>,
-    Fragmentable {
-  node: <T = EmailSubscriberPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface EmailSubscriberEdgeSubscription
-  extends Promise<AsyncIterator<EmailSubscriberEdge>>,
-    Fragmentable {
-  node: <T = EmailSubscriberSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateEmailSubscriber {
-  count: Int;
-}
-
-export interface AggregateEmailSubscriberPromise
-  extends Promise<AggregateEmailSubscriber>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateEmailSubscriberSubscription
-  extends Promise<AsyncIterator<AggregateEmailSubscriber>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  isEmailSubscriber: () => Promise<Boolean>;
+  lists: <T = FragmentableArray<List>>(args?: {
+    where?: ListWhereInput;
+    orderBy?: ListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface List {
@@ -1168,63 +1378,163 @@ export interface ListPlaceNullablePromise
   list: <T = ListPromise>() => T;
 }
 
-export interface User {
+export interface CommentConnection {
+  pageInfo: PageInfo;
+  edges: CommentEdge[];
+}
+
+export interface CommentConnectionPromise
+  extends Promise<CommentConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CommentEdge>>() => T;
+  aggregate: <T = AggregateCommentPromise>() => T;
+}
+
+export interface CommentConnectionSubscription
+  extends Promise<AsyncIterator<CommentConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CommentEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCommentSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CommentEdge {
+  node: Comment;
+  cursor: String;
+}
+
+export interface CommentEdgePromise extends Promise<CommentEdge>, Fragmentable {
+  node: <T = CommentPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface CommentEdgeSubscription
+  extends Promise<AsyncIterator<CommentEdge>>,
+    Fragmentable {
+  node: <T = CommentSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateComment {
+  count: Int;
+}
+
+export interface AggregateCommentPromise
+  extends Promise<AggregateComment>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCommentSubscription
+  extends Promise<AsyncIterator<AggregateComment>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface EmailSubscriber {
   id: ID_Output;
   email: String;
-  password: String;
-  isEmailSubscriber?: Boolean;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
+export interface EmailSubscriberPromise
+  extends Promise<EmailSubscriber>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
-  password: () => Promise<String>;
-  isEmailSubscriber: () => Promise<Boolean>;
-  lists: <T = FragmentableArray<List>>(args?: {
-    where?: ListWhereInput;
-    orderBy?: ListOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
 }
 
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface EmailSubscriberSubscription
+  extends Promise<AsyncIterator<EmailSubscriber>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  isEmailSubscriber: () => Promise<AsyncIterator<Boolean>>;
-  lists: <T = Promise<AsyncIterator<ListSubscription>>>(args?: {
-    where?: ListWhereInput;
-    orderBy?: ListOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface EmailSubscriberNullablePromise
+  extends Promise<EmailSubscriber | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   email: () => Promise<String>;
-  password: () => Promise<String>;
-  isEmailSubscriber: () => Promise<Boolean>;
-  lists: <T = FragmentableArray<List>>(args?: {
-    where?: ListWhereInput;
-    orderBy?: ListOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+}
+
+export interface EmailSubscriberConnection {
+  pageInfo: PageInfo;
+  edges: EmailSubscriberEdge[];
+}
+
+export interface EmailSubscriberConnectionPromise
+  extends Promise<EmailSubscriberConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<EmailSubscriberEdge>>() => T;
+  aggregate: <T = AggregateEmailSubscriberPromise>() => T;
+}
+
+export interface EmailSubscriberConnectionSubscription
+  extends Promise<AsyncIterator<EmailSubscriberConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<EmailSubscriberEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateEmailSubscriberSubscription>() => T;
+}
+
+export interface EmailSubscriberEdge {
+  node: EmailSubscriber;
+  cursor: String;
+}
+
+export interface EmailSubscriberEdgePromise
+  extends Promise<EmailSubscriberEdge>,
+    Fragmentable {
+  node: <T = EmailSubscriberPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface EmailSubscriberEdgeSubscription
+  extends Promise<AsyncIterator<EmailSubscriberEdge>>,
+    Fragmentable {
+  node: <T = EmailSubscriberSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateEmailSubscriber {
+  count: Int;
+}
+
+export interface AggregateEmailSubscriberPromise
+  extends Promise<AggregateEmailSubscriber>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateEmailSubscriberSubscription
+  extends Promise<AsyncIterator<AggregateEmailSubscriber>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface ListConnection {
@@ -1407,6 +1717,62 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface CommentSubscriptionPayload {
+  mutation: MutationType;
+  node: Comment;
+  updatedFields: String[];
+  previousValues: CommentPreviousValues;
+}
+
+export interface CommentSubscriptionPayloadPromise
+  extends Promise<CommentSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = CommentPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = CommentPreviousValuesPromise>() => T;
+}
+
+export interface CommentSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<CommentSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = CommentSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = CommentPreviousValuesSubscription>() => T;
+}
+
+export interface CommentPreviousValues {
+  id: ID_Output;
+  createdAt?: DateTimeOutput;
+  updatedAt?: DateTimeOutput;
+  text: String;
+  sanityPostId: String;
+  claps?: Int;
+}
+
+export interface CommentPreviousValuesPromise
+  extends Promise<CommentPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  text: () => Promise<String>;
+  sanityPostId: () => Promise<String>;
+  claps: () => Promise<Int>;
+}
+
+export interface CommentPreviousValuesSubscription
+  extends Promise<AsyncIterator<CommentPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  text: () => Promise<AsyncIterator<String>>;
+  sanityPostId: () => Promise<AsyncIterator<String>>;
+  claps: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface EmailSubscriberSubscriptionPayload {
   mutation: MutationType;
   node: EmailSubscriber;
@@ -1581,6 +1947,7 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
+  username: String;
   email: String;
   password: String;
   isEmailSubscriber?: Boolean;
@@ -1590,6 +1957,7 @@ export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
   email: () => Promise<String>;
   password: () => Promise<String>;
   isEmailSubscriber: () => Promise<Boolean>;
@@ -1599,6 +1967,7 @@ export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  username: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   isEmailSubscriber: () => Promise<AsyncIterator<Boolean>>;
@@ -1611,14 +1980,19 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
+
+/*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -1629,6 +2003,11 @@ export type Boolean = boolean;
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
 export type Float = number;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 export type Long = string;
 
@@ -1651,6 +2030,10 @@ export const models: Model[] = [
   },
   {
     name: "EmailSubscriber",
+    embedded: false
+  },
+  {
+    name: "Comment",
     embedded: false
   }
 ];

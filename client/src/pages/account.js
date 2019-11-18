@@ -29,7 +29,8 @@ function UserAccount() {
       {error && `Error: ${error.message}`}
       {data && data.me && (
         <>
-          <h1>{data.me.email}</h1>
+          <h1>{data.me.username}</h1>
+          <h4>{data.me.email}</h4>
           <Logout />
         </>
       )}
