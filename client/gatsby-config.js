@@ -29,7 +29,7 @@ module.exports = {
         background_color: `#000000`,
         theme_color: `#fafafa`,
         display: `fullscreen`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/untrip-brand.png`, // This path is relative to the root of the site.
       },
     },
     {
