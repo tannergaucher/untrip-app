@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/react-hooks"
 
 import { Button } from "../styles"
 import { AddPlace, RemovePlace } from "."
-import { IS_IN_LIST, CURRENT_USER_QUERY } from "../apollo/graphql"
+import { CURRENT_USER_QUERY } from "../apollo/graphql"
 import { CreateListForm } from "../list"
 
 const StyledUserLists = styled.div`

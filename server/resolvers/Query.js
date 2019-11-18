@@ -20,6 +20,10 @@ const Query = {
 
     return prisma.list({ id: listId })
   },
+  user: async (_parent, { userId }, _context) => {
+    const user = prisma.user({ id: userId })
+    return user
+  },
   comments: async (_parent, { sanityPostId }, _context) => {
     const comments = await prisma.comments({
       where: {
@@ -27,7 +31,6 @@ const Query = {
       },
       orderBy: 'createdAt_DESC',
     })
-
     return comments
   },
 }

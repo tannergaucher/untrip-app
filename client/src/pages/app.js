@@ -1,13 +1,14 @@
 import React from "react"
 import { Router } from "@reach/router"
 
-import { UserListPage } from "../components/list"
+import { PublicUserPage, PublicUserListPage } from "../components/user"
 
 export default function App() {
   return (
     <>
       <Router>
-        <UserListPage path="/app/list/:listId" />
+        <PublicUserPage path="/app/user/:userId" />
+        <PublicUserListPage path="/app/list/:listId" />
       </Router>
     </>
   )

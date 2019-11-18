@@ -90,6 +90,13 @@ export const LIST_QUERY = gql`
   }
   ${LIST_FRAGMENT}
 `
+export const USER_QUERY = gql`
+  query USER_QUERY($userId: ID!) {
+    user(userId: $userId) {
+      ...UserFragment
+    }
+  }
+  ${USER_FRAGMENT}
 
 export const COMMENTS_QUERY = gql`
   query COMMENTS_QUERY($sanityPostId: String!) {

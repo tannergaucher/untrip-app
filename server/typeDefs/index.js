@@ -70,6 +70,7 @@ const typeDefs = gql`
   type Query {
     me: User
     list(listId: ID!): List
+    user(userId: ID!): User
     comments(sanityPostId: String!): [Comment!]
   }
 
