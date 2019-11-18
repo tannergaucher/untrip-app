@@ -24,6 +24,15 @@ const Query = {
     const user = prisma.user({ id: userId })
     return user
   },
+  comments: async (_parent, { sanityPostId }, _context) => {
+    const comments = await prisma.comments({
+      where: {
+        sanityPostId,
+      },
+      orderBy: 'createdAt_DESC',
+    })
+    return comments
+  },
 }
 
 module.exports = Query

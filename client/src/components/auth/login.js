@@ -9,7 +9,10 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [login, { loading, error, client }] = useMutation(LOGIN_MUTATION, {
-    variables: { email, password },
+    variables: {
+      email,
+      password,
+    },
   })
 
   return (

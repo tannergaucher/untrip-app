@@ -3,6 +3,19 @@ const { gql } = require('apollo-server')
 // Public facing API
 
 const typeDefs = gql`
+  scalar DateTime
+
+  input AuthInput {
+    username: String!
+    email: String!
+    password: String!
+  }
+
+  input CommentInput {
+    sanityPostId: String!
+    text: String!
+  }
+
   type AuthPayload {
     token: String!
     user: User!
@@ -14,6 +27,7 @@ const typeDefs = gql`
 
   type User {
     id: ID!
+    username: String!
     email: String!
     password: String!
     lists: [List!]
@@ -43,14 +57,25 @@ const typeDefs = gql`
     email: String!
   }
 
+  type Comment {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime
+    sanityPostId: String!
+    text: String!
+    author: User!
+    claps: Int
+  }
+
   type Query {
     me: User
     list(listId: ID!): List
     user(userId: ID!): User
+    comments(sanityPostId: String!): [Comment!]
   }
 
   type Mutation {
-    signup(email: String!, password: String!): AuthPayload!
+    signup(authInput: AuthInput!): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
     createList(
       title: String!
@@ -75,6 +100,9 @@ const typeDefs = gql`
     removeFromList(listPlaceId: ID!): ListPlace
     subscribeToEmail(email: String!): SuccessMessage!
     unsubscribeToEmail(email: String!): SuccessMessage!
+    addComment(commentInput: CommentInput!): Comment!
+    editComment(commentId: ID!, text: String!): Comment!
+    deleteComnent(sanityPostId: String!): Comment
   }
 `
 

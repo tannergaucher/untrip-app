@@ -44,7 +44,6 @@ export default function Footer() {
           <h6 className="site-description">Curated Kuala Lumpur</h6>
         </div>
       </div>
-      <Divider bgDark />
     </StyledFooter>
   )
 }

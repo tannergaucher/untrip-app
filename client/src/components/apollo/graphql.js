@@ -31,6 +31,7 @@ export const LIST_FRAGMENT = gql`
 export const USER_FRAGMENT = gql`
   fragment UserFragment on User {
     id
+    username
     email
     password
     isEmailSubscriber
@@ -39,6 +40,21 @@ export const USER_FRAGMENT = gql`
     }
   }
   ${LIST_FRAGMENT}
+`
+
+export const COMMENT_FRAGMENT = gql`
+  fragment CommentFragment on Comment {
+    id
+    createdAt
+    updatedAt
+    text
+    sanityPostId
+    author {
+      id
+      username
+    }
+    claps
+  }
 `
 
 // Client side resolvers
@@ -74,7 +90,6 @@ export const LIST_QUERY = gql`
   }
   ${LIST_FRAGMENT}
 `
-
 export const USER_QUERY = gql`
   query USER_QUERY($userId: ID!) {
     user(userId: $userId) {
@@ -82,13 +97,21 @@ export const USER_QUERY = gql`
     }
   }
   ${USER_FRAGMENT}
+
+export const COMMENTS_QUERY = gql`
+  query COMMENTS_QUERY($sanityPostId: String!) {
+    comments(sanityPostId: $sanityPostId) {
+      ...CommentFragment
+    }
+  }
+  ${COMMENT_FRAGMENT}
 `
 
 // Mutations
 
 export const SIGN_UP_MUTATION = gql`
-  mutation SIGN_UP_MUTATION($email: String!, $password: String!) {
-    signup(email: $email, password: $password) {
+  mutation SIGN_UP_MUTATION($authInput: AuthInput!) {
+    signup(authInput: $authInput) {
       token
       user {
         ...UserFragment
@@ -198,4 +221,22 @@ export const UNSUBSCRIBE_TO_EMAIL_MUTATION = gql`
     ...UserFragment
   }
   ${USER_FRAGMENT}
+`
+
+export const ADD_COMMENT_MUTATION = gql`
+  mutation ADD_COMMENT_MUTATION($commentInput: CommentInput!) {
+    addComment(commentInput: $commentInput) {
+      ...CommentFragment
+    }
+  }
+  ${COMMENT_FRAGMENT}
+`
+
+export const EDIT_COMMENT_MUTATION = gql`
+  mutation EDIT_COMMENT_MUTATION($commentId: ID!, $text: String!) {
+    editComment(commentId: $commentId, text: $text) {
+      ...CommentFragment
+    }
+  }
+  ${COMMENT_FRAGMENT}
 `

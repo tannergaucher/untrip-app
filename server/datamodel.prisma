@@ -1,5 +1,6 @@
 type User {
   id: ID! @id
+  username: String! @unique
   email: String! @unique
   password: String!
   isEmailSubscriber: Boolean @default(value: false)
@@ -29,5 +30,12 @@ type EmailSubscriber {
   email: String! @unique
 }
 
-
-
+type Comment {
+  id: ID! @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  text: String!
+  sanityPostId: String!
+  author: User!
+  claps: Int @default(value: 0)
+}

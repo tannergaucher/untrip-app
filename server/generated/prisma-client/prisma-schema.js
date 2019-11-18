@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateEmailSubscriber {
+/* GraphQL */ `type AggregateComment {
+  count: Int!
+}
+
+type AggregateEmailSubscriber {
   count: Int!
 }
 
@@ -22,6 +26,169 @@ type AggregateUser {
 type BatchPayload {
   count: Long!
 }
+
+type Comment {
+  id: ID!
+  createdAt: DateTime
+  updatedAt: DateTime
+  text: String!
+  sanityPostId: String!
+  author: User!
+  claps: Int
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  id: ID
+  text: String!
+  sanityPostId: String!
+  author: UserCreateOneInput!
+  claps: Int
+}
+
+type CommentEdge {
+  node: Comment!
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  text_ASC
+  text_DESC
+  sanityPostId_ASC
+  sanityPostId_DESC
+  claps_ASC
+  claps_DESC
+}
+
+type CommentPreviousValues {
+  id: ID!
+  createdAt: DateTime
+  updatedAt: DateTime
+  text: String!
+  sanityPostId: String!
+  claps: Int
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+  AND: [CommentSubscriptionWhereInput!]
+  OR: [CommentSubscriptionWhereInput!]
+  NOT: [CommentSubscriptionWhereInput!]
+}
+
+input CommentUpdateInput {
+  text: String
+  sanityPostId: String
+  author: UserUpdateOneRequiredInput
+  claps: Int
+}
+
+input CommentUpdateManyMutationInput {
+  text: String
+  sanityPostId: String
+  claps: Int
+}
+
+input CommentWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  sanityPostId: String
+  sanityPostId_not: String
+  sanityPostId_in: [String!]
+  sanityPostId_not_in: [String!]
+  sanityPostId_lt: String
+  sanityPostId_lte: String
+  sanityPostId_gt: String
+  sanityPostId_gte: String
+  sanityPostId_contains: String
+  sanityPostId_not_contains: String
+  sanityPostId_starts_with: String
+  sanityPostId_not_starts_with: String
+  sanityPostId_ends_with: String
+  sanityPostId_not_ends_with: String
+  author: UserWhereInput
+  claps: Int
+  claps_not: Int
+  claps_in: [Int!]
+  claps_not_in: [Int!]
+  claps_lt: Int
+  claps_lte: Int
+  claps_gt: Int
+  claps_gte: Int
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
 
 type EmailSubscriber {
   id: ID!
@@ -690,6 +857,12 @@ input ListWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createComment(data: CommentCreateInput!): Comment!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateManyComments(data: CommentUpdateManyMutationInput!, where: CommentWhereInput): BatchPayload!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
   createEmailSubscriber(data: EmailSubscriberCreateInput!): EmailSubscriber!
   updateEmailSubscriber(data: EmailSubscriberUpdateInput!, where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
   updateManyEmailSubscribers(data: EmailSubscriberUpdateManyMutationInput!, where: EmailSubscriberWhereInput): BatchPayload!
@@ -734,6 +907,9 @@ type PageInfo {
 }
 
 type Query {
+  comment(where: CommentWhereUniqueInput!): Comment
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
   emailSubscriber(where: EmailSubscriberWhereUniqueInput!): EmailSubscriber
   emailSubscribers(where: EmailSubscriberWhereInput, orderBy: EmailSubscriberOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmailSubscriber]!
   emailSubscribersConnection(where: EmailSubscriberWhereInput, orderBy: EmailSubscriberOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmailSubscriberConnection!
@@ -750,6 +926,7 @@ type Query {
 }
 
 type Subscription {
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
   emailSubscriber(where: EmailSubscriberSubscriptionWhereInput): EmailSubscriberSubscriptionPayload
   list(where: ListSubscriptionWhereInput): ListSubscriptionPayload
   listPlace(where: ListPlaceSubscriptionWhereInput): ListPlaceSubscriptionPayload
@@ -758,6 +935,7 @@ type Subscription {
 
 type User {
   id: ID!
+  username: String!
   email: String!
   password: String!
   isEmailSubscriber: Boolean
@@ -772,10 +950,16 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
+  username: String!
   email: String!
   password: String!
   isEmailSubscriber: Boolean
   lists: ListCreateManyWithoutUserInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutListsInput {
@@ -785,6 +969,7 @@ input UserCreateOneWithoutListsInput {
 
 input UserCreateWithoutListsInput {
   id: ID
+  username: String!
   email: String!
   password: String!
   isEmailSubscriber: Boolean
@@ -798,6 +983,8 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
+  username_ASC
+  username_DESC
   email_ASC
   email_DESC
   password_ASC
@@ -808,6 +995,7 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
+  username: String!
   email: String!
   password: String!
   isEmailSubscriber: Boolean
@@ -831,7 +1019,16 @@ input UserSubscriptionWhereInput {
   NOT: [UserSubscriptionWhereInput!]
 }
 
+input UserUpdateDataInput {
+  username: String
+  email: String
+  password: String
+  isEmailSubscriber: Boolean
+  lists: ListUpdateManyWithoutUserInput
+}
+
 input UserUpdateInput {
+  username: String
   email: String
   password: String
   isEmailSubscriber: Boolean
@@ -839,9 +1036,17 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyMutationInput {
+  username: String
   email: String
   password: String
   isEmailSubscriber: Boolean
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneRequiredWithoutListsInput {
@@ -852,9 +1057,15 @@ input UserUpdateOneRequiredWithoutListsInput {
 }
 
 input UserUpdateWithoutListsDataInput {
+  username: String
   email: String
   password: String
   isEmailSubscriber: Boolean
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserUpsertWithoutListsInput {
@@ -877,6 +1088,20 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
   email: String
   email_not: String
   email_in: [String!]
@@ -917,6 +1142,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  username: String
   email: String
 }
 `

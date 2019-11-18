@@ -5,9 +5,14 @@ import { Button } from "../styles"
 import { Login, Signup } from "../auth"
 
 const StyledAuthTabs = styled.div`
-  color: var(--black);
+  .welcome-message {
+    margin-bottom: 2.5rem;
+    font-size: 40px;
+    font-weight: 900;
+  }
 
-  .toggle-auth {
+  .toggle-auth,
+  .welcome-message {
     text-align: center;
 
     .auth-message {
@@ -23,6 +28,7 @@ export default function AuthTabs() {
 
   return (
     <StyledAuthTabs>
+      <h1 className="welcome-message">Welcome to Untrip</h1>
       {show === "Login" ? <Login /> : <Signup />}
       {show === "Login" && (
         <div className="toggle-auth signup">

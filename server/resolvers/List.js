@@ -1,10 +1,10 @@
 const { prisma } = require('../generated/prisma-client')
 
 const List = {
-  user: ({ id }, args, context) => {
+  user: ({ id }, _args, _context) => {
     return prisma.list({ id }).user()
   },
-  places: ({ id }, args, context) => {
+  places: ({ id }, _args, _context) => {
     return prisma.list({ id }).places()
   },
 }

@@ -6,10 +6,17 @@ import { SIGN_UP_MUTATION } from "../apollo/graphql"
 import { Button, Fieldset, Form, Input } from "../styles"
 
 export default function Signup() {
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [signup, { loading, error, client }] = useMutation(SIGN_UP_MUTATION, {
-    variables: { email, password },
+    variables: {
+      authInput: {
+        username,
+        email,
+        password,
+      },
+    },
   })
 
   return (
@@ -32,20 +39,25 @@ export default function Signup() {
           }}
         >
           <Input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
+          <Input
             type="email"
             name="email"
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-
           <Input
             type="password"
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-
           <Button type="submit" primary loading={loading}>
             Sign Up
           </Button>

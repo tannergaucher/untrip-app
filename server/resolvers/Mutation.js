@@ -5,12 +5,13 @@ const { getUserId } = require('../utils')
 const { prisma } = require('../generated/prisma-client')
 
 const Mutation = {
-  signup: async (_parent, { email, password }, _context) => {
+  signup: async (_parent, { authInput }, _context) => {
     const salt = genSaltSync(10)
-    const hashedPassword = hashSync(password, salt)
+    const hashedPassword = hashSync(authInput.password, salt)
 
     const user = await prisma.createUser({
-      email,
+      username: authInput.username,
+      email: authInput.email,
       password: hashedPassword,
     })
 
@@ -116,7 +117,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     const list = await prisma.createList({
@@ -146,7 +147,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     const list = await prisma.updateList({
@@ -164,7 +165,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     return await prisma.deleteList(
@@ -200,7 +201,7 @@ const Mutation = {
     const userId = getUserId(context)
 
     if (!userId) {
-      throw new AuthError()
+      throw new Error(`Sign In!`)
     }
 
     return await prisma.deleteListPlace(
@@ -209,6 +210,45 @@ const Mutation = {
       },
       info
     )
+  },
+
+  addComment: async (_parent, { commentInput }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new Error(`Sign In!`)
+    }
+
+    const comment = await prisma.createComment({
+      text: commentInput.text,
+      sanityPostId: commentInput.sanityPostId,
+      author: {
+        connect: {
+          id: userId,
+        },
+      },
+    })
+
+    return comment
+  },
+
+  editComment: async (_parent, { commentId, text }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new Error(`Sign In!`)
+    }
+
+    const updatedComment = await prisma.updateComment({
+      where: {
+        id: commentId,
+      },
+      data: {
+        text,
+      },
+    })
+
+    return updatedComment
   },
 }
 
