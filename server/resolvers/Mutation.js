@@ -210,6 +210,26 @@ const Mutation = {
       info
     )
   },
+
+  addComment: async (_parent, { commentInput }, context) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new AuthError()
+    }
+
+    const comment = await prisma.createComment({
+      text: commentInput.text,
+      sanityPostId: commentInput.sanityPostId,
+      author: {
+        connect: {
+          id: userId,
+        },
+      },
+    })
+
+    return comment
+  },
 }
 
 module.exports = Mutation

@@ -32,7 +32,7 @@ type EmailSubscriber {
 type Comment {
   id: ID! @id
   text: String!
-  post: ID!
+  sanityPostId: String!
   author: User!
-  claps: Int
+  claps: Int @default(value: 0)
 }

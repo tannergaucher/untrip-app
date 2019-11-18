@@ -8,6 +8,7 @@ import Link from "./link"
 import StyledPage from "./styled-page"
 import ContentAsideGrid from "./content-aside-grid"
 import StyledLayer from "./styled-layer"
+import Textarea from "./textarea"
 
 export {
   Button,
@@ -20,4 +21,5 @@ export {
   Link,
   ContentAsideGrid,
   StyledLayer,
+  Textarea,
 }

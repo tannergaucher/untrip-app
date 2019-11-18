@@ -86,7 +86,7 @@ export default function PostPage({ data }) {
               setPlaceInView={setPlaceInView}
             />
             <div className="post-comments">
-              <Comments setCommentsInView={setCommentsInView} />
+              <Comments setCommentsInView={setCommentsInView} post={post} />
             </div>
           </StyledPost>
         </article>

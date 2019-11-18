@@ -14,7 +14,7 @@ const server = new ApolloServer({
   playground: true,
   context: async request => {
     return {
-      request,
+      ...request,
     }
   },
 })

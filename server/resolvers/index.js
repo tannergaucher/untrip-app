@@ -3,6 +3,7 @@ const Mutation = require('./Mutation')
 const User = require('./User')
 const List = require('./List')
 const ListPlace = require('./ListPlace')
+const Comment = require('./Comment')
 
 module.exports = {
   Query,
@@ -10,4 +11,5 @@ module.exports = {
   User,
   List,
   ListPlace,
+  Comment,
 }

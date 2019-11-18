@@ -292,8 +292,8 @@ export type CommentOrderByInput =
   | "id_DESC"
   | "text_ASC"
   | "text_DESC"
-  | "post_ASC"
-  | "post_DESC"
+  | "sanityPostId_ASC"
+  | "sanityPostId_DESC"
   | "claps_ASC"
   | "claps_DESC";
 
@@ -532,20 +532,20 @@ export interface CommentWhereInput {
   text_not_starts_with?: Maybe<String>;
   text_ends_with?: Maybe<String>;
   text_not_ends_with?: Maybe<String>;
-  post?: Maybe<ID_Input>;
-  post_not?: Maybe<ID_Input>;
-  post_in?: Maybe<ID_Input[] | ID_Input>;
-  post_not_in?: Maybe<ID_Input[] | ID_Input>;
-  post_lt?: Maybe<ID_Input>;
-  post_lte?: Maybe<ID_Input>;
-  post_gt?: Maybe<ID_Input>;
-  post_gte?: Maybe<ID_Input>;
-  post_contains?: Maybe<ID_Input>;
-  post_not_contains?: Maybe<ID_Input>;
-  post_starts_with?: Maybe<ID_Input>;
-  post_not_starts_with?: Maybe<ID_Input>;
-  post_ends_with?: Maybe<ID_Input>;
-  post_not_ends_with?: Maybe<ID_Input>;
+  sanityPostId?: Maybe<String>;
+  sanityPostId_not?: Maybe<String>;
+  sanityPostId_in?: Maybe<String[] | String>;
+  sanityPostId_not_in?: Maybe<String[] | String>;
+  sanityPostId_lt?: Maybe<String>;
+  sanityPostId_lte?: Maybe<String>;
+  sanityPostId_gt?: Maybe<String>;
+  sanityPostId_gte?: Maybe<String>;
+  sanityPostId_contains?: Maybe<String>;
+  sanityPostId_not_contains?: Maybe<String>;
+  sanityPostId_starts_with?: Maybe<String>;
+  sanityPostId_not_starts_with?: Maybe<String>;
+  sanityPostId_ends_with?: Maybe<String>;
+  sanityPostId_not_ends_with?: Maybe<String>;
   author?: Maybe<UserWhereInput>;
   claps?: Maybe<Int>;
   claps_not?: Maybe<Int>;
@@ -615,7 +615,7 @@ export type UserWhereUniqueInput = AtLeastOne<{
 export interface CommentCreateInput {
   id?: Maybe<ID_Input>;
   text: String;
-  post: ID_Input;
+  sanityPostId: String;
   author: UserCreateOneInput;
   claps?: Maybe<Int>;
 }
@@ -663,7 +663,7 @@ export interface ListPlaceCreateWithoutListInput {
 
 export interface CommentUpdateInput {
   text?: Maybe<String>;
-  post?: Maybe<ID_Input>;
+  sanityPostId?: Maybe<String>;
   author?: Maybe<UserUpdateOneRequiredInput>;
   claps?: Maybe<Int>;
 }
@@ -917,7 +917,7 @@ export interface UserUpsertNestedInput {
 
 export interface CommentUpdateManyMutationInput {
   text?: Maybe<String>;
-  post?: Maybe<ID_Input>;
+  sanityPostId?: Maybe<String>;
   claps?: Maybe<Int>;
 }
 
@@ -1131,14 +1131,14 @@ export interface NodeNode {
 export interface Comment {
   id: ID_Output;
   text: String;
-  post: ID_Output;
+  sanityPostId: String;
   claps?: Int;
 }
 
 export interface CommentPromise extends Promise<Comment>, Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
-  post: () => Promise<ID_Output>;
+  sanityPostId: () => Promise<String>;
   author: <T = UserPromise>() => T;
   claps: () => Promise<Int>;
 }
@@ -1148,7 +1148,7 @@ export interface CommentSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
-  post: () => Promise<AsyncIterator<ID_Output>>;
+  sanityPostId: () => Promise<AsyncIterator<String>>;
   author: <T = UserSubscription>() => T;
   claps: () => Promise<AsyncIterator<Int>>;
 }
@@ -1158,7 +1158,7 @@ export interface CommentNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
-  post: () => Promise<ID_Output>;
+  sanityPostId: () => Promise<String>;
   author: <T = UserPromise>() => T;
   claps: () => Promise<Int>;
 }
@@ -1690,7 +1690,7 @@ export interface CommentSubscriptionPayloadSubscription
 export interface CommentPreviousValues {
   id: ID_Output;
   text: String;
-  post: ID_Output;
+  sanityPostId: String;
   claps?: Int;
 }
 
@@ -1699,7 +1699,7 @@ export interface CommentPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
-  post: () => Promise<ID_Output>;
+  sanityPostId: () => Promise<String>;
   claps: () => Promise<Int>;
 }
 
@@ -1708,7 +1708,7 @@ export interface CommentPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
-  post: () => Promise<AsyncIterator<ID_Output>>;
+  sanityPostId: () => Promise<AsyncIterator<String>>;
   claps: () => Promise<AsyncIterator<Int>>;
 }
 

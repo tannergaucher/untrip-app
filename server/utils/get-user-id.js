@@ -1,10 +1,10 @@
 const { verify } = require('jsonwebtoken')
 
 function getUserId(context) {
-  const { authorization } = context.req.headers
+  const Authorization = context.req.headers.authorization
 
-  if (authorization) {
-    const token = authorization.replace('Bearer ', '')
+  if (Authorization) {
+    const token = Authorization.replace('Bearer ', '')
     const verifiedToken = verify(token, process.env.APP_SECRET)
 
     return verifiedToken && verifiedToken.userId

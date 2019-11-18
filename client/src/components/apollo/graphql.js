@@ -41,6 +41,19 @@ export const USER_FRAGMENT = gql`
   ${LIST_FRAGMENT}
 `
 
+export const COMMENT_FRAGMENT = gql`
+  fragment CommentFragment on Comment {
+    id
+    text
+    sanityPostId
+    author {
+      ...UserFragment
+    }
+    claps
+  }
+  ${USER_FRAGMENT}
+`
+
 // Client side resolvers
 
 export const IS_LOGGED_IN = gql`
@@ -73,6 +86,15 @@ export const LIST_QUERY = gql`
     }
   }
   ${LIST_FRAGMENT}
+`
+
+export const COMMENTS_QUERY = gql`
+  query COMMENTS_QUERY($sanityPostId: String!) {
+    comments(sanityPostId: $sanityPostId) {
+      ...CommentFragment
+    }
+  }
+  ${COMMENT_FRAGMENT}
 `
 
 // Mutations
@@ -189,4 +211,13 @@ export const UNSUBSCRIBE_TO_EMAIL_MUTATION = gql`
     ...UserFragment
   }
   ${USER_FRAGMENT}
+`
+
+export const ADD_COMMENT_MUTATION = gql`
+  mutation ADD_COMMENT_MUTATION($commentInput: CommentInput!) {
+    addComment(commentInput: $commentInput) {
+      ...CommentFragment
+    }
+  }
+  ${COMMENT_FRAGMENT}
 `

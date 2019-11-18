@@ -30,7 +30,7 @@ type BatchPayload {
 type Comment {
   id: ID!
   text: String!
-  post: ID!
+  sanityPostId: String!
   author: User!
   claps: Int
 }
@@ -44,7 +44,7 @@ type CommentConnection {
 input CommentCreateInput {
   id: ID
   text: String!
-  post: ID!
+  sanityPostId: String!
   author: UserCreateOneInput!
   claps: Int
 }
@@ -59,8 +59,8 @@ enum CommentOrderByInput {
   id_DESC
   text_ASC
   text_DESC
-  post_ASC
-  post_DESC
+  sanityPostId_ASC
+  sanityPostId_DESC
   claps_ASC
   claps_DESC
 }
@@ -68,7 +68,7 @@ enum CommentOrderByInput {
 type CommentPreviousValues {
   id: ID!
   text: String!
-  post: ID!
+  sanityPostId: String!
   claps: Int
 }
 
@@ -92,14 +92,14 @@ input CommentSubscriptionWhereInput {
 
 input CommentUpdateInput {
   text: String
-  post: ID
+  sanityPostId: String
   author: UserUpdateOneRequiredInput
   claps: Int
 }
 
 input CommentUpdateManyMutationInput {
   text: String
-  post: ID
+  sanityPostId: String
   claps: Int
 }
 
@@ -132,20 +132,20 @@ input CommentWhereInput {
   text_not_starts_with: String
   text_ends_with: String
   text_not_ends_with: String
-  post: ID
-  post_not: ID
-  post_in: [ID!]
-  post_not_in: [ID!]
-  post_lt: ID
-  post_lte: ID
-  post_gt: ID
-  post_gte: ID
-  post_contains: ID
-  post_not_contains: ID
-  post_starts_with: ID
-  post_not_starts_with: ID
-  post_ends_with: ID
-  post_not_ends_with: ID
+  sanityPostId: String
+  sanityPostId_not: String
+  sanityPostId_in: [String!]
+  sanityPostId_not_in: [String!]
+  sanityPostId_lt: String
+  sanityPostId_lte: String
+  sanityPostId_gt: String
+  sanityPostId_gte: String
+  sanityPostId_contains: String
+  sanityPostId_not_contains: String
+  sanityPostId_starts_with: String
+  sanityPostId_not_starts_with: String
+  sanityPostId_ends_with: String
+  sanityPostId_not_ends_with: String
   author: UserWhereInput
   claps: Int
   claps_not: Int

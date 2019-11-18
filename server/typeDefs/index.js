@@ -8,6 +8,11 @@ const typeDefs = gql`
     password: String!
   }
 
+  input CommentInput {
+    sanityPostId: String!
+    text: String!
+  }
+
   type AuthPayload {
     token: String!
     user: User!
@@ -48,9 +53,18 @@ const typeDefs = gql`
     email: String!
   }
 
+  type Comment {
+    id: ID!
+    sanityPostId: String!
+    text: String!
+    author: User!
+    claps: Int
+  }
+
   type Query {
     me: User
     list(listId: ID!): List
+    comments(sanityPostId: String!): [Comment!]
   }
 
   type Mutation {
@@ -79,6 +93,9 @@ const typeDefs = gql`
     removeFromList(listPlaceId: ID!): ListPlace
     subscribeToEmail(email: String!): SuccessMessage!
     unsubscribeToEmail(email: String!): SuccessMessage!
+    addComment(commentInput: CommentInput!): Comment!
+    editComment(commentInput: CommentInput!): Comment!
+    deleteComnent(sanityPostId: String!): Comment
   }
 `
 
