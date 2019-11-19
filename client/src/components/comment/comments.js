@@ -80,7 +80,7 @@ function AllComments({ post }) {
       {data &&
         data.comments &&
         data.comments.map(comment => (
-          <Comment comment={comment} key={comment.id} />
+          <Comment key={comment.id} comment={comment} post={post} />
         ))}
     </div>
   )
@@ -113,7 +113,7 @@ const StyledComment = styled.div`
   }
 `
 
-function Comment({ comment }) {
+function Comment({ comment, post }) {
   const [edit, setEdit] = useState(false)
   const [editedText, setEditedText] = useState("")
 
@@ -165,7 +165,6 @@ function Comment({ comment }) {
               e.preventDefault()
               setEdit(false)
               const res = await editComment()
-              console.log(res)
             }}
           >
             <Form>
@@ -204,7 +203,7 @@ function Comment({ comment }) {
           >
             {edit ? "Close" : "Edit"}
           </Button>
-          <DeleteComment comment={comment} />
+          <DeleteComment comment={comment} post={post} />
         </>
       )}
       <Divider />
