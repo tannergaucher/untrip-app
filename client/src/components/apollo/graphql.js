@@ -247,3 +247,12 @@ export const EDIT_COMMENT_MUTATION = gql`
   }
   ${COMMENT_FRAGMENT}
 `
+
+export const DELETE_COMMENT_MUTATION = gql`
+  mutation DELETE_COMMENT_MUTATION($commentId: ID!) {
+    deleteComment(commentId: $commentId) {
+      ...CommentFragment
+    }
+  }
+  ${COMMENT_FRAGMENT}
+`
