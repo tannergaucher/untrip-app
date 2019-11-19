@@ -6,7 +6,11 @@ import moment from "moment"
 
 import { Button, Divider, Textarea, Fieldset, Form } from "../styles"
 import { AddComment } from "."
-import { COMMENTS_QUERY, CURRENT_USER_QUERY } from "../apollo/graphql"
+import {
+  COMMENTS_QUERY,
+  CURRENT_USER_QUERY,
+  IS_MY_COMMENT,
+} from "../apollo/graphql"
 
 const StyledComments = styled.div`
   margin-top: 1rem;
@@ -112,6 +116,12 @@ function Comment({ comment }) {
   const [edit, setEdit] = useState(false)
   const [editedText, setEditedText] = useState("")
 
+  const { data } = useQuery(IS_MY_COMMENT, {
+    variables: {
+      commentAuthorId: comment.author.id,
+    },
+  })
+
   return (
     <StyledComment>
       <div className="comment-info">
@@ -152,8 +162,7 @@ function Comment({ comment }) {
       ) : (
         <p className="comment-text">{comment.text}</p>
       )}
-
-      {/* {data && data.me && data.me.id === comment.author.id && (
+      {data && data.isMyComment && (
         <>
           <Button
             onClick={() => setEdit(!edit)}
@@ -174,7 +183,7 @@ function Comment({ comment }) {
             Delete
           </Button>
         </>
-      )} */}
+      )}
       <Divider />
     </StyledComment>
   )

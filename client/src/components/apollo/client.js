@@ -34,9 +34,6 @@ export const client = new ApolloClient({
     Mutation: {},
     Query: {
       isInList: (_parent, { listId, placeSanityId }, { client }) => {
-        console.log("IS IN LIST RAN")
-
-        // use client or cache?
         const data = client.readQuery({ query: CURRENT_USER_QUERY })
         const [myList] = data.me.lists.filter(list => list.id === listId)
         const [existingPlace] = myList.places.filter(
@@ -44,6 +41,10 @@ export const client = new ApolloClient({
         )
 
         return existingPlace ? true : false
+      },
+      isMyComment: (parent, { commentAuthorId }, { client }) => {
+        const data = client.readQuery({ query: CURRENT_USER_QUERY })
+        return data.me && data.me.id === commentAuthorId
       },
     },
   },

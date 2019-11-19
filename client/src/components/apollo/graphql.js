@@ -71,6 +71,12 @@ export const IS_IN_LIST = gql`
   }
 `
 
+export const IS_MY_COMMENT = gql`
+  query IS_MY_COMMENT($commentAuthorId: ID!) {
+    isMyComment(commentAuthorId: $commentAuthorId) @client
+  }
+`
+
 // Queries
 
 export const CURRENT_USER_QUERY = gql`
