@@ -97,6 +97,7 @@ export const USER_QUERY = gql`
     }
   }
   ${USER_FRAGMENT}
+`
 
 export const COMMENTS_QUERY = gql`
   query COMMENTS_QUERY($sanityPostId: String!) {
