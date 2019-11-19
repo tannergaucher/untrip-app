@@ -11,6 +11,9 @@ import {
 export default function AddComment({ post }) {
   const [text, setText] = useState("")
 
+  // Because need to compare comment createdAt versus updatedAt
+  const tempDate = new Date()
+
   const { data } = useQuery(CURRENT_USER_QUERY)
   const [addComment, { error }] = useMutation(ADD_COMMENT_MUTATION, {
     variables: {
@@ -24,11 +27,11 @@ export default function AddComment({ post }) {
       __typename: "Mutation",
       addComment: {
         __typename: "Comment",
-        id: new Date(),
+        id: tempDate,
         sanityPostId: post.id,
         text,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: tempDate,
+        updatedAt: tempDate,
         claps: 0,
         author: {
           __typename: "User",

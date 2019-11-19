@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import { useQuery } from "@apollo/react-hooks"
+import { useQuery, useMutation } from "@apollo/react-hooks"
 import styled from "styled-components"
 import moment from "moment"
 
+import { AddComment, DeleteComment } from "."
 import { Button, Divider, Textarea, Fieldset, Form } from "../styles"
-import { AddComment } from "."
-import { COMMENTS_QUERY, CURRENT_USER_QUERY } from "../apollo/graphql"
+import {
+  COMMENTS_QUERY,
+  CURRENT_USER_QUERY,
+  IS_MY_COMMENT,
+  EDIT_COMMENT_MUTATION,
+} from "../apollo/graphql"
 
 const StyledComments = styled.div`
   margin-top: 1rem;
@@ -23,7 +28,7 @@ export default function Comments({
     threshold: 1,
   })
 
-  const { data, loading, error } = useQuery(CURRENT_USER_QUERY)
+  const { data, loading } = useQuery(CURRENT_USER_QUERY)
 
   useEffect(() => {
     setCommentsInView(inView)
@@ -44,7 +49,7 @@ export default function Comments({
                 ? "1 comment"
                 : `${commentsData.comments.length} Comments`
             }`
-          : "Comments"}
+          : `${commentsLoading ? "Loading Comments" : "No Comments"}`}
       </Button>
       {show && (
         <StyledComments>
@@ -75,7 +80,7 @@ function AllComments({ post }) {
       {data &&
         data.comments &&
         data.comments.map(comment => (
-          <Comment comment={comment} key={comment.id} />
+          <Comment key={comment.id} comment={comment} post={post} />
         ))}
     </div>
   )
@@ -83,13 +88,13 @@ function AllComments({ post }) {
 
 const StyledComment = styled.div`
   margin-bottom: 1rem;
-  padding: 1rem 0.5rem;
   border-radius: var(--radius);
 
   .comment-author {
     margin: 0;
+    margin-top: 2rem;
     margin-bottom: 1rem;
-    font-weight: 300;
+    font-weight: 900;
   }
 
   .comment-date {
@@ -106,33 +111,69 @@ const StyledComment = styled.div`
     margin-bottom: 1rem;
     font-weight: 900;
   }
+
+  .edited {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
 `
 
-function Comment({ comment }) {
+function Comment({ comment, post }) {
   const [edit, setEdit] = useState(false)
   const [editedText, setEditedText] = useState("")
+
+  const { data } = useQuery(IS_MY_COMMENT, {
+    variables: {
+      commentAuthorId: comment.author.id,
+    },
+  })
+
+  console.log(comment)
+
+  const [editComment] = useMutation(EDIT_COMMENT_MUTATION, {
+    variables: {
+      commentId: comment.id,
+      text: editedText,
+    },
+    optimisticResponse: {
+      __typename: "Mutation",
+      editComment: {
+        __typename: "Comment",
+        id: comment.id,
+        createdAt: comment.createdAt,
+        updatedAt: comment.updatedAt,
+        text: editedText,
+        author: comment.author,
+        sanityPostId: comment.sanityPostId,
+        claps: comment.claps,
+      },
+    },
+  })
 
   return (
     <StyledComment>
       <div className="comment-info">
         <h5 className="comment-author">{comment.author.username}</h5>
-        <h5 className="comment-date">
-          {moment(comment.createdAt).format("h:mm A D MMMM")}
-        </h5>
+        <div>
+          <h5 className="comment-date">
+            {moment(comment.createdAt).format("h:mm A D MMMM")}
+          </h5>
+        </div>
       </div>
-
       {edit ? (
         <>
           <Fieldset
-            onSubmit={e => {
+            onSubmit={async e => {
               e.preventDefault()
+              setEdit(false)
+              const res = await editComment()
             }}
           >
             <Form>
               <Textarea
-                defaultValue={comment.text}
-                value={editedText}
+                required={true}
                 fillMobile
+                defaultValue={comment.text}
                 onChange={e => setEditedText(e.target.value)}
               />
               <Button
@@ -150,10 +191,16 @@ function Comment({ comment }) {
           </Fieldset>
         </>
       ) : (
-        <p className="comment-text">{comment.text}</p>
+        <>
+          <p className="comment-text">{comment.text}</p>
+          {comment.createdAt !== comment.updatedAt && (
+            <h5 className="comment-date edited">
+              Edited: {moment(comment.updatedAt).format("h:mm A D MMMM")}
+            </h5>
+          )}
+        </>
       )}
-
-      {/* {data && data.me && data.me.id === comment.author.id && (
+      {data && data.isMyComment && (
         <>
           <Button
             onClick={() => setEdit(!edit)}
@@ -165,16 +212,9 @@ function Comment({ comment }) {
           >
             {edit ? "Close" : "Edit"}
           </Button>
-          <Button
-            style={{
-              color: `var(--grey)`,
-              border: `none`,
-            }}
-          >
-            Delete
-          </Button>
+          <DeleteComment comment={comment} post={post} />
         </>
-      )} */}
+      )}
       <Divider />
     </StyledComment>
   )

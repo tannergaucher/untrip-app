@@ -102,7 +102,7 @@ const typeDefs = gql`
     unsubscribeToEmail(email: String!): SuccessMessage!
     addComment(commentInput: CommentInput!): Comment!
     editComment(commentId: ID!, text: String!): Comment!
-    deleteComnent(sanityPostId: String!): Comment
+    deleteComment(commentId: ID!): Comment
   }
 `
 

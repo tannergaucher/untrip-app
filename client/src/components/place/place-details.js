@@ -41,7 +41,13 @@ export default function Details({ place, post }) {
 
   return (
     <StyledDetails>
-      <Button onClick={() => setShow(!show)} primary={!show}>
+      <Button
+        onClick={() => setShow(!show)}
+        style={{
+          borderColor: show ? "var(--grey)" : "var(--black)",
+          color: show ? "var(--grey)" : "var(--black)",
+        }}
+      >
         Details
       </Button>
       {show && (

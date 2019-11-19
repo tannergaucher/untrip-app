@@ -231,7 +231,6 @@ const Mutation = {
 
     return comment
   },
-
   editComment: async (_parent, { commentId, text }, context) => {
     const userId = getUserId(context)
 
@@ -249,6 +248,22 @@ const Mutation = {
     })
 
     return updatedComment
+  },
+  deleteComment: async (_parent, { commentId }, context, info) => {
+    const userId = getUserId(context)
+
+    if (!userId) {
+      throw new Error(`Sign In!`)
+    }
+
+    // TODO: check that user owns that comment
+
+    return await prisma.deleteComment(
+      {
+        id: commentId,
+      },
+      info
+    )
   },
 }
 
