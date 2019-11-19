@@ -12,7 +12,7 @@ import {
 export default function CategoryPage({ data, pageContext }) {
   return (
     <>
-      <SEO title={`Tags`} />
+      <SEO title={``} />
       <ContentAsideGrid>
         <div className="content">
           {data.allSanityPost.edges.map(edge => (

@@ -26,9 +26,7 @@ export default function Menu() {
 
   return (
     <>
-      <Button onClick={() => setShow(!show)} primary>
-        Menu
-      </Button>
+      <Button onClick={() => setShow(!show)}>Menu</Button>
       {show && (
         <>
           <StyledLayer

@@ -88,13 +88,13 @@ function AllComments({ post }) {
 
 const StyledComment = styled.div`
   margin-bottom: 1rem;
-  padding: 1rem 0.5rem;
   border-radius: var(--radius);
 
   .comment-author {
     margin: 0;
+    margin-top: 2rem;
     margin-bottom: 1rem;
-    font-weight: 300;
+    font-weight: 900;
   }
 
   .comment-date {
@@ -111,6 +111,11 @@ const StyledComment = styled.div`
     margin-bottom: 1rem;
     font-weight: 900;
   }
+
+  .edited {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
 `
 
 function Comment({ comment, post }) {
@@ -122,6 +127,8 @@ function Comment({ comment, post }) {
       commentAuthorId: comment.author.id,
     },
   })
+
+  console.log(comment)
 
   const [editComment] = useMutation(EDIT_COMMENT_MUTATION, {
     variables: {
@@ -151,11 +158,6 @@ function Comment({ comment, post }) {
           <h5 className="comment-date">
             {moment(comment.createdAt).format("h:mm A D MMMM")}
           </h5>
-          {comment.createdAt !== comment.updatedAt && (
-            <h5 className="comment-date">
-              Edited: {moment(comment.updatedAt).format("h:mm A D MMMM")}
-            </h5>
-          )}
         </div>
       </div>
       {edit ? (
@@ -189,7 +191,14 @@ function Comment({ comment, post }) {
           </Fieldset>
         </>
       ) : (
-        <p className="comment-text">{comment.text}</p>
+        <>
+          <p className="comment-text">{comment.text}</p>
+          {comment.createdAt !== comment.updatedAt && (
+            <h5 className="comment-date edited">
+              Edited: {moment(comment.updatedAt).format("h:mm A D MMMM")}
+            </h5>
+          )}
+        </>
       )}
       {data && data.isMyComment && (
         <>
