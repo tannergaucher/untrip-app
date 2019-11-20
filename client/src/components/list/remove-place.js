@@ -61,7 +61,7 @@ export default function RemovePlace({ list, listPlace }) {
     <Button
       primary="true"
       onClick={() => removeFromList()}
-      style={{ marginTop: `.5rem`, marginRight: `.5rem` }}
+      style={{ marginTop: `var(--space-sm)`, marginRight: `var(--space-sm)` }}
     >
       {list.title}
     </Button>

@@ -1,17 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
 
 :root {
-  /* Layout */
-  --max-width: 1000px;
   /* Typography */
   --sans: "Karla", sans-serif;
   --heading-line-height: 1.2;
   --paragraph-line-height: 1.75;
   --heading-letter-spacing: -1.2px;
-  --paragraph-letter-spacing: 0px;
+  --paragraph-letter-spacing: -0.5px;
 
   /* Vertical Rhythm */
-  --responsive-unit: 0.5vw; /* TWEAK ME  */
+  --responsive-unit: 0.6vw; /* TWEAK ME  */
 
   /* base values */
   --text-base-size: calc(0.8rem + var(--responsive-unit));
@@ -98,7 +96,7 @@ h4 {
 h1,
 .text--xxl {
   font-size: var(--text-xxl);
-  margin: var(--space-lg) 0;
+  margin: var(--space-md) 0;
 }
 
 h2,
@@ -145,7 +143,19 @@ br {
   margin: var(--space-md) 0;
 }
 
+button,
+input,
+textarea {
+  font-size: var(--text-sm);
+}
+
 .component {
   padding: var(--component-padding);
   margin-bottom: var(--space-md);
+}
+
+@media (max-width: 1100px) {
+  .responsive-padding {
+    padding: 0 var(--space-sm);
+  }
 }

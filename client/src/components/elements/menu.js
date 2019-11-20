@@ -10,14 +10,13 @@ import { IS_LOGGED_IN } from "../apollo/graphql"
 const StyledLayer = styled(Layer)`
   /* override grommet default */
   color: var(--black);
-  padding: 1rem;
+  padding: var(--space-md);
   display: flex;
   justify-content: center;
   align-items: flex-end;
 
   .menu-link {
     font-weight: 900;
-    text-transform: uppercase;
   }
 `
 
@@ -42,7 +41,7 @@ export default function Menu() {
             modal={true}
           >
             <Link to="/food-and-drink" plain>
-              <h2 className="menu-link">Food / Drink</h2>
+              <h2 className="menu-link">Food & Drink</h2>
             </Link>
             <Link to="/music" plain>
               <h2 className="menu-link">Music</h2>
@@ -53,7 +52,7 @@ export default function Menu() {
             <Link to="/this-month" plain>
               <h2 className="menu-link">This Month</h2>
             </Link>
-            <Divider />
+
             {data && data.isLoggedIn ? <AuthedLinks /> : <AuthLinks />}
           </StyledLayer>
         </>

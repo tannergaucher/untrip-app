@@ -4,26 +4,21 @@ import { useMutation } from "@apollo/react-hooks"
 
 import { Share } from "../elements"
 import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
-import { Divider, Button, Form, Input, StyledLayer } from "../styles"
-
-const StyledAbout = styled.div`
-  .site-description {
-    margin-bottom: 1.5rem;
-  }
-`
+import { Button, Form, Input, StyledLayer } from "../styles"
 
 export default function About() {
   return (
-    <StyledAbout className="sticky">
-      <h2 className="side-title">About Untrip</h2>
+    <div className="sticky">
+      <h3 className="side-title">About Untrip</h3>
       <p className="site-description">
         We curate the best food and drink, music, culture and events happening
         in Kuala Lumpur.
       </p>
+      <br />
       <Share />
       <EmailForm />
-      {/* <Divider /> */}
-    </StyledAbout>
+      <br />
+    </div>
   )
 }
 

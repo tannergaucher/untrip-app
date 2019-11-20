@@ -2,9 +2,9 @@ import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 
-const Styled = styled.div`
+const StyledAsideCard = styled.div`
   display: flex;
-  margin: 2rem 0;
+  margin-bottom: var(--space-md);
 
   .img-wrapper {
     flex: 1;
@@ -12,7 +12,11 @@ const Styled = styled.div`
 
   .post-details {
     flex: 3;
-    margin: 0 1rem;
+    padding: 0 var(--space-sm);
+  }
+
+  .post-category {
+    margin-bottom: var(--space-sm);
   }
 
   .post-title,
@@ -22,26 +26,20 @@ const Styled = styled.div`
   }
 
   .post-title {
-    margin-top: 0.5rem;
     font-weight: 900;
-  }
-
-  .post-date {
-    margin-top: 0.5rem;
   }
 `
 
 export default function AsidePostCard({ post }) {
   return (
-    <Styled>
+    <StyledAsideCard>
       <div className="img-wrapper">
         <Img fluid={post.mainImage.asset.fluid} />
       </div>
       <div className="post-details">
-        <h6 className="post-category">{post.category.category}</h6>
+        <small className="post-category">{post.category.category}</small>
         <h4 className="post-title">{post.title}</h4>
-        {/* <h6 className="post-date">{post.publishedAt}</h6> */}
       </div>
-    </Styled>
+    </StyledAsideCard>
   )
 }

@@ -4,13 +4,12 @@ import styled from "styled-components"
 import { LinkButton } from "../styles"
 
 const StyledShare = styled.div`
-  margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: var(--space-md);
 
   .share-btn {
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-right: var(--space-sm);
   }
 
   .link {
@@ -48,14 +47,14 @@ export default function Share({ href, pinterestImageUrl }) {
       >
         Tweet
       </LinkButton>
-      <LinkButton
+      {/* <LinkButton
         className="share-btn"
         href={pinterest}
         target="_blank"
         style={{ color: `var(--pinterest)` }}
       >
         Pin
-      </LinkButton>
+      </LinkButton> */}
       <CopyLinkButton href={href} />
     </StyledShare>
   )
