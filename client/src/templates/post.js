@@ -15,7 +15,7 @@ import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
 const StyledPost = styled.div`
   .post-title {
     font-weight: 900;
-    font-size: 50px
+    font-size: 50px;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
@@ -27,7 +27,6 @@ const StyledPost = styled.div`
   .post-category,
   .post-date {
     margin: 0;
-    text-transform: uppercase;
   }
 
   .post-date {
@@ -91,7 +90,7 @@ export default function PostPage({ data }) {
             <Img fluid={post.mainImage.asset.fluid} />
             <BlockContent blocks={post._rawBody} />
             <Author author={post.author} />
-            <Divider bgLight={true} />
+            {/* <Divider bgLight={true} /> */}
             <PostPlaces
               postPlaces={post.postPlaces}
               post={post}

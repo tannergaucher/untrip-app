@@ -21,13 +21,11 @@ const StyledFullPostCard = styled.div`
   }
 
   .post-category {
-    text-transform: uppercase;
     margin: 0 1rem 0 0;
   }
 
   .post-date {
     margin: 0;
-    text-transform: uppercase;
   }
 
   @media (max-width: 600px) {
@@ -61,18 +59,17 @@ export default function IndexCard({ post }) {
     <StyledFullPostCard>
       <Link to={`/${post.category.slug.current}/${post.slug.current}`} plain>
         <Img fluid={post.mainImage.asset.fluid} />
+        <h2 className="post-title">{post.title}</h2>
         <div className="post-category-date">
           <h6 className="post-category">{post.category.category} </h6>
           <h6 className="post-date">{post.publishedAt}</h6>
         </div>
-        <h2 className="post-title">{post.title}</h2>
         <p className="post-excerpt">{excerpt}</p>
       </Link>
       <Share
         href={`/${post.category.slug.current}/${post.slug.current}`}
         pinterestImageUrl={post.mainImage.asset.url}
       />
-      <Divider />
     </StyledFullPostCard>
   )
 }

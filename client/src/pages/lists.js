@@ -79,6 +79,8 @@ function UserLists() {
 }
 
 const StyledListItem = styled.div`
+  margin-bottom: 5rem;
+
   .title-edit {
     display: flex;
 
@@ -171,7 +173,7 @@ function ListItem({ list }) {
         </Button>
       )}
       {isEdit && <DeleteListButton listId={list.id} />}
-      <Divider bgLight={true} />
+      {/* <Divider bgLight={true} /> */}
     </StyledListItem>
   )
 }

@@ -8,7 +8,7 @@ import { Button, Link } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledHeader = styled.header`
-  padding: 0 2rem 2rem 2rem;
+  padding: 0 2rem;
 
   .responsive-flex {
     display: flex;
@@ -33,13 +33,7 @@ const StyledHeader = styled.header`
     }
   }
 
-  .site-title-description {
-    margin: 2rem 0;
-  }
-
   .site-title {
-    font-size: var(--heading);
-    text-transform: uppercase;
     font-weight: 900;
     margin: 0;
   }
@@ -60,10 +54,6 @@ const StyledHeader = styled.header`
     display: none;
   }
 
-  .divider {
-    border: 6px solid var(--black);
-  }
-
   @media (max-width: 1200px) {
     .nav-link {
       font-size: 20px;
@@ -81,17 +71,7 @@ const StyledHeader = styled.header`
   }
 
   @media (max-width: 800px) {
-    padding: 0 0.5rem;
-
-    .site-title {
-      font-size: 40px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .divider {
-      border: 3px solid var(--black);
-    }
+    padding: 0;
   }
 `
 
@@ -122,7 +102,6 @@ export default function Header() {
           {data && data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
         </div>
       </div>
-      <div className="divider" />
     </StyledHeader>
   )
 }

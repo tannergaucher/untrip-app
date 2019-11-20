@@ -19,7 +19,7 @@ export default function PopularPostsAside() {
           <AsidePostCard key={edge.node.id} post={edge.node} />
         </Link>
       ))}
-      <Divider />
+      {/* <Divider /> */}
     </div>
   )
 }

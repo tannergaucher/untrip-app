@@ -29,7 +29,7 @@ const LinkButton = styled.a`
   background: ${props => (props.primary ? "var(--black)" : "var(--white)")};
   color: ${props => (props.primary ? "var(--white)" : "var(--black)")};
   padding: 0.5rem 1rem;
-  font-family: var(--sans);
+  font-family: var(--serif);
   font-weight: bolder;
   font-size: calc(var(--font-size) - 4px);
   border: ${props =>

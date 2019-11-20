@@ -36,7 +36,7 @@ const ContentAsideGrid = styled.div`
   }
 
   @media (max-width: 900px) {
-    margin: 2rem 0.5rem;
+    margin: 2rem 0;
     grid-template-areas:
       "content"
       "aside";

@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { useQuery } from "@apollo/react-hooks"
 
 import { Layer } from "grommet"
+import { Menu as MenuIcon } from "grommet-icons"
 import { Button, Link, Divider } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
@@ -26,7 +27,9 @@ export default function Menu() {
 
   return (
     <>
-      <Button onClick={() => setShow(!show)}>Menu</Button>
+      <Button onClick={() => setShow(!show)} style={{ border: `none` }}>
+        <MenuIcon color="var(--black)" />
+      </Button>
       {show && (
         <>
           <StyledLayer
