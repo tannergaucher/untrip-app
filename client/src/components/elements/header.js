@@ -55,7 +55,7 @@ export default function Header() {
           <Link to="/" plain="true">
             <h3 className="site-title">Untrip</h3>
           </Link>
-          <small className="site-description"> Curated Kuala Lumpur</small>
+          <small className="site-description">Curated Kuala Lumpur</small>
         </div>
         <div className="btns">
           {data && data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}

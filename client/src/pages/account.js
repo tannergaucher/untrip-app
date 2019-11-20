@@ -24,7 +24,12 @@ function UserAccount() {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
   return (
-    <>
+    <div
+      style={{
+        // Becuase I live in the aside.
+        padding: `var(--space-sm)`,
+      }}
+    >
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.me && (
@@ -35,6 +40,6 @@ function UserAccount() {
           <Logout />
         </>
       )}
-    </>
+    </div>
   )
 }

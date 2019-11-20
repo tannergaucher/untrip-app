@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
     <>
-      <h2 style={{ textAlign: `center` }}>Login</h2>
+      <h2 style={{ textAlign: `center` }}>Log In</h2>
       <Fieldset disabled={loading}>
         {error && `${error.message}`}
         <Form

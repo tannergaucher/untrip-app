@@ -7,7 +7,7 @@ const StyledAsideCard = styled.div`
   margin-bottom: var(--space-md);
 
   .img-wrapper {
-    flex: 1;
+    flex: 1.5;
   }
 
   .post-details {
@@ -15,17 +15,13 @@ const StyledAsideCard = styled.div`
     padding: 0 var(--space-sm);
   }
 
-  .post-category {
-    margin-bottom: var(--space-sm);
-  }
-
-  .post-title,
   .post-date,
   .post-category {
     margin: 0;
   }
 
   .post-title {
+    margin: 0;
     font-weight: 900;
   }
 `
@@ -36,8 +32,9 @@ export default function AsidePostCard({ post }) {
       <div className="img-wrapper">
         <Img fluid={post.mainImage.asset.fluid} />
       </div>
+
       <div className="post-details">
-        <small className="post-category">{post.category.category}</small>
+        {/* <small className="post-category">{post.category.category}</small> */}
         <h4 className="post-title">{post.title}</h4>
       </div>
     </StyledAsideCard>

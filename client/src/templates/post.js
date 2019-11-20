@@ -12,11 +12,7 @@ import { SEO, Map, Share, About } from "../components/elements"
 import { ContentAsideGrid } from "../components/styles"
 import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
 
-const StyledPost = styled.div`
-  .post-category-date {
-    margin-bottom: var(--space-md);
-  }
-`
+const StyledPost = styled.div``
 
 export default function PostPage({ data }) {
   const [placeInView, setPlaceInView] = useState(null)
@@ -46,19 +42,12 @@ export default function PostPage({ data }) {
           <Img fluid={post.mainImage.asset.fluid} />
           <div className="responsive-padding">
             <h1 className="post-title ">{post.title}</h1>
-            <div className="post-category-date">
-              <small className="post-category">
-                {post.category.category} /{" "}
-              </small>
-              <small className="post-date">{post.publishedAt}</small>
-            </div>
+            {/* <h4 className="post-category">{post.category.category} </h4> */}
+            {/* <h4 className="post-date">{post.publishedAt}</h4> */}
             <Share
               href={`/${post.category.slug.current}/${post.slug.current}`}
-              pinterestImageUrl={post.mainImage.asset.url}
             />
-            <br />
             <BlockContent blocks={post._rawBody} />
-            <br />
             <Author author={post.author} />
             <br />
             <PostPlaces
@@ -66,7 +55,6 @@ export default function PostPage({ data }) {
               post={post}
               setPlaceInView={setPlaceInView}
             />
-            <br />
             <Comments
               post={post}
               setCommentsInView={setCommentsInView}
@@ -74,7 +62,6 @@ export default function PostPage({ data }) {
               commentsError={commentsError}
               commentsLoading={commentsLoading}
             />
-            <br />
             <br />
             <br />
           </div>

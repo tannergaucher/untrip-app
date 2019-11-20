@@ -23,6 +23,7 @@ const ContentAsideGrid = styled.div`
   .side-title {
     margin-top: 0;
     margin-bottom: var(--space-md);
+    font-weight: lighter;
   }
 
   .sticky {
@@ -35,7 +36,7 @@ const ContentAsideGrid = styled.div`
   }
 
   @media (max-width: 1100px) {
-    margin: var(--space-sm) 0;
+    margin: 0;
     grid-template-areas:
       "content"
       "aside";
@@ -44,6 +45,7 @@ const ContentAsideGrid = styled.div`
 
     aside {
       margin: 0rem;
+      padding: var(--space-sm);
     }
 
     .map-container {

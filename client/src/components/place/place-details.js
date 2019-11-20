@@ -7,7 +7,7 @@ import { Button, StyledLayer, LinkButton } from "../styles"
 const StyledDetails = styled.div`
   a {
     margin-right: var(--space-sm);
-    margin-top: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .show-details {
@@ -20,10 +20,9 @@ const StyledDetails = styled.div`
     display: none;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 1100px) {
     a {
       margin-right: 0;
-      margin-bottom: 0.5rem;
     }
 
     .show-details {

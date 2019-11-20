@@ -7,14 +7,12 @@
   --paragraph-line-height: 1.75;
   --heading-letter-spacing: -1.2px;
   --paragraph-letter-spacing: -0.5px;
-
   /* Vertical Rhythm */
   --responsive-unit: 0.6vw; /* TWEAK ME  */
-
-  /* base values */
-  --text-base-size: calc(0.8rem + var(--responsive-unit));
+  /* Base Values */
+  --text-base-size: calc(0.9rem + var(--responsive-unit));
   --text-scale-ratio: 1.3; /* TWEAK ME */
-  /* type scale */
+  /* Type Scale */
   --text-xs: calc(
     1rem / (var(--text-scale-ratio) * var(--text-scale-ratio)) +
       var(--responsive-unit)
@@ -38,16 +36,14 @@
       var(--text-scale-ratio) * var(--text-scale-ratio) *
       var(--text-scale-ratio) + var(--responsive-unit)
   );
-
-  /* spacing */
+  /* Spacing */
   --baseline: calc(1.2rem + var(--responsive-unit));
   --component-padding: var(--space-sm);
-  /* spacing values */
+  /* Spacing Values */
   --space-sm: calc(var(--baseline) / 2);
   --space-md: var(--baseline);
   --space-lg: calc(var(--baseline) * 2);
   --space-xl: calc(var(--baseline) * 3);
-
   /* Colors */
   --accent: darkred;
   --black: black;
@@ -61,11 +57,9 @@
   --twitter: #1da1f2;
   --pinterest: #c8232c;
   --instagram: #5851db;
-
-  /* animation */
+  /* Animation */
   --duration: 0.2s;
-
-  /* design */
+  /* Components */
   --radius: 2px;
   --thickness: 2px;
 }

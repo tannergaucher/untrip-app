@@ -5,12 +5,12 @@ import styled from "styled-components"
 const StyledAuthor = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
+  margin: var(--space-md) 0;
 
   .author-info {
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
+    margin-left: var(--space-sm);
 
     a {
       text-decoration-color: var(--black);

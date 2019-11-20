@@ -21,7 +21,7 @@ export default function IndexPage() {
             <FullPostCard key={edge.node.id} post={edge.node} />
           ))}
         </article>
-        <aside className="responsive-padding">
+        <aside>
           <ThisMonthAside />
           <PopularPostsAside />
           <div className="sticky">

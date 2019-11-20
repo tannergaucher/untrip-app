@@ -5,7 +5,7 @@ import styled from "styled-components"
 import moment from "moment"
 
 import { AddComment, DeleteComment } from "."
-import { Button, Textarea, Fieldset, Form } from "../styles"
+import { Button, Textarea, Fieldset, Form, Link } from "../styles"
 import {
   COMMENTS_QUERY,
   CURRENT_USER_QUERY,
@@ -57,7 +57,9 @@ export default function Comments({
           {data && data.me ? (
             <AddComment post={post} />
           ) : (
-            "Sign in to add a comment"
+            <Link to="/login">
+              <h4>Log in to comment</h4>
+            </Link>
           )}
           <AllComments post={post} />
         </StyledComments>

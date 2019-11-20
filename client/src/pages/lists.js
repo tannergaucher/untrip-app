@@ -29,7 +29,7 @@ export default function ListsPage() {
   const { data } = useQuery(IS_LOGGED_IN)
 
   return (
-    <StyledListPage>
+    <StyledListPage className="responsive-padding">
       <ContentAsideGrid>
         <div className="content">
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}

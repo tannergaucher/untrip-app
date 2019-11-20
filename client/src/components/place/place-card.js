@@ -13,15 +13,15 @@ const StyledPlace = styled.div`
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border-radius: calc(var(--radius) * 2);
 
+  .place-name {
+    margin: var(--space-sm) 0;
+  }
+
   .place-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--space-sm);
-  }
-
-  .place-name {
-    margin-top: var(--space-sm);
   }
 
   .place-content {
@@ -30,6 +30,7 @@ const StyledPlace = styled.div`
 
   .place-tags {
     display: flex;
+    margin-bottom: var(--space-md);
   }
 
   .place-tag {
@@ -52,7 +53,7 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
     <StyledPlace>
       <div className="place-info">
         <div className="place-name-type" ref={ref}>
-          <h2 className="place-name">{postPlace.place.name}</h2>
+          <h3 className="place-name">{postPlace.place.name}</h3>
         </div>
         <AddToListModal place={postPlace} />
       </div>
@@ -74,7 +75,6 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
           ))}
         </div>
         <BlockContent blocks={postPlace._rawText} />
-        <br />
         <PlaceDetails place={postPlace} post={post} />
       </div>
     </StyledPlace>
