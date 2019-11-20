@@ -6,12 +6,12 @@ import { Button, StyledLayer, LinkButton } from "../styles"
 
 const StyledDetails = styled.div`
   a {
-    margin-right: 0.5rem;
-    margin-top: 0.5rem;
+    margin-right: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
 
   .show-details {
-    margin: 1rem 0 0 0;
+    margin: var(--space-md) 0 0 0;
     display: flex;
     flex-wrap: wrap;
   }
@@ -20,10 +20,9 @@ const StyledDetails = styled.div`
     display: none;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 1100px) {
     a {
       margin-right: 0;
-      margin-bottom: 0.5rem;
     }
 
     .show-details {

@@ -6,55 +6,37 @@ import { useInView } from "react-intersection-observer"
 
 import { PlaceDetails } from "../place"
 import { AddToListModal } from "../list"
-import { Divider, Link } from "../styles"
+import { Link } from "../styles"
 
 const StyledPlace = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: calc(var(--radius) * 2);
+
+  .place-name {
+    margin: var(--space-sm) 0;
+  }
 
   .place-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 2rem 0;
+    padding: var(--space-sm);
   }
 
-  .place-type {
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .place-name {
-    margin: 0;
-    margin-top: 0.25rem;
-    font-weight: 900;
+  .place-content {
+    padding: var(--space-sm);
   }
 
   .place-tags {
     display: flex;
-    margin: 1.5rem 0;
+    margin-bottom: var(--space-md);
   }
 
   .place-tag {
-    margin: 0;
-    margin-right: 1rem;
+    margin-right: var(--space-md);
     text-transform: uppercase;
-  }
-
-  @media (max-width: 600px) {
-    margin-bottom: 1rem;
-
-    .place-info {
-      margin-bottom: 0.5rem;
-    }
-
-    .place-name {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-    }
-
-    .place-tags {
-      margin: 1.5rem 0;
-    }
+    font-weight: bold;
   }
 `
 
@@ -71,25 +53,30 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
     <StyledPlace>
       <div className="place-info">
         <div className="place-name-type" ref={ref}>
-          <h2 className="place-name">{postPlace.place.name}</h2>
+          <h3 className="place-name">{postPlace.place.name}</h3>
         </div>
         <AddToListModal place={postPlace} />
       </div>
-      <Img fluid={postPlace.place.image.asset.fluid} />
-      <div className="place-tags">
-        {postPlace.place.tags.map(tag => (
-          <Link
-            plain="true"
-            key={tag.slug.current}
-            to={`/tags/${tag.slug.current}`}
-          >
-            <h5 className="place-tag">{tag.tag}</h5>
-          </Link>
-        ))}
+      <Img
+        fluid={postPlace.place.image.asset.fluid}
+        style={{ marginBottom: `var(--space-md)` }}
+      />
+
+      <div className="place-content">
+        <div className="place-tags">
+          {postPlace.place.tags.map(tag => (
+            <Link
+              plain="true"
+              key={tag.slug.current}
+              to={`/tags/${tag.slug.current}`}
+            >
+              <small className="place-tag">{tag.tag}</small>
+            </Link>
+          ))}
+        </div>
+        <BlockContent blocks={postPlace._rawText} />
+        <PlaceDetails place={postPlace} post={post} />
       </div>
-      <BlockContent blocks={postPlace._rawText} />
-      <PlaceDetails place={postPlace} post={post} />
-      <Divider />
     </StyledPlace>
   )
 }

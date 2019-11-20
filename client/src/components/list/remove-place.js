@@ -10,7 +10,7 @@ import {
 export default function RemovePlace({ list, listPlace }) {
   const [removeFromList] = useMutation(REMOVE_FROM_LIST_MUTATION, {
     variables: {
-      // Because listPlace gets deleted from cache, leading to undefined error
+      // Bug: Fix this.
       listPlaceId: listPlace ? listPlace.id : "",
     },
     optimisticResponse: {
@@ -28,7 +28,6 @@ export default function RemovePlace({ list, listPlace }) {
           cacheList => cacheList.id === list.id
         )
 
-        // Because can't mutate data.
         const updatedList = {
           ...data.me.lists[listIndex],
           places: data.me.lists[listIndex].places.filter(
@@ -61,7 +60,7 @@ export default function RemovePlace({ list, listPlace }) {
     <Button
       primary="true"
       onClick={() => removeFromList()}
-      style={{ marginTop: `.5rem`, marginRight: `.5rem` }}
+      style={{ marginTop: `var(--space-sm)`, marginRight: `var(--space-sm)` }}
     >
       {list.title}
     </Button>

@@ -41,7 +41,7 @@ export default function UserLists({ place }) {
             <Button
               onClick={() => setShow(!show)}
               style={{
-                marginTop: `1.5rem`,
+                marginTop: `var(--space-md)`,
                 color: `var(--accent)`,
                 borderColor: `var(--accent)`,
               }}

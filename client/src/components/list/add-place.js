@@ -66,7 +66,7 @@ export default function AddPlace({ place, list }) {
 
   return (
     <Button
-      style={{ marginTop: `.5rem`, marginRight: `.5rem` }}
+      style={{ marginTop: `var(--space-sm)`, marginRight: `var(--space-sm)` }}
       onClick={() => {
         addToList()
       }}

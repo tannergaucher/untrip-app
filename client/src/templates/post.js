@@ -9,49 +9,10 @@ import { COMMENTS_QUERY } from "../components/apollo/graphql"
 import { Comments } from "../components/comment"
 import { PostPlaces } from "../components/place"
 import { SEO, Map, Share, About } from "../components/elements"
-import { ContentAsideGrid, Divider } from "../components/styles"
+import { ContentAsideGrid } from "../components/styles"
 import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
 
-const StyledPost = styled.div`
-  .post-title {
-    font-weight: 900;
-    font-size: 50px
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .post-category-date {
-    display: flex;
-  }
-
-  .post-category,
-  .post-date {
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .post-date {
-    margin-left: 1rem;
-  }
-
-  .post-comments {
-    margin-top: 3rem;
-    margin-bottom: 4rem;
-  }
-
-  @media (max-width: 600px) {
-    .post-title {
-      font-size: 40px;
-      margin-top: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .post-comments {
-      margin-top: 2rem;
-      margin-bottom: 3rem;
-    }
-  }
-`
+const StyledPost = styled.div``
 
 export default function PostPage({ data }) {
   const [placeInView, setPlaceInView] = useState(null)
@@ -70,7 +31,7 @@ export default function PostPage({ data }) {
   })
 
   return (
-    <>
+    <StyledPost>
       <SEO
         title={post.title}
         image={post.mainImage.asset.fluid.src}
@@ -78,37 +39,34 @@ export default function PostPage({ data }) {
       />
       <ContentAsideGrid>
         <article className="content">
-          <StyledPost>
-            <div className="post-category-date">
-              <h6 className="post-category">{post.category.category} </h6>
-              <h6 className="post-date">{post.publishedAt}</h6>
-            </div>
-            <h1 className="post-title">{post.title}</h1>
+          <Img fluid={post.mainImage.asset.fluid} />
+          <div className="responsive-padding">
+            <h1 className="post-title ">{post.title}</h1>
+            {/* <h4 className="post-category">{post.category.category} </h4> */}
+            {/* <h4 className="post-date">{post.publishedAt}</h4> */}
             <Share
               href={`/${post.category.slug.current}/${post.slug.current}`}
-              pinterestImageUrl={post.mainImage.asset.url}
             />
-            <Img fluid={post.mainImage.asset.fluid} />
             <BlockContent blocks={post._rawBody} />
             <Author author={post.author} />
-            <Divider bgLight={true} />
+            <br />
             <PostPlaces
               postPlaces={post.postPlaces}
               post={post}
               setPlaceInView={setPlaceInView}
             />
-            <div className="post-comments">
-              <Comments
-                post={post}
-                setCommentsInView={setCommentsInView}
-                commentsData={commentsData}
-                commentsError={commentsError}
-                commentsLoading={commentsLoading}
-              />
-            </div>
-          </StyledPost>
+            <Comments
+              post={post}
+              setCommentsInView={setCommentsInView}
+              commentsData={commentsData}
+              commentsError={commentsError}
+              commentsLoading={commentsLoading}
+            />
+            <br />
+            <br />
+          </div>
         </article>
-        <aside>
+        <aside className="responsive-padding">
           <LatestPostsAside />
           <PopularPostsAside />
           <div className="only-mobile">
@@ -125,13 +83,13 @@ export default function PostPage({ data }) {
           </div>
         </aside>
       </ContentAsideGrid>
-    </>
+    </StyledPost>
   )
 }
 
 const MapAside = ({ post, placeInView }) => (
   <>
-    <h2 className="map-title">{post.title}</h2>
+    <h3 className="map-title">{post.title}</h3>
     <Map
       places={post.postPlaces}
       placeInView={placeInView}

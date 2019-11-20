@@ -7,13 +7,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks"
 
 import { AuthTabs } from "../components/auth"
 import { SEO, Share } from "../components/elements"
-import {
-  ContentAsideGrid,
-  Divider,
-  Button,
-  Form,
-  Input,
-} from "../components/styles"
+import { ContentAsideGrid, Button, Form, Input } from "../components/styles"
 import {
   IS_LOGGED_IN,
   CURRENT_USER_QUERY,
@@ -35,7 +29,7 @@ export default function ListsPage() {
   const { data } = useQuery(IS_LOGGED_IN)
 
   return (
-    <StyledListPage>
+    <StyledListPage className="responsive-padding">
       <ContentAsideGrid>
         <div className="content">
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
@@ -79,11 +73,13 @@ function UserLists() {
 }
 
 const StyledListItem = styled.div`
+  margin-bottom: var(--space-xl);
+
   .title-edit {
     display: flex;
 
     button {
-      margin-left: 0.5rem;
+      margin-left: var(--space-md);
       border: none;
       color: grey;
     }
@@ -91,13 +87,8 @@ const StyledListItem = styled.div`
 
   .edit-form {
     button {
-      margin-bottom: 2rem;
+      margin-bottom: var(--space-lg);
     }
-  }
-
-  .list-title {
-    margin-bottom: 1.5rem;
-    font-weight: 900;
   }
 
   .list-length {
@@ -107,10 +98,6 @@ const StyledListItem = styled.div`
   .list-places {
     display: flex;
     flex-direction: column;
-  }
-
-  .delete-list-btn {
-    margin-top: 1rem;
   }
 `
 
@@ -138,10 +125,12 @@ function ListItem({ list }) {
     <StyledListItem>
       <div className="title-edit">
         <h2 className="list-title">{list.title}</h2>
+
         <Button onClick={() => setIsEdit(!isEdit)}>
           <Edit color="var(--black)" size="20px" />
         </Button>
       </div>
+      {!isEdit && <Share />}
       {isEdit && (
         <div className="edit-form">
           <Form
@@ -164,14 +153,13 @@ function ListItem({ list }) {
           <ListPlace key={place.id} place={place} list={list} isEdit={isEdit} />
         ))}
       </div>
-      {!isEdit && <Share />}
       {!isEdit && (
         <Button primary onClick={() => navigate(`/app/list/${list.id}`)}>
           View List
         </Button>
       )}
+      <br />
       {isEdit && <DeleteListButton listId={list.id} />}
-      <Divider bgLight={true} />
     </StyledListItem>
   )
 }
@@ -213,7 +201,7 @@ function DeleteListButton({ listId }) {
       onClick={() => deleteList()}
       style={{
         color: `var(--accent)`,
-        border: `var(--accent)`,
+        borderColor: `var(--accent)`,
       }}
     >
       Delete List
@@ -282,8 +270,8 @@ function ListPlace({ place, list, isEdit }) {
           style={{
             height: `60px`,
             width: `80px`,
-            marginRight: `1rem`,
-            marginBottom: `1rem`,
+            marginRight: `var(--space-md)`,
+            marginBottom: `var(--space-md)`,
           }}
         />
         {isEdit ? (
@@ -291,7 +279,7 @@ function ListPlace({ place, list, isEdit }) {
             X {place.name}
           </Button>
         ) : (
-          <h2>{place.name}</h2>
+          <h4>{place.name}</h4>
         )}
       </div>
     </StyledListPlace>

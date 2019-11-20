@@ -5,20 +5,17 @@ import { Button } from "../styles"
 import { Login, Signup } from "../auth"
 
 const StyledAuthTabs = styled.div`
-  .welcome-message {
-    margin-bottom: 2.5rem;
-    font-size: 40px;
-    font-weight: 900;
-  }
-
   .toggle-auth,
   .welcome-message {
     text-align: center;
 
     .auth-message {
-      margin-bottom: 1rem;
       font-weight: lighter;
     }
+  }
+
+  .toggle-auth {
+    margin: var(--space-md);
   }
 `
 

@@ -1,7 +1,7 @@
 import React from "react"
 
 import { AsidePostCard } from "."
-import { Divider, Link } from "../styles"
+import { Link } from "../styles"
 import { useLatestSanityPosts } from "../hooks"
 
 export default function LatestPostsAside() {
@@ -9,7 +9,7 @@ export default function LatestPostsAside() {
 
   return (
     <div className="side-section">
-      <h2 className="side-title">Latest Posts </h2>
+      <h3 className="side-title">Latest Posts </h3>
       {latestPostEdges.map(edge => (
         <Link
           key={edge.node.id}
@@ -19,7 +19,6 @@ export default function LatestPostsAside() {
           <AsidePostCard key={edge.node.id} post={edge.node} />
         </Link>
       ))}
-      <Divider />
     </div>
   )
 }

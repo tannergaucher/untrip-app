@@ -5,7 +5,7 @@ import styled from "styled-components"
 import moment from "moment"
 
 import { AddComment, DeleteComment } from "."
-import { Button, Divider, Textarea, Fieldset, Form } from "../styles"
+import { Button, Textarea, Fieldset, Form, Link } from "../styles"
 import {
   COMMENTS_QUERY,
   CURRENT_USER_QUERY,
@@ -14,7 +14,7 @@ import {
 } from "../apollo/graphql"
 
 const StyledComments = styled.div`
-  margin-top: 1rem;
+  margin-top: var(--space-md);
 `
 
 export default function Comments({
@@ -57,7 +57,9 @@ export default function Comments({
           {data && data.me ? (
             <AddComment post={post} />
           ) : (
-            "Sign in to add a comment"
+            <Link to="/login">
+              <h4>Log in to comment</h4>
+            </Link>
           )}
           <AllComments post={post} />
         </StyledComments>
@@ -74,7 +76,7 @@ function AllComments({ post }) {
   })
 
   return (
-    <div style={{ marginTop: `2rem` }}>
+    <div style={{ marginTop: `var(--space-xl)` }}>
       {loading && `loading comments`}
       {error && `Error! ${error.message}`}
       {data &&
@@ -87,14 +89,15 @@ function AllComments({ post }) {
 }
 
 const StyledComment = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-lg);
   border-radius: var(--radius);
+  border: 2px solid var(--black);
+  padding: var(--space-md);
 
   .comment-author {
-    margin: 0;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 900;
+    margin-top: 0;
+    margin-bottom: var(--space-sm);
+    font-weight: bold;
   }
 
   .comment-date {
@@ -103,18 +106,18 @@ const StyledComment = styled.div`
   }
 
   .comment-info {
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-md);
   }
 
   .comment-text {
     font-style: italic;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-sm);
     font-weight: 900;
   }
 
   .edited {
     margin-top: 0;
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-lg);
   }
 `
 
@@ -127,8 +130,6 @@ function Comment({ comment, post }) {
       commentAuthorId: comment.author.id,
     },
   })
-
-  console.log(comment)
 
   const [editComment] = useMutation(EDIT_COMMENT_MUTATION, {
     variables: {
@@ -153,11 +154,11 @@ function Comment({ comment, post }) {
   return (
     <StyledComment>
       <div className="comment-info">
-        <h5 className="comment-author">{comment.author.username}</h5>
+        <h4 className="comment-author">{comment.author.username}</h4>
         <div>
-          <h5 className="comment-date">
+          <small className="comment-date">
             {moment(comment.createdAt).format("h:mm A D MMMM")}
-          </h5>
+          </small>
         </div>
       </div>
       {edit ? (
@@ -177,12 +178,10 @@ function Comment({ comment, post }) {
                 onChange={e => setEditedText(e.target.value)}
               />
               <Button
-                primary
                 fillMobile
                 type="submit"
                 style={{
-                  marginBottom: `2rem`,
-                  background: `var(--grey)`,
+                  marginBottom: `var(--space-md)`,
                 }}
               >
                 Save
@@ -205,9 +204,9 @@ function Comment({ comment, post }) {
           <Button
             onClick={() => setEdit(!edit)}
             style={{
-              marginRight: `1rem`,
+              marginRight: `var(--space-md)`,
               color: `var(--grey)`,
-              borderColor: `grey`,
+              borderColor: `var(--grey)`,
             }}
           >
             {edit ? "Close" : "Edit"}
@@ -215,7 +214,6 @@ function Comment({ comment, post }) {
           <DeleteComment comment={comment} post={post} />
         </>
       )}
-      <Divider />
     </StyledComment>
   )
 }

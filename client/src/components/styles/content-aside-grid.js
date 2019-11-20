@@ -4,8 +4,8 @@ const ContentAsideGrid = styled.div`
   display: grid;
   grid-template-areas: "content aside";
   grid-template-columns: 5fr 3fr;
-  grid-column-gap: 2rem;
-  margin: 2rem 2rem;
+  grid-column-gap: var(--space-md);
+  margin: var(--space-md);
 
   .content {
     grid-area: "content";
@@ -13,30 +13,30 @@ const ContentAsideGrid = styled.div`
 
   aside {
     grid-area: "aside";
-    margin: 0 2rem;
+    margin: 0 var(--space-md);
   }
 
   .side-section {
-    margin-bottom: 6rem;
+    margin-bottom: var(--space-xl);
   }
 
   .side-title {
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: 900;
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    font-weight: lighter;
   }
 
   .sticky {
     position: sticky;
-    top: 3rem;
+    top: var(--space-md);
   }
 
   .only-mobile {
     display: none;
   }
 
-  @media (max-width: 900px) {
-    margin: 2rem 0.5rem;
+  @media (max-width: 1100px) {
+    margin: 0;
     grid-template-areas:
       "content"
       "aside";
@@ -45,10 +45,7 @@ const ContentAsideGrid = styled.div`
 
     aside {
       margin: 0rem;
-    }
-
-    .side-section {
-      margin-bottom: 1.5rem;
+      padding: var(--space-sm);
     }
 
     .map-container {

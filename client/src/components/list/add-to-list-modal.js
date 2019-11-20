@@ -9,7 +9,8 @@ import { Button, StyledLayer } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const PlainButton = styled(Button)`
-  border: var(--thickness) solid var(--white);
+  border: none;
+  padding: var(--space-sm);
 `
 
 export default function AddToListModal({ place }) {
