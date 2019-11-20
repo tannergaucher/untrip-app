@@ -26,11 +26,6 @@ const Styled = styled.div`
     font-weight: 900;
   }
 
-  .post-category,
-  .post-date {
-    text-transform: uppercase;
-  }
-
   .post-date {
     margin-top: 0.5rem;
   }

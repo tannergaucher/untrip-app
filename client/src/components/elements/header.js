@@ -25,16 +25,12 @@ const StyledHeader = styled.header`
   }
 
   .nav-link {
-    text-transform: uppercase;
-    font-weight: 900;
-
     &:last-child {
       margin-right: 0;
     }
   }
 
   .site-title {
-    font-weight: 900;
     margin: 0;
   }
 
@@ -87,7 +83,7 @@ export default function Header() {
           </Link>
           <h6 className="site-description"> Curated Kuala Lumpur</h6>
         </div>
-        <nav className="only-full-size">
+        {/* <nav className="only-full-size">
           <Link to="/food-and-drink" plain="true">
             <h2 className="nav-link">Food & Drink</h2>
           </Link>
@@ -97,7 +93,7 @@ export default function Header() {
           <Link to="/culture" plain="true">
             <h2 className="nav-link">Culture</h2>
           </Link>
-        </nav>
+        </nav> */}
         <div className="btns">
           {data && data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
         </div>
