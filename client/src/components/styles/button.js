@@ -4,7 +4,7 @@ const Button = styled.button`
   cursor: pointer;
   background: ${props => (props.primary ? "var(--black)" : "var(--white)")};
   color: ${props => (props.primary ? "var(--white)" : "var(--black)")};
-  padding: 0.5rem 1rem;
+  padding: var(--space-sm);
   font-family: var(--sans);
   font-weight: bolder;
   border: ${props =>
@@ -16,7 +16,7 @@ const Button = styled.button`
   opacity: ${props => (props.loading ? ".5" : "1")};
   transition-duration: var(--duration);
 
-  @media (max-width: 600px) {
+  @media (max-width: 1100px) {
     width: ${props => (props.fillMobile ? "100%" : "")};
   }
 `
@@ -27,7 +27,7 @@ const LinkButton = styled.a`
   cursor: pointer;
   background: ${props => (props.primary ? "var(--black)" : "var(--white)")};
   color: ${props => (props.primary ? "var(--white)" : "var(--black)")};
-  padding: 0.5rem 1rem;
+  padding: var(--space-sm);
   font-family: var(--sans);
   font-weight: bolder;
   border: ${props =>
@@ -38,7 +38,7 @@ const LinkButton = styled.a`
   text-transform: uppercase;
   transition-duration: var(--duration);
 
-  @media (max-width: 600px) {
+  @media (max-width: 1100px) {
     width: ${props => (props.fillMobile ? "100%" : "")};
   }
 `

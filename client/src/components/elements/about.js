@@ -55,7 +55,7 @@ function EmailForm() {
         />
 
         <Button type="submit" primary loading={loading}>
-          Subscribe to weekly newsletter
+          Subscribe
         </Button>
       </Form>
       {message && (

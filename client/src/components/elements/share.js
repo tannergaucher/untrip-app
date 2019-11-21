@@ -11,10 +11,6 @@ const StyledShare = styled.div`
   .share-btn {
     margin-right: var(--space-sm);
   }
-
-  .link {
-    color: grey;
-  }
 `
 
 export default function Share({ href, pinterestImageUrl }) {
@@ -34,7 +30,9 @@ export default function Share({ href, pinterestImageUrl }) {
         href={fb}
         target="_blank"
         style={{
-          color: `var(--facebook)`,
+          backgroundColor: `var(--facebook)`,
+          borderColor: `var(--facebook)`,
+          color: `var(--white)`,
         }}
       >
         Share
@@ -43,18 +41,14 @@ export default function Share({ href, pinterestImageUrl }) {
         className="share-btn"
         href={twitter}
         target="_blank"
-        style={{ color: `var(--twitter)` }}
+        style={{
+          color: `var(--white)`,
+          backgroundColor: `var(--twitter)`,
+          borderColor: `var(--twitter)`,
+        }}
       >
         Tweet
       </LinkButton>
-      {/* <LinkButton
-        className="share-btn"
-        href={pinterest}
-        target="_blank"
-        style={{ color: `var(--pinterest)` }}
-      >
-        Pin
-      </LinkButton> */}
       <CopyLinkButton href={href} />
     </StyledShare>
   )
@@ -87,7 +81,9 @@ function CopyLinkButton({ href }) {
       className="share-btn link"
       ref={buttonEl}
       style={{
-        color: copied ? "green" : "",
+        color: copied ? "green" : `var(--white)`,
+        backgroundColor: `var(--grey)`,
+        borderColor: `var(--grey)`,
       }}
     >
       Link

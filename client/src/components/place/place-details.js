@@ -30,7 +30,8 @@ const StyledDetails = styled.div`
     }
 
     .only-mobile {
-      display: inline;
+      display: block;
+      width: 100%;
     }
   }
 `
@@ -54,7 +55,11 @@ export default function Details({ place, post }) {
           {place.place.facebookLink && (
             <LinkButton
               href={place.place.facebookLink}
-              style={{ background: `var(--facebook)`, color: `white` }}
+              style={{
+                backgroundColor: `var(--facebook)`,
+                borderColor: `var(--facebook)`,
+                color: `white`,
+              }}
             >
               Facebook
             </LinkButton>
@@ -64,8 +69,9 @@ export default function Details({ place, post }) {
             <LinkButton
               href={place.place.instagramLink}
               style={{
-                background: `var(--instagram)`,
-                color: `white`,
+                backgroundColor: `var(--instagram)`,
+                borderColor: `var(--instagram)`,
+                color: `var(--white)`,
               }}
             >
               Instagram
@@ -82,7 +88,11 @@ export default function Details({ place, post }) {
           {place.place.websiteLink && (
             <LinkButton
               href={place.place.websiteLink}
-              style={{ background: `grey`, color: `white` }}
+              style={{
+                backgroundColor: `var(--grey)`,
+                borderColor: `var(--grey)`,
+                color: `var(--white)`,
+              }}
             >
               Website
             </LinkButton>
@@ -105,14 +115,12 @@ function ShowOnMap({ post }) {
   const [show, setShow] = useState(false)
 
   return (
-    <div style={{ marginTop: `.5rem` }}>
+    <>
       <Button
         onClick={() => setShow(true)}
-        fillMobile
         style={{
-          textAlign: `left`,
-          background: `var(--red)`,
           color: `var(--white)`,
+          background: `var(--red)`,
         }}
       >
         Show on map
@@ -147,6 +155,6 @@ function ShowOnMap({ post }) {
           </Button>
         </StyledLayer>
       )}
-    </div>
+    </>
   )
 }

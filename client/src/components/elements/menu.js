@@ -22,7 +22,13 @@ export default function Menu() {
 
   return (
     <>
-      <Button onClick={() => setShow(!show)} style={{ border: `none` }}>
+      <Button
+        onClick={() => setShow(!show)}
+        style={{
+          border: `none`,
+          padding: `var(--space-sm) 0 var(--space-sm) var(--space-sm)`,
+        }}
+      >
         <MenuIcon color="var(--black)" />
       </Button>
       {show && (
