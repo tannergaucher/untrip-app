@@ -20,7 +20,7 @@ const StyledDetails = styled.div`
     display: none;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     a {
       margin-right: 0;
     }
@@ -116,19 +116,14 @@ function ShowOnMap({ post }) {
 
   return (
     <>
-      <Button
-        onClick={() => setShow(true)}
-        style={{
-          color: `var(--white)`,
-          background: `var(--red)`,
-        }}
-      >
+      <Button onClick={() => setShow(true)} primary fillMobile>
         Show on map
       </Button>
       {show && (
         <StyledLayer
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
+          full={true}
           style={{
             padding: `0`,
             position: `relative`,
@@ -138,7 +133,7 @@ function ShowOnMap({ post }) {
             isUserList={false}
             places={post.postPlaces}
             style={{
-              height: `93vh`,
+              height: `100vh`,
             }}
           />
           <Button
@@ -147,7 +142,6 @@ function ShowOnMap({ post }) {
             style={{
               position: `absolute`,
               bottom: `0`,
-              height: `7vh`,
             }}
             onClick={() => setShow(false)}
           >

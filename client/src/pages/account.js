@@ -1,5 +1,6 @@
 import React from "react"
 import { useQuery } from "@apollo/react-hooks"
+import styled from "styled-components"
 
 import { ContentAsideGrid } from "../components/styles"
 import { AuthTabs, Logout } from "../components/auth"
@@ -20,16 +21,18 @@ export default function AccountPage() {
   )
 }
 
+const StyledAccount = styled.div`
+  @media (max-width: 1024px) {
+    /* Because I live in the aside. I need padding after the breakpoint. */
+    padding: var(--space-sm);
+  }
+`
+
 function UserAccount() {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
   return (
-    <div
-      style={{
-        // Becuase I live in the aside.
-        padding: `var(--space-sm)`,
-      }}
-    >
+    <StyledAccount>
       {loading && `Loading...`}
       {error && `Error: ${error.message}`}
       {data && data.me && (
@@ -40,6 +43,6 @@ function UserAccount() {
           <Logout />
         </>
       )}
-    </div>
+    </StyledAccount>
   )
 }

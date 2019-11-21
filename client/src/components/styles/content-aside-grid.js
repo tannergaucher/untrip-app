@@ -35,7 +35,7 @@ const ContentAsideGrid = styled.div`
     display: none;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     margin: 0;
     grid-template-areas:
       "content"
@@ -44,7 +44,7 @@ const ContentAsideGrid = styled.div`
     grid-template-rows: auto auto;
 
     aside {
-      margin: 0rem;
+      margin: 0;
       padding: var(--space-sm);
     }
 

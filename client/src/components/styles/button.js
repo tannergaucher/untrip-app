@@ -16,7 +16,7 @@ const Button = styled.button`
   opacity: ${props => (props.loading ? ".5" : "1")};
   transition-duration: var(--duration);
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     width: ${props => (props.fillMobile ? "100%" : "")};
   }
 `
@@ -38,7 +38,7 @@ const LinkButton = styled.a`
   text-transform: uppercase;
   transition-duration: var(--duration);
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     width: ${props => (props.fillMobile ? "100%" : "")};
   }
 `

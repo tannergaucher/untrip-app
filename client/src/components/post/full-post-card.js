@@ -16,7 +16,7 @@ const StyledFullPostCard = styled.div`
 export default function IndexCard({ post }) {
   const postText = post._rawBody[0].children[0].text
   const textArr = postText.split(" ")
-  const maxWordLength = 40
+  const maxWordLength = 30
 
   let excerpt
 

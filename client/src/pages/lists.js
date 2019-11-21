@@ -34,12 +34,7 @@ export default function ListsPage() {
         <div className="content">
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
-        {/* <aside>
-          <div className="sticky">
-            <h2 className="aside-title">Favorites</h2>
-            <Divider bgLight={true} />
-          </div>
-        </aside> */}
+        <aside></aside>
       </ContentAsideGrid>
     </StyledListPage>
   )

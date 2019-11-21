@@ -8,7 +8,7 @@ const StyledLayer = styled(Layer)`
   color: var(--black);
   border-radius: var(--radius);
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     width: 100vw;
   }
 `

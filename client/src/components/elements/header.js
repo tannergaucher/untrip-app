@@ -21,11 +21,15 @@ const StyledHeader = styled.header`
     line-height: 1;
   }
 
+  .site-description {
+    line-height: 1;
+  }
+
   .mobile-menu-btn {
     display: none;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     padding: var(--space-sm);
 
     .only-full-size {

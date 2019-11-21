@@ -9,7 +9,7 @@ import { Button, Form, Input, StyledLayer } from "../styles"
 export default function About() {
   return (
     <div className="sticky">
-      <h3 className="side-title">About Untrip</h3>
+      <h3 className="side-title">About Us</h3>
       <p className="site-description">
         We curate the best food and drink, music, culture and events happening
         in Kuala Lumpur.
