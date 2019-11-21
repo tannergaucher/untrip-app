@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useMutation } from "@apollo/react-hooks"
-import { MailOption } from "grommet-icons"
+import { MailOption, Close } from "grommet-icons"
 
 import { Share } from "../elements"
 import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
@@ -74,18 +74,26 @@ function EmailForm() {
         >
           <div className="email-subscribe-modal">
             <div>
-              <h1 className="">🎉</h1>
+              <div
+                className="emoji-close-btn"
+                style={{
+                  display: `flex`,
+                  alignItems: `center`,
+                  justifyContent: `space-between`,
+                }}
+              >
+                <h1 style={{ margin: `0` }}>🎉</h1>
+                <Button
+                  // Setting message to falsy closes modal.
+                  onClick={() => setMessage("")}
+                  style={{ border: `none` }}
+                >
+                  <Close size="var(--text-md)" color="var(--black)" />
+                </Button>
+              </div>
               <h2 className="">{message}</h2>
             </div>
-            <Button
-              primary
-              style={{ marginTop: `3rem` }}
-              // Closes modal.
-              onClick={() => setMessage("")}
-            >
-              Close
-            </Button>
-            <div className="">
+            <div>
               <h5>Change your mind already?</h5>
               <Button>Unsubscribe</Button>
             </div>
