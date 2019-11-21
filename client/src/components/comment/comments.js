@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import { useQuery, useMutation } from "@apollo/react-hooks"
 import styled from "styled-components"
+import { Edit, Redo } from "grommet-icons"
 import moment from "moment"
 
 import { AddComment, DeleteComment } from "."
@@ -111,13 +112,12 @@ const StyledComment = styled.div`
   }
 
   .comment-text {
-    margin-bottom: var(--space-sm);
     font-weight: 900;
+    margin-bottom: 0;
   }
 
   .edited {
     margin-top: 0;
-    margin-bottom: var(--space-lg);
   }
 `
 
@@ -200,19 +200,23 @@ function Comment({ comment, post }) {
         </>
       )}
       {data && data.isMyComment && (
-        <>
+        <div style={{ marginTop: `var(--space-md)` }}>
           <Button
             onClick={() => setEdit(!edit)}
             style={{
               marginRight: `var(--space-md)`,
               color: `var(--grey)`,
-              borderColor: `var(--grey)`,
+              border: `none`,
             }}
           >
-            {edit ? "Close" : "Edit"}
+            {edit ? (
+              <Redo size="var(--text-md)" color="var(--grey)" />
+            ) : (
+              <Edit size="var(--text-md)" color="var(--grey)" />
+            )}
           </Button>
           <DeleteComment comment={comment} post={post} />
-        </>
+        </div>
       )}
     </StyledComment>
   )

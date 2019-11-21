@@ -22,7 +22,7 @@ const ContentAsideGrid = styled.div`
 
   .side-title {
     margin-top: 0;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
     font-weight: lighter;
     text-transform: uppercase;
   }

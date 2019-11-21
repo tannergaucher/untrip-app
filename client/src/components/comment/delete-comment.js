@@ -1,5 +1,6 @@
 import React from "react"
 import { useMutation } from "@apollo/react-hooks"
+import { Trash } from "grommet-icons"
 
 import { Button } from "../styles"
 import { DELETE_COMMENT_MUTATION, COMMENTS_QUERY } from "../apollo/graphql"
@@ -49,7 +50,7 @@ export default function DeleteComment({ comment, post }) {
         border: `none`,
       }}
     >
-      Delete
+      <Trash size="var(--text-md)" color="var(--grey)" />
     </Button>
   )
 }

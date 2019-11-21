@@ -15,6 +15,10 @@ const StyledLayer = styled(Layer)`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+
+  .menu-link {
+    text-transform: uppercase;
+  }
 `
 
 export default function Menu() {
