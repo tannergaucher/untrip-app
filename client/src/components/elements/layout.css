@@ -51,8 +51,6 @@
   --grey: grey;
   --red: tomato;
   --warning: red;
-  --font-size: 21px;
-  --link-color: blue;
   --facebook: #3b5998;
   --twitter: #1da1f2;
   --pinterest: #c8232c;
@@ -123,7 +121,6 @@ small {
 }
 
 p {
-  line-height: var(--body-line-height);
   margin: var(--space-sm) 0;
   line-height: var(--paragraph-line-height);
   letter-spacing: var(--paragraph-letter-spacing);
@@ -140,7 +137,7 @@ br {
 button,
 input,
 textarea {
-  font-size: var(--text-sm);
+  font-size: var(--text-md);
 }
 
 .component {
