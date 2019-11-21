@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import styled from "styled-components"
 import { useMutation } from "@apollo/react-hooks"
+import { MailOption } from "grommet-icons"
 
 import { Share } from "../elements"
 import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
@@ -54,8 +54,17 @@ function EmailForm() {
           onChange={e => setEmail(e.target.value)}
         />
 
-        <Button type="submit" primary loading={loading}>
-          Subscribe
+        <Button
+          type="submit"
+          primary
+          loading={loading}
+          style={{
+            display: `flex`,
+            alignItems: `center`,
+            justifyContent: `center`,
+          }}
+        >
+          <MailOption size="var(--text-md)" color="var(--white)" />
         </Button>
       </Form>
       {message && (

@@ -4,7 +4,7 @@ const Button = styled.button`
   cursor: pointer;
   background: ${props => (props.primary ? "var(--black)" : "var(--white)")};
   color: ${props => (props.primary ? "var(--white)" : "var(--black)")};
-  padding: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
   font-family: var(--sans);
   font-weight: bolder;
   border: ${props =>
@@ -27,7 +27,7 @@ const LinkButton = styled.a`
   cursor: pointer;
   background: ${props => (props.primary ? "var(--black)" : "var(--white)")};
   color: ${props => (props.primary ? "var(--white)" : "var(--black)")};
-  padding: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
   font-family: var(--sans);
   font-weight: bolder;
   border: ${props =>

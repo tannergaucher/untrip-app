@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useMutation, useQuery } from "@apollo/react-hooks"
+import { Chat } from "grommet-icons"
 
 import { Fieldset, Form, Textarea, Button } from "../styles"
 import {
@@ -76,8 +77,17 @@ export default function AddComment({ post }) {
           onChange={e => setText(e.target.value)}
           required={true}
         ></Textarea>
-        <Button primary fillMobile type="submit">
-          Add Comment
+        <Button
+          primary
+          fillMobile
+          type="submit"
+          style={{
+            display: `flex`,
+            justifyContent: `center`,
+            alignItems: `center`,
+          }}
+        >
+          <Chat size="var(--text-md)" color="var(--white)" />
         </Button>
       </Form>
     </Fieldset>

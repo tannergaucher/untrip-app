@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/react-hooks"
 
 import { Layer } from "grommet"
 import { Menu as MenuIcon } from "grommet-icons"
-import { Button, Link, Divider } from "../styles"
+import { Button, Link } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledLayer = styled(Layer)`
@@ -14,6 +14,10 @@ const StyledLayer = styled(Layer)`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+
+  .menu-link {
+    text-transform: uppercase;
+  }
 `
 
 export default function Menu() {
@@ -54,7 +58,6 @@ export default function Menu() {
             <Link to="/this-month" plain>
               <h3 className="menu-link">This Month</h3>
             </Link>
-
             {data && data.isLoggedIn ? <AuthedLinks /> : <AuthLinks />}
           </StyledLayer>
         </>

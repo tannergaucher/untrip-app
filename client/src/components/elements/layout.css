@@ -6,7 +6,8 @@
   --heading-line-height: 1.1;
   --paragraph-line-height: 1.75;
   --heading-letter-spacing: -1.5px;
-  --paragraph-letter-spacing: -0.5px;
+  --paragraph-letter-spacing: -0.2px;
+
   /* Vertical Rhythm */
   --responsive-unit: 0.5vw; /* TWEAK ME  */
   /* Base Values */
@@ -48,7 +49,7 @@
   --accent: darkred;
   --black: black;
   --white: white;
-  --grey: grey;
+  --grey: #555555;
   --red: tomato;
   --warning: red;
   --facebook: #3b5998;
@@ -60,6 +61,10 @@
   /* Components */
   --radius: 2px;
   --thickness: 2px;
+}
+
+html {
+  width: 100%;
 }
 
 body {
@@ -137,7 +142,7 @@ br {
 button,
 input,
 textarea {
-  font-size: var(--text-md);
+  font-size: var(--text-sm);
 }
 
 .component {

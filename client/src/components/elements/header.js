@@ -19,6 +19,8 @@ const StyledHeader = styled.header`
   .site-title {
     margin: 0;
     line-height: 1;
+    text-transform: uppercase;
+    font-weight: lighter;
   }
 
   .site-description {
@@ -50,7 +52,7 @@ export default function Header() {
       <div className="responsive-flex">
         <div className="site-title-description">
           <Link to="/" plain="true">
-            <h3 className="site-title">Untrip</h3>
+            <h4 className="site-title">Untrip</h4>
           </Link>
           <small className="site-description">Curated Kuala Lumpur</small>
         </div>
