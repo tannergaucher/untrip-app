@@ -8,13 +8,15 @@ const StyledFooter = styled.footer`
 
   .site-title {
     margin: 0;
+    text-transform: uppercase;
+    font-weight: lighter;
   }
 `
 
 export default function Footer() {
   return (
     <StyledFooter>
-      <h3 className="site-title">Untrip</h3>
+      <h4 className="site-title">Untrip</h4>
       <small>Curated Kuala Lumpur</small>
     </StyledFooter>
   )

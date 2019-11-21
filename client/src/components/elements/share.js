@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 
-import { LinkButton } from "../styles"
+import { FacebookOption, Twitter, Pinterest, Link } from "grommet-icons"
+
+import { IconButton } from "../styles"
 
 const StyledShare = styled.div`
   display: flex;
@@ -25,7 +27,7 @@ export default function Share({ href, pinterestImageUrl }) {
 
   return (
     <StyledShare>
-      <LinkButton
+      <IconButton
         className="share-btn"
         href={fb}
         target="_blank"
@@ -35,9 +37,9 @@ export default function Share({ href, pinterestImageUrl }) {
           color: `var(--white)`,
         }}
       >
-        Share
-      </LinkButton>
-      <LinkButton
+        <FacebookOption size="var(--text-md)" color="var(--white)" />
+      </IconButton>
+      <IconButton
         className="share-btn"
         href={twitter}
         target="_blank"
@@ -47,8 +49,20 @@ export default function Share({ href, pinterestImageUrl }) {
           borderColor: `var(--twitter)`,
         }}
       >
-        Tweet
-      </LinkButton>
+        <Twitter size="var(--text-md)" color="var(--white)" />
+      </IconButton>
+      <IconButton
+        className="share-btn"
+        href={pinterest}
+        target="_blank"
+        style={{
+          color: `var(--white)`,
+          backgroundColor: `var(--pinterest)`,
+          borderColor: `var(--pinterest)`,
+        }}
+      >
+        <Pinterest size="var(--text-md)" color="var(--white)" />
+      </IconButton>
       <CopyLinkButton href={href} />
     </StyledShare>
   )
@@ -77,7 +91,7 @@ function CopyLinkButton({ href }) {
   }, [handleClick])
 
   return (
-    <LinkButton
+    <IconButton
       className="share-btn link"
       ref={buttonEl}
       style={{
@@ -86,7 +100,7 @@ function CopyLinkButton({ href }) {
         borderColor: `var(--grey)`,
       }}
     >
-      Link
-    </LinkButton>
+      <Link size="var(--text-md)" color="white" />
+    </IconButton>
   )
 }

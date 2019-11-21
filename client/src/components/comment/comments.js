@@ -91,7 +91,7 @@ function AllComments({ post }) {
 const StyledComment = styled.div`
   margin-bottom: var(--space-lg);
   border-radius: var(--radius);
-  border: 2px solid var(--black);
+  border: 2px solid var(--grey);
   padding: var(--space-md);
 
   .comment-author {
@@ -103,6 +103,7 @@ const StyledComment = styled.div`
   .comment-date {
     margin: 0;
     font-weight: 300;
+    color: var(--grey);
   }
 
   .comment-info {
@@ -110,7 +111,6 @@ const StyledComment = styled.div`
   }
 
   .comment-text {
-    font-style: italic;
     margin-bottom: var(--space-sm);
     font-weight: 900;
   }

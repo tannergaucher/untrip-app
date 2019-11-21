@@ -24,6 +24,7 @@ const ContentAsideGrid = styled.div`
     margin-top: 0;
     margin-bottom: var(--space-md);
     font-weight: lighter;
+    text-transform: uppercase;
   }
 
   .sticky {

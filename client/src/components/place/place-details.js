@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { FacebookOption, Instagram, Domain, Phone } from "grommet-icons"
 
 import { Map } from "../elements"
 import { Button, StyledLayer, LinkButton } from "../styles"
@@ -61,7 +62,7 @@ export default function Details({ place, post }) {
                 color: `white`,
               }}
             >
-              Facebook
+              <FacebookOption size="var(--text-md)" color="var(--white)" />
             </LinkButton>
           )}
 
@@ -74,7 +75,7 @@ export default function Details({ place, post }) {
                 color: `var(--white)`,
               }}
             >
-              Instagram
+              <Instagram size="var(--text-md)" color="var(--white)" />
             </LinkButton>
           )}
           {place.place.twitterLink && (
@@ -94,12 +95,22 @@ export default function Details({ place, post }) {
                 color: `var(--white)`,
               }}
             >
-              Website
+              <Domain size="var(--text-md)" color="var(--white)" />
             </LinkButton>
           )}
 
           {place.place.phoneNumber && (
-            <LinkButton href="#">{place.place.phoneNumber}</LinkButton>
+            <LinkButton
+              href="#"
+              style={{ display: `flex`, alignItems: `center` }}
+            >
+              <Phone
+                size="var(--text-md)"
+                color="var(--black)"
+                style={{ marginRight: `var(--space-sm)` }}
+              />
+              {place.place.phoneNumber}
+            </LinkButton>
           )}
 
           <div className="only-mobile">

@@ -9,6 +9,7 @@ import StyledPage from "./styled-page"
 import ContentAsideGrid from "./content-aside-grid"
 import StyledLayer from "./styled-layer"
 import Textarea from "./textarea"
+import IconButton from "./icon-button"
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   ContentAsideGrid,
   StyledLayer,
   Textarea,
+  IconButton,
 }
