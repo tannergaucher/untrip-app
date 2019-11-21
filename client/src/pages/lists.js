@@ -120,9 +120,11 @@ function ListItem({ list }) {
     <StyledListItem>
       <div className="title-edit">
         <h2 className="list-title">{list.title}</h2>
-
         <Button onClick={() => setIsEdit(!isEdit)}>
-          <Edit color="var(--black)" size="20px" />
+          <Edit
+            color={`${isEdit ? "var(--black)" : "var(--grey)"}`}
+            size="20px"
+          />
         </Button>
       </div>
       {!isEdit && <Share />}
@@ -153,7 +155,6 @@ function ListItem({ list }) {
           View List
         </Button>
       )}
-      <br />
       {isEdit && <DeleteListButton listId={list.id} />}
     </StyledListItem>
   )
@@ -208,10 +209,6 @@ const StyledListPlace = styled.div`
   .img-place-name {
     display: flex;
     align-items: flex-start;
-  }
-
-  .place-delete-btn {
-    height: 60px;
   }
 `
 
