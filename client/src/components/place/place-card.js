@@ -30,6 +30,7 @@ const StyledPlace = styled.div`
 
   .place-tags {
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: var(--space-md);
   }
 
