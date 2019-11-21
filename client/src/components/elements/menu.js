@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { useQuery } from "@apollo/react-hooks"
-import { List } from "grommet-icons"
 
 import { Layer } from "grommet"
 import { Menu as MenuIcon } from "grommet-icons"
