@@ -20,7 +20,7 @@ const StyledDetails = styled.div`
     display: none;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     a {
       margin-right: 0;
     }
@@ -30,7 +30,8 @@ const StyledDetails = styled.div`
     }
 
     .only-mobile {
-      display: inline;
+      display: block;
+      width: 100%;
     }
   }
 `
@@ -54,7 +55,11 @@ export default function Details({ place, post }) {
           {place.place.facebookLink && (
             <LinkButton
               href={place.place.facebookLink}
-              style={{ background: `var(--facebook)`, color: `white` }}
+              style={{
+                backgroundColor: `var(--facebook)`,
+                borderColor: `var(--facebook)`,
+                color: `white`,
+              }}
             >
               Facebook
             </LinkButton>
@@ -64,8 +69,9 @@ export default function Details({ place, post }) {
             <LinkButton
               href={place.place.instagramLink}
               style={{
-                background: `var(--instagram)`,
-                color: `white`,
+                backgroundColor: `var(--instagram)`,
+                borderColor: `var(--instagram)`,
+                color: `var(--white)`,
               }}
             >
               Instagram
@@ -82,7 +88,11 @@ export default function Details({ place, post }) {
           {place.place.websiteLink && (
             <LinkButton
               href={place.place.websiteLink}
-              style={{ background: `grey`, color: `white` }}
+              style={{
+                backgroundColor: `var(--grey)`,
+                borderColor: `var(--grey)`,
+                color: `var(--white)`,
+              }}
             >
               Website
             </LinkButton>
@@ -105,22 +115,15 @@ function ShowOnMap({ post }) {
   const [show, setShow] = useState(false)
 
   return (
-    <div style={{ marginTop: `.5rem` }}>
-      <Button
-        onClick={() => setShow(true)}
-        fillMobile
-        style={{
-          textAlign: `left`,
-          background: `var(--red)`,
-          color: `var(--white)`,
-        }}
-      >
+    <>
+      <Button onClick={() => setShow(true)} primary fillMobile>
         Show on map
       </Button>
       {show && (
         <StyledLayer
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
+          full={true}
           style={{
             padding: `0`,
             position: `relative`,
@@ -130,7 +133,7 @@ function ShowOnMap({ post }) {
             isUserList={false}
             places={post.postPlaces}
             style={{
-              height: `93vh`,
+              height: `100vh`,
             }}
           />
           <Button
@@ -139,7 +142,6 @@ function ShowOnMap({ post }) {
             style={{
               position: `absolute`,
               bottom: `0`,
-              height: `7vh`,
             }}
             onClick={() => setShow(false)}
           >
@@ -147,6 +149,6 @@ function ShowOnMap({ post }) {
           </Button>
         </StyledLayer>
       )}
-    </div>
+    </>
   )
 }

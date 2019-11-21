@@ -10,10 +10,10 @@ const StyledListPage = styled.div`
   margin: 0 var(--space-md);
 
   .list-title {
-    margin-top: 0;
+    /* margin-top: 0; */
   }
 
-  @media (max-width: 1100) {
+  @media (max-width: 1024) {
     margin: 0 var(--space-sm);
   }
 `

@@ -18,21 +18,18 @@ const StyledHeader = styled.header`
 
   .site-title {
     margin: 0;
+    line-height: 1;
   }
 
-  .auth-btn,
-  .authed-btn {
-    margin-right: var(--space-md);
-    &:last-child {
-      margin-right: 0;
-    }
+  .site-description {
+    line-height: 1;
   }
 
   .mobile-menu-btn {
     display: none;
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1024px) {
     padding: var(--space-sm);
 
     .only-full-size {
@@ -72,6 +69,9 @@ function AuthedBtns() {
         primary
         className="authed-btn only-full-size"
         onClick={() => navigate(`/lists`)}
+        style={{
+          marginRight: `var(--space-md)`,
+        }}
       >
         My Lists
       </Button>
@@ -94,6 +94,9 @@ function AuthBtns() {
       <Button
         primary
         className="auth-btn only-full-size"
+        style={{
+          marginRight: `var(--space-md)`,
+        }}
         onClick={e => {
           e.preventDefault()
           navigate("/signup")
