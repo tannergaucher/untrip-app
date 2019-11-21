@@ -207,6 +207,7 @@ function DeleteListButton({ listId }) {
 const StyledListPlace = styled.div`
   .img-place-name {
     display: flex;
+    align-items: flex-start;
   }
 
   .place-delete-btn {
