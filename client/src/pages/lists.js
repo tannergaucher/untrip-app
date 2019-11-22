@@ -259,10 +259,8 @@ function ListPlace({ place, list, isEdit }) {
     <StyledListPlace>
       <div className="img-place-name">
         <Img
-          fluid={JSON.parse(place.imageUrl)}
+          fixed={JSON.parse(place.imageUrl)}
           style={{
-            height: `60px`,
-            width: `80px`,
             marginRight: `var(--space-md)`,
             marginBottom: `var(--space-md)`,
           }}

@@ -84,6 +84,9 @@ export const SANITY_PLACE_FRAGMENT = graphql`
         fluid(maxWidth: 1024, maxHeight: 768) {
           ...GatsbySanityImageFluid
         }
+        fixed(width: 80, height: 60) {
+          ...GatsbySanityImageFixed
+        }
         url
       }
     }
