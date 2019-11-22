@@ -7,6 +7,7 @@ import {
   Phone,
   MapLocation,
   Close,
+  Info,
 } from "grommet-icons"
 
 import { Map } from "../elements"
@@ -50,10 +51,14 @@ export default function Details({ place, post }) {
   return (
     <StyledDetails>
       <Button
+        fillMobile
         onClick={() => setShow(!show)}
         style={{
-          borderColor: show ? "var(--grey)" : "var(--black)",
-          color: show ? "var(--grey)" : "var(--black)",
+          border: `none`,
+          textAlign: `left`,
+          padding: `var(--space-sm) var(--space-sm) var(--space-sm) var(--space-sm)`,
+          // borderColor: show ? "var(--grey)" : "var(--black)",
+          color: show ? "var(--black)" : "var(--grey)",
         }}
       >
         Details
