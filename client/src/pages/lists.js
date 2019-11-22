@@ -45,7 +45,7 @@ function UserLists() {
 
   return (
     <>
-      <SEO title={`My Untrips | Untrip`} />
+      <SEO title={`My Lists`} />
       <>
         {loading && `loading...`}
         {error && `Error: ${error.message}`}
