@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import { useQuery, useMutation } from "@apollo/react-hooks"
 import styled from "styled-components"
-import { Edit, Redo } from "grommet-icons"
+import { Edit, Redo, Close } from "grommet-icons"
 import moment from "moment"
 
 import { AddComment, DeleteComment } from "."
-import { Button, Textarea, Fieldset, Form, Link } from "../styles"
+import { Button, Textarea, Fieldset, Form, StyledLayer } from "../styles"
+import { AuthTabs } from "../auth"
 import {
   COMMENTS_QUERY,
   CURRENT_USER_QUERY,
@@ -25,6 +26,8 @@ export default function Comments({
   commentsLoading,
 }) {
   const [show, setShow] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false)
+
   const [ref, inView] = useInView({
     threshold: 1,
   })
@@ -58,9 +61,31 @@ export default function Comments({
           {data && data.me ? (
             <AddComment post={post} />
           ) : (
-            <Link to="/login">
-              <h4>Log in to comment</h4>
-            </Link>
+            <>
+              <>
+                <Button primary onClick={() => setShowAuthModal(true)}>
+                  Log in to comment
+                </Button>
+                {showAuthModal && (
+                  <StyledLayer
+                    onClickOutside={() => setShowAuthModal(false)}
+                    onEsc={() => setShowAuthModal(false)}
+                  >
+                    <Button
+                      style={{
+                        alignSelf: "flex-end",
+                        border: `none`,
+                        padding: `var(--space-sm)`,
+                      }}
+                      onClick={() => setShowAuthModal(false)}
+                    >
+                      <Close size="var(--text-md)" color="var(--black)" />
+                    </Button>
+                    <AuthTabs />
+                  </StyledLayer>
+                )}
+              </>
+            </>
           )}
           <AllComments post={post} />
         </StyledComments>
