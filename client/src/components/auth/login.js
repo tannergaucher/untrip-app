@@ -31,7 +31,6 @@ export default function Login() {
                 me: data.login.user,
               },
             })
-            navigate("/")
           }}
         >
           <Input
