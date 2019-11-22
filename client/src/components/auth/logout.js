@@ -1,4 +1,5 @@
 import React from "react"
+import { navigate } from "gatsby"
 import { useApolloClient } from "@apollo/react-hooks"
 
 import { Button } from "../styles"
@@ -12,6 +13,7 @@ export default function Logout() {
       onClick={() => {
         client.resetStore()
         localStorage.removeItem("token")
+        navigate(`/`)
       }}
     >
       Log Out

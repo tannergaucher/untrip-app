@@ -1,6 +1,13 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { FacebookOption, Instagram, Domain, Phone } from "grommet-icons"
+import {
+  FacebookOption,
+  Instagram,
+  Domain,
+  Phone,
+  MapLocation,
+  Close,
+} from "grommet-icons"
 
 import { Map } from "../elements"
 import { Button, StyledLayer, LinkButton } from "../styles"
@@ -127,8 +134,15 @@ function ShowOnMap({ post }) {
 
   return (
     <>
-      <Button onClick={() => setShow(true)} primary fillMobile>
-        Show on map
+      <Button
+        onClick={() => setShow(true)}
+        fillMobile
+        primary
+        style={{
+          textAlign: `left`,
+        }}
+      >
+        <MapLocation size="var(--text-md)" color="var(--white)" />
       </Button>
       {show && (
         <StyledLayer
@@ -153,10 +167,11 @@ function ShowOnMap({ post }) {
             style={{
               position: `absolute`,
               bottom: `0`,
+              padding: `var(--space-sm)`,
             }}
             onClick={() => setShow(false)}
           >
-            Close
+            <Close size="var(--text-md)" color="var(--white)" />
           </Button>
         </StyledLayer>
       )}
