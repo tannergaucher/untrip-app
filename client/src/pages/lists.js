@@ -45,7 +45,7 @@ function UserLists() {
 
   return (
     <>
-      <SEO title={`My Untrips | Untrip`} />
+      <SEO title={`My Lists`} />
       <>
         {loading && `loading...`}
         {error && `Error: ${error.message}`}
@@ -120,9 +120,11 @@ function ListItem({ list }) {
     <StyledListItem>
       <div className="title-edit">
         <h2 className="list-title">{list.title}</h2>
-
         <Button onClick={() => setIsEdit(!isEdit)}>
-          <Edit color="var(--black)" size="20px" />
+          <Edit
+            color={`${isEdit ? "var(--black)" : "var(--grey)"}`}
+            size="20px"
+          />
         </Button>
       </div>
       {!isEdit && <Share />}
@@ -153,7 +155,6 @@ function ListItem({ list }) {
           View List
         </Button>
       )}
-      <br />
       {isEdit && <DeleteListButton listId={list.id} />}
     </StyledListItem>
   )
@@ -209,10 +210,6 @@ const StyledListPlace = styled.div`
     display: flex;
     align-items: flex-start;
   }
-
-  .place-delete-btn {
-    height: 60px;
-  }
 `
 
 function ListPlace({ place, list, isEdit }) {
@@ -262,10 +259,8 @@ function ListPlace({ place, list, isEdit }) {
     <StyledListPlace>
       <div className="img-place-name">
         <Img
-          fluid={JSON.parse(place.imageUrl)}
+          fixed={JSON.parse(place.imageUrl)}
           style={{
-            height: `60px`,
-            width: `80px`,
             marginRight: `var(--space-md)`,
             marginBottom: `var(--space-md)`,
           }}

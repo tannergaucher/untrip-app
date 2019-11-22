@@ -17,7 +17,7 @@ export const SANITY_POST_FRAGMENT = graphql`
     }
     mainImage {
       asset {
-        fluid(maxWidth: 1000, maxHeight: 750) {
+        fluid(maxWidth: 1024, maxHeight: 768) {
           ...GatsbySanityImageFluid
         }
         url
@@ -68,7 +68,7 @@ export const SANITY_TAG_FRAGMENT = graphql`
     }
     image {
       asset {
-        fluid(maxWidth: 1000, maxHeight: 750) {
+        fluid(maxWidth: 1024, maxHeight: 768) {
           ...GatsbySanityImageFluid
         }
       }
@@ -81,8 +81,11 @@ export const SANITY_PLACE_FRAGMENT = graphql`
     id
     image {
       asset {
-        fluid(maxWidth: 1000, maxHeight: 750) {
+        fluid(maxWidth: 1024, maxHeight: 768) {
           ...GatsbySanityImageFluid
+        }
+        fixed(width: 80, height: 60) {
+          ...GatsbySanityImageFixed
         }
         url
       }
@@ -91,7 +94,7 @@ export const SANITY_PLACE_FRAGMENT = graphql`
       type
       image {
         asset {
-          fluid(maxWidth: 1000, maxHeight: 750) {
+          fluid(maxWidth: 1024, maxHeight: 768) {
             ...GatsbySanityImageFluid
           }
         }
@@ -128,7 +131,7 @@ export const SANITY_CATEGORY_FRAGMENT = graphql`
     }
     image {
       asset {
-        fluid(maxWidth: 1000, maxHeight: 750) {
+        fluid(maxWidth: 1024, maxHeight: 768) {
           ...GatsbySanityImageFluid
         }
       }
