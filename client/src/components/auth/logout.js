@@ -4,7 +4,7 @@ import { useApolloClient } from "@apollo/react-hooks"
 
 import { Button } from "../styles"
 
-export default function Logout() {
+export default function Logout({ shouldNavigateTo }) {
   const client = useApolloClient()
 
   return (
@@ -13,7 +13,10 @@ export default function Logout() {
       onClick={() => {
         client.resetStore()
         localStorage.removeItem("token")
-        navigate(`/`)
+
+        if (shouldNavigateTo) {
+          navigate(shouldNavigateTo)
+        }
       }}
     >
       Log Out

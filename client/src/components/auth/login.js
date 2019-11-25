@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/react-hooks"
 import { LOGIN_MUTATION } from "../apollo/graphql"
 import { Button, Fieldset, Form, Input } from "../styles"
 
-export default function Login() {
+export default function Login({ shouldNavigateTo }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [login, { loading, error, client }] = useMutation(LOGIN_MUTATION, {
@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
     <>
-      <h2 style={{ textAlign: `center` }}>Log In</h2>
+      <h2 style={{ marginTop: `0`, textAlign: `center` }}>Log In</h2>
       <Fieldset disabled={loading}>
         {error && `${error.message}`}
         <Form
@@ -31,6 +31,10 @@ export default function Login() {
                 me: data.login.user,
               },
             })
+
+            if (shouldNavigateTo) {
+              navigate(shouldNavigateTo)
+            }
           }}
         >
           <Input

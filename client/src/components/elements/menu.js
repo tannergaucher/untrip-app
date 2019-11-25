@@ -58,6 +58,7 @@ export default function Menu() {
             <Link to="/this-month" plain>
               <h3 className="menu-link">This Month</h3>
             </Link>
+            <br />
             {data && data.isLoggedIn ? <AuthedLinks /> : <AuthLinks />}
           </StyledLayer>
         </>
@@ -82,9 +83,6 @@ const AuthLinks = () => (
   <>
     <Link to="/login" plain>
       <h3 className="menu-link">Login</h3>
-    </Link>
-    <Link to="/signup" plain>
-      <h3 className="menu-link">Sign Up</h3>
     </Link>
   </>
 )

@@ -42,7 +42,7 @@ function UserAccount() {
           <h1>{data.me.username}</h1>
           <h4>{data.me.email}</h4>
           <br />
-          <Logout />
+          <Logout shouldNavigateTo={`/`} />
         </>
       )}
     </StyledAccount>
