@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { useQuery } from "@apollo/react-hooks"
 import { Bookmark, Close } from "grommet-icons"
-import styled from "styled-components"
 
 import { AuthTabs } from "../auth"
 import { UserLists } from "../list"
@@ -9,7 +8,7 @@ import { Button, StyledLayer } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 export default function AddToListModal({ place }) {
-  const [show, setShow] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const { error, loading, data } = useQuery(IS_LOGGED_IN)
 
   if (loading) return `Loading...`
@@ -18,7 +17,7 @@ export default function AddToListModal({ place }) {
   return (
     <>
       <Button
-        onClick={() => setShow(!show)}
+        onClick={() => setShowModal(!showModal)}
         style={{
           padding: `var(--space-sm)`,
           border: `none`,
@@ -26,10 +25,10 @@ export default function AddToListModal({ place }) {
       >
         <Bookmark size="var(--text-md)" color="var(--black)" />
       </Button>
-      {show && (
+      {showModal && (
         <StyledLayer
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
+          onEsc={() => setShowModal(false)}
+          onClickOutside={() => setShowModal(false)}
         >
           <>
             <Button
@@ -38,12 +37,12 @@ export default function AddToListModal({ place }) {
                 padding: `var(--space-sm)`,
                 border: `none`,
               }}
-              onClick={() => setShow(false)}
+              onClick={() => setShowModal(false)}
             >
               <Close size="var(--text-md)" color="var(--black)" />
             </Button>
             {data && data.isLoggedIn ? (
-              <UserLists place={place.place} />
+              <UserLists place={place.place} setShowModal={setShowModal} />
             ) : (
               <AuthTabs />
             )}

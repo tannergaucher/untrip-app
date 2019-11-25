@@ -12,8 +12,8 @@ const StyledUserLists = styled.div`
   color: var(--black);
 `
 
-export default function UserLists({ place }) {
-  const [show, setShow] = useState(false)
+export default function UserLists({ place, setShowModal }) {
+  const [showForm, setShowForm] = useState(false)
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
   if (loading) return `Loading...`
@@ -24,7 +24,7 @@ export default function UserLists({ place }) {
       {data && data.me && data.me.lists.length === 0 ? (
         <>
           <h4>Create a new list with {`${place.name}`}</h4>
-          <CreateListForm place={place} setShow={setShow} />
+          <CreateListForm place={place} />
         </>
       ) : (
         <h4>Add {place.name} to list</h4>
@@ -34,12 +34,12 @@ export default function UserLists({ place }) {
         data.me.lists.map(list => (
           <ToggleListPlace key={list.id} list={list} place={place} />
         ))}
-      {!show && (
+      {!showForm && (
         <>
           <br />
           {data && data.me && data.me.lists.length > 0 && (
             <Button
-              onClick={() => setShow(!show)}
+              onClick={() => setShowForm(!showForm)}
               style={{
                 marginTop: `var(--space-md)`,
                 color: `var(--accent)`,
@@ -51,7 +51,8 @@ export default function UserLists({ place }) {
           )}
         </>
       )}
-      {show && <CreateListForm place={place} setShow={setShow} />}
+
+      {showForm && <CreateListForm place={place} setShowModal={setShowModal} />}
     </StyledUserLists>
   )
 }
@@ -59,13 +60,15 @@ export default function UserLists({ place }) {
 function ToggleListPlace({ list, place }) {
   const { data } = useQuery(CURRENT_USER_QUERY)
 
+  // TODO: MAKE THIS AN @CLIENT QUERY
+
   const listIndex = data.me.lists.findIndex(
     cacheList => cacheList.id === list.id
   )
 
-  const testList = data.me.lists[listIndex]
+  const cacheList = data.me.lists[listIndex]
 
-  const [isInList] = testList.places.filter(
+  const [isInList] = cacheList.places.filter(
     listPlace => listPlace.sanityId === place.id
   )
 

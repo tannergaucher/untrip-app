@@ -266,7 +266,11 @@ function ListPlace({ place, list, isEdit }) {
           }}
         />
         {isEdit ? (
-          <Button className="place-delete-btn" onClick={() => removeFromList()}>
+          <Button
+            className="place-delete-btn"
+            onClick={() => removeFromList()}
+            style={{ minHeight: `60px` }}
+          >
             X {place.name}
           </Button>
         ) : (
