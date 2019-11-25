@@ -143,13 +143,9 @@ class MapContainer extends React.Component {
           >
             <div className="info-window">
               <h4>{this.state.selectedPlace.name}</h4>
-              <Img
-                // change to fixed
-                fluid={this.state.selectedPlace.image}
-                style={{ marginBottom: `var(--space-md)` }}
-              />
+              <Img fixed={this.state.selectedPlace.image} />
               <Link to={`/place/${this.state.selectedPlace.slug}`}>
-                <h2>View all posts</h2>
+                <small style={{ display: `block` }}>View all posts</small>
               </Link>
             </div>
           </InfoWindow>
