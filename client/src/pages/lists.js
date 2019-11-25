@@ -28,10 +28,9 @@ const StyledListPage = styled.div`
 export default function ListsPage() {
   const { loading, data } = useQuery(IS_LOGGED_IN)
 
-  if (loading) return
-
   return (
     <StyledListPage className="responsive-padding">
+      {loading && <h2>Loading Lists...</h2>}
       <ContentAsideGrid>
         <div className="content">
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
@@ -45,12 +44,11 @@ export default function ListsPage() {
 function UserLists() {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
-  if (loading) return `Loading...`
-  if (error) return `Error: ${error.message}`
-
   return (
     <>
       <SEO title={`My Lists`} />
+      {loading && <h2>Loading Lists...</h2>}
+      {error && <h2>Error: {error.message}</h2>}
       <>
         {data && data.me && data.me.lists.length === 0 && (
           <h3>You don't have any lists yet. Make one!</h3>
