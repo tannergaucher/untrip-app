@@ -72,9 +72,11 @@ class MapContainer extends React.Component {
 
     let bounds = new this.props.google.maps.LatLngBounds()
 
-    for (var i = 0; i < points.length; i++) {
-      bounds.extend(points[i])
-    }
+    // for (var i = 0; i < points.length; i++) {
+    //   bounds.extend(points[i])
+    // }
+
+    points.forEach(point => bounds.extend(point))
 
     this.setState({ bounds })
   }
@@ -144,10 +146,11 @@ class MapContainer extends React.Component {
             marker={this.state.activeMarker}
           >
             <div className="info-window">
-              <h1>{this.state.selectedPlace.name}</h1>
+              <h4>{this.state.selectedPlace.name}</h4>
               <Img
+                // change to fixed
                 fluid={this.state.selectedPlace.image}
-                style={{ marginBottom: `1rem` }}
+                style={{ marginBottom: `var(--space-md)` }}
               />
               <Link to={`/place/${this.state.selectedPlace.slug}`}>
                 <h2>View all posts</h2>
