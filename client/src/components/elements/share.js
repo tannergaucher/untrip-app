@@ -72,6 +72,23 @@ export default function Share({ href, pinterestImageUrl }) {
 function CopyLinkButton({ href }) {
   const [copied, setCopied] = useState(false)
 
+  const copyEl = useRef(null)
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick)
+    }
+  }, [])
+
+  const handleClick = e => {
+    if (e.target === copyEl.current) {
+      setCopied(true)
+    }
+    setCopied(false)
+  }
+
   return (
     <CopyToClipboard
       text={`https://untrip.app${href}`}
@@ -79,12 +96,13 @@ function CopyLinkButton({ href }) {
         console.log("copy")
         setCopied(true)
       }}
+      ref={copyEl}
     >
       <Button
         className="share-btn link"
         style={{
           color: `var(--white)`,
-          backgroundColor: `var(--grey)`,
+          backgroundColor: copied ? `var(--black)` : `var(--grey)`,
           borderColor: `var(--grey)`,
           padding: `var(--space-sm)`,
         }}
