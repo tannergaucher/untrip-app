@@ -139,9 +139,12 @@ br {
   margin: var(--space-md) 0;
 }
 
-button,
 input,
 textarea {
+  font-size: var(--text-md);
+}
+
+button {
   font-size: var(--text-sm);
 }
 
