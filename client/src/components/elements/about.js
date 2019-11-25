@@ -15,7 +15,7 @@ export default function About() {
         in Kuala Lumpur.
       </p>
       <br />
-      <Share />
+      <Share href={"/"} />
       <EmailForm />
       <br />
     </div>

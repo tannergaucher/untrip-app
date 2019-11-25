@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
+import { CopyToClipboard } from "react-copy-to-clipboard"
 
 import { FacebookOption, Twitter, Pinterest, Link } from "grommet-icons"
 
-import { IconButton } from "../styles"
+import { IconButton, Button } from "../styles"
 
 const StyledShare = styled.div`
   display: flex;
@@ -72,17 +73,8 @@ export default function Share({ href, pinterestImageUrl }) {
 
 function CopyLinkButton({ href }) {
   const [copied, setCopied] = useState(false)
-  const buttonEl = useRef(null)
 
-  const handleClick = e => {
-    if (e.target === buttonEl.current) {
-      setCopied(true)
-      navigator.clipboard.writeText(`https://untrip.app${href ? href : ""}`)
-    } else {
-      setCopied(false)
-      navigator.clipboard.writeText("")
-    }
-  }
+  const copyEl = useRef(null)
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClick)
@@ -90,19 +82,35 @@ function CopyLinkButton({ href }) {
     return () => {
       document.removeEventListener("mousedown", handleClick)
     }
-  }, [handleClick])
+  }, [])
+
+  const handleClick = e => {
+    if (e.target === copyEl.current) {
+      setCopied(true)
+    }
+    setCopied(false)
+  }
 
   return (
-    <IconButton
-      className="share-btn link"
-      ref={buttonEl}
-      style={{
-        color: copied ? "green" : `var(--white)`,
-        backgroundColor: `var(--grey)`,
-        borderColor: `var(--grey)`,
+    <CopyToClipboard
+      text={`https://untrip.app${href}`}
+      onCopy={() => {
+        console.log("copy")
+        setCopied(true)
       }}
+      ref={copyEl}
     >
-      <Link size="var(--text-md)" color="white" />
-    </IconButton>
+      <Button
+        className="share-btn link"
+        style={{
+          color: `var(--white)`,
+          backgroundColor: copied ? `var(--black)` : `var(--grey)`,
+          borderColor: `var(--grey)`,
+          padding: `var(--space-sm)`,
+        }}
+      >
+        <Link size="var(--text-md)" color="white" />
+      </Button>
+    </CopyToClipboard>
   )
 }
