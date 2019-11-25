@@ -100,18 +100,6 @@ function AuthBtns() {
       <Button
         primary
         className="auth-btn only-full-size"
-        style={{
-          marginRight: `var(--space-md)`,
-        }}
-        onClick={e => {
-          e.preventDefault()
-          navigate("/signup")
-        }}
-      >
-        Sign Up
-      </Button>
-      <Button
-        className="auth-btn only-full-size"
         onClick={e => {
           e.preventDefault()
           navigate("/login")
