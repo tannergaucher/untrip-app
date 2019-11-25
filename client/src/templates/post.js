@@ -46,6 +46,7 @@ export default function PostPage({ data }) {
             {/* <h4 className="post-date">{post.publishedAt}</h4> */}
             <Share
               href={`/${post.category.slug.current}/${post.slug.current}`}
+              pinterestImageUrl={post.mainImage.asset.url}
             />
             <BlockContent blocks={post._rawBody} />
             <Author author={post.author} />

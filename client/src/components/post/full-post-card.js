@@ -35,7 +35,10 @@ export default function IndexCard({ post }) {
         <p className="post-excerpt responsive-padding">{excerpt}</p>
       </Link>
       <div className="post-share responsive-padding">
-        <Share href={`/${post.category.slug.current}/${post.slug.current}`} />
+        <Share
+          href={`/${post.category.slug.current}/${post.slug.current}`}
+          pinterestImageUrl={post.mainImage.asset.url}
+        />
       </div>
     </StyledFullPostCard>
   )

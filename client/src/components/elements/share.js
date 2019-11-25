@@ -20,7 +20,7 @@ export default function Share({ href, pinterestImageUrl }) {
   const twitterBaseUrl = `https://twitter.com/intent/tweet?text=https://untrip.app`
   const pinterestBaseUrl = `https://www.pinterest.com/pin/create/button/?url=https://untrip.app`
 
-  const fb = `${fbBaseUrl}${href && href}`
+  const fb = `${fbBaseUrl}${href ? href : ""}`
   const twitter = `${twitterBaseUrl}${href && href}`
   const pinterest = `${pinterestBaseUrl}${href &&
     href}&media=${pinterestImageUrl}`
@@ -51,18 +51,20 @@ export default function Share({ href, pinterestImageUrl }) {
       >
         <Twitter size="var(--text-md)" color="var(--white)" />
       </IconButton>
-      <IconButton
-        className="share-btn"
-        href={pinterest}
-        target="_blank"
-        style={{
-          color: `var(--white)`,
-          backgroundColor: `var(--pinterest)`,
-          borderColor: `var(--pinterest)`,
-        }}
-      >
-        <Pinterest size="var(--text-md)" color="var(--white)" />
-      </IconButton>
+      {pinterestImageUrl && (
+        <IconButton
+          className="share-btn"
+          href={pinterest}
+          target="_blank"
+          style={{
+            color: `var(--white)`,
+            backgroundColor: `var(--pinterest)`,
+            borderColor: `var(--pinterest)`,
+          }}
+        >
+          <Pinterest size="var(--text-md)" color="var(--white)" />
+        </IconButton>
+      )}
       <CopyLinkButton href={href} />
     </StyledShare>
   )
