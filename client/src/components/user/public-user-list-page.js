@@ -9,10 +9,6 @@ import { useWindowSize } from "../hooks"
 const StyledListPage = styled.div`
   margin: 0 var(--space-md);
 
-  .list-title {
-    /* margin-top: 0; */
-  }
-
   @media (max-width: 1024) {
     margin: 0 var(--space-sm);
   }
@@ -27,15 +23,15 @@ export default function UserListPage({ listId }) {
     },
   })
 
+  if (loading) return `Loading...`
+  if (error) return `Error: ${error.message}`
+
   return (
     <StyledListPage>
-      {loading && <h2>Loading list...</h2>}
-      {error && `Error`}
       {data && data.list && (
         <>
           <h1 className="list-title">{data.list.title}</h1>
           <Share href={`/app/list/${data.list.id}`} />
-
           <div className="full-size-map">
             <Map
               places={data.list.places}

@@ -9,11 +9,12 @@ import { IS_LOGGED_IN, CURRENT_USER_QUERY } from "../components/apollo/graphql"
 export default function AccountPage() {
   const { loading, error, data } = useQuery(IS_LOGGED_IN)
 
+  if (loading) return `Loading...`
+  if (error) return `Error: ${error.message}`
+
   return (
     <ContentAsideGrid>
       <div className="content">
-        {loading && `Loading...`}
-        {error && `Error: ${error.message}`}
         {data && data.isLoggedIn ? <UserAccount /> : null}
       </div>
       <aside>{data && !data.isLoggedIn && <AuthTabs />}</aside>
@@ -31,10 +32,11 @@ const StyledAccount = styled.div`
 function UserAccount() {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
+  if (loading) return `Loading...`
+  if (error) return `Error: ${error.message}`
+
   return (
     <StyledAccount>
-      {loading && `Loading...`}
-      {error && `Error: ${error.message}`}
       {data && data.me && (
         <>
           <h1>{data.me.username}</h1>

@@ -34,7 +34,7 @@ export default function ListsPage() {
         <div className="content">
           {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
-        <aside></aside>
+        {/* TODO: Display user's liked posts <aside></aside> */}
       </ContentAsideGrid>
     </StyledListPage>
   )
@@ -43,22 +43,20 @@ export default function ListsPage() {
 function UserLists() {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
 
+  if (loading) return `Loading...`
+  if (error) return `Error: ${error.message}`
+
   return (
     <>
       <SEO title={`My Lists`} />
       <>
-        {loading && `Loading...`}
-        {error && `Error: ${error.message}`}
         {data && data.me && data.me.lists.length === 0 && (
-          <h2>You don't have any lists yet. Make one!</h2>
+          <h3>You don't have any lists yet. Make one!</h3>
         )}
         <>
           {data &&
             data.me &&
             data.me.lists.map(list => {
-              if (list.places.length === 0) {
-                return <h4>{`Oops, ${list.title}has no places yet`}</h4>
-              }
               return <ListItem list={list} key={list.id} />
             })}
         </>
