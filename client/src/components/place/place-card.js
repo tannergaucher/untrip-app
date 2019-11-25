@@ -31,10 +31,12 @@ const StyledPlace = styled.div`
   .place-tags {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: var(--space-md);
+    margin-bottom: 0;
   }
 
   .place-tag {
+    margin-top: 0;
+
     margin-right: var(--space-md);
     text-transform: uppercase;
     font-weight: bold;
@@ -62,17 +64,12 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
         fluid={postPlace.place.image.asset.fluid}
         style={{ marginBottom: `var(--space-md)` }}
       />
-
       <div className="place-content">
         <div className="place-tags">
           {postPlace.place.tags.map(tag => (
-            <Link
-              plain="true"
-              key={tag.slug.current}
-              to={`/tags/${tag.slug.current}`}
-            >
-              <small className="place-tag">{tag.tag}</small>
-            </Link>
+            <small className="place-tag" key={tag.id}>
+              {tag.tag}
+            </small>
           ))}
         </div>
         <BlockContent blocks={postPlace._rawText} />
