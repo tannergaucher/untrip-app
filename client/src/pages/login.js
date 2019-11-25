@@ -8,7 +8,7 @@ export default function LoginPage() {
     <ContentAsideGrid>
       <div className="content">{/* <h2>Brand content here</h2> */}</div>
       <aside>
-        <Login />
+        <Login shouldNavigateTo={`/`} />
       </aside>
     </ContentAsideGrid>
   )
