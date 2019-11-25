@@ -54,7 +54,9 @@ export default function Header() {
           <Link to="/" plain="true">
             <h4 className="site-title">Untrip</h4>
           </Link>
-          <small className="site-description">Curated Kuala Lumpur</small>
+          <small className="site-description only-full-size">
+            Curated Kuala Lumpur
+          </small>
         </div>
         <div className="btns">
           {data && data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
