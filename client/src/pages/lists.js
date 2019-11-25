@@ -28,11 +28,13 @@ const StyledListPage = styled.div`
 export default function ListsPage() {
   const { data } = useQuery(IS_LOGGED_IN)
 
+  if (!data) return
+
   return (
     <StyledListPage className="responsive-padding">
       <ContentAsideGrid>
         <div className="content">
-          {data && data.isLoggedIn ? <UserLists /> : <AuthTabs />}
+          {data.isLoggedIn ? <UserLists /> : <AuthTabs />}
         </div>
         {/* TODO: Display user's liked posts <aside></aside> */}
       </ContentAsideGrid>
