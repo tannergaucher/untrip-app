@@ -50,6 +50,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allSanityCategory {
         edges {
           node {
+            category
             slug {
               current
             }
@@ -68,6 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve(`./src/templates/category.js`),
       context: {
         categorySlug: edge.node.slug.current,
+        category: edge.node.category,
       },
     })
   })

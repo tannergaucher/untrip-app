@@ -10,15 +10,20 @@ import {
 } from "../components/post"
 
 export default function CategoryPage({ data, pageContext }) {
+  // Pass category through pageContext,to use in <SEO/> and now have to wait for data.
+
+  console.log(pageContext)
+
   return (
     <>
-      <SEO title={``} />
+      <SEO title={pageContext.category} />
       <ContentAsideGrid>
         <div className="content">
           {data.allSanityPost.edges.map(edge => (
             <Link
-              to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
               plain
+              key={edge.node.id}
+              to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
             >
               <FullPostCard key={edge.node.id} post={edge.node} />
             </Link>
