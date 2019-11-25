@@ -72,9 +72,11 @@ class MapContainer extends React.Component {
 
     let bounds = new this.props.google.maps.LatLngBounds()
 
-    for (var i = 0; i < points.length; i++) {
-      bounds.extend(points[i])
-    }
+    // for (var i = 0; i < points.length; i++) {
+    //   bounds.extend(points[i])
+    // }
+
+    points.forEach(point => bounds.extend(point))
 
     this.setState({ bounds })
   }

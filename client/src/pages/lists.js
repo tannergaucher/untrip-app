@@ -47,10 +47,10 @@ function UserLists() {
     <>
       <SEO title={`My Lists`} />
       <>
-        {loading && `loading...`}
+        {loading && `Loading...`}
         {error && `Error: ${error.message}`}
         {data && data.me && data.me.lists.length === 0 && (
-          <h1>You don't have any lists yet. Make one!</h1>
+          <h2>You don't have any lists yet. Make one!</h2>
         )}
         <>
           {data &&
