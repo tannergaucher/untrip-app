@@ -66,13 +66,6 @@ export const SANITY_TAG_FRAGMENT = graphql`
     slug {
       current
     }
-    image {
-      asset {
-        fluid(maxWidth: 1024, maxHeight: 768) {
-          ...GatsbySanityImageFluid
-        }
-      }
-    }
   }
 `
 
@@ -92,14 +85,8 @@ export const SANITY_PLACE_FRAGMENT = graphql`
     }
     placeType {
       type
-      image {
-        asset {
-          fluid(maxWidth: 1024, maxHeight: 768) {
-            ...GatsbySanityImageFluid
-          }
-        }
-      }
     }
+
     imageCaption
     imageCredit
     imageLink
@@ -128,13 +115,6 @@ export const SANITY_CATEGORY_FRAGMENT = graphql`
     category
     slug {
       current
-    }
-    image {
-      asset {
-        fluid(maxWidth: 1024, maxHeight: 768) {
-          ...GatsbySanityImageFluid
-        }
-      }
     }
   }
 `
