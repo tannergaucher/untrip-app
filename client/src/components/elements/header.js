@@ -45,9 +45,9 @@ const StyledHeader = styled.header`
 `
 
 export default function Header() {
-  const { data } = useQuery(IS_LOGGED_IN)
+  const { loading, data } = useQuery(IS_LOGGED_IN)
 
-  if (!data) return
+  if (loading) return
 
   return (
     <StyledHeader>
@@ -61,7 +61,7 @@ export default function Header() {
           </small>
         </div>
         <div className="btns">
-          {data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
+          {data && data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
         </div>
       </div>
     </StyledHeader>
