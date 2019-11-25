@@ -11,7 +11,7 @@ export default function CreateList({ place, setShow }) {
       title,
       sanityId: place.id,
       name: place.name,
-      imageUrl: JSON.stringify(place.image.asset.fluid),
+      imageUrl: JSON.stringify(place.image.asset.fixed),
       slug: place.slug.current,
       lat: place.location.lat,
       lng: place.location.lng,
