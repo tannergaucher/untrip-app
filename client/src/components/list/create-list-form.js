@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/react-hooks"
 import { Button, Input, Form } from "../styles"
 import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
 
-export default function CreateList({ place, setShow }) {
+export default function CreateList({ place, setShowModal }) {
   const [title, setTitle] = useState("")
   const [createList, { loading }] = useMutation(CREATE_LIST_MUTATION, {
     variables: {
@@ -62,22 +62,22 @@ export default function CreateList({ place, setShow }) {
 
   return (
     <Form
-      onSubmit={async e => {
+      onSubmit={e => {
         e.preventDefault()
-        setShow(false)
-        await createList()
+        createList()
+        setShowModal(false)
       }}
     >
       <Input
         value={title}
-        onChange={e => setTitle(e.target.value)}
         required={true}
         placeholder="List Name"
+        onChange={e => setTitle(e.target.value)}
         style={{
-          marginTop: `1rem`,
+          marginTop: `var(--space-md)`,
         }}
       />
-      <Button type="submit" primary loading={loading}>
+      <Button type="submit" loading={loading} primary>
         Create List
       </Button>
     </Form>
