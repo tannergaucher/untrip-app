@@ -10,17 +10,11 @@ export default function Layout({ children, location }) {
   useQuery(CURRENT_USER_QUERY)
 
   return (
-    <div
-      style={{
-        display: `grid`,
-        gridTemplateRows: `auto 1fr auto`,
-        minHeight: `100vh`,
-      }}
-    >
+    <>
       <Header location={location} />
-      <main>{children}</main>
+      <main style={{ minHeight: `100vh` }}>{children}</main>
       <Footer />
-    </div>
+    </>
   )
 }
 

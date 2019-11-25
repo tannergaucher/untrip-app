@@ -7,16 +7,10 @@ import { LIST_QUERY } from "../apollo/graphql"
 import { useWindowSize } from "../hooks"
 
 const StyledListPage = styled.div`
-  margin: 0 var(--space-md);
-
-  @media (max-width: 1024) {
-    margin: 0 var(--space-sm);
-  }
+  margin: 0 var(--space-sm);
 `
 
 export default function UserListPage({ listId }) {
-  const size = useWindowSize()
-
   const { data, loading, error } = useQuery(LIST_QUERY, {
     variables: {
       listId,
@@ -32,14 +26,16 @@ export default function UserListPage({ listId }) {
         <>
           <h1 className="list-title">{data.list.title}</h1>
           <Share href={`/app/list/${data.list.id}`} />
-          <div className="full-size-map">
+          <div
+            className="full-size-map"
+            style={{ height: `100vh`, marginBottom: `var(--space-md)` }}
+          >
             <Map
-              places={data.list.places}
               isUserList={true}
+              places={data.list.places}
               style={{
-                maxWidth:
-                  size.width > 600 ? `calc(100% - 4rem)` : `calc(100% - 1rem)`,
-                height: size.width > 600 ? `71vh` : `76vh`,
+                maxWidth: `calc(100% - var(--space-md))`,
+                height: `100vh`,
               }}
             />
           </div>
