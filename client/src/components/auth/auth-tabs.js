@@ -8,6 +8,7 @@ const StyledAuthTabs = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  justify-self: center;
   height: 100%;
 
   .toggle-auth {
@@ -17,15 +18,20 @@ const StyledAuthTabs = styled.div`
 
   .auth-message {
     font-weight: lighter;
+    margin-bottom: var(--space-md);
   }
 `
 
-export default function AuthTabs() {
+export default function AuthTabs({ shouldNavigateTo }) {
   const [show, setShow] = useState("Login")
 
   return (
     <StyledAuthTabs>
-      {show === "Login" ? <Login /> : <Signup />}
+      {show === "Login" ? (
+        <Login shouldNavigateTo={shouldNavigateTo} />
+      ) : (
+        <Signup shouldNavigateTo={shouldNavigateTo} />
+      )}
       {show === "Login" && (
         <div className="toggle-auth">
           <h4 className="auth-message">Don't have an account yet? </h4>

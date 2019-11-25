@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 import { CopyToClipboard } from "react-copy-to-clipboard"
-
 import { FacebookOption, Twitter, Pinterest, Link } from "grommet-icons"
 
 import { IconButton, Button } from "../styles"
@@ -73,7 +72,6 @@ export default function Share({ href, pinterestImageUrl }) {
 
 function CopyLinkButton({ href }) {
   const [copied, setCopied] = useState(false)
-
   const copyEl = useRef(null)
 
   useEffect(() => {
@@ -93,12 +91,11 @@ function CopyLinkButton({ href }) {
 
   return (
     <CopyToClipboard
+      ref={copyEl}
       text={`https://untrip.app${href}`}
       onCopy={() => {
-        console.log("copy")
         setCopied(true)
       }}
-      ref={copyEl}
     >
       <Button
         className="share-btn link"

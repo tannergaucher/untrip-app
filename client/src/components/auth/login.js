@@ -17,7 +17,7 @@ export default function Login({ shouldNavigateTo }) {
 
   return (
     <>
-      <h2 style={{ textAlign: `center` }}>Log In</h2>
+      <h2 style={{ marginTop: `0`, textAlign: `center` }}>Log In</h2>
       <Fieldset disabled={loading}>
         {error && `${error.message}`}
         <Form
