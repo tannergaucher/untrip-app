@@ -144,10 +144,11 @@ class MapContainer extends React.Component {
             marker={this.state.activeMarker}
           >
             <div className="info-window">
-              <h1>{this.state.selectedPlace.name}</h1>
+              <h4>{this.state.selectedPlace.name}</h4>
               <Img
+                // change to fixed
                 fluid={this.state.selectedPlace.image}
-                style={{ marginBottom: `1rem` }}
+                style={{ marginBottom: `var(--space-md)` }}
               />
               <Link to={`/place/${this.state.selectedPlace.slug}`}>
                 <h2>View all posts</h2>
