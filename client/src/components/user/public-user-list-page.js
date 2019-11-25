@@ -17,11 +17,9 @@ export default function UserListPage({ listId }) {
     },
   })
 
-  if (loading) return `Loading...`
-  if (error) return `Error: ${error.message}`
-
   return (
     <StyledListPage>
+      {loading && <h4>Loading</h4>}
       {data && data.list && (
         <>
           <h1 className="list-title">{data.list.title}</h1>
