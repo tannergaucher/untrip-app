@@ -49,7 +49,7 @@ class MapContainer extends React.Component {
         sanitizedPlaces.push({
           id: place.place.id,
           name: place.place.name,
-          image: place.place.image.asset.fluid,
+          image: place.place.image.asset.fixed,
           location: {
             lat: place.place.location.lat,
             lng: place.place.location.lng,
@@ -71,10 +71,6 @@ class MapContainer extends React.Component {
     })
 
     let bounds = new this.props.google.maps.LatLngBounds()
-
-    // for (var i = 0; i < points.length; i++) {
-    //   bounds.extend(points[i])
-    // }
 
     points.forEach(point => bounds.extend(point))
 
@@ -147,13 +143,9 @@ class MapContainer extends React.Component {
           >
             <div className="info-window">
               <h4>{this.state.selectedPlace.name}</h4>
-              <Img
-                // change to fixed
-                fluid={this.state.selectedPlace.image}
-                style={{ marginBottom: `var(--space-md)` }}
-              />
+              <Img fixed={this.state.selectedPlace.image} />
               <Link to={`/place/${this.state.selectedPlace.slug}`}>
-                <h2>View all posts</h2>
+                <small style={{ display: `block` }}>View all posts</small>
               </Link>
             </div>
           </InfoWindow>
