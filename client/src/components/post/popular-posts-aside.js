@@ -1,24 +1,27 @@
 import React from "react"
 
-import { AsidePostCard } from "."
-import { usePopularSanityPosts } from "../hooks"
 import { Link } from "../styles"
+import { AsidePostCard } from "."
+import { useAllSanityPopularPost } from "../hooks"
 
 export default function PopularPostsAside() {
-  const { edges: popularPostEdges } = usePopularSanityPosts()
+  const { edges } = useAllSanityPopularPost()
 
   return (
     <div className="side-section">
       <h3 className="side-title">Popular</h3>
-      {popularPostEdges.map(edge => (
-        <Link
-          plain="true"
-          key={edge.node.id}
-          to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
-        >
-          <AsidePostCard key={edge.node.id} post={edge.node} />
-        </Link>
-      ))}
+
+      {edges[0].node.popularPost.map(post => {
+        return (
+          <Link
+            plain="true"
+            key={post.id}
+            to={`/${post.category.slug.current}/${post.slug.current}`}
+          >
+            <AsidePostCard key={post.id} post={post} />
+          </Link>
+        )
+      })}
     </div>
   )
 }

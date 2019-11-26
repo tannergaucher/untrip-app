@@ -15,8 +15,7 @@ const StyledAsideCard = styled.div`
     padding: 0 var(--space-sm);
   }
 
-  .post-date,
-  .post-category {
+  .post-date {
     margin: 0;
   }
 
@@ -32,9 +31,7 @@ export default function AsidePostCard({ post }) {
       <div className="img-wrapper">
         <Img fluid={post.mainImage.asset.fluid} />
       </div>
-
       <div className="post-details">
-        {/* <small className="post-category">{post.category.category}</small> */}
         <h4 className="post-title">{post.title}</h4>
       </div>
     </StyledAsideCard>
