@@ -6,7 +6,6 @@ import { useInView } from "react-intersection-observer"
 
 import { PlaceDetails } from "../place"
 import { AddToListModal } from "../list"
-import { Link } from "../styles"
 
 const StyledPlace = styled.div`
   margin-bottom: var(--space-lg);

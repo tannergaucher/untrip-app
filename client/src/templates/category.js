@@ -4,16 +4,12 @@ import { graphql } from "gatsby"
 import { SEO, About } from "../components/elements"
 import { ContentAsideGrid, Link } from "../components/styles"
 import {
-  FullPostCard,
+  PostCard,
   LatestPostsAside,
   PopularPostsAside,
 } from "../components/post"
 
 export default function CategoryPage({ data, pageContext }) {
-  // Pass category through pageContext,to use in <SEO/> and now have to wait for data.
-
-  console.log(pageContext)
-
   return (
     <>
       <SEO title={pageContext.category} />
@@ -25,7 +21,7 @@ export default function CategoryPage({ data, pageContext }) {
               key={edge.node.id}
               to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
             >
-              <FullPostCard key={edge.node.id} post={edge.node} />
+              <PostCard key={edge.node.id} post={edge.node} />
             </Link>
           ))}
         </div>

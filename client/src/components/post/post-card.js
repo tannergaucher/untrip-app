@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { Share } from "../elements"
 import { Link } from "../styles"
 
-const StyledFullPostCard = styled.div`
+const StyledPostCard = styled.div`
   margin-bottom: var(--space-xl);
 
   .post-share {
@@ -13,7 +13,7 @@ const StyledFullPostCard = styled.div`
   }
 `
 
-export default function IndexCard({ post }) {
+export default function PostCard({ post }) {
   const postText = post._rawBody[0].children[0].text
   const textArr = postText.split(" ")
   const maxWordLength = 30
@@ -28,7 +28,7 @@ export default function IndexCard({ post }) {
   excerpt = `${textArr.slice(0, maxWordLength).join(" ")}...`
 
   return (
-    <StyledFullPostCard>
+    <StyledPostCard>
       <Link to={`/${post.category.slug.current}/${post.slug.current}`} plain>
         <Img fluid={post.mainImage.asset.fluid} />
         <h2 className="post-title responsive-padding">{post.title}</h2>
@@ -40,6 +40,6 @@ export default function IndexCard({ post }) {
           pinterestImageUrl={post.mainImage.asset.url}
         />
       </div>
-    </StyledFullPostCard>
+    </StyledPostCard>
   )
 }

@@ -2,21 +2,21 @@ import React from "react"
 
 import { AsidePostCard } from "."
 import { Link } from "../styles"
-import { useLatestSanityPosts } from "../hooks"
+import { useAllSanityHappingThisMonthPost } from "../hooks"
 
-export default function LatestPostsAside() {
-  // TODO: Make useThisMonth hook.
-  const { edges: latestPostEdges } = useLatestSanityPosts()
+export default function HappeningThisMonthAside() {
+  const { edges } = useAllSanityHappingThisMonthPost()
 
   return (
     <div className="side-section">
       <h3 className="side-title">This Month</h3>
-      {latestPostEdges.map(edge => (
+      {edges[0].node.happeningThisMonth.map(post => (
         <Link
           plain
-          to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
+          key={post.id}
+          to={`/${post.category.slug.current}/${post.slug.current}`}
         >
-          <AsidePostCard key={edge.node.id} post={edge.node} />
+          <AsidePostCard key={post.id} post={post} />
         </Link>
       ))}
     </div>

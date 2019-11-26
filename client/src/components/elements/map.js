@@ -66,7 +66,7 @@ class MapContainer extends React.Component {
   makeBounds = () => {
     let points = []
 
-    this.state.sanitizedPlaces.map(place => {
+    this.state.sanitizedPlaces.forEach(place => {
       points.push(place.location)
     })
 

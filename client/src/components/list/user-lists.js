@@ -61,7 +61,6 @@ function ToggleListPlace({ list, place }) {
   const { data } = useQuery(CURRENT_USER_QUERY)
 
   // TODO: MAKE THIS AN @CLIENT QUERY
-
   const listIndex = data.me.lists.findIndex(
     cacheList => cacheList.id === list.id
   )
