@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import { SEO, About } from "../components/elements"
 import { ContentAsideGrid, Link } from "../components/styles"
 import {
-  FullPostCard,
+  PostCard,
   LatestPostsAside,
   PopularPostsAside,
 } from "../components/post"
@@ -22,7 +22,7 @@ export default function PlacePage({ data, pageContext }) {
               to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
               plain
             >
-              <FullPostCard key={edge.node.id} post={edge.node} />
+              <PostCard key={edge.node.id} post={edge.node} />
             </Link>
           ))}
         </div>

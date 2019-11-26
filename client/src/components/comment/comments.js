@@ -36,7 +36,7 @@ export default function Comments({
 
   useEffect(() => {
     setCommentsInView(inView)
-  }, [inView])
+  }, [inView, setCommentsInView])
 
   return (
     <div ref={ref}>
@@ -189,16 +189,16 @@ function Comment({ comment, post }) {
       {edit ? (
         <>
           <Fieldset
-            onSubmit={async e => {
+            onSubmit={e => {
               e.preventDefault()
               setEdit(false)
-              const res = await editComment()
+              editComment()
             }}
           >
             <Form>
               <Textarea
-                required={true}
                 fillMobile
+                required={true}
                 defaultValue={comment.text}
                 onChange={e => setEditedText(e.target.value)}
               />

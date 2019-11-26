@@ -7,7 +7,6 @@ import {
   Phone,
   MapLocation,
   Close,
-  Info,
 } from "grommet-icons"
 
 import { Map } from "../elements"

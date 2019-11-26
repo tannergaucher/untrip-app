@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 export default function useWindowSize() {
   const isClient = typeof window === "object"
 
-  function getSize() {
+  const memoizedGetSize = useCallback(() => {
     return {
       width: isClient ? window.innerWidth : undefined,
       height: isClient ? window.innerHeight : undefined,
     }
-  }
+  }, [isClient])
 
-  const [windowSize, setWindowSize] = useState(getSize)
+  const [windowSize, setWindowSize] = useState(memoizedGetSize)
 
   useEffect(() => {
     if (!isClient) {
@@ -18,12 +18,12 @@ export default function useWindowSize() {
     }
 
     function handleResize() {
-      setWindowSize(getSize())
+      setWindowSize(memoizedGetSize())
     }
 
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
-  }, []) // Empty array ensures that effect is only run on mount and unmount
+  }, [isClient, memoizedGetSize])
 
   return windowSize
 }

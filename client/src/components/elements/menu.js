@@ -51,10 +51,10 @@ export default function Menu() {
               <h3 className="menu-link">Food & Drink</h3>
             </Link>
             <Link to="/music" plain>
-              <h3 className="menu-link">Music</h3>
+              <h3 className="menu-link">Entertainment</h3>
             </Link>
             <Link to="/this-month" plain>
-              <h3 className="menu-link">This Month</h3>
+              <h3 className="menu-link">Curated KL</h3>
             </Link>
             <br />
             {data && data.isLoggedIn ? <AuthedLinks /> : <AuthLinks />}

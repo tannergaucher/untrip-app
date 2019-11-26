@@ -47,16 +47,16 @@ function EmailForm() {
         }}
       >
         <Input
-          placeholder="Email Address"
           type="email"
           value={email}
           required={true}
+          placeholder="Email Address"
           onChange={e => setEmail(e.target.value)}
         />
 
         <Button
-          type="submit"
           primary
+          type="submit"
           loading={loading}
           style={{
             display: `flex`,
@@ -82,16 +82,19 @@ function EmailForm() {
                   justifyContent: `space-between`,
                 }}
               >
-                <h1 style={{ margin: `0` }}>🎉</h1>
+                <h1 style={{ margin: `0` }}>
+                  <span role="img" aria-label="welcome emoji">
+                    🎉
+                  </span>
+                </h1>
                 <Button
-                  // Setting message to falsy closes modal.
                   onClick={() => setMessage("")}
                   style={{ border: `none` }}
                 >
                   <Close size="var(--text-md)" color="var(--black)" />
                 </Button>
               </div>
-              <h2 className="">{message}</h2>
+              <h2 className="email-message">{message}</h2>
             </div>
             <div>
               <h5>Change your mind already?</h5>

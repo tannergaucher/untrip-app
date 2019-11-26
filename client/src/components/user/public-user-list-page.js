@@ -4,14 +4,13 @@ import styled from "styled-components"
 
 import { Map, Share } from "../elements"
 import { LIST_QUERY } from "../apollo/graphql"
-import { useWindowSize } from "../hooks"
 
 const StyledListPage = styled.div`
   margin: 0 var(--space-sm);
 `
 
 export default function UserListPage({ listId }) {
-  const { data, loading, error } = useQuery(LIST_QUERY, {
+  const { data, loading } = useQuery(LIST_QUERY, {
     variables: {
       listId,
     },
