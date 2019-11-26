@@ -4,7 +4,6 @@ import useAllSanityPost from "./use-all-sanity-post"
 import useAllSanityPlace from "./use-all-sanity-place"
 import useAllSanityCategory from "./use-all-sanity-category"
 import useLatestSanityPosts from "./use-latest-sanity-posts"
-import usePopularSanityPosts from "./use-popular-sanity-posts"
 import useAllSanityPopularPost from "./use-all-sanity-popular-post"
 import useAllSanityHappingThisMonthPost from "./use-all-sanity-happening-this-month-post"
 
@@ -17,7 +16,6 @@ export {
   useAllSanityPlace,
   useAllSanityCategory,
   useLatestSanityPosts,
-  usePopularSanityPosts,
   useWindowSize,
   useAllSanityPopularPost,
   useAllSanityHappingThisMonthPost,
