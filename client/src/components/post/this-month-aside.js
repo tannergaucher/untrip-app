@@ -7,11 +7,9 @@ import { useAllSanityHappingThisMonthPost } from "../hooks"
 export default function HappeningThisMonthAside() {
   const { edges } = useAllSanityHappingThisMonthPost()
 
-  console.log(edges)
-
   return (
     <div className="side-section">
-      <h3 className="side-title">Happening This Month</h3>
+      <h3 className="side-title">This Month</h3>
       {edges[0].node.happeningThisMonth.map(post => (
         <Link
           plain
