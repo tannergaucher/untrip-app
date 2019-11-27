@@ -5,7 +5,7 @@ export default function useLatestSanityPost() {
   const { allSanityPost } = useStaticQuery(
     graphql`
       query LatestSanityPost {
-        allSanityPost(limit: 5) {
+        allSanityPost(limit: 5, sort: { fields: publishedAt, order: DESC }) {
           edges {
             node {
               ...SanityPostFragment
