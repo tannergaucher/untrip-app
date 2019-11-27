@@ -9,7 +9,7 @@ export default function LatestPostsAside() {
 
   return (
     <div className="side-section">
-      <h3 className="side-title">Latest Posts </h3>
+      <h3 className="side-title">Latest </h3>
       {latestPostEdges.map(edge => (
         <Link
           key={edge.node.id}
