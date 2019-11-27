@@ -31,6 +31,10 @@ const StyledHeader = styled.header`
     display: none;
   }
 
+  .my-lists-btn {
+    margin-right: var(--space-md);
+  }
+
   @media (max-width: 1024px) {
     padding: var(--space-sm);
 
@@ -73,11 +77,8 @@ function AuthedBtns() {
     <>
       <Button
         primary
-        className="authed-btn only-full-size"
+        className="authed-btn only-full-size my-lists-btn"
         onClick={() => navigate(`/lists`)}
-        style={{
-          marginRight: `var(--space-md)`,
-        }}
       >
         My Lists
       </Button>

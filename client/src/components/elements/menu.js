@@ -46,14 +46,14 @@ export default function Menu() {
             responsive={false}
             modal={true}
           >
-            {/* TODO: MAKE DYNAMIC. QUERY CMS CATEGORIES AND MAP.  USE USEALLCATEGORIES HOOK */}
+            {/* TODO: MAKE DYNAMIC. QUERY CMS CATEGORIES AND MAP. USE USEALLCATEGORIES HOOK */}
             <Link to="/food-and-drink" plain>
               <h3 className="menu-link">Food & Drink</h3>
             </Link>
-            <Link to="/music" plain>
+            <Link to="/entertainment" plain>
               <h3 className="menu-link">Entertainment</h3>
             </Link>
-            <Link to="/this-month" plain>
+            <Link to="/curated-kl" plain>
               <h3 className="menu-link">Curated KL</h3>
             </Link>
             <br />
