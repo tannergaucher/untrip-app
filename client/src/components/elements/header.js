@@ -28,10 +28,6 @@ const StyledHeader = styled.header`
     display: none;
   }
 
-  .my-lists-btn {
-    margin-right: var(--space-md);
-  }
-
   @media (max-width: 1024px) {
     padding: var(--space-sm);
 
@@ -43,6 +39,11 @@ const StyledHeader = styled.header`
       display: inline;
     }
   }
+`
+
+// Because styled components bug where Button looses classname on refresh in production...
+const MyListsBtn = styled(Button)`
+  margin-right: var(--space-md);
 `
 
 export default function Header() {
@@ -64,13 +65,9 @@ export default function Header() {
         <div className="only-full-size">
           {data && data.isLoggedIn ? (
             <>
-              <Button
-                primary
-                className="my-lists-btn"
-                onClick={() => navigate(`/lists`)}
-              >
+              <MyListsBtn primary onClick={() => navigate(`/lists`)}>
                 My Lists
-              </Button>
+              </MyListsBtn>
               <Button onClick={() => navigate(`/account`)}>Account</Button>
             </>
           ) : (
