@@ -9,12 +9,9 @@ import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledHeader = styled.header`
   padding: var(--space-md);
-
-  .responsive-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   .site-title {
     margin: 0;
@@ -27,7 +24,7 @@ const StyledHeader = styled.header`
     line-height: 1;
   }
 
-  .mobile-menu-btn {
+  .only-mobile {
     display: none;
   }
 
@@ -42,7 +39,7 @@ const StyledHeader = styled.header`
       display: none;
     }
 
-    .mobile-menu-btn {
+    .only-mobile {
       display: inline;
     }
   }
@@ -55,62 +52,43 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <div className="responsive-flex">
-        <div className="site-title-description">
-          <Link to="/" plain="true">
-            <h4 className="site-title">Untrip</h4>
-          </Link>
-          <small className="site-description only-full-size">
-            Curated Kuala Lumpur
-          </small>
+      <div className="site-title-description">
+        <Link to="/" plain="true">
+          <h4 className="site-title">Untrip</h4>
+        </Link>
+        <small className="site-description only-full-size">
+          Curated Kuala Lumpur
+        </small>
+      </div>
+      <div>
+        <div className="only-full-size">
+          {data && data.isLoggedIn ? (
+            <>
+              <Button
+                primary
+                className="my-lists-btn"
+                onClick={() => navigate(`/lists`)}
+              >
+                My Lists
+              </Button>
+              <Button onClick={() => navigate(`/account`)}>Account</Button>
+            </>
+          ) : (
+            <Button
+              primary
+              onClick={e => {
+                e.preventDefault()
+                navigate("/login")
+              }}
+            >
+              Log In
+            </Button>
+          )}
         </div>
-        <div className="btns">
-          {data && data.isLoggedIn ? <AuthedBtns /> : <AuthBtns />}
+        <div className="only-mobile">
+          <Menu />
         </div>
       </div>
     </StyledHeader>
-  )
-}
-
-function AuthedBtns() {
-  return (
-    <>
-      <Button
-        primary
-        className="authed-btn only-full-size my-lists-btn"
-        onClick={() => navigate(`/lists`)}
-      >
-        My Lists
-      </Button>
-      <Button
-        onClick={() => navigate(`/account`)}
-        className="authed-btn only-full-size"
-      >
-        Account
-      </Button>
-      <div className="mobile-menu-btn">
-        <Menu />
-      </div>
-    </>
-  )
-}
-
-function AuthBtns() {
-  return (
-    <>
-      <Button
-        primary
-        className="auth-btn only-full-size"
-        onClick={e => {
-          e.preventDefault()
-          navigate("/login")
-        }}
-      >
-        Log In
-      </Button>
-      <div className="mobile-menu-btn">
-        <Menu />
-      </div>
-    </>
   )
 }
