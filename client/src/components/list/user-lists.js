@@ -9,7 +9,7 @@ import { CreateListForm } from "../list"
 
 const StyledUserLists = styled.div`
   /* Override grommet. */
-  color: var(--black);
+  color: var(--text-color);
 `
 
 export default function UserLists({ place, setShowModal }) {

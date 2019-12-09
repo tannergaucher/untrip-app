@@ -1,6 +1,5 @@
 import Button from "./button"
 import { LinkButton } from "./button"
-import Divider from "./divider"
 import Fieldset from "./fieldset"
 import Form from "./form"
 import Input from "./input"
@@ -14,7 +13,6 @@ import IconButton from "./icon-button"
 export {
   Button,
   LinkButton,
-  Divider,
   Fieldset,
   Form,
   Input,

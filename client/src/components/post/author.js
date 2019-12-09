@@ -13,7 +13,7 @@ const StyledAuthor = styled.div`
     margin-left: var(--space-sm);
 
     a {
-      text-decoration-color: var(--black);
+      text-decoration-color: var(--text-color);
     }
   }
 
@@ -23,7 +23,7 @@ const StyledAuthor = styled.div`
   }
 
   .author-social {
-    color: var(--black);
+    color: var(--text-color);
     font-weight: lighter;
   }
 `

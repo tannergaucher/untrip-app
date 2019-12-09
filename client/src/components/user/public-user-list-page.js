@@ -6,7 +6,7 @@ import { Map, Share } from "../elements"
 import { LIST_QUERY } from "../apollo/graphql"
 
 const StyledListPage = styled.div`
-  margin: 0 var(--space-sm);
+  margin: 0 var(--space-md);
 `
 
 export default function UserListPage({ listId }) {
@@ -31,7 +31,7 @@ export default function UserListPage({ listId }) {
               isUserList={true}
               places={data.list.places}
               style={{
-                maxWidth: `calc(100% - var(--space-md))`,
+                maxWidth: `calc(100% - var(--space-lg))`,
                 height: `100vh`,
               }}
             />

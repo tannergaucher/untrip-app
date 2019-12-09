@@ -9,11 +9,12 @@ import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledLayer = styled(Layer)`
   /* override grommet default */
-  color: var(--black);
+  color: var(--text-color);
   padding: var(--space-md);
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  background: var(--bg-1);
 
   .menu-link {
     text-transform: uppercase;
@@ -33,7 +34,7 @@ export default function Menu() {
           padding: `var(--space-sm) 0 var(--space-sm) var(--space-sm)`,
         }}
       >
-        <MenuIcon color="var(--black)" />
+        <MenuIcon color="var(--text-color)" />
       </Button>
       {show && (
         <>

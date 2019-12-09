@@ -64,7 +64,7 @@ function EmailForm() {
             justifyContent: `center`,
           }}
         >
-          <MailOption size="var(--text-md)" color="var(--white)" />
+          <MailOption size="var(--text-md)" color="var(--bg-1)" />
         </Button>
       </Form>
       {message && (
@@ -91,7 +91,7 @@ function EmailForm() {
                   onClick={() => setMessage("")}
                   style={{ border: `none` }}
                 >
-                  <Close size="var(--text-md)" color="var(--black)" />
+                  <Close size="var(--text-md)" color="var(--text-color)" />
                 </Button>
               </div>
               <h2 className="email-message">{message}</h2>
