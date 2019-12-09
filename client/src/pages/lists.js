@@ -120,8 +120,8 @@ function ListItem({ list }) {
         <h2 className="list-title">{list.title}</h2>
         <Button onClick={() => setIsEdit(!isEdit)}>
           <Edit
-            color={`${isEdit ? "var(--black)" : "var(--grey)"}`}
-            size="20px"
+            color={`${isEdit ? "var(--text-color)" : "var(--grey)"}`}
+            size="var(--text-md)"
           />
         </Button>
       </div>

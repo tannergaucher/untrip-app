@@ -87,7 +87,7 @@ export default function AddComment({ post }) {
             alignItems: `center`,
           }}
         >
-          <Chat size="var(--text-md)" color="var(--white)" />
+          <Chat size="var(--text-md)" color="var(--bg-1)" />
         </Button>
       </Form>
     </Fieldset>

@@ -23,7 +23,7 @@ export default function AddToListModal({ place }) {
           border: `none`,
         }}
       >
-        <Bookmark size="var(--text-md)" color="var(--black)" />
+        <Bookmark size="var(--text-md)" color="var(--text-color)" />
       </Button>
       {showModal && (
         <StyledLayer
@@ -39,7 +39,7 @@ export default function AddToListModal({ place }) {
               }}
               onClick={() => setShowModal(false)}
             >
-              <Close size="var(--text-md)" color="var(--black)" />
+              <Close size="var(--text-md)" color="var(--text-color)" />
             </Button>
             {data && data.isLoggedIn ? (
               <UserLists place={place.place} setShowModal={setShowModal} />

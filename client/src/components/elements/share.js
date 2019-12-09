@@ -100,8 +100,8 @@ function CopyLinkButton({ href }) {
       <Button
         className="share-btn link"
         style={{
-          color: `var(--white)`,
-          backgroundColor: copied ? `var(--black)` : `var(--grey)`,
+          color: `var(--bg-1)`,
+          backgroundColor: copied ? `var(--bg-1)` : `var(--grey)`,
           borderColor: `var(--grey)`,
           padding: `var(--space-sm)`,
         }}

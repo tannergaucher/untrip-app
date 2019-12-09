@@ -79,7 +79,7 @@ export default function Comments({
                       }}
                       onClick={() => setShowAuthModal(false)}
                     >
-                      <Close size="var(--text-md)" color="var(--black)" />
+                      <Close size="var(--text-md)" color="var(--text-color)" />
                     </Button>
                     <AuthTabs />
                   </StyledLayer>

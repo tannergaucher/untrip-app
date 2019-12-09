@@ -7,7 +7,6 @@
   --paragraph-line-height: 1.75;
   --heading-letter-spacing: -1.55px;
   --paragraph-letter-spacing: -0.2px;
-
   /* Vertical Rhythm */
   --responsive-unit: 0.5vw; /* TWEAK ME  */
   /* Base Values */
@@ -46,12 +45,12 @@
   --space-lg: calc(var(--baseline) * 2);
   --space-xl: calc(var(--baseline) * 3);
   /* Colors */
-  --accent: darkred;
-  --black: black;
+  --text-color: black;
+  --bg-1: white;
+  --bg-2: black;
   --white: white;
   --grey: #555555;
-  --red: tomato;
-  --warning: red;
+  --accent: darkred;
   --facebook: #3b5998;
   --twitter: #1da1f2;
   --pinterest: #c8232c;
@@ -61,6 +60,16 @@
   /* Components */
   --radius: 2px;
   --thickness: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: white;
+    --bg-1: black;
+    --bg-2: grey;
+    --accent: tomato;
+    --grey: grey;
+  }
 }
 
 html {
@@ -73,6 +82,8 @@ body {
   font-size: var(--text-base-size);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  color: var(--text-color);
+  background: var(--bg-1);
 }
 
 h1,

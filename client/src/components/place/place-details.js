@@ -56,8 +56,7 @@ export default function Details({ place, post }) {
           border: `none`,
           textAlign: `left`,
           padding: `var(--space-sm) var(--space-sm) var(--space-sm) var(--space-sm)`,
-          // borderColor: show ? "var(--grey)" : "var(--black)",
-          color: show ? "var(--black)" : "var(--grey)",
+          color: show ? "var(--text-color)" : "var(--grey)",
         }}
       >
         Details
@@ -117,7 +116,7 @@ export default function Details({ place, post }) {
             >
               <Phone
                 size="var(--text-md)"
-                color="var(--black)"
+                color="var(--text-color)"
                 style={{ marginRight: `var(--space-sm)` }}
               />
               {place.place.phoneNumber}
