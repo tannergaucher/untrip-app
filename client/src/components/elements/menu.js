@@ -8,13 +8,16 @@ import { Button, Link } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
 
 const StyledLayer = styled(Layer)`
-  /* override grommet default */
+  /* override grommet defaults */
   color: var(--text-color);
+  border-radius: 0;
+  /* */
   padding: var(--space-md);
   display: flex;
   justify-content: center;
   align-items: flex-end;
   background: var(--bg-1);
+  border-left: 2px solid var(--text-color);
 
   .menu-link {
     text-transform: uppercase;
