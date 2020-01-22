@@ -49,6 +49,7 @@ const Mutation = {
   },
   subscribeToEmail: async (_parent, { email }, _context) => {
     const userExists = await prisma.$exists.user({ email })
+    const successMessage = `Hooray! You've signed up for the Untrip weekly newsletter. Some more product description goes here.`
 
     if (userExists) {
       //check to see if they are a subscriber
@@ -73,7 +74,7 @@ const Mutation = {
         })
 
         return {
-          message: `Hooray! You've signed up for the Untrip weekly newsletter. Some more product description goes here.`,
+          message: successMessage,
         }
       }
     }
@@ -84,7 +85,7 @@ const Mutation = {
     })
 
     return {
-      message: `Hooray! You've signed up for the Untrip weekly newsletter. Some more product description goes here.`,
+      message: successMessage,
     }
   },
   unsubscribeToEmail: async (_parent, { email }, _context) => {
@@ -257,7 +258,6 @@ const Mutation = {
     }
 
     // TODO: check that user owns that comment
-
     return await prisma.deleteComment(
       {
         id: commentId,
