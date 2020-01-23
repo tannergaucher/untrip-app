@@ -102,11 +102,11 @@ function CopyLinkButton({ href }) {
         style={{
           color: `var(--bg-1)`,
           backgroundColor: copied ? `var(--bg-1)` : `var(--grey)`,
-          borderColor: `var(--grey)`,
+          border: `none`,
           padding: `var(--space-sm)`,
         }}
       >
-        <Link size="var(--text-md)" color="white" />
+        <Link size="var(--text-md)" color="var(--white)" />
       </Button>
     </CopyToClipboard>
   )

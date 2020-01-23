@@ -45,11 +45,16 @@
   --space-lg: calc(var(--baseline) * 2);
   --space-xl: calc(var(--baseline) * 3);
   /* Colors */
-  --text-color: black;
-  --bg-1: white;
-  --bg-2: black;
   --white: white;
+  --black: black;
   --grey: #555555;
+  /* */
+  --text-color: var(--black);
+  --bg-1: var(--white);
+  --bg-2: var(--black);
+  --primary-btn-bg: var(--black);
+  --input-border: var(--black);
+  /* */
   --accent: darkred;
   --facebook: #3b5998;
   --twitter: #1da1f2;
@@ -64,9 +69,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: white;
-    --bg-1: black;
-    --bg-2: grey;
+    --text-color: var(--white);
+    --bg-1: var(--black);
+    --bg-2: var(--grey);
     --accent: tomato;
     --grey: grey;
   }

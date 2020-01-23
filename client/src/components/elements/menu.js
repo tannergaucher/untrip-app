@@ -17,7 +17,6 @@ const StyledLayer = styled(Layer)`
   justify-content: center;
   align-items: flex-end;
   background: var(--bg-1);
-  border-left: 2px solid var(--text-color);
 
   .menu-link {
     text-transform: uppercase;

@@ -29,7 +29,7 @@ const StyledHeader = styled.header`
   }
 
   @media (max-width: 1024px) {
-    padding: var(--space-sm);
+    padding: 0 var(--space-sm);
 
     .only-full-size {
       display: none;
