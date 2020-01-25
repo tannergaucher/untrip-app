@@ -30,8 +30,11 @@ export default function PostCard({ post }) {
   return (
     <StyledPostCard>
       <Link to={`/${post.category.slug.current}/${post.slug.current}`} plain>
-        <Img fluid={post.mainImage.asset.fluid} />
-        <h2 className="post-title responsive-padding">{post.title}</h2>
+        <Img
+          style={{ boxShadow: `var(--elevation-2)` }}
+          fluid={post.mainImage.asset.fluid}
+        />
+        <h3 className="post-title responsive-padding">{post.title}</h3>
         <p className="post-excerpt responsive-padding">{excerpt}</p>
       </Link>
       <div className="post-share responsive-padding">

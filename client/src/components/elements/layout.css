@@ -50,12 +50,19 @@
   --grey: #555555;
   /* */
   --text-color: var(--black);
+  --href-color: black;
   --bg-1: var(--white);
-  --bg-2: var(--black);
+  --bg-2: #f2f2f2;
   --primary-btn-bg: var(--black);
+  --outline-btn-bg: var(--bg-2);
+  --primary-btn-color: var(--white);
+  --outline-btn-color: var(--grey);
   --input-border: var(--black);
+  --input-bg: var(--bg-2);
+  --card-bg: var(--bg-1);
   /* */
-  --accent: darkred;
+  --green: green;
+  --red: darkred;
   --facebook: #3b5998;
   --twitter: #1da1f2;
   --pinterest: #c8232c;
@@ -63,16 +70,27 @@
   /* Animation */
   --duration: 0.2s;
   /* Components */
-  --radius: 2px;
+  --radius: 4px;
   --thickness: 2px;
+  --elevation-1: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --elevation-2: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  --elevation-3: 0px 12px 20px rgba(0, 0, 0, 0.2);
+  --transition: all 0.15s ease-in 0s;
+  --opacity: opacity(0.35);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: var(--white);
+    --href-color: fuchsia;
     --bg-1: var(--black);
-    --bg-2: var(--grey);
-    --accent: tomato;
+    --bg-2: #1a1a1b;
+    --input-bg: var(--bg-2);
+    --primary-btn-bg: #1a1a1b;
+    --primary-btn-color: var(--href-color);
+    --card-bg: var(--bg-2);
+    --red: tomato;
+    --green: lime;
     --grey: grey;
   }
 }

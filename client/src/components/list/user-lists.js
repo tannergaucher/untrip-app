@@ -42,8 +42,8 @@ export default function UserLists({ place, setShowModal }) {
               onClick={() => setShowForm(!showForm)}
               style={{
                 marginTop: `var(--space-md)`,
-                color: `var(--accent)`,
-                borderColor: `var(--accent)`,
+                color: `var(--green)`,
+                borderColor: `var(--green)`,
               }}
             >
               New List

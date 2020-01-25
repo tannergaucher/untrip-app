@@ -55,7 +55,8 @@ export default function Details({ place, post }) {
         style={{
           border: `none`,
           textAlign: `left`,
-          padding: `var(--space-sm) var(--space-sm) var(--space-sm) var(--space-sm)`,
+          background: `var(--card-bg)`,
+          padding: `var(--space-sm)`,
           color: show ? "var(--text-color)" : "var(--grey)",
         }}
       >

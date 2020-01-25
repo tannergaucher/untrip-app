@@ -46,11 +46,10 @@ export default function DeleteComment({ comment, post }) {
         await deleteComment()
       }}
       style={{
-        color: `var(--grey)`,
         border: `none`,
       }}
     >
-      <Trash size="var(--text-md)" color="var(--grey)" />
+      <Trash size="var(--text-md)" color="var(--red)" />
     </Button>
   )
 }

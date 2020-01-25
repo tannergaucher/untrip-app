@@ -12,6 +12,7 @@ const StyledShare = styled.div`
 
   .share-btn {
     margin-right: var(--space-sm);
+    box-shadow: var(--elevation-3);
   }
 `
 

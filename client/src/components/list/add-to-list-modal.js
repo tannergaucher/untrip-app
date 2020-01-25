@@ -19,11 +19,12 @@ export default function AddToListModal({ place }) {
       <Button
         onClick={() => setShowModal(!showModal)}
         style={{
-          padding: `var(--space-sm)`,
+          padding: `var(--space-sm) 0`,
+          background: `var(--card-bg)`,
           border: `none`,
         }}
       >
-        <Bookmark size="var(--text-md)" color="var(--text-color)" />
+        <Bookmark size="var(--text-md)" color="var(--href-color)" />
       </Button>
       {showModal && (
         <StyledLayer
@@ -36,6 +37,7 @@ export default function AddToListModal({ place }) {
                 alignSelf: `flex-end`,
                 padding: `var(--space-sm)`,
                 border: `none`,
+                background: `var(--bg-1)`,
               }}
               onClick={() => setShowModal(false)}
             >

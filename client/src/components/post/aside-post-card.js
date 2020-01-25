@@ -29,7 +29,10 @@ export default function AsidePostCard({ post }) {
   return (
     <StyledAsideCard>
       <div className="img-wrapper">
-        <Img fluid={post.mainImage.asset.fluid} />
+        <Img
+          style={{ boxShadow: `var(--elevation-2)` }}
+          fluid={post.mainImage.asset.fluid}
+        />
       </div>
       <div className="post-details">
         <h4 className="post-title">{post.title}</h4>

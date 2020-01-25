@@ -2,21 +2,19 @@ import styled from "styled-components"
 
 const Button = styled.button`
   cursor: pointer;
-  background: ${props => (props.primary ? "var(--text-color)" : "var(--bg-1)")};
-  color: ${props => (props.primary ? "var(--bg-1)" : "var(--text-color)")};
+  background: ${props =>
+    props.primary ? "var(--primary-btn-bg)" : "var(--outline-btn-bg)"};
+  color: ${props =>
+    props.primary ? "var(--primary-btn-color)" : "var(--outline-btn-color)"};
+  border: none;
   padding: var(--space-sm) var(--space-md);
   font-family: var(--sans);
   font-weight: bolder;
-  border: ${props =>
-    props.plain
-      ? "var(--thickness) solid var(--white)"
-      : "var(--thickness) solid var(--text-color)"};
-  border-radius: var(--radius);
   text-transform: uppercase;
   opacity: ${props => (props.loading ? ".5" : "1")};
   transition-duration: var(--duration);
-
-  @media (max-width: 1024px) {
+  box-shadow: ${props => (props.primary ? `var(--elevation-3)` : ``)} @media
+    (max-width: 1024px) {
     width: ${props => (props.fillMobile ? "100%" : "")};
   }
 `
