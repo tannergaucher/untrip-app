@@ -11,6 +11,7 @@ const StyledPlace = styled.div`
   margin-bottom: var(--space-lg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border-radius: calc(var(--radius) * 2);
+  background: var(--card-bg);
 
   .place-name {
     margin: var(--space-sm) 0;

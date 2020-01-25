@@ -79,6 +79,7 @@ const StyledListItem = styled.div`
   }
 
   .edit-form {
+    margin-top: var(--space-md);
     button {
       margin-bottom: var(--space-lg);
     }
@@ -118,7 +119,10 @@ function ListItem({ list }) {
     <StyledListItem>
       <div className="title-edit">
         <h2 className="list-title">{list.title}</h2>
-        <Button onClick={() => setIsEdit(!isEdit)}>
+        <Button
+          onClick={() => setIsEdit(!isEdit)}
+          style={{ background: `var(--bg-1)` }}
+        >
           <Edit
             color={`${isEdit ? "var(--text-color)" : "var(--grey)"}`}
             size="var(--text-md)"

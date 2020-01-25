@@ -41,10 +41,13 @@ export default function Comments({
   return (
     <div ref={ref}>
       <Button
-        fillMobile
+        fillMobile={true}
         primary={!show}
         disabled={commentsLoading}
         className="toggle-comments-btn"
+        style={{
+          width: `100%`,
+        }}
         onClick={() => setShow(!show)}
       >
         {commentsData && commentsData.comments
@@ -62,29 +65,28 @@ export default function Comments({
             <AddComment post={post} />
           ) : (
             <>
-              <>
-                <Button primary onClick={() => setShowAuthModal(true)}>
-                  Log in to comment
-                </Button>
-                {showAuthModal && (
-                  <StyledLayer
-                    onClickOutside={() => setShowAuthModal(false)}
-                    onEsc={() => setShowAuthModal(false)}
+              <Button primary onClick={() => setShowAuthModal(true)}>
+                Log in to comment
+              </Button>
+              {showAuthModal && (
+                <StyledLayer
+                  onClickOutside={() => setShowAuthModal(false)}
+                  onEsc={() => setShowAuthModal(false)}
+                >
+                  <Button
+                    style={{
+                      alignSelf: "flex-end",
+                      border: `none`,
+                      padding: `var(--space-sm)`,
+                      background: `var(--bg-1)`,
+                    }}
+                    onClick={() => setShowAuthModal(false)}
                   >
-                    <Button
-                      style={{
-                        alignSelf: "flex-end",
-                        border: `none`,
-                        padding: `var(--space-sm)`,
-                      }}
-                      onClick={() => setShowAuthModal(false)}
-                    >
-                      <Close size="var(--text-md)" color="var(--text-color)" />
-                    </Button>
-                    <AuthTabs />
-                  </StyledLayer>
-                )}
-              </>
+                    <Close size="var(--text-md)" color="var(--text-color)" />
+                  </Button>
+                  <AuthTabs />
+                </StyledLayer>
+              )}
             </>
           )}
           <AllComments post={post} />
@@ -117,13 +119,16 @@ function AllComments({ post }) {
 const StyledComment = styled.div`
   margin-bottom: var(--space-lg);
   border-radius: var(--radius);
-  border: 2px solid var(--grey);
+  /* border: var(--thickness) solid var(--grey); */
   padding: var(--space-md);
+  box-shadow: var(--elevation-2);
+  background: var(--bg-2);
 
   .comment-author {
     margin-top: 0;
     margin-bottom: var(--space-sm);
     font-weight: bold;
+    color: var(--grey);
   }
 
   .comment-date {
@@ -219,7 +224,7 @@ function Comment({ comment, post }) {
           <p className="comment-text">{comment.text}</p>
           {comment.createdAt !== comment.updatedAt && (
             <h5 className="comment-date edited">
-              Edited: {moment(comment.updatedAt).format("h:mm A D MMMM")}
+              Edited {moment(comment.updatedAt).format("h:mm A D MMMM")}
             </h5>
           )}
         </>

@@ -43,7 +43,7 @@ export default function Login({ shouldNavigateTo }) {
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            required="true"
+            required={true}
           />
           <Input
             type="password"
