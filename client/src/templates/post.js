@@ -39,9 +39,12 @@ export default function PostPage({ data }) {
       />
       <ContentAsideGrid>
         <article className="content">
-          <Img fluid={post.mainImage.asset.fluid} />
+          <Img
+            style={{ boxShadow: `var(--elevation-2)` }}
+            fluid={post.mainImage.asset.fluid}
+          />
           <div className="responsive-padding">
-            <h1 className="post-title ">{post.title}</h1>
+            <h1 className="post-title text--xl">{post.title}</h1>
             {/* <h4 className="post-category">{post.category.category} </h4> */}
             {/* <h4 className="post-date">{post.publishedAt}</h4> */}
             <Share

@@ -17,7 +17,6 @@ const StyledLayer = styled(Layer)`
   justify-content: center;
   align-items: flex-end;
   background: var(--bg-1);
-  border-left: 2px solid var(--text-color);
 
   .menu-link {
     text-transform: uppercase;
@@ -33,8 +32,9 @@ export default function Menu() {
       <Button
         onClick={() => setShow(!show)}
         style={{
-          border: `none`,
           padding: `var(--space-sm) 0 var(--space-sm) var(--space-sm)`,
+          background: `var(--bg-1)`,
+          border: `none`,
         }}
       >
         <MenuIcon color="var(--text-color)" />

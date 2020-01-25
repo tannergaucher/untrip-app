@@ -50,7 +50,7 @@ function EmailForm() {
           type="email"
           value={email}
           required={true}
-          placeholder="Email Address"
+          placeholder="Email"
           onChange={e => setEmail(e.target.value)}
         />
 
@@ -64,7 +64,8 @@ function EmailForm() {
             justifyContent: `center`,
           }}
         >
-          <MailOption size="var(--text-md)" color="var(--bg-1)" />
+          Subscribe
+          {/* <MailOption size="var(--text-md)" color="var(--href-color)" /> */}
         </Button>
       </Form>
       {message && (
