@@ -198,8 +198,7 @@ function DeleteListButton({ listId }) {
       disabled={loading}
       onClick={() => deleteList()}
       style={{
-        color: `var(--accent)`,
-        borderColor: `var(--accent)`,
+        color: `var(--red)`,
       }}
     >
       Delete List

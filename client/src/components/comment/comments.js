@@ -42,7 +42,6 @@ export default function Comments({
     <div ref={ref}>
       <Button
         fillMobile={true}
-        primary={!show}
         disabled={commentsLoading}
         className="toggle-comments-btn"
         style={{
@@ -212,6 +211,7 @@ function Comment({ comment, post }) {
                 type="submit"
                 style={{
                   marginBottom: `var(--space-md)`,
+                  background: `var(--bg-1)`,
                 }}
               >
                 Save

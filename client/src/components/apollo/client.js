@@ -3,6 +3,7 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 import { createHttpLink } from "apollo-link-http"
 import { setContext } from "apollo-link-context"
 import fetch from "isomorphic-fetch"
+
 import { CURRENT_USER_QUERY } from "./graphql"
 
 const isBrowser = () => typeof window !== "undefined"

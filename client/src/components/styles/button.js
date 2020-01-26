@@ -6,7 +6,10 @@ const Button = styled.button`
     props.primary ? "var(--primary-btn-bg)" : "var(--outline-btn-bg)"};
   color: ${props =>
     props.primary ? "var(--primary-btn-color)" : "var(--outline-btn-color)"};
-  border: none;
+  border: var(--thickness) solid
+    ${props =>
+      props.primary ? "var(--primary-btn-bg)" : "var(--outline-btn-bg)"};
+  border-radius: var(--radius);
   padding: var(--space-sm) var(--space-md);
   font-family: var(--sans);
   font-weight: bolder;

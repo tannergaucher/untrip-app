@@ -57,7 +57,7 @@ export const COMMENT_FRAGMENT = gql`
   }
 `
 
-// Client side resolvers
+// @client side queries
 
 export const IS_LOGGED_IN = gql`
   query IS_LOGGED_IN {
