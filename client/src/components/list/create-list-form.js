@@ -65,19 +65,25 @@ export default function CreateList({ place, setShowModal }) {
       onSubmit={e => {
         e.preventDefault()
         createList()
-        setShowModal(false)
+        setTitle("")
       }}
     >
       <Input
         value={title}
         required={true}
+        disabled={loading}
         placeholder="List Name"
         onChange={e => setTitle(e.target.value)}
         style={{
           marginTop: `var(--space-md)`,
         }}
       />
-      <Button type="submit" loading={loading} primary>
+      <Button
+        type="submit"
+        loading={loading}
+        primary
+        style={{ color: `var(--green)`, borderColor: `var(--green)` }}
+      >
         Create List
       </Button>
     </Form>
