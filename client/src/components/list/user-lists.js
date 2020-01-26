@@ -12,6 +12,7 @@ const StyledUserLists = styled.div`
   color: var(--text-color);
 `
 
+// BETTER NAME
 export default function UserLists({ place, setShowModal }) {
   const [showForm, setShowForm] = useState(false)
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY)
@@ -57,6 +58,7 @@ export default function UserLists({ place, setShowModal }) {
   )
 }
 
+// BETTER NAME, OWN FILE
 function ToggleListPlace({ list, place }) {
   const { data } = useQuery(CURRENT_USER_QUERY)
 
