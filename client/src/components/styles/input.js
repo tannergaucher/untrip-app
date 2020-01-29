@@ -7,7 +7,7 @@ const Input = styled.input`
   padding: var(--space-sm);
   margin-bottom: var(--space-md);
   color: var(--text-color);
-  background: var(--bg-2);
+  background: var(--bg-1);
   font-size: var(--font-size);
 `
 
