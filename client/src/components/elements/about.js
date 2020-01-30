@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useMutation } from "@apollo/react-hooks"
-import { MailOption, Close } from "grommet-icons"
+import { Close } from "grommet-icons"
 
 import { Share } from "../elements"
 import { SUBSCRIBE_TO_EMAIL_MUTATION } from "../apollo/graphql"
@@ -57,7 +57,7 @@ function EmailForm() {
         <Button
           primary
           type="submit"
-          loading={loading}
+          loading={loading ? "true" : "false"} // Because console warning message
           style={{
             display: `flex`,
             alignItems: `center`,
@@ -65,7 +65,6 @@ function EmailForm() {
           }}
         >
           Subscribe
-          {/* <MailOption size="var(--text-md)" color="var(--href-color)" /> */}
         </Button>
       </Form>
       {message && (

@@ -12,7 +12,7 @@ export default function HappeningThisMonthAside() {
       <h3 className="side-title">This Month</h3>
       {edges[0].node.happeningThisMonth.map(post => (
         <Link
-          plain
+          plain="true"
           key={post.id}
           to={`/${post.category.slug.current}/${post.slug.current}`}
         >

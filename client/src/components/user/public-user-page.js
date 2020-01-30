@@ -1,8 +1,8 @@
 import React from "react"
-import { useQuery } from "@apollo/react-hooks"
+// import { useQuery } from "@apollo/react-hooks"
 
 import { ContentAsideGrid } from "../styles"
-import { USER_QUERY } from "../apollo/graphql"
+// import { USER_QUERY } from "../apollo/graphql"
 
 export default function PublicUserPage({ userId }) {
   // const { data } = useQuery(USER_QUERY, {
@@ -10,8 +10,6 @@ export default function PublicUserPage({ userId }) {
   //     userId,
   //   },
   // })
-
-  // TODO
 
   return (
     <>

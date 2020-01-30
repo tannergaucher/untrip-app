@@ -29,7 +29,10 @@ export default function PostCard({ post }) {
 
   return (
     <StyledPostCard>
-      <Link to={`/${post.category.slug.current}/${post.slug.current}`} plain>
+      <Link
+        to={`/${post.category.slug.current}/${post.slug.current}`}
+        plain="true"
+      >
         <Img
           style={{ boxShadow: `var(--elevation-2)` }}
           fluid={post.mainImage.asset.fluid}

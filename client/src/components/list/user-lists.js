@@ -74,7 +74,7 @@ function ToggleListPlace({ list, place }) {
   )
 
   // get listPlace
-  const myList = list.places.filter(place => place.sanityId === place.sanityId)
+  const myList = list.places.filter(place => place.sanityId === place.sanityId) // console warning comparing self to self ...
   const [listPlace] = myList.filter(myPlace => myPlace.sanityId === place.id)
 
   return isInList ? (
