@@ -1,4 +1,4 @@
-# Untrip.app
+# [Untrip.app](https://untrip.app)
 
 Curate static content into dynamic city lists and share on social media.
 
