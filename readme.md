@@ -1,13 +1,6 @@
 # [Untrip.app](https://untrip.app)
 
-Curate static content into dynamic city lists and share on social media.
-
-## Features
-
-- Responsive light / dark mode
-- Authentication with JSON web token
-- Static content available offline
-- Install to home screen
+## Curate static content into dynamic city lists and share on social media.
 
 ## Uses
 
@@ -16,6 +9,17 @@ Curate static content into dynamic city lists and share on social media.
 - Apollo Client
 - React Hooks Apollo
 - Apollo Server
-- Styled Components
-- CSS Variable style system
-- Prisma database client
+- Prisma
+
+## Client ENV
+
+### GATSBY_SERVER_URL
+
+### GATSBY_GOOGLE_MAPS_KEY
+
+## Server ENV
+
+### CLIENT_URL
+
+### APP_SECRET 
+
