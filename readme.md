@@ -4,12 +4,12 @@
 
 ## Uses
 
-- Gatsby
-- Sanity headless CMS
-- Apollo Client
-- React Hooks Apollo
-- Apollo Server
-- Prisma
+- [Gatsby](https://www.gatsbyjs.org/)
+- [Sanity CMS](https://www.sanity.io/)
+- [Apollo Client](https://www.apollographql.com/docs/react/)
+- [React Hooks Apollo](https://www.apollographql.com/docs/react/api/react-hooks/)
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
+- [Prisma](https://www.prisma.io/)
 
 ## Client ENV
 
