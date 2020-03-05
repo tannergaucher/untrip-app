@@ -40,3 +40,5 @@ From the server directory run `prisma deploy`
 Make environment variables available and run server with `npm start`
 
 View graphql playground on http://localhost:4000
+
+
