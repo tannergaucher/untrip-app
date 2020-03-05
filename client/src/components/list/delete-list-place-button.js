@@ -65,7 +65,6 @@ export default function DeleteListPlaceButton({ list, place, text }) {
       onClick={() => {
         deleteListPlace()
       }}
-      disabled={loading}
     >
       {text}
     </button>

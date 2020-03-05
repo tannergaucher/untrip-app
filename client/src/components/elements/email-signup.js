@@ -44,7 +44,7 @@ export default function EmailSignup() {
           onEsc={() => setMessage("")}
           onClickOutside={() => setMessage("")}
         >
-          <MessageModal />
+          <MessageModal message={message} setMessage={setMessage} />
         </Layer>
       )}
     </fieldset>
@@ -53,7 +53,7 @@ export default function EmailSignup() {
 
 const MessageModal = ({ message, setMessage }) => {
   return (
-    <div>
+    <div style={{ padding: `var(--space-sm)` }}>
       <div>
         <div
           style={{
@@ -62,11 +62,6 @@ const MessageModal = ({ message, setMessage }) => {
             justifyContent: `space-between`,
           }}
         >
-          <h1 style={{ margin: `0` }}>
-            <span role="img" aria-label="welcome emoji">
-              🎉
-            </span>
-          </h1>
           <button
             className="btn"
             onClick={() => setMessage("")}
@@ -75,10 +70,10 @@ const MessageModal = ({ message, setMessage }) => {
             X
           </button>
         </div>
-        <h2>{message}</h2>
+        <h2 style={{ color: `var(--text-color)` }}>{message}</h2>
       </div>
       <h4>Change your mind already?</h4>
-      <button>Unsubscribe</button>
+      <button className="btn">Unsubscribe</button>
     </div>
   )
 }

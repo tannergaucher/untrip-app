@@ -84,7 +84,6 @@ export default function CreateListPlaceButton({ list, place }) {
         color: `var(--grey)`,
         backgroundColor: `var(--bg-1)`,
       }}
-      disabled={loading}
     >
       {list.title}
     </button>
