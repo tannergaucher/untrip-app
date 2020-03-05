@@ -1,21 +1,20 @@
+import { Link } from "gatsby"
 import React from "react"
-import styled from "styled-components"
-
-const StyledFooter = styled.footer`
-  padding: var(--space-md);
-
-  .site-title {
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: lighter;
-  }
-`
+import { useSiteMetadata } from "../hooks"
 
 export default function Footer() {
+  const { title, description } = useSiteMetadata()
+
   return (
-    <StyledFooter>
-      <h4 className="site-title">Untrip</h4>
-      <small>Curated Kuala Lumpur</small>
-    </StyledFooter>
+    <footer className="footer padding">
+      <div style={{ marginBottom: `var(--space-sm )` }}>
+        <Link className="nav-link" to="/">
+          <h2 className="title" style={{ margin: 0 }}>
+            {title}
+          </h2>
+        </Link>
+        <small>{description}</small>
+      </div>
+    </footer>
   )
 }

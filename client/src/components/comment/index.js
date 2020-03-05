@@ -1,6 +1,15 @@
-import Comments from "./comments"
-import AddComment from "./add-comment"
-import DeleteComment from "./delete-comment"
-import EditComment from "./edit-comment"
+import AllComments from "./all-comments"
+import Comment from "./comment"
+import CommentsSection from "./comments-section"
+import CreateComment from "./create-comment"
+import DeleteCommentButton from "./delete-comment-button"
+import EditCommentForm from "./edit-comment-form"
 
-export { Comments, AddComment, DeleteComment, EditComment }
+export {
+  CommentsSection,
+  CreateComment,
+  DeleteCommentButton,
+  EditCommentForm,
+  AllComments,
+  Comment,
+}

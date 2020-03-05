@@ -1,10 +1,11 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { useQuery } from "@apollo/react-hooks"
-
-import { Header, Footer } from "../elements"
-import { CURRENT_USER_QUERY } from "../apollo/graphql"
 import "./layout.css"
+
+import { Footer, Header } from "../elements"
+
+import { CURRENT_USER_QUERY } from "../apollo/graphql"
+import PropTypes from "prop-types"
+import React from "react"
+import { useQuery } from "@apollo/react-hooks"
 
 export default function Layout({ children, location }) {
   useQuery(CURRENT_USER_QUERY)
@@ -12,7 +13,7 @@ export default function Layout({ children, location }) {
   return (
     <>
       <Header location={location} />
-      <main style={{ minHeight: `100vh` }}>{children}</main>
+      <main className="main">{children}</main>
       <Footer />
     </>
   )

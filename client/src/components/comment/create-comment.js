@@ -1,32 +1,28 @@
-import React, { useState } from "react"
-import { useMutation, useQuery } from "@apollo/react-hooks"
-import { Chat } from "grommet-icons"
-
-import { Fieldset, Form, Textarea, Button } from "../styles"
 import {
-  ADD_COMMENT_MUTATION,
   COMMENTS_QUERY,
+  CREATE_COMMENT_MUTATION,
   CURRENT_USER_QUERY,
 } from "../apollo/graphql"
+import React, { useState } from "react"
+import { useMutation, useQuery } from "@apollo/react-hooks"
 
-export default function AddComment({ post }) {
+export default function CreateComment({ post }) {
   const [text, setText] = useState("")
 
-  // Because need to compare comment createdAt versus updatedAt
-  const tempDate = new Date()
-
   const { data } = useQuery(CURRENT_USER_QUERY)
-  const [addComment, { error }] = useMutation(ADD_COMMENT_MUTATION, {
+
+  const tempDate = new Date() // Because need to compare comment createdAt versus updatedAt.
+
+  const [createComment, { error }] = useMutation(CREATE_COMMENT_MUTATION, {
     variables: {
       commentInput: {
         text,
         sanityPostId: post.id,
       },
     },
-
     optimisticResponse: {
       __typename: "Mutation",
-      addComment: {
+      createComment: {
         __typename: "Comment",
         id: tempDate,
         sanityPostId: post.id,
@@ -55,41 +51,36 @@ export default function AddComment({ post }) {
         },
         data: {
           ...data,
-          comments: [payload.data.addComment, ...data.comments],
+          comments: [payload.data.createComment, ...data.comments],
         },
       })
     },
   })
 
   return (
-    <Fieldset
+    <fieldset
+      style={{ marginTop: `var(--space-md)` }}
+      className="fieldset"
       onSubmit={async e => {
         e.preventDefault()
         setText("")
-        await addComment()
+        await createComment()
       }}
     >
       {error && `Error!`}
-
-      <Form>
-        <Textarea
+      <form className="form">
+        <textarea
+          className="textarea"
+          placeholder="Comment"
+          rows="5"
           value={text}
           onChange={e => setText(e.target.value)}
           required={true}
-        ></Textarea>
-        <Button
-          primary
-          fillMobile
-          type="submit"
-          style={{
-            display: `flex`,
-            justifyContent: `center`,
-            alignItems: `center`,
-          }}
-        >
-          <Chat size="var(--text-md)" color="var(--green)" />
-        </Button>
-      </Form>
-    </Fieldset>
+        ></textarea>
+        <button className="btn btn-primary" type="submit">
+          Submit
+        </button>
+      </form>
+    </fieldset>
   )
 }

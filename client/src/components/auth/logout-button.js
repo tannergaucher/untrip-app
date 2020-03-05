@@ -2,14 +2,12 @@ import React from "react"
 import { navigate } from "gatsby"
 import { useApolloClient } from "@apollo/react-hooks"
 
-import { Button } from "../styles"
-
-export default function Logout({ shouldNavigateTo }) {
+export default function LogoutButton({ shouldNavigateTo }) {
   const client = useApolloClient()
 
   return (
-    <Button
-      fillMobile
+    <button
+      className="btn"
       onClick={() => {
         client.resetStore()
         localStorage.removeItem("token")
@@ -20,6 +18,6 @@ export default function Logout({ shouldNavigateTo }) {
       }}
     >
       Log Out
-    </Button>
+    </button>
   )
 }

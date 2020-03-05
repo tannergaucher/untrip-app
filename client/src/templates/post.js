@@ -1,108 +1,89 @@
+import { AboutSection, Map, SEO, Share } from "../components/elements"
+import { Author, LatestPostsAside } from "../components/post"
+import { Link, graphql } from "gatsby"
 import React, { useState } from "react"
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
-import styled from "styled-components"
+
 import BlockContent from "@sanity/block-content-to-react"
-import { useQuery } from "@apollo/react-hooks"
-
-import { COMMENTS_QUERY } from "../components/apollo/graphql"
-import { Comments } from "../components/comment"
+import { CommentsSection } from "../components/comment"
+import Img from "gatsby-image"
 import { PostPlaces } from "../components/place"
-import { SEO, Map, Share, About } from "../components/elements"
-import { ContentAsideGrid } from "../components/styles"
-import { LatestPostsAside, PopularPostsAside, Author } from "../components/post"
-
-const StyledPost = styled.div``
 
 export default function PostPage({ data }) {
   const [placeInView, setPlaceInView] = useState(null)
-  const [commentsInView, setCommentsInView] = useState(null)
-
   const { sanityPost: post } = data
 
-  const {
-    data: commentsData,
-    loading: commentsLoading,
-    error: commentsError,
-  } = useQuery(COMMENTS_QUERY, {
-    variables: {
-      sanityPostId: post.id,
-    },
-  })
-
   return (
-    <StyledPost>
+    <div className="page">
       <SEO
         title={post.title}
         image={post.mainImage.asset.fluid.src}
         url={`https://untrip.app/posts/${post.category.slug.current}/${post.slug.current}`}
       />
-      <ContentAsideGrid>
+      <div
+        className="content-aside-grid"
+        style={{ marginBottom: `var(--space-lg)` }}
+      >
         <article className="content">
-          <Img
-            style={{ boxShadow: `var(--elevation-2)` }}
-            fluid={post.mainImage.asset.fluid}
-          />
-          <div className="responsive-padding">
-            <h1 className="post-title text--xl">{post.title}</h1>
-            {/* <h4 className="post-category">{post.category.category} </h4> */}
-            {/* <h4 className="post-date">{post.publishedAt}</h4> */}
-            <Share
-              href={`/${post.category.slug.current}/${post.slug.current}`}
-              pinterestImageUrl={post.mainImage.asset.url}
-            />
-            <BlockContent blocks={post._rawBody} />
-            <Author author={post.author} />
-            <br />
-            <PostPlaces
-              postPlaces={post.postPlaces}
-              post={post}
-              setPlaceInView={setPlaceInView}
-            />
-            <Comments
-              post={post}
-              setCommentsInView={setCommentsInView}
-              commentsData={commentsData}
-              commentsError={commentsError}
-              commentsLoading={commentsLoading}
-            />
-            <br />
-            <br />
+          <div className="padding">
+            <Share />
           </div>
-        </article>
-        <aside className="responsive-padding">
-          <LatestPostsAside />
-          <PopularPostsAside />
-          <div className="only-mobile">
-            <About />
-          </div>
-          <div className="sticky">
-            {commentsInView ? (
-              <About />
-            ) : (
-              <div className="map-container">
-                <MapAside post={post} placeInView={placeInView} />
-              </div>
+          <Img fluid={post.mainImage.asset.fluid} />
+          <h1 id="post-title" className="title text--xxxl padding">
+            {post.title}
+          </h1>
+          <div className="padding">
+            {/* <h3 className="text--md">{post.publishedAt}</h3> */}
+
+            {post.postPlaces.length > 0 && (
+              <>
+                <a className="nav-link" href="#map">
+                  <h3> View Map</h3>
+                </a>
+                <br />
+              </>
             )}
+
+            <BlockContent blocks={post._rawBody} />
+            <hr />
           </div>
+          <PostPlaces
+            postPlaces={post.postPlaces}
+            post={post}
+            setPlaceInView={setPlaceInView}
+          />
+          <br style={{ marginTop: `var(--space-lg)` }} />
+          <div className="padding">
+            <Author author={post.author} />
+          </div>
+          <br />
+          <CommentsSection post={post} />
+        </article>
+        <aside className="aside padding">
+          <LatestPostsAside />
+          <AboutSection />
         </aside>
-      </ContentAsideGrid>
-    </StyledPost>
+      </div>
+
+      {post.postPlaces.length > 0 && (
+        <PostMap post={post} placeInView={placeInView} />
+      )}
+    </div>
   )
 }
 
-const MapAside = ({ post, placeInView }) => (
+const PostMap = ({ post, placeInView }) => (
   <>
-    <h3 className="map-title">{post.title}</h3>
-    <Map
-      places={post.postPlaces}
-      placeInView={placeInView}
-      style={{
-        height: `71vh`,
-        maxWidth: `500px`,
-        marginTop: "5.5rem",
-      }}
-    />
+    <div className="padding">
+      <hr />
+      <h2 id="map" className="title text--xxxl">
+        {post.title}
+      </h2>
+      <a href="#post-title" className="nav-link">
+        <h3> View Post</h3>
+      </a>
+    </div>
+    <br />
+    <Map places={post.postPlaces} placeInView={placeInView} />
     <Share
       href={`/${post.category.slug.current}/${post.slug.current}`}
       pinterestImageUrl={post.mainImage.asset.url}

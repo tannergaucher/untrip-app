@@ -1,11 +1,9 @@
+import { COMMENTS_QUERY, DELETE_COMMENT_MUTATION } from "../apollo/graphql"
+
 import React from "react"
 import { useMutation } from "@apollo/react-hooks"
-import { Trash } from "grommet-icons"
 
-import { Button } from "../styles"
-import { DELETE_COMMENT_MUTATION, COMMENTS_QUERY } from "../apollo/graphql"
-
-export default function DeleteComment({ comment, post }) {
+export default function DeleteCommentButton({ comment, post }) {
   const [deleteComment] = useMutation(DELETE_COMMENT_MUTATION, {
     variables: {
       commentId: comment.id,
@@ -41,15 +39,14 @@ export default function DeleteComment({ comment, post }) {
   })
 
   return (
-    <Button
-      onClick={async () => {
-        await deleteComment()
-      }}
-      style={{
-        border: `none`,
+    <button
+      style={{ borderColor: `var(--grey)`, color: `var(--grey)` }}
+      className="btn"
+      onClick={() => {
+        deleteComment()
       }}
     >
-      <Trash size="var(--text-md)" color="var(--red)" />
-    </Button>
+      Delete Comment
+    </button>
   )
 }

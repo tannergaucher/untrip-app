@@ -1,19 +1,18 @@
-import React from "react"
-import { graphql } from "gatsby"
-
-import { SEO, About } from "../components/elements"
-import { ContentAsideGrid, Link } from "../components/styles"
+import { AboutSection, SEO } from "../components/elements"
 import {
-  PostCard,
   LatestPostsAside,
   PopularPostsAside,
+  PostCard,
 } from "../components/post"
+import { Link, graphql } from "gatsby"
+
+import React from "react"
 
 export default function CategoryPage({ data, pageContext }) {
   return (
-    <>
+    <div className="page padding contaienr">
       <SEO title={pageContext.category} />
-      <ContentAsideGrid>
+      <div className="content-aside-grid">
         <div className="content">
           {data.allSanityPost.edges.map(edge => (
             <Link
@@ -25,13 +24,13 @@ export default function CategoryPage({ data, pageContext }) {
             </Link>
           ))}
         </div>
-        <aside>
+        <aside className="aside">
           <LatestPostsAside />
           <PopularPostsAside />
-          <About />
+          <AboutSection />
         </aside>
-      </ContentAsideGrid>
-    </>
+      </div>
+    </div>
   )
 }
 

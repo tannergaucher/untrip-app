@@ -11,15 +11,34 @@
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
 - [Prisma](https://www.prisma.io/)
 
-## Client ENV
+## Client Development ENV
 
-### GATSBY_SERVER_URL
+### GATSBY_SERVER_URL="http://localhost:4000"
 
-### GATSBY_GOOGLE_MAPS_KEY
+### GATSBY_GOOGLE_MAPS_KEY=<YOUR_API_KEY>
 
-## Server ENV
+Make environment variables available and run client with `gatsby develop`
 
-### CLIENT_URL
+View client on http://localhost:8000
 
-### APP_SECRET 
+## Server Development ENV
+
+### CLIENT_URL="http://localhost:8888"
+
+### APP_SECRET=<ANY_STRING>
+
+### Deploy Datamodel to Prisma
+
+Make an account with prisma and install the prisma cli.
+
+`prisma login`
+
+From the server directory run `prisma deploy`
+
+### Run Server
+
+Make environment variables available and run server with `npm start`
+
+View graphql playground on http://localhost:4000
+
 

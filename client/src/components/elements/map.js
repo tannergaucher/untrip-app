@@ -1,9 +1,9 @@
-import React from "react"
-import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react"
-import Img from "gatsby-image"
+import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react"
 
-import { Link } from "../styles"
 import Icon from "../../images/location-pin.svg"
+import Img from "gatsby-image"
+import { Link } from "gatsby"
+import React from "react"
 
 class MapContainer extends React.Component {
   state = {
@@ -122,8 +122,7 @@ class MapContainer extends React.Component {
                 // FIX
                 url:
                   this.state.selectedPlace.position === place.location
-                    ? // TODO
-                      ""
+                    ? ""
                     : Icon,
                 anchor: new google.maps.Point(45, 45),
                 scaledSize: new google.maps.Size(45, 45),
@@ -141,11 +140,11 @@ class MapContainer extends React.Component {
             visible={this.state.showingInfoWindow}
             marker={this.state.activeMarker}
           >
-            <div className="info-window">
-              <h4>{this.state.selectedPlace.name}</h4>
+            <div className="card">
+              <h2>{this.state.selectedPlace.name}</h2>
               <Img fixed={this.state.selectedPlace.image} />
               <Link to={`/place/${this.state.selectedPlace.slug}`}>
-                <small style={{ display: `block` }}>View all posts</small>
+                <h2>View posts</h2>
               </Link>
             </div>
           </InfoWindow>

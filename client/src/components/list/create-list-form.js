@@ -1,8 +1,7 @@
-import React, { useState } from "react"
-import { useMutation } from "@apollo/react-hooks"
-
-import { Button, Input, Form } from "../styles"
 import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
+import React, { useState } from "react"
+
+import { useMutation } from "@apollo/react-hooks"
 
 export default function CreateList({ place, setShowModal }) {
   const [title, setTitle] = useState("")
@@ -11,7 +10,7 @@ export default function CreateList({ place, setShowModal }) {
       title,
       sanityId: place.id,
       name: place.name,
-      imageUrl: JSON.stringify(place.image.asset.fixed),
+      imageUrl: JSON.stringify(place.image.asset.fluid),
       slug: place.slug.current,
       lat: place.location.lat,
       lng: place.location.lng,
@@ -33,7 +32,6 @@ export default function CreateList({ place, setShowModal }) {
         console.log(error)
       }
     },
-
     optimisticResponse: {
       __typename: "Mutation",
       createList: {
@@ -61,31 +59,31 @@ export default function CreateList({ place, setShowModal }) {
   })
 
   return (
-    <Form
-      onSubmit={e => {
-        e.preventDefault()
-        createList()
-        setTitle("")
-      }}
-    >
-      <Input
-        value={title}
-        required={true}
-        disabled={loading}
-        placeholder="List Name"
-        onChange={e => setTitle(e.target.value)}
-        style={{
-          marginTop: `var(--space-md)`,
+    <fieldset className="fieldset" disabled={loading && true}>
+      <form
+        className="form"
+        onSubmit={e => {
+          e.preventDefault()
+          createList()
+          setTitle("")
         }}
-      />
-      <Button
-        type="submit"
-        loading={loading}
-        primary
-        style={{ color: `var(--green)`, borderColor: `var(--green)` }}
       >
-        Create List
-      </Button>
-    </Form>
+        <input
+          className="input"
+          value={title}
+          required={true}
+          disabled={loading}
+          placeholder="List Name"
+          onChange={e => setTitle(e.target.value)}
+        />
+        <button
+          className="btn btn-primary"
+          type="submit"
+          loading={loading && true}
+        >
+          Create List
+        </button>
+      </form>
+    </fieldset>
   )
 }
