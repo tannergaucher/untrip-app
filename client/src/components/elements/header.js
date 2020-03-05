@@ -1,91 +1,57 @@
-import React from "react"
-import styled from "styled-components"
-import { navigate } from "gatsby"
-import { useQuery } from "@apollo/react-hooks"
-
-import { Menu } from "../elements"
-import { Button, Link } from "../styles"
 import { IS_LOGGED_IN } from "../apollo/graphql"
-
-const StyledHeader = styled.header`
-  padding: var(--space-md);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .site-title {
-    margin: 0;
-    line-height: 1;
-    text-transform: uppercase;
-    font-weight: lighter;
-  }
-
-  .site-description {
-    line-height: 1;
-  }
-
-  .only-mobile {
-    display: none;
-  }
-
-  @media (max-width: 1024px) {
-    padding: 0 var(--space-sm);
-
-    .only-full-size {
-      display: none;
-    }
-
-    .only-mobile {
-      display: inline;
-    }
-  }
-`
-
-// Because styled components bug where Button looses classname on refresh in production...
-const MyListsBtn = styled(Button)`
-  margin-right: var(--space-md);
-`
+import { Link } from "gatsby"
+import React from "react"
+import { useQuery } from "@apollo/react-hooks"
+import { useSiteMetadata } from "../hooks"
 
 export default function Header() {
+  const { title, description } = useSiteMetadata()
   const { loading, data } = useQuery(IS_LOGGED_IN)
 
   if (loading) return
 
   return (
-    <StyledHeader>
-      <div className="site-title-description">
-        <Link to="/" plain="true">
-          <h4 className="site-title">Untrip</h4>
+    <header className="header padding">
+      <div style={{ marginBottom: `var(--space-md)` }}>
+        <Link to="/" className="nav-link">
+          <h2
+            className="title"
+            style={{ margin: `0`, marginTop: `var(--space-sm)` }}
+          >
+            {title}
+          </h2>
         </Link>
-        <small className="site-description only-full-size">
-          Curated Kuala Lumpur
+        <small
+          style={{
+            marginRight: `var(--space-md)`,
+          }}
+        >
+          {description}
         </small>
       </div>
-      <div>
-        <div className="only-full-size">
-          {data && data.isLoggedIn ? (
-            <>
-              <MyListsBtn primary onClick={() => navigate(`/lists`)}>
-                My Lists
-              </MyListsBtn>
-              <Button onClick={() => navigate(`/account`)}>Account</Button>
-            </>
-          ) : (
-            <Button
-              primary
-              onClick={e => {
-                e.preventDefault()
-                navigate("/login")
-              }}
-            >
-              Log In
-            </Button>
-          )}
-        </div>
-        <div className="only-mobile">
-          <Menu />
-        </div>
-      </div>
-    </StyledHeader>
+      {data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
+    </header>
   )
 }
+
+const Nav = () => (
+  <nav className="nav">
+    <Link to="/login" className="nav-link">
+      <h4>Log In</h4>
+    </Link>
+    <Link to="/signup" className="nav-link">
+      <h4>Sign Up</h4>
+    </Link>
+  </nav>
+)
+
+const AuthedNav = () => (
+  <nav className="nav">
+    <Link to="/my-lists" className="nav-link">
+      <h4>My Lists</h4>
+    </Link>
+    <Link to="/account" className="nav-link">
+      <h4>Account</h4>
+    </Link>
+  </nav>
+)

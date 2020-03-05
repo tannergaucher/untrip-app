@@ -1,6 +1,6 @@
 import AuthTabs from "./auth-tabs"
 import Login from "./login"
-import Logout from "./logout"
+import LogoutButton from "./logout-button"
 import Signup from "./signup"
 
-export { AuthTabs, Login, Logout, Signup }
+export { AuthTabs, Login, LogoutButton, Signup }

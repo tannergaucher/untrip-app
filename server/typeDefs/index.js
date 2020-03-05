@@ -88,7 +88,7 @@ const typeDefs = gql`
     ): List!
     updateList(listId: String!, title: String!): List!
     deleteList(listId: String!): List
-    addToList(
+    createListPlace(
       listId: ID
       sanityId: String
       name: String
@@ -97,10 +97,10 @@ const typeDefs = gql`
       lat: Float
       lng: Float
     ): ListPlace
-    removeFromList(listPlaceId: ID!): ListPlace
+    deleteListPlace(listId: ID!, listPlaceSanityId: String): ListPlace
     subscribeToEmail(email: String!): SuccessMessage!
     unsubscribeToEmail(email: String!): SuccessMessage!
-    addComment(commentInput: CommentInput!): Comment!
+    createComment(commentInput: CommentInput!): Comment!
     editComment(commentId: ID!, text: String!): Comment!
     deleteComment(commentId: ID!): Comment
   }

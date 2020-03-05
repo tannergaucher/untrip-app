@@ -1,10 +1,10 @@
-import About from "./about"
-import Header from "./header"
-import SEO from "./seo"
+import AboutSection from "./about-section"
+import EmailSignup from "./email-signup"
 import Footer from "./footer"
-import Menu from "./menu"
+import Header from "./header"
 import Layout from "./layout"
 import Map from "./map"
+import SEO from "./seo"
 import Share from "./share"
 
-export { About, Header, SEO, Footer, Menu, Layout, Map, Share }
+export { AboutSection, EmailSignup, Header, SEO, Footer, Layout, Map, Share }

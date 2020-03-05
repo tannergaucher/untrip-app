@@ -57,7 +57,7 @@ export const COMMENT_FRAGMENT = gql`
   }
 `
 
-// @client side queries
+// Client side queries
 
 export const IS_LOGGED_IN = gql`
   query IS_LOGGED_IN {
@@ -182,8 +182,8 @@ export const DELETE_LIST_MUTATION = gql`
   }
 `
 
-export const ADD_TO_LIST_MUTATION = gql`
-  mutation ADD_TO_LIST_MUTATION(
+export const CREATE_LIST_PLACE_MUTATION = gql`
+  mutation CREATE_LIST_PLACE_MUTATION(
     $listId: ID!
     $sanityId: String!
     $name: String!
@@ -192,7 +192,7 @@ export const ADD_TO_LIST_MUTATION = gql`
     $lat: Float!
     $lng: Float!
   ) {
-    addToList(
+    createListPlace(
       listId: $listId
       sanityId: $sanityId
       name: $name
@@ -207,9 +207,12 @@ export const ADD_TO_LIST_MUTATION = gql`
   ${LIST_PLACE_FRAGMENT}
 `
 
-export const REMOVE_FROM_LIST_MUTATION = gql`
-  mutation REMOVE_FROM_LIST($listPlaceId: ID!) {
-    removeFromList(listPlaceId: $listPlaceId) {
+export const DELETE_LIST_PLACE_MUTATION = gql`
+  mutation DELETE_LIST_PLACE_MUTATION(
+    $listId: ID!
+    $listPlaceSanityId: String!
+  ) {
+    deleteListPlace(listId: $listId, listPlaceSanityId: $listPlaceSanityId) {
       id
     }
   }
@@ -230,9 +233,9 @@ export const UNSUBSCRIBE_TO_EMAIL_MUTATION = gql`
   ${USER_FRAGMENT}
 `
 
-export const ADD_COMMENT_MUTATION = gql`
+export const CREATE_COMMENT_MUTATION = gql`
   mutation ADD_COMMENT_MUTATION($commentInput: CommentInput!) {
-    addComment(commentInput: $commentInput) {
+    createComment(commentInput: $commentInput) {
       ...CommentFragment
     }
   }

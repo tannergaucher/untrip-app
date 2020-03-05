@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-import { navigate } from "gatsby"
-import { useMutation } from "@apollo/react-hooks"
 
 import { SIGN_UP_MUTATION } from "../apollo/graphql"
-import { Button, Fieldset, Form, Input } from "../styles"
+import { navigate } from "gatsby"
+import { useMutation } from "@apollo/react-hooks"
 
 export default function Signup({ shouldNavigateTo }) {
   const [username, setUsername] = useState("")
@@ -20,52 +19,58 @@ export default function Signup({ shouldNavigateTo }) {
   })
 
   return (
-    <>
-      <h2 style={{ marginTop: `0`, textAlign: `center` }}>Sign Up</h2>
-      <Fieldset disabled={loading}>
-        {error && `${error.message}`}
-        <Form
-          onSubmit={async e => {
-            e.preventDefault()
-            const { data } = await signup()
-            localStorage.setItem("token", data.signup.token)
-            client.writeData({
-              data: {
-                isLoggedIn: true,
-                me: data.signup.user,
-              },
-            })
+    <fieldset className="fieldset" disabled={loading}>
+      {error && `${error.message}`}
+      <form
+        className="form"
+        onSubmit={async e => {
+          e.preventDefault()
+          const { data } = await signup()
+          localStorage.setItem("token", data.signup.token)
+          client.writeData({
+            data: {
+              isLoggedIn: true,
+              me: data.signup.user,
+            },
+          })
 
-            if (shouldNavigateTo) {
-              navigate(shouldNavigateTo)
-            }
-          }}
+          if (shouldNavigateTo) {
+            navigate(shouldNavigateTo)
+          }
+        }}
+      >
+        <input
+          className="input"
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+        />
+        <input
+          className="input"
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <input
+          className="input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <button
+          className="btn btn-primary"
+          type="submit"
+          primary
+          loading={loading}
         >
-          <Input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <Button type="submit" primary loading={loading}>
-            Sign Up
-          </Button>
-        </Form>
-      </Fieldset>
-    </>
+          Sign Up
+        </button>
+      </form>
+    </fieldset>
   )
 }

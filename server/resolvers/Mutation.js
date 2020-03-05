@@ -176,7 +176,7 @@ const Mutation = {
       info
     )
   },
-  addToList: async (
+  createListPlace: async (
     _parent,
     { listId, sanityId, name, imageUrl, slug, lat, lng },
     _context
@@ -197,23 +197,26 @@ const Mutation = {
 
     return listPlace
   },
-
-  removeFromList: async (_parent, { listPlaceId }, context, info) => {
+  deleteListPlace: async (
+    _parent,
+    { listId, listPlaceSanityId },
+    context,
+    _info
+  ) => {
     const userId = getUserId(context)
 
     if (!userId) {
       throw new Error(`Sign In!`)
     }
 
-    return await prisma.deleteListPlace(
-      {
-        id: listPlaceId,
-      },
-      info
-    )
+    const [existingListPlace] = await prisma
+      .list({ id: listId })
+      .places({ where: { sanityId: listPlaceSanityId } })
+
+    return prisma.deleteListPlace({ id: existingListPlace.id })
   },
 
-  addComment: async (_parent, { commentInput }, context) => {
+  createComment: async (_parent, { commentInput }, context) => {
     const userId = getUserId(context)
 
     if (!userId) {
@@ -257,7 +260,6 @@ const Mutation = {
       throw new Error(`Sign In!`)
     }
 
-    // TODO: check that user owns that comment
     return await prisma.deleteComment(
       {
         id: commentId,

@@ -1,37 +1,35 @@
-import React from "react"
-import { graphql } from "gatsby"
-
-import { SEO, About } from "../components/elements"
-import { ContentAsideGrid, Link } from "../components/styles"
+import { AboutSection, SEO } from "../components/elements"
 import {
-  PostCard,
   LatestPostsAside,
   PopularPostsAside,
+  PostCard,
 } from "../components/post"
+import { Link, graphql } from "gatsby"
 
-export default function PlacePage({ data, pageContext }) {
-  console.log(pageContext)
+import React from "react"
+
+export default function PlacePostsPage({ data, pageContext }) {
   return (
     <>
       <SEO title={pageContext.placeName} />
-      <ContentAsideGrid>
-        <div className="content">
-          <h1>All posts with {pageContext.placeName}</h1>
+      <div className="content-aside-grid">
+        <div className="content padding">
+          <h1 className="title">Posts with {pageContext.placeName}</h1>
           {data.allSanityPost.edges.map(edge => (
             <Link
+              className="nav-link"
               to={`/${edge.node.category.slug.current}/${edge.node.slug.current}`}
-              plain
             >
               <PostCard key={edge.node.id} post={edge.node} />
             </Link>
           ))}
         </div>
-        <aside>
+        <aside className="aside padding">
           <LatestPostsAside />
           <PopularPostsAside />
-          <About />
+          <AboutSection />
         </aside>
-      </ContentAsideGrid>
+      </div>
     </>
   )
 }

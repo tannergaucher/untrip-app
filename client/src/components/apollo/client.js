@@ -1,10 +1,9 @@
 import { ApolloClient } from "apollo-client"
+import { CURRENT_USER_QUERY } from "./graphql"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { createHttpLink } from "apollo-link-http"
-import { setContext } from "apollo-link-context"
 import fetch from "isomorphic-fetch"
-
-import { CURRENT_USER_QUERY } from "./graphql"
+import { setContext } from "apollo-link-context"
 
 const isBrowser = () => typeof window !== "undefined"
 
@@ -41,11 +40,11 @@ export const client = new ApolloClient({
           place => place.sanityId === placeSanityId
         )
 
-        return existingPlace ? true : false
+        return existingPlace !== undefined
       },
-      isMyComment: (parent, { commentAuthorId }, { client }) => {
+      isMyComment: (_parent, { commentAuthorId }, { client }) => {
         const data = client.readQuery({ query: CURRENT_USER_QUERY })
-        return data.me && data.me.id === commentAuthorId
+        return data && data.me && data.me.id === commentAuthorId
       },
     },
   },

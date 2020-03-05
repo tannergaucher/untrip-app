@@ -1,22 +1,11 @@
-import React from "react"
 import Img from "gatsby-image"
-import styled from "styled-components"
-
-import { Share } from "../elements"
-import { Link } from "../styles"
-
-const StyledPostCard = styled.div`
-  margin-bottom: var(--space-xl);
-
-  .post-share {
-    margin-top: var(--space-md);
-  }
-`
+import { Link } from "gatsby"
+import React from "react"
 
 export default function PostCard({ post }) {
   const postText = post._rawBody[0].children[0].text
   const textArr = postText.split(" ")
-  const maxWordLength = 30
+  const maxWordLength = 16
 
   let excerpt
 
@@ -24,28 +13,26 @@ export default function PostCard({ post }) {
     excerpt = textArr.join(" ")
   }
 
-  // TODO: Check for existing punctuation at index -1
   excerpt = `${textArr.slice(0, maxWordLength).join(" ")}...`
 
   return (
-    <StyledPostCard>
+    <div className="card">
       <Link
         to={`/${post.category.slug.current}/${post.slug.current}`}
-        plain="true"
+        className="nav-link"
       >
         <Img
-          style={{ boxShadow: `var(--elevation-2)` }}
           fluid={post.mainImage.asset.fluid}
+          style={{
+            borderTopLeftRadius: `var(--radius)`,
+            borderTopRightRadius: `var(--radius)`,
+          }}
         />
-        <h3 className="post-title responsive-padding">{post.title}</h3>
-        <p className="post-excerpt responsive-padding">{excerpt}</p>
+        <br />
+        <h2 className="card-heading title">{post.title}</h2>
+        <p className="card-text">{excerpt}</p>
       </Link>
-      <div className="post-share responsive-padding">
-        <Share
-          href={`/${post.category.slug.current}/${post.slug.current}`}
-          pinterestImageUrl={post.mainImage.asset.url}
-        />
-      </div>
-    </StyledPostCard>
+      {/* <Share /> */}
+    </div>
   )
 }

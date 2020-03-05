@@ -1,30 +1,30 @@
-import React from "react"
+import { PopularPostsAside, PostCard, ThisMonthAside } from "../components/post"
 
-import { SEO, About } from "../components/elements"
-import { ContentAsideGrid } from "../components/styles"
+import React from "react"
+import { SEO } from "../components/elements"
 import { useLatestSanityPosts } from "../components/hooks"
-import { PostCard, PopularPostsAside, ThisMonthAside } from "../components/post"
 
 export default function IndexPage() {
-  const { edges: latestPostEdges } = useLatestSanityPosts()
+  const { edges } = useLatestSanityPosts()
 
   return (
     <>
       <SEO title="Home" />
-      <ContentAsideGrid>
-        <article className="content">
-          {latestPostEdges.map(edge => (
-            <PostCard key={edge.node.id} post={edge.node} />
-          ))}
-        </article>
-        <aside>
-          <ThisMonthAside />
-          <PopularPostsAside />
-          <div className="sticky">
-            <About />
+      <div className="page content-aside-grid padding">
+        <div className="content">
+          <div className="column-grid-lg">
+            {edges.map(edge => (
+              <PostCard key={edge.node.id} post={edge.node} />
+            ))}
           </div>
+          <hr />
+        </div>
+        <aside className="aside">
+          <PopularPostsAside />
+          <ThisMonthAside />
         </aside>
-      </ContentAsideGrid>
+      </div>
+      <br />
     </>
   )
 }

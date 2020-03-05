@@ -1,49 +1,48 @@
-import React, { useState } from "react"
-import styled from "styled-components"
-
-import { Button } from "../styles"
 import { Login, Signup } from "../auth"
-
-const StyledAuthTabs = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-self: center;
-  height: 100%;
-
-  .toggle-auth {
-    text-align: center;
-    margin: var(--space-md);
-  }
-
-  .auth-message {
-    font-weight: lighter;
-    margin-bottom: var(--space-md);
-  }
-`
+import React, { useState } from "react"
 
 export default function AuthTabs({ shouldNavigateTo }) {
   const [show, setShow] = useState("Login")
 
   return (
-    <StyledAuthTabs>
+    <>
       {show === "Login" ? (
-        <Login shouldNavigateTo={shouldNavigateTo} />
+        <LoginTab shouldNavigateTo={shouldNavigateTo} setShow={setShow} />
       ) : (
-        <Signup shouldNavigateTo={shouldNavigateTo} />
+        <SignupTab shouldNavigateTo={shouldNavigateTo} setShow={setShow} />
       )}
-      {show === "Login" && (
-        <div className="toggle-auth">
-          <h4 className="auth-message">Don't have an account yet? </h4>
-          <Button onClick={() => setShow("Signup")}>Sign up now</Button>
-        </div>
-      )}
-      {show === "Signup" && (
-        <div className="toggle-auth">
-          <h4 className="auth-message">Already have an account?</h4>
-          <Button onClick={() => setShow("Login")}>Log in</Button>
-        </div>
-      )}
-    </StyledAuthTabs>
+    </>
   )
 }
+
+const LoginTab = ({ shouldNavigateTo, setShow }) => (
+  <>
+    <h1 className="title">Log in</h1>
+    <Login shouldNavigateTo={shouldNavigateTo} />
+    <hr />
+    <h4>Don't have an account yet? </h4>
+    <button
+      className="btn"
+      onClick={() => setShow("Signup")}
+      style={{ width: `100%` }}
+    >
+      Sign up now
+    </button>
+  </>
+)
+
+const SignupTab = ({ shouldNavigateTo, setShow }) => (
+  <>
+    <h1 className="title">Sign Up</h1>
+    <Signup shouldNavigateTo={shouldNavigateTo} />
+    <hr />
+    <h4 className="auth-message">Already have an account?</h4>
+    <button
+      className="btn"
+      onClick={() => setShow("Login")}
+      style={{ width: `100%` }}
+    >
+      Log in
+    </button>
+  </>
+)
