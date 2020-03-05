@@ -8,12 +8,20 @@ export default function Footer() {
   return (
     <footer className="footer padding">
       <div style={{ marginBottom: `var(--space-sm )` }}>
-        <Link className="nav-link" to="/">
-          <h2 className="title" style={{ margin: 0 }}>
+        <Link to="/" className="nav-link">
+          <h2
+            className="title"
+            style={{
+              margin: `0`,
+              marginTop: `var(--space-sm)`,
+            }}
+          >
             {title}
           </h2>
+          <h3 className="text--sm" style={{ marginTop: `0` }}>
+            {description}
+          </h3>
         </Link>
-        <small>{description}</small>
       </div>
     </footer>
   )

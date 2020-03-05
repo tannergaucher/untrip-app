@@ -12,22 +12,26 @@ export default function Header() {
 
   return (
     <header className="header padding">
-      <div style={{ marginBottom: `var(--space-md)` }}>
+      <div
+        style={{
+          marginBottom: `var(--space-md)`,
+          marginRight: `var(--space-md)`,
+        }}
+      >
         <Link to="/" className="nav-link">
           <h2
             className="title"
-            style={{ margin: `0`, marginTop: `var(--space-sm)` }}
+            style={{
+              margin: `0`,
+              marginTop: `var(--space-sm)`,
+            }}
           >
             {title}
           </h2>
+          <h3 className="text--sm" style={{ marginTop: `0` }}>
+            {description}
+          </h3>
         </Link>
-        <small
-          style={{
-            marginRight: `var(--space-md)`,
-          }}
-        >
-          {description}
-        </small>
       </div>
       {data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
     </header>
