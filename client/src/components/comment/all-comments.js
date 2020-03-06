@@ -10,9 +10,15 @@ export default function AllComments({ post }) {
     },
   })
 
-  if (loading) return <h2>Loading Comments...</h2>
+  if (loading)
+    return <h2 style={{ marginTop: `var(--space-lg)` }}>Loading Comments...</h2>
 
-  if (error) return <h2>{`Error! ${error.message}`}</h2>
+  if (error)
+    return (
+      <h2
+        style={{ marginTop: `var(--space-lg)` }}
+      >{`Error! ${error.message}`}</h2>
+    )
 
   if (data && data.comments.length === 0)
     return <h2 style={{ marginTop: `var(--space-lg)` }}>No comments yet!</h2>
