@@ -80,56 +80,59 @@ export default function EditListModal({ list }) {
 }
 
 function DeleteListPlaceButton({ list, place }) {
-  const [deleteListPlace, { loading }] = useMutation(
-    DELETE_LIST_PLACE_MUTATION,
-    {
-      variables: {
+  const [deleteListPlace] = useMutation(DELETE_LIST_PLACE_MUTATION, {
+    variables: {
+      listId: list.id,
+      listPlaceSanityId: place.sanityId,
+    },
+
+    optimisticResponse: {
+      __typename: "Mutation",
+      deleteListPlace: {
+        __typename: "ListPlace",
+        id: place.id,
         listId: list.id,
         listPlaceSanityId: place.sanityId,
       },
-      // refetchQueries: ["CURRENT_USER_QUERY"],
-      update: (cache, payload) => {
-        try {
-          const data = cache.readQuery({ query: CURRENT_USER_QUERY })
-          const listIndex = data.me.lists.findIndex(
-            cacheList => cacheList.id === list.id
-          )
+    },
 
-          const updatedList = {
-            ...data.me.lists[listIndex],
-            places: data.me.lists[listIndex].places.filter(
-              cacheListPlace =>
-                cacheListPlace.id !== payload.data.deleteListPlace.id
-            ),
-          }
+    update: (cache, payload) => {
+      try {
+        const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+        const listIndex = data.me.lists.findIndex(
+          cacheList => cacheList.id === list.id
+        )
 
-          cache.writeQuery({
-            query: CURRENT_USER_QUERY,
-            data: {
-              ...data,
-              me: {
-                ...data.me,
-                lists: [
-                  ...data.me.lists.slice(0, listIndex),
-                  updatedList,
-                  ...data.me.lists.slice(listIndex + 1),
-                ],
-              },
-            },
-          })
-        } catch (error) {
-          console.log(error)
+        const updatedList = {
+          ...data.me.lists[listIndex],
+          places: data.me.lists[listIndex].places.filter(
+            cacheListPlace =>
+              cacheListPlace.id !== payload.data.deleteListPlace.id
+          ),
         }
-      },
-    }
-  )
+
+        cache.writeQuery({
+          query: CURRENT_USER_QUERY,
+          data: {
+            ...data,
+            me: {
+              ...data.me,
+              lists: [
+                ...data.me.lists.slice(0, listIndex),
+                updatedList,
+                ...data.me.lists.slice(listIndex + 1),
+              ],
+            },
+          },
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  })
 
   return (
-    <button
-      className="btn btn-primary"
-      onClick={() => deleteListPlace()}
-      disabled={loading}
-    >
+    <button className="btn btn-primary" onClick={() => deleteListPlace()}>
       {place.name}
     </button>
   )

@@ -1,10 +1,15 @@
-import { CREATE_LIST_MUTATION, CURRENT_USER_QUERY } from "../apollo/graphql"
+import {
+  CREATE_LIST_MUTATION,
+  CURRENT_USER_QUERY,
+  IS_IN_LIST,
+} from "../apollo/graphql"
 import React, { useState } from "react"
 
 import { useMutation } from "@apollo/react-hooks"
 
 export default function CreateList({ place, setShowModal }) {
   const [title, setTitle] = useState("")
+
   const [createList, { loading }] = useMutation(CREATE_LIST_MUTATION, {
     variables: {
       title,
@@ -18,6 +23,7 @@ export default function CreateList({ place, setShowModal }) {
     update: (cache, payload) => {
       try {
         const data = cache.readQuery({ query: CURRENT_USER_QUERY })
+
         cache.writeQuery({
           query: CURRENT_USER_QUERY,
           data: {
@@ -26,6 +32,17 @@ export default function CreateList({ place, setShowModal }) {
               ...data.me,
               lists: [...data.me.lists, payload.data.createList],
             },
+          },
+        })
+
+        cache.writeQuery({
+          query: IS_IN_LIST,
+          data: {
+            isInList: true,
+          },
+          variables: {
+            listId: payload.data.createList.id,
+            placeSanityId: place.id,
           },
         })
       } catch (error) {
@@ -59,7 +76,7 @@ export default function CreateList({ place, setShowModal }) {
   })
 
   return (
-    <fieldset className="fieldset" disabled={loading && true}>
+    <fieldset className="fieldset" disabled={loading}>
       <form
         className="form"
         onSubmit={e => {
@@ -72,15 +89,10 @@ export default function CreateList({ place, setShowModal }) {
           className="input"
           value={title}
           required={true}
-          disabled={loading}
           placeholder="List Name"
           onChange={e => setTitle(e.target.value)}
         />
-        <button
-          className="btn btn-primary"
-          type="submit"
-          loading={loading && true}
-        >
+        <button className="btn btn-primary" type="submit">
           Create List
         </button>
       </form>
