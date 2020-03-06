@@ -47,7 +47,7 @@ export default function AddPlaceToList({ place, setShowModal }) {
       {showForm ? (
         <>
           <hr />
-          <CreateListForm place={place} setShowModal={setShowModal} />
+          <CreateListForm place={place} setShowForm={setShowForm} />
         </>
       ) : (
         <>

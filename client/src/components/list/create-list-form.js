@@ -7,7 +7,7 @@ import React, { useState } from "react"
 
 import { useMutation } from "@apollo/react-hooks"
 
-export default function CreateList({ place, setShowModal }) {
+export default function CreateList({ place, setShowForm }) {
   const [title, setTitle] = useState("")
 
   const [createList, { loading }] = useMutation(CREATE_LIST_MUTATION, {
@@ -83,6 +83,7 @@ export default function CreateList({ place, setShowModal }) {
           e.preventDefault()
           createList()
           setTitle("")
+          setShowForm(false)
         }}
       >
         <input
