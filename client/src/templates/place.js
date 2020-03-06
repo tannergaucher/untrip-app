@@ -23,6 +23,7 @@ export default function PlacePostsPage({ data, pageContext }) {
               <PostCard key={edge.node.id} post={edge.node} />
             </Link>
           ))}
+          <hr />
         </div>
         <aside className="aside padding">
           <LatestPostsAside />

@@ -20,21 +20,8 @@ export default function UserListPage({ listId }) {
         <>
           <h1 className="title padding">{data.list.title}</h1>
           <Map isUserList={true} places={data.list.places} />
-          {/* <ListPlacesGrid places={data.list.places} /> */}
         </>
       )}
     </div>
   )
 }
-
-// function ListPlacesGrid({ places }) {
-//   return (
-//     <div className="column-grid-lg">
-//       {places.map(place => (
-//         <div key={place.id} className="card">
-//           <h2 className="card-heading">{place.name}</h2>
-//         </div>
-//       ))}
-//     </div>
-//   )
-// }
