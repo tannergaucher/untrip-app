@@ -33,7 +33,7 @@ export default function Header() {
           </h3>
         </Link>
       </div>
-      {data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
+      {!loading && data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
     </header>
   )
 }
