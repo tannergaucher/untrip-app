@@ -145,23 +145,25 @@ class MapContainer extends React.Component {
               <h2
                 style={{
                   marginTop: `var(--space-sm)`,
+                  color: `black`,
                 }}
               >
                 {this.state.selectedPlace.name}
               </h2>
               <Img fluid={this.state.selectedPlace.image} />
-              <hr />
+              <hr style={{ boxShadow: `none` }} />
               <nav className="nav">
                 {!this.props.isUserList && (
                   <a
                     href={`#${kebabCase(this.state.selectedPlace.title)}`}
                     className="nav-link"
                   >
-                    <h4>View in post </h4>
+                    <h4 style={{ color: `black` }}>View in post </h4>
                   </a>
                 )}
                 <Link
                   className="nav-link"
+                  style={{ color: `black` }}
                   to={`/place/${kebabCase(this.state.selectedPlace.name)}`}
                 >
                   <h4>All posts with {this.state.selectedPlace.name}</h4>
