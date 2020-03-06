@@ -2,8 +2,9 @@ import { AddPlaceToListModal } from "../list"
 import BlockContent from "@sanity/block-content-to-react"
 import Img from "gatsby-image"
 import React from "react"
+import { kebabCase } from "lodash"
 
-export default function PlaceCard({ postPlace, setPlaceInView, post }) {
+export default function PlaceCard({ postPlace }) {
   return (
     <div className="card">
       <Img
@@ -14,7 +15,9 @@ export default function PlaceCard({ postPlace, setPlaceInView, post }) {
           borderTopRightRadius: `var(--radius)`,
         }}
       />
-      <h3 className="card-heading title">{postPlace.place.name}</h3>
+      <h2 className="card-heading title" id={kebabCase(postPlace.place.name)}>
+        {postPlace.place.name}
+      </h2>
       <div style={{ display: `flex` }}>
         {postPlace.place.tags.map(tag => (
           <small className="place-tag card-text" key={tag.id}>

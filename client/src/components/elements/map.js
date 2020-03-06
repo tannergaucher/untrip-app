@@ -4,6 +4,7 @@ import Icon from "../../images/location-pin.svg"
 import Img from "gatsby-image"
 import { Link } from "gatsby"
 import React from "react"
+import { kebabCase } from "lodash"
 
 class MapContainer extends React.Component {
   state = {
@@ -15,7 +16,7 @@ class MapContainer extends React.Component {
     activeMarker: {},
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = (_prevProps, prevState) => {
     if (
       this.props.placeInView &&
       this.props.placeInView.location !== prevState.mapCenter
@@ -49,7 +50,7 @@ class MapContainer extends React.Component {
         sanitizedPlaces.push({
           id: place.place.id,
           name: place.place.name,
-          image: place.place.image.asset.fixed,
+          image: place.place.image.asset.fluid,
           location: {
             lat: place.place.location.lat,
             lng: place.place.location.lng,
@@ -140,13 +141,31 @@ class MapContainer extends React.Component {
             visible={this.state.showingInfoWindow}
             marker={this.state.activeMarker}
           >
-            <div className="card">
-              <h2>{this.state.selectedPlace.name}</h2>
-              <Img fixed={this.state.selectedPlace.image} />
-              <Link to={`/place/${this.state.selectedPlace.slug}`}>
-                <h2>View posts</h2>
-              </Link>
-            </div>
+            <>
+              <h2
+                style={{
+                  marginTop: `var(--space-sm)`,
+                }}
+              >
+                {this.state.selectedPlace.name}
+              </h2>
+              <Img fluid={this.state.selectedPlace.image} />
+              <hr />
+              <nav className="nav">
+                <a
+                  href={`#${kebabCase(this.state.selectedPlace.title)}`}
+                  className="nav-link"
+                >
+                  <h4>View in post </h4>
+                </a>
+                <Link
+                  className="nav-link"
+                  to={`/place/${kebabCase(this.state.selectedPlace.name)}`}
+                >
+                  <h4>All posts with {this.state.selectedPlace.name}</h4>
+                </Link>
+              </nav>
+            </>
           </InfoWindow>
         )}
       </Map>

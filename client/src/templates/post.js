@@ -73,6 +73,7 @@ const PostMap = ({ post, placeInView }) => (
   <>
     <div className="padding">
       <hr />
+      <br />
       <h2
         id="map"
         className="title text--xxxl"
