@@ -8,7 +8,7 @@ export default function Header() {
   const { title, description } = useSiteMetadata()
   const { loading, data } = useQuery(IS_LOGGED_IN)
 
-  if (loading) return
+  if (loading) return null
 
   return (
     <header className="header padding">
@@ -33,7 +33,7 @@ export default function Header() {
           </h3>
         </Link>
       </div>
-      {!loading && data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
+      {loading ? null : data && data.isLoggedIn ? <AuthedNav /> : <Nav />}
     </header>
   )
 }

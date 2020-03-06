@@ -87,7 +87,7 @@ function DeleteListPlaceButton({ list, place }) {
         listId: list.id,
         listPlaceSanityId: place.sanityId,
       },
-      refetchQueries: ["CURRENT_USER_QUERY"],
+      // refetchQueries: ["CURRENT_USER_QUERY"],
       update: (cache, payload) => {
         try {
           const data = cache.readQuery({ query: CURRENT_USER_QUERY })

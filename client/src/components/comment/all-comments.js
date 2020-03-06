@@ -14,6 +14,9 @@ export default function AllComments({ post }) {
 
   if (error) return <h2>{`Error! ${error.message}`}</h2>
 
+  if (data && data.comments.length === 0)
+    return <h2 style={{ marginTop: `var(--space-lg)` }}>No comments yet!</h2>
+
   return (
     data &&
     data.comments &&

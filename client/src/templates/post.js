@@ -28,21 +28,20 @@ export default function PostPage({ data }) {
             <Share />
           </div>
           <Img fluid={post.mainImage.asset.fluid} />
-          <h1 id="post-title" className="title text--xxxl padding">
+          <h1
+            id="post-title"
+            className="title text--xxxl padding"
+            style={{ margin: `var(--space-lg)  0` }}
+          >
             {post.title}
           </h1>
           <div className="padding">
             {/* <h3 className="text--md">{post.publishedAt}</h3> */}
-
             {post.postPlaces.length > 0 && (
-              <>
-                <a className="nav-link" href="#map">
-                  <h3> View Map</h3>
-                </a>
-                <br />
-              </>
+              <a className="nav-link" href="#map">
+                <h3> View Map</h3>
+              </a>
             )}
-
             <BlockContent blocks={post._rawBody} />
             <hr />
           </div>
@@ -63,7 +62,6 @@ export default function PostPage({ data }) {
           <AboutSection />
         </aside>
       </div>
-
       {post.postPlaces.length > 0 && (
         <PostMap post={post} placeInView={placeInView} />
       )}
@@ -75,14 +73,18 @@ const PostMap = ({ post, placeInView }) => (
   <>
     <div className="padding">
       <hr />
-      <h2 id="map" className="title text--xxxl">
+      <h2
+        id="map"
+        className="title text--xxxl"
+        style={{ margin: `var(--space-lg) 0` }}
+      >
         {post.title}
       </h2>
       <a href="#post-title" className="nav-link">
         <h3> View Post</h3>
       </a>
+      <br />
     </div>
-    <br />
     <Map places={post.postPlaces} placeInView={placeInView} />
     <Share
       href={`/${post.category.slug.current}/${post.slug.current}`}
