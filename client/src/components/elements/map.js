@@ -152,12 +152,14 @@ class MapContainer extends React.Component {
               <Img fluid={this.state.selectedPlace.image} />
               <hr />
               <nav className="nav">
-                <a
-                  href={`#${kebabCase(this.state.selectedPlace.title)}`}
-                  className="nav-link"
-                >
-                  <h4>View in post </h4>
-                </a>
+                {!this.props.isUserList && (
+                  <a
+                    href={`#${kebabCase(this.state.selectedPlace.title)}`}
+                    className="nav-link"
+                  >
+                    <h4>View in post </h4>
+                  </a>
+                )}
                 <Link
                   className="nav-link"
                   to={`/place/${kebabCase(this.state.selectedPlace.name)}`}
