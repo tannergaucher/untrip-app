@@ -23,7 +23,13 @@ export default function CommentsSection({ post }) {
           {data && data.me ? (
             <CreateComment post={post} />
           ) : (
-            <Link to="/login">Log in to comment</Link>
+            <>
+              <h3 style={{ marginTop: `var(--space-md)` }}>
+                <Link to="/login" className="nav-link">
+                  Log in to comment
+                </Link>
+              </h3>
+            </>
           )}
           <AllComments post={post} />
         </>
