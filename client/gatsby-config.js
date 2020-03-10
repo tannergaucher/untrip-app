@@ -39,6 +39,12 @@ module.exports = {
         dataset: "production",
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-132758873-2",
+      },
+    },
     // `gatsby-plugin-offline`,
   ],
 }
